@@ -1,0 +1,44 @@
+[
+	{
+		"id": "dd957d62-de3a-4dc5-b3fd-530d300cb80d",
+		"code": "FA2024MUSC101",
+		"title": "Fall 2024 MUSC 101",
+		"owner": "d59e3465-983c-42c6-a927-627f22131680",
+		"members": [
+			"9b0f257f-42d6-4b69-8ae5-3a18df3f0b46",
+			"694ff6b5-18e9-4133-a19f-6dd8d844d43e"
+		],
+		"lessons": [
+			{
+				"id": "65a6318e-2702-433a-9237-3f5be6cf4c63",
+				"title": "Reading Sheet Music",
+				"song": "2a78b4ec-da25-4edf-b1db-76e4069826ef",
+				"sheet": "0abac31a-672a-44db-a50f-5eeb64a4bc35"
+			}
+		]
+	},
+	{
+		"id": "712a41c0-2cd2-45d0-ade5-727d5261c0c5",
+		"code": "S25MUSC499",
+		"title": "Spring 2025 MUSC 499",
+		"owner": "349e9bcd-065c-4bd6-bc29-481680430641",
+		"members": [
+			"694ff6b5-18e9-4133-a19f-6dd8d844d43e",
+			"ce8cab66-a03a-47f9-8230-052b63c1cf5e"
+		],
+		"lessons": [
+			{
+				"id": "24d85a1d-e68c-4961-a43c-f9d02a7483c0",
+				"title": "Making Masterpieces Pt. 1",
+				"song": "fc421d46-b9d0-4ab8-a795-60364bc67af2",
+				"sheet": "c71414bf-aedc-462e-8f94-74c0ff3e6a0d"
+			},
+			{
+				"id": "42011ee3-1ad6-465a-b14c-44cd72f6491e",
+				"title": "Making Masterpieces Pt. 2",
+				"song": "fc421d46-b9d0-4ab8-a795-60364bc67af2",
+				"sheet": "146df812-f0f0-4293-b510-03d87386fc15"
+			}
+		]
+	}
+]
