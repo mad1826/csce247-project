@@ -13,14 +13,76 @@
                 "rangeMin": 40,
                 "rangeMax": 88,
                 "tuning": "Standard",
-                "isMuted": false
+                "isMuted": false,
+				"sheet": {
+					"difficulty": "INTERMEDIATE",
+					"clef": "TREBLE",
+					"audioPlaybackEnabled": true,
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "My First Chord",
+									"notes": [
+										{
+											"pitch": "A",
+											"pitchModifier": "NONE",
+											"value": "SIXTEENTH",
+											"dot": false,
+											"line": false,
+											"octave": 2
+										}
+									],
+									"tie": false
+								}
+							],
+							"tempo": 1,
+							"timeSignatureNum": 50,
+							"timeSignatureDenom": 1,
+							"repeatOpen": false,
+							"repeatClose": false
+						}
+					],
+					"private": true
+				}
             },
             "PIANO": {
                 "name": "Piano",
                 "rangeMin": 21,
                 "rangeMax": 108,
                 "tuning": "Standard",
-                "isMuted": false
+                "isMuted": false,
+				"sheet": {
+					"difficulty": "INTERMEDIATE",
+					"clef": "TREBLE",
+					"audioPlaybackEnabled": true,
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "My First Chord",
+									"notes": [
+										{
+											"pitch": "A",
+											"pitchModifier": "NONE",
+											"value": "SIXTEENTH",
+											"dot": false,
+											"line": false,
+											"octave": 2
+										}
+									],
+									"tie": false
+								}
+							],
+							"tempo": 1,
+							"timeSignatureNum": 50,
+							"timeSignatureDenom": 1,
+							"repeatOpen": false,
+							"repeatClose": false
+						}
+					],
+					"private": true
+				}
             }
         }
     },
@@ -38,14 +100,76 @@
                 "rangeMin": 30,
                 "rangeMax": 70,
                 "tuning": "Standard",
-                "isMuted": false
+                "isMuted": false,
+				"sheet": {
+					"difficulty": "INTERMEDIATE",
+					"clef": "TREBLE",
+					"audioPlaybackEnabled": true,
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "My First Chord",
+									"notes": [
+										{
+											"pitch": "A",
+											"pitchModifier": "NONE",
+											"value": "SIXTEENTH",
+											"dot": false,
+											"line": false,
+											"octave": 2
+										}
+									],
+									"tie": false
+								}
+							],
+							"tempo": 1,
+							"timeSignatureNum": 50,
+							"timeSignatureDenom": 1,
+							"repeatOpen": false,
+							"repeatClose": false
+						}
+					],
+					"private": true
+				}
             },
             "DRUMS": {
                 "name": "Drums",
                 "rangeMin": 35,
                 "rangeMax": 90,
                 "tuning": "Standard",
-                "isMuted": true
+                "isMuted": true,
+				"sheet": {
+					"difficulty": "INTERMEDIATE",
+					"clef": "TREBLE",
+					"audioPlaybackEnabled": true,
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "My First Chord",
+									"notes": [
+										{
+											"pitch": "A",
+											"pitchModifier": "NONE",
+											"value": "SIXTEENTH",
+											"dot": false,
+											"line": false,
+											"octave": 2
+										}
+									],
+									"tie": false
+								}
+							],
+							"tempo": 1,
+							"timeSignatureNum": 50,
+							"timeSignatureDenom": 1,
+							"repeatOpen": false,
+							"repeatClose": false
+						}
+					],
+					"private": true
+				}
             }
         }
     }
