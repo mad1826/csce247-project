@@ -28,20 +28,47 @@ public class Lesson {
 		this.title = title;
 	}
 
+	/**
+	 * Constructs a new Lesson instance and automatically generate an identifier
+	 * @param title - the lesson's title
+	 */
 	public Lesson(String title) {
-		this.id = UUID.randomUUID();
-		this.title = title;
+		this(UUID.randomUUID(), title);
 	}
 
+	/**
+	 * Returns whether this lesson has the same id as another id
+	 * @param otherId - the other identifier
+	 * @return whether the ids are the same
+	 */
 	public boolean hasId(UUID otherId) {
 		return this.id.equals(otherId);
 	}
 
+	/**
+	 * Gets the lesson's identifier as a string
+	 * @return a stringified UUID
+	 */
 	public String getId() {
 		return id.toString();
 	}
 
+	/**
+	 * Gets the lesson's title
+	 * @return the lesson's title
+	 */
 	public String getTitle() {
 		return title;
+	}
+
+	/**
+	 * Updates the lesson's title
+	 * @param title - the new lesson title
+	 * @return whether the title was changed
+	 */
+	public boolean setTitle(String title) {
+		if (this.title.equals(title)) return false;
+		this.title = title;
+		return true;
 	}
 }
