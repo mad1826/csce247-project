@@ -31,7 +31,7 @@ public class Lesson {
 	}
 
 	/**
-	 * Constructs a new Lesson instance and automatically generate an identifier
+	 * Constructs a new Lesson instance and automatically generates an identifier
 	 * @param title - the lesson's title
 	 */
 	public Lesson(String title) {
