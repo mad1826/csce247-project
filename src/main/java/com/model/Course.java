@@ -49,11 +49,11 @@ public class Course {
 	}
 
 	/**
-	 * Gets the course's identifier as a string
-	 * @return a stringified UUID
+	 * Gets the course's identifier
+	 * @return a UUID
 	 */
-	public String getId() {
-		return id.toString();
+	public UUID getId() {
+		return id;
 	}
 
 	/**
