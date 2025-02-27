@@ -4,6 +4,8 @@ import java.util.UUID;
 
 /**
  * A lesson for playing a sheet
+ * 
+ * @author Michael Davis
  */
 public class Lesson {
 	/**
