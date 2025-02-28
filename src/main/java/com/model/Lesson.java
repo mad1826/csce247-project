@@ -31,7 +31,7 @@ public class Lesson {
 	}
 
 	/**
-	 * Constructs a new Lesson instance and automatically generate an identifier
+	 * Constructs a new Lesson instance and automatically generates an identifier
 	 * @param title - the lesson's title
 	 */
 	public Lesson(String title) {
@@ -48,11 +48,11 @@ public class Lesson {
 	}
 
 	/**
-	 * Gets the lesson's identifier as a string
-	 * @return a stringified UUID
+	 * Gets the lesson's identifier
+	 * @return a UUID
 	 */
-	public String getId() {
-		return id.toString();
+	public UUID getId() {
+		return id;
 	}
 
 	/**
