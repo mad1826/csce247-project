@@ -33,7 +33,6 @@ public class User {
            }
         
         this.id = id;
-        this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.password = password;
@@ -51,6 +50,7 @@ public class User {
          */
         public User(String firstName, String lastName, String emailAddress, String password) {
             this(UUID.randomUUID(), firstName, lastName, emailAddress, password);
+            this.firstName = firstName;
         }
 
         /**
@@ -126,5 +126,61 @@ public class User {
                 return true;
             }
             return false;
+        }
+
+         /**
+        * gets the user's unique ID
+        * @return - the user's ID
+        */
+        public UUID getId() {
+          return id;
+        }
+
+        /**
+        * gets the user's first name
+        * @return - the user's first name
+        */
+        public String getFirstName() {
+            return firstName;
+        }
+        
+        /**
+        * gets the user's last name
+        * @return - the user's last name
+        */
+        public String getLastName() {
+            return lastName;
+        }
+
+        /**
+         * gets the user's email address
+         * @return - the user's email address
+         */
+        public String getEmailAddress() {
+            return emailAddress;
+        }
+
+        /**
+         * gets the list of the user's friends
+         * @return - ArrayList of friends
+         */
+        public ArrayList<User> getFriends() {
+            return friends;
+        }
+
+        /**
+         * gets the list of the user's courses
+         * @return - ArrayList of courses
+         */
+        public ArrayList<Course> getCourses() {
+            return courses;
+        }
+
+        /**
+         * gets the metronome speed modifier
+         * @return - the user's metronome speed
+         */
+        public double getMetronomeSpeedModifier() {
+            return metronomeSpeedModifier;
         }
     }
