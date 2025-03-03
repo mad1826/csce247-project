@@ -96,6 +96,16 @@ public class Course {
 	}
 
 	/**
+	 * Adds a member to this course
+	 * @param member - the student joining the course
+	 * @return whether the operation was successful
+	 */
+	public boolean addMember(Student member) {
+		this.members.add(member);
+		return true;
+	}
+
+	/**
 	 * Gets the course's lessons
 	 * @return an array list of the course's lessons
 	 */
