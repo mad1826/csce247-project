@@ -19,7 +19,6 @@ public class DataWriter {
      * Handles writing data to JSON files.
      *
      * @param list Defines the list that is writing the data
-     * @param data the data to be written
      * @return An operation result saying if the operation was successful.
      */
     public static <T> OperationResult<HashMap<UUID, T>> setData(SavableList<T> list) {
