@@ -19,9 +19,15 @@ public class Course {
 	 */
 	private String title;
 
-	// private Teacher owner;
+	/**
+	 * The course's owner
+	 */
+	private Teacher owner;
 
-	// private ArrayList<Student> members;
+	/**
+	 * The course's members
+	 */
+	private ArrayList<Student> members;
 
 	/**
 	 * The course's lessons
@@ -33,19 +39,25 @@ public class Course {
 	 * @param id - the course's unique identifier
 	 * @param title - the course's title
 	 * @param lessons - the course's lessons
+	 * @param owner - the course's owner
+	 * @param members - the course's student members
 	 */
-	public Course(UUID id, String title, ArrayList<Lesson> lessons) {
+	public Course(UUID id, String title, ArrayList<Lesson> lessons, Teacher owner, ArrayList<Student> members) {
 		this.id = id;
 		this.title = title;
+		this.owner = owner;
+		this.members = members;
 	}
 
 	/**
 	 * Constructs a new Course instance and automatically generates an identifier
 	 * @param title - the course's title
 	 * @param lessons - the course's lessons
+	 * @param owner - the course's owner
+	 * @param members - the course's student members
 	 */
-	public Course(String title, ArrayList<Lesson> lessons) {
-		this(UUID.randomUUID(), title, lessons);
+	public Course(String title, ArrayList<Lesson> lessons, Teacher owner, ArrayList<Student> members) {
+		this(UUID.randomUUID(), title, lessons, owner, members);
 	}
 
 	/**
@@ -80,6 +92,16 @@ public class Course {
 	 * @return whether the deletion was successful
 	 */
 	public boolean delete() {
+		return true;
+	}
+
+	/**
+	 * Adds a member to this course
+	 * @param member - the student joining the course
+	 * @return whether the operation was successful
+	 */
+	public boolean addMember(Student member) {
+		this.members.add(member);
 		return true;
 	}
 

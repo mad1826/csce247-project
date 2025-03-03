@@ -1,5 +1,6 @@
 package com.model;
 
+import java.util.HashMap;
 import java.util.UUID;
 import java.util.ArrayList;
 
@@ -41,7 +42,7 @@ public class Teacher extends User {
      * @return A new Course object
      */
     public Course createCourse(UUID id) {
-        return new Course(id, "Placeholder Course", new ArrayList<Lesson>());
+        return new Course(id, "Placeholder Course", new ArrayList<Lesson>(), this, new ArrayList<Student>());
     }
 
     /**

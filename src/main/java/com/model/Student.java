@@ -45,7 +45,7 @@ public class Student extends User {
      * @return The joined Course object
      */
     public Course joinCourse(UUID id) {
-        return new Course(id, "Placeholder Course", new ArrayList<Lesson>());
+        return new Course(id, "Placeholder Course", new ArrayList<Lesson>(), null, new ArrayList<Student>());
     }
 
     /**
