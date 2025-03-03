@@ -1,5 +1,6 @@
 package com.model;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -40,8 +41,7 @@ public class Teacher extends User {
      * @return A new Course object
      */
     public Course createCourse(UUID id) {
-       
-        return new Course(id, "Placeholder Course", "Placeholder Description");
+		return CourseManager.getInstance(new HashMap<>(), "data/courses.json").createCourse(id, "My Course", this);
     }
 
     /**
