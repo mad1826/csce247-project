@@ -1,5 +1,7 @@
 package com.model.datahandlers;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -20,11 +22,18 @@ public class DataWriter {
      * @param data the data to be written
      * @return An operation result saying if the operation was successful.
      */
-    static <T> OperationResult<Void> setData(SavableList<T> list, HashMap<UUID,T> data) {
-        for (UUID key : data.keySet()){
-            list.toJSON(data.get(key));
-        }
-        
-        return new OperationResult<>("Not implemented");
+    public static <T> OperationResult<HashMap<UUID, T>> setData(SavableList<T> list) {
+        try (FileWriter file = new FileWriter(list.getFilePath())) {
+			String jsonString = list.toJSON();
+			file.write(jsonString);
+			file.flush();
+			
+			return new OperationResult<HashMap<UUID, T>>(list.toObjects(jsonString));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+
+			return new OperationResult<>("FileWriter Exception");
+		}
     }
 }

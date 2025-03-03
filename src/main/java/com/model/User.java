@@ -3,6 +3,8 @@ package com.model;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.json.simple.JSONObject;
+
 /**
  * represent a user in the music app system
  * stores user info, password, friends, and courses
@@ -183,4 +185,15 @@ public class User {
         public double getMetronomeSpeedModifier() {
             return metronomeSpeedModifier;
         }
+
+		public JSONObject toJSON() {
+			JSONObject userDetails = new JSONObject();
+			userDetails.put("id", id.toString());
+			userDetails.put("firstName", firstName);
+			userDetails.put("lastName", lastName);
+			userDetails.put("emailAddress", emailAddress);
+			userDetails.put("password", password);
+			userDetails.put("metronomeSpeedModifier", metronomeSpeedModifier);
+			return userDetails;
+		}
     }

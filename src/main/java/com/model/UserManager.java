@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.json.simple.JSONArray;
+
 /**
  * manages user creation, deletion, and retrieval
  * implements singleton pattern to ensure only one instance exists
  * @author Makyia Irick
  */
-public class UserManager {
+public class UserManager implements  SavableList<User> {
     private static UserManager userManager; //singleton instance
     private ArrayList<User> users; //list of users
     private String filePath; //file path for saving user data
@@ -84,13 +86,24 @@ public class UserManager {
     }
 
     /**
-     * converts a user object into a JSON string
-     * placeholder method
-     * @param - the user to convert
-     * @return - the user represented as a JSON string
+     * Returns the json file path this list is stored at.
+     * @return filePath
      */
-    public String toJSON(User user) {
-        return "{ \"email\": \"" + user.getEmailAddress() + "\", \"name\": \"" + user.getFirstName() + " " + user.getLastName() + "\" }";
+	@Override
+	public String getFilePath() {
+		return filePath;
+	}
+
+    /**
+     * converts all users into a JSON string
+     * @return - the users represented as a JSON string
+     */
+    public String toJSON() {
+		JSONArray jsonUsers = new JSONArray();
+		for (User user : users) {
+			jsonUsers.add(user.toJSON());
+		}
+		return jsonUsers.toJSONString();
     }
 
     /**

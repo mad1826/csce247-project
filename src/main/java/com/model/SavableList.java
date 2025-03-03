@@ -1,6 +1,7 @@
 package com.model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * Defines behavior for any class manager compatible with data loader and writer.
@@ -18,11 +19,11 @@ public interface SavableList<T> {
      * Defines how the object should be converted into JSON.
      * @return jsonResult
      */
-    String toJSON(T object);
+    String toJSON();
 
     /**
      * Defines how the json should be converted into objects.
-     * @return ArrayList of objects contained in the JSON file
+     * @return HashMap of objects contained in the JSON file
      */
-    ArrayList<T> toObjects(String json);
+    HashMap<UUID, T> toObjects(String json);
 }

@@ -89,18 +89,18 @@ public class CourseManager implements SavableList<Course> {
 	}
 
 	/**
-	 * Transforms a Course instance into a JSON string
+	 * Transforms all Course instances into a JSON string
 	 */
 	@Override
-	public String toJSON(Course course) {
+	public String toJSON() {
 		return "";
 	}
 
 	/**
-	 * Transforms a JSON string into an array list of Course instances
+	 * Transforms a JSON string into a HashMap of Course instances
 	 */
 	@Override
-	public ArrayList<Course> toObjects(String json) {
-		return new ArrayList<>();
+	public HashMap<UUID, Course> toObjects(String json) {
+		return new HashMap<>();
 	}
 }
