@@ -25,6 +25,4 @@ public interface SavableList<T> {
      * @return ArrayList of objects contained in the JSON file
      */
     ArrayList<T> toObjects(String json);
-
-    ArrayList<T> getObjects();
 }
