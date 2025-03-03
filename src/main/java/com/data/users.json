@@ -1,0 +1,20 @@
+[
+    {
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "firstName": "John",
+        "lastName": "Doe",
+        "emailAddress": "john.doe@example.com",
+        "password": "p@ssw0rd123",
+        "friends": ["c0a80101-7b2d-4f5a-91d1-4e5b5b5a5a5a"],
+        "metronomeSpeedModifier": 0.5
+    },
+    {
+        "id": "c0a80101-7b2d-4f5a-91d1-4e5b5b5a5a5a",
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "emailAddress": "jane.smith@example.com",
+        "password": "secureP@ss987",
+        "friends": ["550e8400-e29b-41d4-a716-446655440000"],
+        "metronomeSpeedModifier": 1.0
+    }
+]
