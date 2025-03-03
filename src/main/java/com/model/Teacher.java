@@ -1,6 +1,7 @@
 package com.model;
 
 import java.util.UUID;
+import java.util.ArrayList;
 
 /**
  * Represents a teacher in the music app
@@ -40,8 +41,7 @@ public class Teacher extends User {
      * @return A new Course object
      */
     public Course createCourse(UUID id) {
-       
-        return new Course(id, "Placeholder Course", "Placeholder Description");
+        return new Course(id, "Placeholder Course", new ArrayList<Lesson>());
     }
 
     /**

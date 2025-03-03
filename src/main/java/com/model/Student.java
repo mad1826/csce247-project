@@ -1,5 +1,6 @@
 package com.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class Student extends User {
      * @return The joined Course object
      */
     public Course joinCourse(UUID id) {
-        return new Course(id, "Placeholder Course", "Placeholder Description");
+        return new Course(id, "Placeholder Course", new ArrayList<Lesson>());
     }
 
     /**
