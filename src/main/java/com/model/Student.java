@@ -44,7 +44,9 @@ public class Student extends User {
      * @return The joined Course object
      */
     public Course joinCourse(UUID id) {
-        return new Course(id, "Placeholder Course", "Placeholder Description");
+		Course course = CourseManager.getInstance(new HashMap<>(), "data/courses.json").getCourse(id);
+		course.addMember(this);
+		return course;
     }
 
     /**
