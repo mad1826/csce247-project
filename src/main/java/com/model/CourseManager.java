@@ -54,10 +54,11 @@ public class CourseManager implements SavableList<Course> {
 	 * Creates a new course
 	 * @param title - the course's title
 	 * @param courseId - the course's unique identifier
-	 * @return - the newly created course
+	 * @param owner - the course's owner
+	 * @return the newly created course
 	 */
-	public Course createCourse(String title, UUID courseId) {
-		Course course = new Course(courseId, title, new ArrayList<>());
+	public Course createCourse(UUID courseId, String title, Teacher owner) {
+		Course course = new Course(courseId, title, new ArrayList<>(), owner, new ArrayList<>());
 		courses.put(courseId, course);
 		return course;
 	}
