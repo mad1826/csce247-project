@@ -98,6 +98,7 @@ public class UserManager implements  SavableList<User> {
      * converts all users into a JSON string
      * @return - the users represented as a JSON string
      */
+	@Override
     public String toJSON() {
 		JSONArray jsonUsers = new JSONArray();
 		for (User user : users) {
@@ -112,6 +113,7 @@ public class UserManager implements  SavableList<User> {
      * @param - the JSON string containing user data
      * @return - a HashMap of user IDs mapped to User objects
      */
+	@Override
     public HashMap<UUID, User> toObjects(String json) {
         return new HashMap<>();
     }
