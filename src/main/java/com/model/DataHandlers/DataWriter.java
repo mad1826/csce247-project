@@ -2,8 +2,8 @@ package com.model.datahandlers;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.UUID;
+
+import org.json.simple.JSONArray;
 
 import com.model.OperationResult;
 import com.model.SavableList;
@@ -21,13 +21,13 @@ public class DataWriter {
      * @param list Defines the list that is writing the data
      * @return An operation result saying if the operation was successful.
      */
-    public static <T> OperationResult<HashMap<UUID, T>> setData(SavableList<T> list) {
+    public static <T> OperationResult<JSONArray> setData(SavableList<T> list) {
         try (FileWriter file = new FileWriter(list.getFilePath())) {
-			String jsonString = list.toJSON();
-			file.write(jsonString);
+			JSONArray jsonArray = list.toJSON();
+			file.write(jsonArray.toJSONString());
 			file.flush();
 			
-			return new OperationResult<HashMap<UUID, T>>(list.toObjects(jsonString));
+			return new OperationResult<>(jsonArray);
 		}
 		catch (IOException e) {
 			e.printStackTrace();

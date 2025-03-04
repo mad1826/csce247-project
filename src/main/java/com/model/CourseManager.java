@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 /**
  * A manager for all courses
  * @author Michael Davis
@@ -89,18 +92,18 @@ public class CourseManager implements SavableList<Course> {
 	}
 
 	/**
-	 * Transforms all Course instances into a JSON string
+	 * Transforms all Course instances into a JSON array
 	 */
 	@Override
-	public String toJSON() {
-		return "";
+	public JSONArray toJSON() {
+		return new JSONArray();
 	}
 
 	/**
-	 * Transforms a JSON string into a HashMap of Course instances
+	 * Transforms a JSON object into a Course instances
 	 */
 	@Override
-	public HashMap<UUID, Course> toObjects(String json) {
-		return new HashMap<>();
+	public Course toObject(JSONObject json) {
+		return new Course("", new ArrayList<>(), new Teacher("", "", "", "abcd1234$"), new ArrayList<>());
 	}
 }

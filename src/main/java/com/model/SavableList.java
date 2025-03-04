@@ -1,5 +1,6 @@
 package com.model;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
@@ -18,7 +19,7 @@ public interface SavableList<T> {
      * Defines how the object should be converted into JSON.
      * @return jsonResult
      */
-    String toJSON();
+    JSONArray toJSON();
 
     /**
      * Defines how the json should be converted into objects.

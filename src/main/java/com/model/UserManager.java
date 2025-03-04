@@ -95,23 +95,22 @@ public class UserManager implements  SavableList<User> {
 	}
 
     /**
-     * converts all users into a JSON string
-     * @return - the users represented as a JSON string
+     * converts all users into a JSON array
+     * @return - the users represented as a JSON array
      */
 	@Override
-    public String toJSON() {
+    public JSONArray toJSON() {
 		JSONArray jsonUsers = new JSONArray();
 		for (User user : users) {
 			jsonUsers.add(user.toJSON());
 		}
-		return jsonUsers.toJSONString();
+		return jsonUsers;
     }
 
     /**
      * converts a user JSON Object into a user
-     * this method is a placeholder for future JSON parsing functionality
-     * @param - the JSON string containing user data
-     * @return - a HashMap of user IDs mapped to User objects
+     * @param - the JSON object containing user data
+     * @return a User instance
      */
 
     @Override
