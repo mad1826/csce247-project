@@ -19,16 +19,15 @@ public class CourseManager implements SavableList<Course> {
 	private HashMap<UUID, Course> courses;
 
 	/** The location of the course data */
-	private String filePath;
+    final static String filePath = "src/main/java/com/data/users.json";
 
 	/**
 	 * Constructs a new CourseMangaer instance
 	 * @param courses - all courses
 	 * @param filePath - the location of the course data
 	 */
-	private CourseManager(HashMap<UUID, Course> courses, String filePath) {
-		this.courses = courses;
-		this.filePath = filePath;
+	private CourseManager() {
+		this.courses = new HashMap<>();
 	}
 
 	/**
@@ -39,7 +38,7 @@ public class CourseManager implements SavableList<Course> {
 	 */
 	public static CourseManager getInstance(HashMap<UUID, Course> courses, String filePath) {
 		if (courseManager == null)
-			courseManager = new CourseManager(courses, filePath);
+			courseManager = new CourseManager();
 
 		return courseManager;
 	}
@@ -96,7 +95,13 @@ public class CourseManager implements SavableList<Course> {
 	 */
 	@Override
 	public JSONArray toJSON() {
-		return new JSONArray();
+		JSONArray jsonCourses = new JSONArray();
+
+		for (Course course : courses.values()) {
+			jsonCourses.add(course.toJSON());
+		}
+
+		return jsonCourses;
 	}
 
 	/**

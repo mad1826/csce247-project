@@ -3,6 +3,9 @@ package com.model;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 /**
  * A teacher's course that can contain lessons for members to progress through
  * 
@@ -45,6 +48,7 @@ public class Course {
 	public Course(UUID id, String title, ArrayList<Lesson> lessons, Teacher owner, ArrayList<Student> members) {
 		this.id = id;
 		this.title = title;
+		this.lessons = lessons;
 		this.owner = owner;
 		this.members = members;
 	}
@@ -95,6 +99,10 @@ public class Course {
 		return true;
 	}
 
+	public ArrayList<Student> getMembers() {
+		return members;
+	}
+
 	/**
 	 * Adds a member to this course
 	 * @param member - the student joining the course
@@ -136,5 +144,28 @@ public class Course {
 			}
 		}
 		return false;
+	}
+
+	public JSONObject toJSON() {
+		JSONObject courseDetails = new JSONObject();
+
+		courseDetails.put("id", id.toString());
+		courseDetails.put("code", id.toString());
+		courseDetails.put("title", title);
+		courseDetails.put("owner", owner.getId().toString());
+
+		JSONArray membersArray = new JSONArray();
+		for (Student member : members) {
+			membersArray.add(member.getId().toString());
+		}
+		courseDetails.put("members", membersArray);
+
+		JSONArray lessonsArray = new JSONArray();
+		for (Lesson lesson : lessons) {
+			lessonsArray.add(lesson.toJSON());
+		}
+		courseDetails.put("lessons", lessonsArray);
+
+		return courseDetails;
 	}
 }
