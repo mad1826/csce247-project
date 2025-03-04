@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.datahandlers.DataLoader;
+
 /**
  * manages user creation, deletion, and retrieval
  * implements singleton pattern to ensure only one instance exists
@@ -133,4 +135,20 @@ public class UserManager implements  SavableList<User> {
         return u;
     }
     
+    public void loadData() { //loads all data to user file
+        OperationResult<ArrayList<User>> or = DataLoader.getData(this);
+
+        if (or.success) {
+            for (User u : or.result) {
+                System.out.println(u);
+            }
+        } else {
+            System.out.println(or.message);
+            System.out.println(or.error.fillInStackTrace());
+        }
+    }
+
+    public void linkData() { //links references stored by UUID to other classes.  Must be called AFTER all other data is loaded
+
+    }
 }
