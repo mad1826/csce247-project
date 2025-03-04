@@ -22,8 +22,8 @@ public interface SavableList<T> {
     JSONArray toJSON();
 
     /**
-     * Defines how the json should be converted into objects.
-     * @return HashMap of objects contained in the JSON file
+     * Defines how the json should be converted into an object instance.
+     * @return the object instance of the generic type
      */
     T toObject(JSONObject object);
 }
