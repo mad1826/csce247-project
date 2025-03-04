@@ -1,30 +1,42 @@
 package com.model.datahandlers;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.UUID;
+import java.io.FileReader;
+import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import com.model.OperationResult;
 import com.model.SavableList;
 
+/**
+ * Handles loading data from a JSON file to any savable list
+ * 
+ * @author Matt Carey
+ */
+
 public class DataLoader {
 
-    static <T> OperationResult<HashMap<UUID, T>> getData(SavableList<T> list) {
-        Path p = Paths.get(list.getFilePath());
-
-        String fileData = "";
+    static <T> OperationResult<ArrayList<T>> getData(SavableList<T> list) {
         try {
-            fileData = new String(Files.readAllBytes(p), StandardCharsets.UTF_8);
+            ArrayList<T> result = new ArrayList<>();
 
-        } catch (IOException e) {
-            return new OperationResult<>("Error reading file " + p.getFileName(), e);
+            FileReader reader = new FileReader(list.getFilePath()); //const reader
+            JSONArray jsonData = (JSONArray) new JSONParser().parse(reader); //parse file into JSONArray
+
+            for (int i = 0; i < jsonData.size(); i++) { //iterate array
+                JSONObject o = (JSONObject) jsonData.get(i); //get object in array
+                
+                T object = list.toObject(o); //call class specific behavior on how to construct object from json data
+                
+                result.add(object); //append result
+            }
+
+            return new OperationResult<>(result);
+        } catch (Exception e) {
+            return new OperationResult<>("Unable to load data.",e);
         }
-
-        return new OperationResult<>(list.toObjects(fileData));
     }
 
     // public static void main(String[] args) { //tester

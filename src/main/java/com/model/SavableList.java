@@ -1,7 +1,6 @@
 package com.model;
 
-import java.util.HashMap;
-import java.util.UUID;
+import org.json.simple.JSONObject;
 
 /**
  * Defines behavior for any class manager compatible with data loader and writer.
@@ -25,5 +24,5 @@ public interface SavableList<T> {
      * Defines how the json should be converted into objects.
      * @return HashMap of objects contained in the JSON file
      */
-    HashMap<UUID, T> toObjects(String json);
+    T toObject(JSONObject object);
 }
