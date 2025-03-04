@@ -22,6 +22,25 @@ public class User {
     private double metronomeSpeedModifier = 1.0;
 
     /**
+     * Complete constructor used in data loading
+     * @param id
+     * @param firstname
+     * @param lastName
+     * @param emailAddress
+     * @param password
+     */
+    public User(UUID id, String firstName, String lastName, String emailAddress, String password, double metronomeSpeedModifier) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.password = password;
+        this.friends = new ArrayList<>();
+        this.courses = new ArrayList<>();
+        this.metronomeSpeedModifier = metronomeSpeedModifier;
+    }
+
+    /**
      * constructs a User with a specific UUID
      * @param - the unique ID of the user
      * @param - the user's first name
@@ -30,19 +49,19 @@ public class User {
      * @param - the user's password (validated)
      * @throws - IllegalArgumentException, if password is invalid
      */
-     public User(UUID id, String firstname, String lastName, String emailAddress, String password) {
+     public User(UUID id, String firstName, String lastName, String emailAddress, String password) {
            if(!isValidPassword(password)) {
             throw new IllegalArgumentException("Invalid password: Should be at least 7 characters, containing 1 number and 1 symbol.");
            }
         
         this.id = id;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.password = password;
         this.friends = new ArrayList<>();
         this.courses = new ArrayList<>();
      }
-
 
     /**
      * constructs a User without a UUID (generates one automatically)
@@ -53,7 +72,6 @@ public class User {
      */
     public User(String firstName, String lastName, String emailAddress, String password) {
         this(UUID.randomUUID(), firstName, lastName, emailAddress, password);
-        this.firstName = firstName;
     }
 
     /**

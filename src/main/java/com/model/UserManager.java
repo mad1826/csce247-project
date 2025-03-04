@@ -1,10 +1,10 @@
 package com.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  * manages user creation, deletion, and retrieval
@@ -108,14 +108,31 @@ public class UserManager implements  SavableList<User> {
     }
 
     /**
-     * converts a JSON string into a HashMap of users
+     * converts a user JSON Object into a user
      * this method is a placeholder for future JSON parsing functionality
      * @param - the JSON string containing user data
      * @return - a HashMap of user IDs mapped to User objects
      */
-	@Override
-    public HashMap<UUID, User> toObjects(String json) {
-        return new HashMap<>();
+
+    @Override
+    public User toObject(JSONObject object) {
+        UUID id = UUID.fromString((String) object.get("id"));
+        String fn = (String) object.get("firstName");
+        String ln = (String) object.get("lastName");
+        String em = (String) object.get("emailAddress");
+        String pw = (String) object.get("password");
+        double spd = ((Double) object.get("metronomeSpeedModifier"));
+
+        User u = new User(id,fn,ln,em,pw,spd);
+
+        // userDetails.put("id", id.toString());
+        // userDetails.put("firstName", firstName);
+        // userDetails.put("lastName", lastName);
+        // userDetails.put("emailAddress", emailAddress);
+        // userDetails.put("password", password);
+        // userDetails.put("metronomeSpeedModifier", metronomeSpeedModifier);
+
+        return u;
     }
     
 }
