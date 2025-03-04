@@ -51,4 +51,28 @@ public class Song {
     public HashMap<Instrument, SheetMusic> getSheets() {
         return sheets;
     }
+
+    /**
+     * gets the title of the song
+     * @return - title of the song
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * gets the artist of the song
+     * @return - the artist of the song
+     */
+    public String getArtist() {
+        return artist;
+    }
+
+    /**
+     * gets the unique ID of the song
+     * @return - the uuid of the song
+     */
+    public UUID getID() {
+        return id;
+    }
 }
