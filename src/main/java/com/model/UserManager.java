@@ -1,18 +1,22 @@
 package com.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.model.datahandlers.DataLoader;
 
 /**
  * manages user creation, deletion, and retrieval
  * implements singleton pattern to ensure only one instance exists
  * @author Makyia Irick
  */
-public class UserManager {
+public class UserManager implements  SavableList<User> {
     private static UserManager userManager; //singleton instance
     private ArrayList<User> users; //list of users
-    private String filePath; //file path for saving user data
+    final static String filePath = "src/main/java/com/data/users.json"; //file path for saving user data
 
     /**
      * private constructor to create the UserManager instance
@@ -20,9 +24,8 @@ public class UserManager {
      * @param - the list of users to manage
      * @param - the file path for saving user data
      */
-    private UserManager(ArrayList<User> users, String filePath) {
-        this.users = users;
-        this.filePath = filePath;
+    private UserManager() {
+        this.users = new ArrayList<>();
     }
 
     /**
@@ -32,9 +35,9 @@ public class UserManager {
      * @param - the file path for saving user data
      * @return - the singleton instance of UserManager
      */
-    public static UserManager getInstance(ArrayList<User> users, String filePath) {
+    public static UserManager getInstance() {
         if (userManager == null) {
-            userManager = new UserManager(users, filePath);
+            userManager = new UserManager();
         }
         return userManager;
     }
@@ -84,23 +87,68 @@ public class UserManager {
     }
 
     /**
-     * converts a user object into a JSON string
-     * placeholder method
-     * @param - the user to convert
-     * @return - the user represented as a JSON string
+     * Returns the json file path this list is stored at.
+     * @return filePath
      */
-    public String toJSON(User user) {
-        return "{ \"email\": \"" + user.getEmailAddress() + "\", \"name\": \"" + user.getFirstName() + " " + user.getLastName() + "\" }";
+	@Override
+	public String getFilePath() {
+		return filePath;
+	}
+
+    /**
+     * converts all users into a JSON array
+     * @return - the users represented as a JSON array
+     */
+	@Override
+    public JSONArray toJSON() {
+		JSONArray jsonUsers = new JSONArray();
+		for (User user : users) {
+			jsonUsers.add(user.toJSON());
+		}
+		return jsonUsers;
     }
 
     /**
-     * converts a JSON string into a HashMap of users
-     * this method is a placeholder for future JSON parsing functionality
-     * @param - the JSON string containing user data
-     * @return - a HashMap of user IDs mapped to User objects
+     * converts a user JSON Object into a user
+     * @param - the JSON object containing user data
+     * @return a User instance
      */
-    public HashMap<UUID, User> toObjects(String json) {
-        return new HashMap<>();
+
+    @Override
+    public User toObject(JSONObject object) {
+        UUID id = UUID.fromString((String) object.get("id"));
+        String fn = (String) object.get("firstName");
+        String ln = (String) object.get("lastName");
+        String em = (String) object.get("emailAddress");
+        String pw = (String) object.get("password");
+        double spd = ((Double) object.get("metronomeSpeedModifier"));
+
+        User u = new User(id,fn,ln,em,pw,spd);
+
+        // userDetails.put("id", id.toString());
+        // userDetails.put("firstName", firstName);
+        // userDetails.put("lastName", lastName);
+        // userDetails.put("emailAddress", emailAddress);
+        // userDetails.put("password", password);
+        // userDetails.put("metronomeSpeedModifier", metronomeSpeedModifier);
+
+        return u;
     }
     
+    public void loadData() { //loads all data to user file
+        OperationResult<ArrayList<User>> or = DataLoader.getData(this);
+
+        if (or.success) {
+            for (User u : or.result) {
+                System.out.println(u);
+            }
+        } else {
+            System.out.println(or.message);
+            System.out.println(or.error.fillInStackTrace());
+        }
+    }
+
+    public void linkData() { //links references stored by UUID to other classes.  Must be called AFTER all other data is loaded
+
+    }
 }

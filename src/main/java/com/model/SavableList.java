@@ -1,6 +1,7 @@
 package com.model;
 
-import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  * Defines behavior for any class manager compatible with data loader and writer.
@@ -18,11 +19,11 @@ public interface SavableList<T> {
      * Defines how the object should be converted into JSON.
      * @return jsonResult
      */
-    String toJSON(T object);
+    JSONArray toJSON();
 
     /**
-     * Defines how the json should be converted into objects.
-     * @return ArrayList of objects contained in the JSON file
+     * Defines how the json should be converted into an object instance.
+     * @return the object instance of the generic type
      */
-    ArrayList<T> toObjects(String json);
+    T toObject(JSONObject object);
 }

@@ -2,6 +2,8 @@ package com.model;
 
 import java.util.UUID;
 
+import org.json.simple.JSONObject;
+
 /**
  * A lesson for playing a sheet
  * 
@@ -72,5 +74,16 @@ public class Lesson {
 		if (this.title.equals(title)) return false;
 		this.title = title;
 		return true;
+	}
+
+	public JSONObject toJSON() {
+		JSONObject lessonObject = new JSONObject();
+
+		lessonObject.put("id", id.toString());
+		lessonObject.put("title", title);
+		// lessonObject.put("song", sheet.song.getId());
+		// lessonObject.put("sheet", sheet.getId());
+
+		return lessonObject;
 	}
 }
