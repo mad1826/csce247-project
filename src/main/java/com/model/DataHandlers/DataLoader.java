@@ -9,6 +9,8 @@ import org.json.simple.parser.JSONParser;
 
 import com.model.OperationResult;
 import com.model.SavableList;
+import com.model.User;
+import com.model.UserManager;
 
 /**
  * Handles loading data from a JSON file to any savable list
@@ -39,12 +41,20 @@ public class DataLoader {
         }
     }
 
-    // public static void main(String[] args) { //tester
-    //     testHandler t = new testHandler();
-    //     for (testObject o : t.getObjects()) {
-    //         System.out.println(o.test);
-    //     }
-    // }
+    public static void main(String[] args) { //tester
+        UserManager um = UserManager.getInstance();
+        OperationResult<ArrayList<User>> or = DataLoader.getData(um);
+
+        if (or.success) {
+            for (User u : or.result) {
+                System.out.println(u);
+            }
+        } else {
+            System.out.println(or.message);
+            System.out.println(or.error.fillInStackTrace());
+        }
+        
+    }
 }
 
 //below is example of using data loader.

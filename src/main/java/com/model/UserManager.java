@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 public class UserManager implements  SavableList<User> {
     private static UserManager userManager; //singleton instance
     private ArrayList<User> users; //list of users
-    private String filePath; //file path for saving user data
+    final static String filePath = "src/main/java/com/data/users.json"; //file path for saving user data
 
     /**
      * private constructor to create the UserManager instance
@@ -22,9 +22,8 @@ public class UserManager implements  SavableList<User> {
      * @param - the list of users to manage
      * @param - the file path for saving user data
      */
-    private UserManager(ArrayList<User> users, String filePath) {
-        this.users = users;
-        this.filePath = filePath;
+    private UserManager() {
+        this.users = new ArrayList<>();
     }
 
     /**
@@ -34,9 +33,9 @@ public class UserManager implements  SavableList<User> {
      * @param - the file path for saving user data
      * @return - the singleton instance of UserManager
      */
-    public static UserManager getInstance(ArrayList<User> users, String filePath) {
+    public static UserManager getInstance() {
         if (userManager == null) {
-            userManager = new UserManager(users, filePath);
+            userManager = new UserManager();
         }
         return userManager;
     }
