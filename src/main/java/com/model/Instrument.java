@@ -24,6 +24,14 @@ public class Instrument {
         this.rangeMax = rangeMax;
     }
 
+	/**
+	 * Gets the type of instrument
+	 * @return the instrument type
+	 */
+	public InstrumentType getType() {
+		return type;
+	}
+
     /**
      * Plays a musical note
      * @param note note to play

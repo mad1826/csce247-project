@@ -44,6 +44,14 @@ public class Song {
         this(UUID.randomUUID(), title, artist, genres, sheets);
     }
 
+	/**
+	 * Gets the course's identifier
+	 * @return a UUID
+	 */
+	public UUID getId() {
+		return id;
+	}
+
     /**
      * retrieves the sheet music associated with the song for each instrument
      * @return - HashMap containing instruments as keys and their corresponding sheet music as values

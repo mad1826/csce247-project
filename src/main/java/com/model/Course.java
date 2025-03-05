@@ -124,10 +124,12 @@ public class Course {
 	/**
 	 * Creates a new lesson in this course
 	 * @param title - the lesson's title
+	 * @param sheet - the song this lesson will play a sheet from
+	 * @param instrumentType - the instrument this lesson will play a sheet using
 	 * @return whether the lesson was successfully created
 	 */
-	public boolean createLesson(String title) {
-		lessons.add(new Lesson(title));
+	public boolean createLesson(String title, Song song, InstrumentType instrumentType) {
+		lessons.add(new Lesson(title, song, instrumentType));
 		return true;
 	}
 

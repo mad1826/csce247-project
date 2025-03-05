@@ -1,5 +1,6 @@
 package com.model;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.json.simple.JSONObject;
@@ -20,24 +21,38 @@ public class Lesson {
 	 */
 	private String title;
 
-	// private SheetMusic sheet;
+	/**
+	 * The song this lesson will play a sheet from
+	 */
+	private Song song;
+
+	/**
+	 * The instrument this lesson will play a sheet from
+	 */
+	private InstrumentType instrumentType;
 
 	/**
 	 * Constructs a new Lesson instance that already has an identifier
 	 * @param id - the lesson's unique identifier
 	 * @param title - the lesson's title
+	 * @param song - the song this lesson will play a sheet from
+	 * @param instrumentType - the instrument this lesson will play a sheet from
 	 */
-	public Lesson(UUID id, String title) {
+	public Lesson(UUID id, String title, Song song, InstrumentType instrumentType) {
 		this.id = id;
 		this.title = title;
+		this.song = song;
+		this.instrumentType = instrumentType;
 	}
 
 	/**
 	 * Constructs a new Lesson instance and automatically generates an identifier
 	 * @param title - the lesson's title
+	 * @param song - the song this lesson will play a sheet from
+	 * @param instrumentType - the instrument this lesson will play a sheet from
 	 */
-	public Lesson(String title) {
-		this(UUID.randomUUID(), title);
+	public Lesson(String title, Song song, InstrumentType instrumentType) {
+		this(UUID.randomUUID(), title, song, instrumentType);
 	}
 
 	/**
@@ -76,13 +91,27 @@ public class Lesson {
 		return true;
 	}
 
+	/**
+	 * Gets the sheet this lesson focuses on
+	 * @return a piece of sheet music
+	 */
+	public SheetMusic getSheet() {
+		HashMap<Instrument, SheetMusic> sheets = song.getSheets();
+		for (Instrument instrument : sheets.keySet()) {
+			if (instrument.getType().getName().equals(instrumentType.getName()))
+				return sheets.get(instrument);
+		}
+
+		return null;
+	}
+
 	public JSONObject toJSON() {
 		JSONObject lessonObject = new JSONObject();
 
 		lessonObject.put("id", id.toString());
 		lessonObject.put("title", title);
-		// lessonObject.put("song", sheet.song.getId());
-		// lessonObject.put("sheet", sheet.getId());
+		lessonObject.put("song", song.getId().toString());
+		lessonObject.put("instrument", instrumentType.getName());
 
 		return lessonObject;
 	}

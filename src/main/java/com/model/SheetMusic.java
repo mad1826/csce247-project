@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * @author Ryan Smith
  */
 public class SheetMusic {
-    private Song song;
     private Instrument instrument;
     private Difficulty difficulty;
     private Clef clef;
@@ -18,7 +17,6 @@ public class SheetMusic {
     /**
      * Creates a new sheet music instance
      *
-     * @param song               the associated song
      * @param instrument         the instrument for this sheet
      * @param difficulty         the difficulty level
      * @param clef              the musical clef
@@ -27,10 +25,9 @@ public class SheetMusic {
      * @param isPrivate        whether the sheet is private
      */
     
-    public SheetMusic(Song song, Instrument instrument, Difficulty difficulty, 
+    public SheetMusic(Instrument instrument, Difficulty difficulty, 
                      Clef clef, boolean audioPlaybackEnabled, ArrayList<Measure> measures, 
                      boolean isPrivate) {
-        this.song = song;
         this.instrument = instrument;
         this.difficulty = difficulty;
         this.clef = clef;
@@ -38,6 +35,14 @@ public class SheetMusic {
         this.measures = measures;
         this.isPrivate = isPrivate;
     }
+
+	/**
+	 * Gets the instrument playable with this sheet
+	 * @return the Instrument instance
+	 */
+	public Instrument getInstrument() {
+		return instrument;
+	}
 
     /**
      * Toggles audio playback on/off

@@ -12,7 +12,7 @@
 				"id": "65a6318e-2702-433a-9237-3f5be6cf4c63",
 				"title": "Reading Sheet Music",
 				"song": "2a78b4ec-da25-4edf-b1db-76e4069826ef",
-				"sheet": "0abac31a-672a-44db-a50f-5eeb64a4bc35"
+				"instrument": "Piano"
 			}
 		]
 	},
@@ -29,13 +29,13 @@
 				"id": "24d85a1d-e68c-4961-a43c-f9d02a7483c0",
 				"title": "Maki`ng Masterpieces Pt. 1",
 				"song": "fc421d46-b9d0-4ab8-a795-60364bc67af2",
-				"sheet": "c71414bf-aedc-462e-8f94-74c0ff3e6a0d"
+				"instrument": "Piano"
 			},
 			{
 				"id": "42011ee3-1ad6-465a-b14c-44cd72f6491e",
 				"title": "Making Masterpieces Pt. 2",
 				"song": "fc421d46-b9d0-4ab8-a795-60364bc67af2",
-				"sheet": "146df812-f0f0-4293-b510-03d87386fc15"
+				"instrument": "Piano"
 			}
 		]
 	}
