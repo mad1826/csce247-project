@@ -2,6 +2,9 @@ package com.model;
 
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 /**
  * chord composed of multiple notes
  * @author Ryan Smith
@@ -39,4 +42,22 @@ public class Chord {
     public void removeNote(Note note) {
         
     }
+
+	/**
+	 * Transforms this instance into a JSON object
+	 * @return a JSON object
+	 */
+	public JSONObject toJSON() {
+		JSONObject chordJSON = new JSONObject();
+
+		chordJSON.put("name", name);
+		JSONArray notesJSON = new JSONArray();
+		for (Note note : notes) {
+			notesJSON.add(note.toJSON());
+		}
+		chordJSON.put("notes", notesJSON);
+		chordJSON.put("tie", tie);
+
+		return chordJSON;
+	}
 } 

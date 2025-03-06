@@ -4,36 +4,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 /**
  * manages all songs within the music app system
  * implements the Singleton design pattern to ensure only one instance exists
  * @author Makyia Irick
  */
-public class SongManager {
+public class SongManager implements  SavableList<Song> {
     private static SongManager songManager; //singleton instance
-    private ArrayList<Song> songs; //list of all songs
-    private String filePath; //file path for saving songs
+    private HashMap<UUID, Song> songs; //list of all songs
+    final static String filePath = "src/main/java/com/data/songs.json";
 
     /**
      * private constructor for SongManager
-     * @param - the list of songs to manage
-     * @param - the file path where songs are stored
      */
-    private SongManager(ArrayList<Song> songs, String filePath) {
-        this.songs = songs;
-        this.filePath = filePath;
+    private SongManager() {
+        this.songs = new HashMap<>();
     }
 
     /**
      * eeturns singleton instance of SongManager
      * if the instance does not exist, a new one is created
-     * @param - the list of songs
-     * @param - the file path where songs are stored
      * @return - the singleton instance of SongManager
      */
-    public static SongManager getInstance(ArrayList<Song> songs, String filePath) {
+    public static SongManager getInstance() {
         if (songManager == null) {
-            songManager = new SongManager(songs, filePath);
+            songManager = new SongManager();
         }
         return songManager;
     }
@@ -44,7 +42,7 @@ public class SongManager {
      * @return - the Song object if found, otherwise null
      */
     public Song getSong(UUID id) {
-        for (Song song : songs) {
+        for (Song song : songs.values()) {
             if (song.getID().equals(id)) {
                 return song;
             }
@@ -67,7 +65,7 @@ public class SongManager {
      * @return - true if the song was added successfully, false otherwise
      */
     public boolean createSong(Song song) {
-        songs.add(song);
+        songs.put(song.getID(), song);
         return true;
     }
 
@@ -77,9 +75,9 @@ public class SongManager {
      * @return - operationResult with the song if found, or null if not found
      */
     public OperationResult<Song> deleteSong(UUID songId) {
-        for (Song song : songs) {
+        for (Song song : songs.values()) {
             if (song.getID().equals(songId)) {
-                songs.remove(song);
+                songs.remove(song.getID());
                 return new OperationResult<>(song);
             }
         }
@@ -87,22 +85,37 @@ public class SongManager {
     }
 
     /**
-     * converts a Song object into JSON format
-     * this is a placeholder method
-     * @param - the song to convert
-     * @return - JSON representation of the song
+     * Returns the json file path this list is stored at.
+     * @return filePath
      */
-    public String toJSON(Song song) {
-        return "{ \"title\": \"" + song.getTitle() + "\", \"artist\": \"" + song.getArtist() + "\" }";
-    }
+	@Override
+	public String getFilePath() {
+		return filePath;
+	}
 
     /**
-     * converts JSON data into a HashMap of songs
+     * converts all songs into JSON format
      * this is a placeholder method
-     * @param - the JSON data
-     * @return - a HashMap of songs
+     * @return - JSON representation of the song
      */
-    public HashMap<UUID, Song> toObjects(String json) {
-        return new HashMap<>();
+	@Override
+    public JSONArray toJSON() {
+        JSONArray songsJSON = new JSONArray();
+
+		for (Song song : songs.values()) {
+			songsJSON.add(song.toJSON());
+		}
+
+		return songsJSON;
+    }
+
+	/**
+	 * TODO
+	 * @param json
+	 * @return
+	 */
+	@Override
+    public Song toObject(JSONObject json) {
+        return null;
     }
 }

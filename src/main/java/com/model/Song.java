@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 /**
  * represent a song in the music app system
  * song contains data such as title, artist, genres, and sheet music for different instruments
@@ -83,4 +86,30 @@ public class Song {
     public UUID getID() {
         return id;
     }
+
+	
+	/**
+	 * Transforms this instance into a JSON object
+	 * @return a JSON object
+	 */
+	public JSONObject toJSON() {
+		JSONObject songObject = new JSONObject();
+
+		songObject.put("id", id.toString());
+		songObject.put("title", title);
+		songObject.put("artist", artist);
+		JSONArray genresJSON = new JSONArray();
+		for (Genre genre : genres) {
+			genresJSON.add(genre.toString());
+		}
+		songObject.put("genres", genresJSON);
+		JSONObject sheetsJSON = new JSONObject();
+		for (Instrument instrument : sheets.keySet()) {
+			JSONObject instrumentJSON = instrument.toJSON(sheets.get(instrument).toJSON());
+			sheetsJSON.put(instrument.getType().toString(), instrumentJSON);
+		}
+		songObject.put("sheets", sheetsJSON);
+
+		return songObject;
+	}
 }

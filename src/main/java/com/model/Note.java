@@ -1,5 +1,7 @@
 package com.model;
 
+import org.json.simple.JSONObject;
+
 /**
  * Represents a musical note with musical properties
  * @author Ryan Smith
@@ -73,4 +75,21 @@ public class Note {
     public void removeTie(Note nextNote) {
        
     }
+
+	/**
+	 * Transforms this instance into a JSON object
+	 * @return a JSON object
+	 */
+	public JSONObject toJSON() {
+		JSONObject noteJSON = new JSONObject();
+
+		noteJSON.put("pitch", pitch.toString());
+		noteJSON.put("pitchModifier", pitchModifier.toString());
+		noteJSON.put("value", value.toString());
+		noteJSON.put("dot", dot);
+		noteJSON.put("line", line);
+		noteJSON.put("octave", octave);
+
+		return noteJSON;
+	}
 } 

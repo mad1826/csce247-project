@@ -2,6 +2,9 @@ package com.model;
 
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 /**
  * musical measure containing chords
  * @author Ryan Smith
@@ -71,4 +74,25 @@ public class Measure {
     public void removeChord(Chord chord) {
         
     }
+
+	/**
+	 * Transforms this instance into a JSON object
+	 * @return a JSON object
+	 */
+	public JSONObject toJSON() {
+		JSONObject measureJSON = new JSONObject();
+
+		JSONArray chordsJSON = new JSONArray();
+		for (Chord chord : chords) {
+			chordsJSON.add(chord.toJSON());
+		}
+		measureJSON.put("chords", chordsJSON);
+		measureJSON.put("tempo", tempo);
+		measureJSON.put("timeSignatureNum", timeSignatureNum);
+		measureJSON.put("timeSignatureDenom", timeSignatureDenom);
+		measureJSON.put("repeatOpen", repeatOpen);
+		measureJSON.put("repeatClose", repeatClose);
+
+		return measureJSON;
+	}
 } 

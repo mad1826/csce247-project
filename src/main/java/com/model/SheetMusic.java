@@ -2,6 +2,9 @@ package com.model;
 
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 /**
  * sheet with measures and playback settings
  * @author Ryan Smith
@@ -56,7 +59,7 @@ public class SheetMusic {
      * @param measure the measure to add
      */
     public void addMeasure(Measure measure) {
-        
+        measures.add(measure);
     }
 
     /**
@@ -73,4 +76,24 @@ public class SheetMusic {
     public void togglePrivate() {
         
     }
+
+	/**
+	 * Transforms this instance into a JSON object
+	 * @return a JSON object
+	 */
+	public JSONObject toJSON() {
+		JSONObject sheetObject = new JSONObject();
+
+		sheetObject.put("difficulty", difficulty.toString());
+		sheetObject.put("clef", clef.toString());
+		sheetObject.put("audioPlaybackEnabled", audioPlaybackEnabled);
+		JSONArray measureArray = new JSONArray();
+		for (Measure measure : measures) {
+			measureArray.add(measure.toJSON());
+		}
+		sheetObject.put("measures", measureArray);
+		sheetObject.put("private", isPrivate);
+
+		return sheetObject;
+	}
 } 
