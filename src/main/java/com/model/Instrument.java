@@ -1,5 +1,7 @@
 package com.model;
 
+import org.json.simple.JSONObject;
+
 /**
  * musical instrument with playback 
  * @author Ryan Smith
@@ -77,4 +79,24 @@ public class Instrument {
     public void setVolume(int volume) {
         
     }
+
+	
+	/**
+	 * Transforms this instance into a JSON object
+	 * @param sheetJSON - the associated sheet
+	 * @return a JSON object
+	 */
+	@SuppressWarnings({ "exports", "unchecked" })
+	public JSONObject toJSON(JSONObject sheetJSON) {
+		JSONObject instrumentJSON = new JSONObject();
+
+		instrumentJSON.put("name", type.toString());
+		instrumentJSON.put("rangeMin", rangeMin);
+		instrumentJSON.put("rangeMax", rangeMax);
+		instrumentJSON.put("tuning", tuning);
+		instrumentJSON.put("isMuted", isMuted);
+		instrumentJSON.put("sheet", sheetJSON);
+
+		return instrumentJSON;
+	}
 } 

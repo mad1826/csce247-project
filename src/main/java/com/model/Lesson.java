@@ -105,6 +105,7 @@ public class Lesson {
 		return null;
 	}
 
+	@SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {
 		JSONObject lessonObject = new JSONObject();
 
