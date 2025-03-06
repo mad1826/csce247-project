@@ -47,6 +47,7 @@ public class Chord {
 	 * Transforms this instance into a JSON object
 	 * @return a JSON object
 	 */
+	@SuppressWarnings({ "exports", "unchecked" })
 	public JSONObject toJSON() {
 		JSONObject chordJSON = new JSONObject();
 

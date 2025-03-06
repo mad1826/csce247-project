@@ -19,11 +19,12 @@ public interface SavableList<T> {
      * Defines how the object should be converted into JSON.
      * @return jsonResult
      */
-    JSONArray toJSON();
+    @SuppressWarnings("exports")
+	JSONArray toJSON();
 
     /**
      * Defines how the json should be converted into an object instance.
      * @return the object instance of the generic type
      */
-    T toObject(JSONObject object);
+    T toObject(@SuppressWarnings("exports") JSONObject object);
 }

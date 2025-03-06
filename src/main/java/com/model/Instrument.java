@@ -86,6 +86,7 @@ public class Instrument {
 	 * @param sheetJSON - the associated sheet
 	 * @return a JSON object
 	 */
+	@SuppressWarnings({ "exports", "unchecked" })
 	public JSONObject toJSON(JSONObject sheetJSON) {
 		JSONObject instrumentJSON = new JSONObject();
 

@@ -81,6 +81,7 @@ public class SheetMusic {
 	 * Transforms this instance into a JSON object
 	 * @return a JSON object
 	 */
+	@SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {
 		JSONObject sheetObject = new JSONObject();
 

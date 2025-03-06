@@ -148,6 +148,7 @@ public class Course {
 		return false;
 	}
 
+	@SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {
 		JSONObject courseDetails = new JSONObject();
 

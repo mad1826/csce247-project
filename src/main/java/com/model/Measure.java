@@ -79,6 +79,7 @@ public class Measure {
 	 * Transforms this instance into a JSON object
 	 * @return a JSON object
 	 */
+	@SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {
 		JSONObject measureJSON = new JSONObject();
 

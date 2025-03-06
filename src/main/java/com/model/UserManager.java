@@ -99,6 +99,7 @@ public class UserManager implements  SavableList<User> {
      * converts all users into a JSON array
      * @return - the users represented as a JSON array
      */
+	@SuppressWarnings({ "unchecked", "exports" })
 	@Override
     public JSONArray toJSON() {
 		JSONArray jsonUsers = new JSONArray();
@@ -115,7 +116,7 @@ public class UserManager implements  SavableList<User> {
      */
 
     @Override
-    public User toObject(JSONObject object) {
+    public User toObject(@SuppressWarnings("exports") JSONObject object) {
         UUID id = UUID.fromString((String) object.get("id"));
         String fn = (String) object.get("firstName");
         String ln = (String) object.get("lastName");

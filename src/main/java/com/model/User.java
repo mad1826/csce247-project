@@ -205,7 +205,8 @@ public class User {
         return metronomeSpeedModifier;
     }
 
-    public JSONObject toJSON() {
+    @SuppressWarnings({ "unchecked", "exports" })
+	public JSONObject toJSON() {
         JSONObject userDetails = new JSONObject();
         userDetails.put("id", id.toString());
         userDetails.put("firstName", firstName);

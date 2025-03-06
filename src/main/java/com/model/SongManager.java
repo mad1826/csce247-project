@@ -98,6 +98,7 @@ public class SongManager implements  SavableList<Song> {
      * this is a placeholder method
      * @return - JSON representation of the song
      */
+	@SuppressWarnings({ "exports", "unchecked" })
 	@Override
     public JSONArray toJSON() {
         JSONArray songsJSON = new JSONArray();
@@ -115,7 +116,7 @@ public class SongManager implements  SavableList<Song> {
 	 * @return
 	 */
 	@Override
-    public Song toObject(JSONObject json) {
+    public Song toObject(@SuppressWarnings("exports") JSONObject json) {
         return null;
     }
 }

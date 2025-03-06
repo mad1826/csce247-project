@@ -93,6 +93,7 @@ public class CourseManager implements SavableList<Course> {
 	/**
 	 * Transforms all Course instances into a JSON array
 	 */
+	@SuppressWarnings({ "exports", "unchecked" })
 	@Override
 	public JSONArray toJSON() {
 		JSONArray jsonCourses = new JSONArray();
@@ -108,7 +109,7 @@ public class CourseManager implements SavableList<Course> {
 	 * Transforms a JSON object into a Course instances
 	 */
 	@Override
-	public Course toObject(JSONObject json) {
+	public Course toObject(@SuppressWarnings("exports") JSONObject json) {
 		return new Course("", new ArrayList<>(), new Teacher("", "", "", "abcd1234$"), new ArrayList<>());
 	}
 }

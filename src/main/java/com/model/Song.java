@@ -92,6 +92,7 @@ public class Song {
 	 * Transforms this instance into a JSON object
 	 * @return a JSON object
 	 */
+	@SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {
 		JSONObject songObject = new JSONObject();
 
