@@ -21,6 +21,12 @@ public class User {
     private ArrayList<Course> courses;
     private double metronomeSpeedModifier = 1.0;
 
+    private ArrayList<UUID> unlinkedFriends;
+
+    public ArrayList<UUID> getUnlinkedFriends() {
+        return unlinkedFriends;
+    }
+
     /**
      * Complete constructor used in data loading
      * @param id
@@ -29,7 +35,7 @@ public class User {
      * @param emailAddress
      * @param password
      */
-    public User(UUID id, String firstName, String lastName, String emailAddress, String password, double metronomeSpeedModifier) {
+    public User(UUID id, String firstName, String lastName, String emailAddress, String password, double metronomeSpeedModifier, ArrayList<UUID> unlinkedFriends) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,6 +43,7 @@ public class User {
         this.password = password;
         this.friends = new ArrayList<>();
         this.courses = new ArrayList<>();
+        this.unlinkedFriends = unlinkedFriends;
         this.metronomeSpeedModifier = metronomeSpeedModifier;
     }
 

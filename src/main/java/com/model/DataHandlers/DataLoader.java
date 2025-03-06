@@ -9,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 
 import com.model.OperationResult;
 import com.model.SavableList;
+import com.model.UserManager;
 
 /**
  * Handles loading data from a JSON file to any savable list
@@ -17,6 +18,7 @@ import com.model.SavableList;
  */
 
 public class DataLoader {
+    private static boolean isLoaded = false;
 
     public static <T> OperationResult<ArrayList<T>> getData(SavableList<T> list) {
         try {
@@ -38,21 +40,34 @@ public class DataLoader {
             return new OperationResult<>("Unable to load data.",e);
         }
     }
+    
+    /**
+     * To be called on initialization to load data from files into all classes.
+     * @return
+     */
+    public static OperationResult<Void> loadAllData() {
+        if (isLoaded) {
+            return new OperationResult<>("Failed to load, data has already been loaded");
+        }
 
-    // public static void main(String[] args) { //tester (works)
-    //     UserManager um = UserManager.getInstance();
-    //     OperationResult<ArrayList<User>> or = DataLoader.getData(um);
+        // Index all savable lists we want to load
+        ArrayList<SavableList<?>> handlers = new ArrayList<>();
+        handlers.add(UserManager.getInstance());
 
-    //     if (or.success) {
-    //         for (User u : or.result) {
-    //             System.out.println(u);
-    //         }
-    //     } else {
-    //         System.out.println(or.message);
-    //         System.out.println(or.error.fillInStackTrace());
-    //     }
-        
-    // }
+        // Load all data from files
+        for (SavableList<?> list : handlers) {
+            OperationResult<Void> or = list.loadData();
+        }
+
+        // Link all loaded data
+        for (SavableList<?> list : handlers) {
+            OperationResult<Void> or = list.linkData();
+        }
+
+        isLoaded = true;
+
+        return new OperationResult<>(true);
+    }
 }
 
 //below is example of using data loader.

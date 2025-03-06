@@ -1,6 +1,7 @@
 package com.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.json.simple.JSONArray;
@@ -15,7 +16,7 @@ import com.model.datahandlers.DataLoader;
  */
 public class UserManager implements  SavableList<User> {
     private static UserManager userManager; //singleton instance
-    private ArrayList<User> users; //list of users
+    private HashMap<UUID,User> users; //list of users
     final static String filePath = "src/main/java/com/data/users.json"; //file path for saving user data
 
     /**
@@ -25,7 +26,7 @@ public class UserManager implements  SavableList<User> {
      * @param - the file path for saving user data
      */
     private UserManager() {
-        this.users = new ArrayList<>();
+        this.users = new HashMap<>();
     }
 
     /**
@@ -51,9 +52,13 @@ public class UserManager implements  SavableList<User> {
      * @return - the newly created user object
      */
     public User createUser(String firstName, String lastName, String emailAddress, String password) {
-        User newUser = new User(firstName, lastName, emailAddress, password);
-        users.add(newUser);
-        return newUser;
+        //TODO Refactor using hashmap
+
+        // User newUser = new User(firstName, lastName, emailAddress, password);
+        // users.add(newUser);
+        // return newUser;
+
+        return null;
     }
 
     /**
@@ -61,14 +66,9 @@ public class UserManager implements  SavableList<User> {
      * @param - the unique ID of the user to delete
      * @return - true if the user was successfully deleted, false otherwise
      */
-    public boolean deleteUser(UUID userID) {
-        for (User user : users) {
-            if (user.getId().equals(userID)) { //direct attribute access
-                users.remove(user);
-                return true;
-            }
-        }
-        return false;
+    public OperationResult<Void> deleteUser(UUID userID) {
+        // TODO implement using users.get
+        return new OperationResult<>("Not implemented");
     }
 
     /**
@@ -78,12 +78,13 @@ public class UserManager implements  SavableList<User> {
      * @return - the matching user object, or null if no user is found 
      */
     public User getUser(String emailAddress, String password) {
-        for (User user : users) {
-            if(user.getEmailAddress().equals(emailAddress) && user.isAuthorized(password)) {
-                return user;
-            }
-        }
-        return null;
+        // TODO: Implement using hashmap
+        // for (User user : users) {
+        //     if(user.getEmailAddress().equals(emailAddress) && user.isAuthorized(password)) {
+        //         return user;
+        //     }
+        // }
+         return null;
     }
 
     /**
@@ -102,7 +103,7 @@ public class UserManager implements  SavableList<User> {
 	@Override
     public JSONArray toJSON() {
 		JSONArray jsonUsers = new JSONArray();
-		for (User user : users) {
+		for (User user : users.values()) {
 			jsonUsers.add(user.toJSON());
 		}
 		return jsonUsers;
@@ -123,7 +124,13 @@ public class UserManager implements  SavableList<User> {
         String pw = (String) object.get("password");
         double spd = ((Double) object.get("metronomeSpeedModifier"));
 
-        User u = new User(id,fn,ln,em,pw,spd);
+        ArrayList<UUID> friends = new ArrayList<>();
+        JSONArray friendsJSON = (JSONArray)object.get("friends");
+        for (Object friendID : friendsJSON) { //iterate array
+            friends.add(UUID.fromString((String) friendID));
+        }
+
+        User u = new User(id,fn,ln,em,pw,spd,friends);
 
         // userDetails.put("id", id.toString());
         // userDetails.put("firstName", firstName);
@@ -135,20 +142,35 @@ public class UserManager implements  SavableList<User> {
         return u;
     }
     
-    public void loadData() { //loads all data to user file
+    @Override
+    public OperationResult<Void> loadData() { //loads all data to user file
         OperationResult<ArrayList<User>> or = DataLoader.getData(this);
 
         if (or.success) {
             for (User u : or.result) {
-                System.out.println(u);
+                this.users.put(u.getId(),u);
             }
-        } else {
-            System.out.println(or.message);
-            System.out.println(or.error.fillInStackTrace());
         }
+
+        return new OperationResult<>("Needs result message done");
     }
 
-    public void linkData() { //links references stored by UUID to other classes.  Must be called AFTER all other data is loaded
+    @Override
+    public OperationResult<Void> linkData() { //links references stored by UUID to other classes.  Must be called AFTER all other data is loaded
+        for (User u : this.users.values()) {
+            for (UUID id : u.getUnlinkedFriends()) {
+                u.getFriends().add(this.users.get(id));
+            }
+        }
 
+        return new OperationResult<>(true);
+    }
+
+    public static void main(String[] args) { //tester.  verifies users are deserialized.  currently works.
+        DataLoader.loadAllData();
+
+        for (User u : UserManager.getInstance().users.values()) {
+            System.out.println(u);
+        }
     }
 }

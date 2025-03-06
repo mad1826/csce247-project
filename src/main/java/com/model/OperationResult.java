@@ -43,4 +43,15 @@ public class OperationResult<T> {
         this.error = null;
         this.message = message;
     }
+
+    /**
+     * Should only be used in OperationResult<Void> so that result is guaranteed for successful operations.
+     * @param result
+     */
+    public OperationResult(boolean result) {
+        this.success = result;
+        this.result = null;
+        this.error = null;
+        this.message = null;
+    }
 }

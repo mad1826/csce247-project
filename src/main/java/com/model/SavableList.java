@@ -26,4 +26,18 @@ public interface SavableList<T> {
      * @return the object instance of the generic type
      */
     T toObject(JSONObject object);
+
+
+    /**
+     * Loads data into manager classes, recursive references stored as UUIDs
+     * @return OperationResult depicting outcome
+     */
+    OperationResult<Void> loadData();
+
+
+    /**
+     * Links data to other loaded data
+     * @return
+     */
+    OperationResult<Void> linkData();
 }
