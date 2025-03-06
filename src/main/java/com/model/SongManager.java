@@ -119,4 +119,16 @@ public class SongManager implements  SavableList<Song> {
     public Song toObject(@SuppressWarnings("exports") JSONObject json) {
         return null;
     }
+
+    @Override
+    public OperationResult<Void> loadData() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'loadData'");
+    }
+
+    @Override
+    public OperationResult<Void> linkData() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'linkData'");
+    }
 }

@@ -112,4 +112,16 @@ public class CourseManager implements SavableList<Course> {
 	public Course toObject(@SuppressWarnings("exports") JSONObject json) {
 		return new Course("", new ArrayList<>(), new Teacher("", "", "", "abcd1234$"), new ArrayList<>());
 	}
+
+	@Override
+	public OperationResult<Void> loadData() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'loadData'");
+	}
+
+	@Override
+	public OperationResult<Void> linkData() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'linkData'");
+	}
 }
