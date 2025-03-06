@@ -16,8 +16,8 @@ import com.model.datahandlers.DataLoader;
  */
 public class UserManager implements  SavableList<User> {
     private static UserManager userManager; //singleton instance
-    private HashMap<UUID,User> users; //list of users
-    final static String filePath = "src/main/java/com/data/users.json"; //file path for saving user data
+    private final HashMap<UUID,User> users; //list of users
+    final static String FILE_PATH = "src/main/java/com/data/users.json"; //file path for saving user data
 
     /**
      * private constructor to create the UserManager instance
@@ -93,7 +93,7 @@ public class UserManager implements  SavableList<User> {
      */
 	@Override
 	public String getFilePath() {
-		return filePath;
+		return FILE_PATH;
 	}
 
     /**

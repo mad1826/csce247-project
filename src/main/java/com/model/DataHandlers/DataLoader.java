@@ -20,6 +20,7 @@ import com.model.UserManager;
 public class DataLoader {
     private static boolean isLoaded = false;
 
+    @SuppressWarnings("UseSpecificCatch")
     public static <T> OperationResult<ArrayList<T>> getData(SavableList<T> list) {
         try {
             ArrayList<T> result = new ArrayList<>();
@@ -57,11 +58,19 @@ public class DataLoader {
         // Load all data from files
         for (SavableList<?> list : handlers) {
             OperationResult<Void> or = list.loadData();
+
+            if (!or.success) {
+                return or;
+            }
         }
 
         // Link all loaded data
         for (SavableList<?> list : handlers) {
             OperationResult<Void> or = list.linkData();
+
+            if (!or.success) {
+                return or;
+            }
         }
 
         isLoaded = true;

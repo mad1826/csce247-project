@@ -19,7 +19,7 @@ public class CourseManager implements SavableList<Course> {
 	private HashMap<UUID, Course> courses;
 
 	/** The location of the course data */
-    final static String filePath = "src/main/java/com/data/courses.json";
+    final static String FILE_PATH = "src/main/java/com/data/courses.json";
 
 	/**
 	 * Constructs a new CourseMangaer instance
@@ -87,7 +87,7 @@ public class CourseManager implements SavableList<Course> {
 	 */
 	@Override
 	public String getFilePath() {
-		return filePath;
+		return FILE_PATH;
 	}
 
 	/**
