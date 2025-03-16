@@ -32,11 +32,9 @@ public class CourseManager implements SavableList<Course> {
 
 	/**
 	 * Gets the single CourseManager instance
-	 * @param courses - all courses if a new instance must be constructed
-	 * @param filePath - the location of the course data if a new instance must be constructed
 	 * @return the CourseManager singleton instance
 	 */
-	public static CourseManager getInstance(HashMap<UUID, Course> courses, String filePath) {
+	public static CourseManager getInstance() {
 		if (courseManager == null)
 			courseManager = new CourseManager();
 

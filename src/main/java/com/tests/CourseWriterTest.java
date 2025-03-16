@@ -17,7 +17,7 @@ import com.model.datahandlers.DataWriter;
 
 public class CourseWriterTest {
 	public static void main(String[] args) {
-		CourseManager courseManager = CourseManager.getInstance(new HashMap<>(), "course-output.json");
+		CourseManager courseManager = CourseManager.getInstance();
 		Course course = courseManager.createCourse(UUID.randomUUID(), "Hi", new Teacher("Mary", "Sue", "abc@gmail.com", "$1982347Ddj"));
 		
 		Instrument instrument = new Instrument(InstrumentType.PIANO, 1, 1);
