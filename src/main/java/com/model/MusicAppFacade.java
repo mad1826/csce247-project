@@ -19,7 +19,9 @@ public class MusicAppFacade {
      * Private constructor
      */
     private MusicAppFacade() {
-        
+        UserManager.getInstance().loadData();
+		// CourseManager.getInstance().loadData();
+		// SongManager.getInstance().loadData();
     }
 
     /**
@@ -51,8 +53,8 @@ public class MusicAppFacade {
      * @param password password
      * @return OperationResult<User>
      */
-    public OperationResult<User> login(String email, String password) {
-        return null;
+    public User login(String email, String password) {
+        return UserManager.getInstance().getUser(email, password);
     }
 
     /**
