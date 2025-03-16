@@ -78,13 +78,12 @@ public class UserManager implements  SavableList<User> {
      * @return - the matching user object, or null if no user is found 
      */
     public User getUser(String emailAddress, String password) {
-        // TODO: Implement using hashmap
-        // for (User user : users) {
-        //     if(user.getEmailAddress().equals(emailAddress) && user.isAuthorized(password)) {
-        //         return user;
-        //     }
-        // }
-         return null;
+        for (User user : users.values()) {
+            if (user.getEmailAddress().equals(emailAddress) && user.isAuthorized(password)) {
+        		return user;
+            }
+        }
+        return null;
     }
 
     /**
