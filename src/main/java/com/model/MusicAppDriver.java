@@ -1,73 +1,41 @@
 package com.model;
 
-import java.util.Scanner;
-
 /**
  * A terminal-based interface for interacting with the application.
  * @author Michael Davis
  */
 public class MusicAppDriver {
 	/**
-	 * A scanner that collects responses from the default system input device
-	 */
-	public static Scanner scanner = new Scanner(System.in);
-
-	/**
 	 * The facade that the driver will interact through
 	 */
-	public static MusicAppFacade facade = MusicAppFacade.getInstance();
+	public MusicAppFacade facade = new MusicAppFacade();
 
+	/**
+	 * Create a new driver and run its designated scenarios.
+	 * @param args - options passed in through the command line
+	 */
 	public static void main(String[] args) {
-		User user = authenticate();
-
-		if (user == null)
-			return;
-
-		System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
+		MusicAppDriver driver = new MusicAppDriver();
+		driver.run();
 	}
 
 	/**
-	 * Authenticates the user through their preferred authentication method
-	 * @return the User instance that should be logged in with
+	 * Runs one or more individual scenarios.
 	 */
-	public static User authenticate() {
-		System.out.println("Welcome to the music app! Please select one of the following authentication methods:\n(1) Log in\n(2) Sign Up\n(9) Quit");
+	public void run() {
+		logInAndOut();
+	}
 
-		User ret = null;
+	/**
+	 * Logs in with a user and then immediately logs out.
+	 */
+	public void logInAndOut() {
+		facade.login("jane.smith@example.com", "secureP@ss987");
+		User user = facade.getCurrentUser();
+		System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
 
-		while (ret == null) {
-			int method = scanner.nextInt();
-			scanner.nextLine();
-
-			switch (method) {
-				case 1: {
-					System.out.println("Enter your email address.");
-					String address = scanner.nextLine();
-					System.out.println("Enter your password.");
-					String password = scanner.nextLine();
-					
-					User result = facade.login(address, password);
-					if (result != null) {
-						ret = result;
-					}
-					else {
-						System.out.println("Invalid credentials. Please select a method and try again.");
-					}
-					break;
-				}
-				case 2: {
-					// TODO Create new user account
-					break;
-				}
-				case 9: {
-					return null;
-				}
-				default: {
-					System.out.println("Unexpected option, please select an authentication method again.");
-				}
-			}
-		}
-
-		return ret;
+		boolean changed = facade.logout();
+		if (changed)
+			System.out.println("You have successfully logged out.");
 	}
 }

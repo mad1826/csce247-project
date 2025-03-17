@@ -10,30 +10,43 @@ import java.util.UUID;
  * @author Ryan Smith
  */
 public class MusicAppFacade {
-    private static MusicAppFacade instance;
-    private User user;
+	/**
+	 * The currently authenticated user
+	 */
+    private User currentUser;
+	/**
+	 * The currently selected song
+	 */
     private Song currentSong;
+	/**
+	 * The currently selected music sheet
+	 */
     private SheetMusic currentSheet;
 
     /**
-     * Private constructor
+     * Constructs a new MusicAppFacade instance
      */
-    private MusicAppFacade() {
+    public MusicAppFacade() {
         UserManager.getInstance().loadData();
 		// CourseManager.getInstance().loadData();
 		// SongManager.getInstance().loadData();
     }
 
-    /**
-     * single instance of MusicAppFacade
-     * @return  MusicAppFacade instance
-     */
-    public static MusicAppFacade getInstance() {
-        if (instance == null) {
-            instance = new MusicAppFacade();
-        }
-        return instance;
-    }
+	/**
+	 * Gets the current authenticated user
+	 * @return The user that has logged in
+	 */
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
+	/**
+	 * Gets the currently selected song
+	 * @return The currently selected song
+	 */
+	public Song getCurrentSong() {
+		return currentSong;
+	}
 
     /**
      * sign up
@@ -41,7 +54,7 @@ public class MusicAppFacade {
      * @param lastName last name
      * @param email email
      * @param password password
-     * @return OperationResult<User>
+     * @return the result of creating a new user
      */
     public OperationResult<User> signUp(String firstName, String lastName, String email, String password) {
         return null;
@@ -51,18 +64,24 @@ public class MusicAppFacade {
      * login
      * @param email email
      * @param password password
-     * @return OperationResult<User>
+     * @return The newly authenticated user
      */
     public User login(String email, String password) {
-        return UserManager.getInstance().getUser(email, password);
+        User user = UserManager.getInstance().getUser(email, password);
+		this.currentUser = user;
+		return user;
     }
 
     /**
-     * logout
-     * @return boolean
+     * Log the currently authenticated user out
+     * @return Whether the user's authentication state changed
      */
     public boolean logout() {
-        return true;
+		if (this.currentUser == null)
+			return false;
+
+		this.currentUser = null;
+		return true;
     }
 
     /**
