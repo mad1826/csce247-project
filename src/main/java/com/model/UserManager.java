@@ -49,27 +49,42 @@ public class UserManager implements  SavableList<User> {
      * @param - the last name of the user
      * @param - the email address of the user
      * @param - the password of the user
-     * @return - the newly created user object
+     * @return - the result of attempting to create the user
      */
-    public User createUser(String firstName, String lastName, String emailAddress, String password) {
-        //TODO Refactor using hashmap
+    public OperationResult<User> createUser(String firstName, String lastName, String emailAddress, String password) {
+        if (accountExists(emailAddress))
+			return new OperationResult<>("An account with this email already exists.");
 
-        // User newUser = new User(firstName, lastName, emailAddress, password);
-        // users.add(newUser);
-        // return newUser;
-
-        return null;
+        User user = new User(firstName, lastName, emailAddress, password);
+        users.put(user.getId(), user);
+		// TODO save data
+        
+		OperationResult<User> or = new OperationResult<>(user);
+		return or;
     }
 
     /**
      * deletes a user from the list by matching the user ID
      * @param - the unique ID of the user to delete
-     * @return - true if the user was successfully deleted, false otherwise
+     * @return - the result of attempting to delete the user
      */
     public OperationResult<Void> deleteUser(UUID userID) {
         // TODO implement using users.get
         return new OperationResult<>("Not implemented");
     }
+
+	/**
+	 * Checks whether a user is already registered with a designated email address
+	 * @param emailAddress - the email address to check all users for
+	 * @return whether a user has already registered with the address
+	 */
+	public boolean accountExists(String emailAddress) {
+		for (User user : users.values()) {
+			if (user.getEmailAddress().equalsIgnoreCase(emailAddress))
+				return true;
+		}
+		return false;
+	}
 
     /**
      * retrieve a user by matching their email address and password

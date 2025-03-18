@@ -27,6 +27,8 @@ public class MusicAppDriver {
 	public void run() {
 		logInAndOut();
 		searchSongs();
+		signUp();
+		signUpInvalid();
 	}
 
 	/**
@@ -42,6 +44,47 @@ public class MusicAppDriver {
 			System.out.println("You have successfully logged out.");
 	}
 
+	/**
+	 * Sign up for a new account.
+	 */
+	public void signUp() {
+		System.out.println("Signing up for a new account...");
+		OperationResult<User> or = facade.signUp("Portia", "Plante", "pplante@email.sc.edu", "secu4eP@ssw0rd");
+		if (or.success) {
+			User user = facade.getCurrentUser();
+			System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
+
+			boolean changed = facade.logout();
+			if (changed)
+				System.out.println("You have successfully logged out.");
+		}
+		else {
+			System.out.println("Your account could not be created: " + or.message);
+		}
+	}
+
+	/**
+	 * Attempt to sign up for a new account with an email that an account is already regitered to.
+	 */
+	public void signUpInvalid() {
+		System.out.println("Signing up for a new account...");
+		OperationResult<User> or = facade.signUp("Portia", "Plante","jane.smith@example.com", "secu4eP@ssw0rd");
+		if (or.success) {
+			User user = facade.getCurrentUser();
+			System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
+
+			boolean changed = facade.logout();
+			if (changed)
+				System.out.println("You have successfully logged out.");
+		}
+		else {
+			System.out.println("Your account could not be created for the following reason: " + or.message);
+		}
+	}
+
+	/**
+	 * List all songs, then filter all songs by a query.
+	 */
 	public void searchSongs() {
 		facade.login("jane.smith@example.com", "secureP@ss987");
 		User user = facade.getCurrentUser();
@@ -52,7 +95,7 @@ public class MusicAppDriver {
 			System.out.println("\t" + song);
 		}
 
-		String titleFilter = "sound";
+		String titleFilter = "time";
 		System.out.println("Filtering songs by \"title: " + titleFilter + "\"");
 		HashMap<SongFilter, String> query = new HashMap<>();
 		query.put(SongFilter.TITLE, titleFilter);
