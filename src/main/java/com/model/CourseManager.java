@@ -140,7 +140,11 @@ public class CourseManager implements SavableList<Course> {
 	public OperationResult<Void> linkData() {
 		for (Course c : this.courses.values()) {
             for (UUID id : c.getUnlinkedMembers()) {
-               c.getMembers().add((Student) UserManager.getInstance().getUser(id)); //will throw error if non student user is in course
+				Student s = (Student) UserManager.getInstance().getUser(id); //will throw error if non student user is in course
+
+				s.getCourses().add(c); //Add course to user, ideally would be done in user.linkData but the loop is already here so it was easier.
+
+            	c.getMembers().add(s); //Add user to course
             }
         }
 
