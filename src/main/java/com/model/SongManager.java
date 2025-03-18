@@ -1,10 +1,13 @@
 package com.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import com.model.datahandlers.DataLoader;
 
 /**
  * manages all songs within the music app system
@@ -145,24 +148,106 @@ public class SongManager implements  SavableList<Song> {
     }
 
 	/**
-	 * TODO
-	 * @param object
-	 * @return
+	 * Below methods ending at toObject have to do with JSON to java object conversions
+	 * @param object JSONObject
+	 * @return java object
 	 */
+
+    private Chord toChord(JSONObject chord) {
+        String name = (String)chord.get("name");
+        Boolean tie = (Boolean)chord.get("tie");
+
+        ArrayList<Note> notes = new ArrayList<>();
+        JSONArray notesJSON = (JSONArray)chord.get("notes");
+        for (Object o : notesJSON) {
+            JSONObject noteObj = (JSONObject)o;
+            Pitch p = Pitch.valueOf((String)noteObj.get("pitch"));
+            PitchModifier pm = PitchModifier.valueOf((String)noteObj.get("pitchModifier"));
+            NoteValue v = NoteValue.valueOf((String)noteObj.get("value"));
+            Boolean dot = (Boolean) noteObj.get("dot");
+            Boolean line = (Boolean) noteObj.get("line");
+            int oct = (int) noteObj.get("octave");
+
+            Note n = new Note(p, pm, v, dot, line, oct);
+            notes.add(n);
+        }
+
+        return new Chord(name, notes, tie);
+    }
+
+    private Measure toMeasure(JSONObject measure) {
+        int tempo = (int)measure.get("tempo");
+        int tsn = (int)measure.get("timeSignatureNum");
+        int tsd = (int) measure.get("timeSignatureDenom");
+        boolean repeatOpen = (Boolean) measure.get("repeatOpen");
+        boolean repeatClosed = (Boolean) measure.get("repeatClosed");
+
+        ArrayList<Chord> chords = new ArrayList<>();
+        JSONArray chordsJSON = (JSONArray)measure.get("chords");
+        for (Object chord : chordsJSON) {
+            chords.add(toChord((JSONObject)chord));
+        }
+
+        return new Measure(chords, tempo, tsn, tsd, repeatOpen, repeatClosed);
+    }
+
+    private SheetMusic toSheet(String instrument, JSONObject sheet) {
+        Difficulty d = Difficulty.valueOf((String)sheet.get("difficulty"));
+        Clef c = Clef.valueOf((String)sheet.get("clef"));
+        InstrumentType i = InstrumentType.valueOf(instrument);
+        Boolean isPrivate = (Boolean)sheet.get("isPrivate");
+
+        ArrayList<Measure> measures = new ArrayList<>();
+        JSONArray measuresJSON = (JSONArray)sheet.get("measures");
+        for (Object measure : measuresJSON) {
+            measures.add(toMeasure((JSONObject)measure));
+        }
+
+        return new SheetMusic(new Instrument(i),d,c,true,measures,isPrivate);
+    }
+
 	@Override
     public Song toObject(@SuppressWarnings("exports") JSONObject object) {
-        return null;
+        UUID id = UUID.fromString((String) object.get("id"));
+        String title = (String) object.get("title");
+        String artist = (String) object.get("artist");
+
+        ArrayList<Genre> genres = new ArrayList<>();
+        JSONArray genresJSON = (JSONArray)object.get("genres");
+        for (Object genre : genresJSON) { //iterate array
+            genres.add(Genre.valueOf((String) genre));
+        }
+
+        HashMap<Instrument,SheetMusic> sheets = new HashMap<>();
+        JSONObject sheetsJSON = (JSONObject)object.get("sheets");
+
+        for (Object key : sheetsJSON.keySet()) {
+            String index = (String)key;
+            JSONObject value = (JSONObject)sheetsJSON.get(index);
+
+            SheetMusic m = toSheet(index,value);
+
+            sheets.put(m.getInstrument(),m);
+        }
+
+        return new Song(id,title,artist,genres,sheets);
     }
 
     @Override
     public OperationResult<Void> loadData() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadData'");
+        OperationResult<ArrayList<Song>> or = DataLoader.getData(this);
+
+        if (or.success) {
+            for (Song s : or.result) {
+                this.songs.put(s.getId(),s);
+            }
+        }
+
+        return new OperationResult<>(true);
     }
 
     @Override
     public OperationResult<Void> linkData() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'linkData'");
+        return new OperationResult<>(true); //Nothing to link
     }
 }
