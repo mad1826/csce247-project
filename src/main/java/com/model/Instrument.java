@@ -8,8 +8,6 @@ import org.json.simple.JSONObject;
  */
 public class Instrument {
     private InstrumentType type;
-    private int rangeMin;
-    private int rangeMax;
     private String tuning = "Standard";
     private boolean isMuted = false;
 
@@ -17,13 +15,10 @@ public class Instrument {
      * Creates a new instrument 
      *
      * @param type     the instrument type
-     * @param rangeMin the min range value
-     * @param rangeMax the max range value
      */
-    public Instrument(InstrumentType type, int rangeMin, int rangeMax) {
-        this.type = type;
-        this.rangeMin = rangeMin;
-        this.rangeMax = rangeMax;
+
+    public Instrument(InstrumentType t) {
+        this.type = t;
     }
 
 	/**
@@ -91,8 +86,6 @@ public class Instrument {
 		JSONObject instrumentJSON = new JSONObject();
 
 		instrumentJSON.put("name", type.toString());
-		instrumentJSON.put("rangeMin", rangeMin);
-		instrumentJSON.put("rangeMax", rangeMax);
 		instrumentJSON.put("tuning", tuning);
 		instrumentJSON.put("isMuted", isMuted);
 		instrumentJSON.put("sheet", sheetJSON);
