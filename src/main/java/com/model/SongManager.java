@@ -146,11 +146,11 @@ public class SongManager implements  SavableList<Song> {
 
 	/**
 	 * TODO
-	 * @param json
+	 * @param object
 	 * @return
 	 */
 	@Override
-    public Song toObject(@SuppressWarnings("exports") JSONObject json) {
+    public Song toObject(@SuppressWarnings("exports") JSONObject object) {
         return null;
     }
 

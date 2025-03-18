@@ -25,6 +25,7 @@ public class Lesson {
 	 * The song this lesson will play a sheet from
 	 */
 	private Song song;
+	private UUID unlinkedSong;
 
 	/**
 	 * The instrument this lesson will play a sheet from
@@ -44,6 +45,13 @@ public class Lesson {
 		this.song = song;
 		this.instrumentType = instrumentType;
 	}
+
+	public Lesson(UUID id, String title, UUID song, InstrumentType instrumentType) {
+        this.id = id;
+        this.title = title;
+        this.unlinkedSong = song;
+        this.instrumentType = instrumentType;
+    }
 
 	/**
 	 * Constructs a new Lesson instance and automatically generates an identifier
@@ -70,6 +78,14 @@ public class Lesson {
 	 */
 	public UUID getId() {
 		return id;
+	}
+
+	public void setSong(Song s) {
+		this.song = s;
+	}
+
+	public UUID getUnlinkedSong() {
+		return this.unlinkedSong;
 	}
 
 	/**

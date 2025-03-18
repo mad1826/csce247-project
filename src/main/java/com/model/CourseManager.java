@@ -18,7 +18,7 @@ public class CourseManager implements SavableList<Course> {
 	private static CourseManager courseManager;
 	
 	/** All courses */
-	private HashMap<UUID, Course> courses;
+	private final HashMap<UUID, Course> courses;
 
 	/** The location of the course data */
     final static String FILE_PATH = "src/main/java/com/data/courses.json";
@@ -115,10 +115,25 @@ public class CourseManager implements SavableList<Course> {
 		String title = (String) object.get("title");
 		UUID owner = UUID.fromString((String) object.get("owner"));
 
-		ArrayList<UUID> members = new ArrayList<>(); //TODO: grab the members by UUID from json and index here
+		ArrayList<UUID> members = new ArrayList<>();
+		JSONArray membersJSON = (JSONArray) object.get("members");
+		for (Object memberID : membersJSON) { //iterate array
+			members.add(UUID.fromString((String) memberID));
+		}
 
-		ArrayList<Lesson> lessons = new ArrayList<>(); //TODO: Construct these from json
+		ArrayList<Lesson> lessons = new ArrayList<>();
+		JSONArray lessonsJSON = (JSONArray) object.get("lessons");
+		for (Object lessonObject : lessonsJSON) {
+			JSONObject lessonJSON = (JSONObject) lessonObject;
 
+			UUID lessonID = UUID.fromString((String) lessonJSON.get("id"));
+			String lessonTitle = (String) lessonJSON.get("title");
+			UUID songID = UUID.fromString((String) lessonJSON.get("song"));
+			String instrument = (String) lessonJSON.get("instrument");
+
+			Lesson l = new Lesson(lessonID, lessonTitle, songID,InstrumentType.valueOf(instrument));
+			lessons.add(l);
+		}
 
 		return new Course(id,code,title,lessons,owner,members);
 	}
@@ -146,6 +161,10 @@ public class CourseManager implements SavableList<Course> {
 
             	c.getMembers().add(s); //Add user to course
             }
+
+			for (Lesson l : c.getLessons()) {
+				l.setSong(SongManager.getInstance().getSong(l.getUnlinkedSong())); //will error until we have songmanager.loadData
+			}
         }
 
         return new OperationResult<>(true);
