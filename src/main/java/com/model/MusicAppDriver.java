@@ -1,5 +1,7 @@
 package com.model;
 
+import java.util.HashMap;
+
 /**
  * A terminal-based interface for interacting with the application.
  * @author Michael Davis
@@ -24,6 +26,7 @@ public class MusicAppDriver {
 	 */
 	public void run() {
 		logInAndOut();
+		searchSongs();
 	}
 
 	/**
@@ -33,6 +36,29 @@ public class MusicAppDriver {
 		facade.login("jane.smith@example.com", "secureP@ss987");
 		User user = facade.getCurrentUser();
 		System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
+
+		boolean changed = facade.logout();
+		if (changed)
+			System.out.println("You have successfully logged out.");
+	}
+
+	public void searchSongs() {
+		facade.login("jane.smith@example.com", "secureP@ss987");
+		User user = facade.getCurrentUser();
+		System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
+
+		System.out.println("Listing all songs:");
+		for (Song song : facade.getSongs().values()) {
+			System.out.println("\t" + song);
+		}
+
+		String titleFilter = "sound";
+		System.out.println("Filtering songs by \"title: " + titleFilter + "\"");
+		HashMap<SongFilter, String> query = new HashMap<>();
+		query.put(SongFilter.TITLE, titleFilter);
+		for (Song song : facade.findSongs(query).values()) {
+			System.out.println("\t" + song);
+		}
 
 		boolean changed = facade.logout();
 		if (changed)

@@ -174,19 +174,19 @@ public class MusicAppFacade {
 
     /**
      * get songs
-     * @return ArrayList<Song>
+     * @return All songs
      */
-    public ArrayList<Song> getSongs() {
-        return new ArrayList<>();
+    public HashMap<UUID, Song> getSongs() {
+        return SongManager.getInstance().getSongs();
     }
 
     /**
      * find songs
      * @param query query
-     * @return ArrayList<Song>
+     * @return All songs that match the query
      */
-    public ArrayList<Song> findSongs(HashMap<SongFilter, String> query) {
-        return new ArrayList<>();
+    public HashMap<UUID, Song> findSongs(HashMap<SongFilter, String> query) {
+        return SongManager.getInstance().findSongs(query);
     }
 
     /**
