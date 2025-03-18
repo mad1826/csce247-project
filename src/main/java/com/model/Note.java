@@ -30,7 +30,7 @@ public class Note {
         this.value = value;
         this.dot = dot;
         this.line = line;
-        this.octave = octave;
+        this.octave = octave > 0 ? octave : 1;
     }
 
     /**
@@ -39,8 +39,16 @@ public class Note {
      * @param pitch the new pitch to set
      */
     public void setPitch(Pitch pitch) {
-        
+        this.pitch = pitch;
     }
+
+	/**
+	 * Sets the pitch modifier of the note
+	 * @param pitchModifier - the new pitch modifier
+	 */
+	public void setPitchModifier(PitchModifier pitchModifier) {
+		this.pitchModifier = pitchModifier;
+	}
 
     /**
      * Sets the duration value of the note
@@ -48,33 +56,31 @@ public class Note {
      * @param value the new value to set
      */
     public void setValue(NoteValue value) {
-        
+		this.value = value;
     }
 
     /**
      * Toggles the dot property of the note
      */
     public void toggleDot() {
-        
+		dot = !dot;
     }
 
-    /**
-     * Adds a tie to the next note
-     *
-     * @param nextNote the note to tie to
-     */
-    public void addTie(Note nextNote) {
-        
-    }
+	/**
+	 * Toggles whether the note should have a line
+	 */
+	public void toggleLine() {
+		line = !line;
+	}
 
-    /**
-     * Removes a tie to the next note
-     *
-     * @param nextNote the note to remove tie from
-     */
-    public void removeTie(Note nextNote) {
-       
-    }
+	/**
+	 * Sets the octave of the note
+	 * @param octave - the new octave
+	 */
+	public void setOctave(int octave) {
+		if (octave > 0)
+			this.octave = octave;
+	}
 
 	/**
 	 * Transforms this instance into a JSON object
