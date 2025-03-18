@@ -1,6 +1,5 @@
 package com.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -50,13 +49,48 @@ public class SongManager implements  SavableList<Song> {
         return null;
     }
 
+	/**
+	 * Get all songs loaded
+	 * @return All songs
+	 */
+	public HashMap<UUID, Song> getSongs() {
+		return songs;
+	}
+
     /**
      * finds songs based on search filters
      * @param - a HashMap of search filters (e.g., title, artist, genre)
-     * @return - a list of matching songs
+     * @return All matching songs
      */
-    public ArrayList<Song> findSongs(HashMap<SongFilter, String> query) {
-        return new ArrayList<>(); //placeholder stub
+    public HashMap<UUID, Song> findSongs(HashMap<SongFilter, String> query) {
+		HashMap<UUID, Song> matches = new HashMap<>();
+
+		for (UUID songId : songs.keySet()) {
+			Song song = songs.get(songId);
+
+			String titleQuery = query.get(SongFilter.TITLE);
+			String artistQuery = query.get(SongFilter.ARTIST);
+			String genreQuery = query.get(SongFilter.GENRE);
+
+			if (genreQuery != null) {
+				boolean correct = false;
+				for (Genre genre : song.getGenres()) {
+					if (genre.toString().toLowerCase().contains(genreQuery.toLowerCase())) {
+						correct = true;
+						break;
+					}
+				}
+				
+				if (!correct)
+					continue;
+			}
+
+			if ((titleQuery == null || song.getTitle().toLowerCase().contains(titleQuery.toLowerCase()))
+			&& (artistQuery == null || song.getArtist().toLowerCase().equalsIgnoreCase(artistQuery.toLowerCase())))
+				matches.put(songId, song);
+		}
+
+        return matches;
     }
 
     /**

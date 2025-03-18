@@ -79,6 +79,14 @@ public class Song {
         return artist;
     }
 
+	/**
+	 * Gets the genres the song belongs to
+	 * @return A list of song genres
+	 */
+	public ArrayList<Genre> getGenres() {
+		return genres;
+	}
+
     /**
      * gets the unique ID of the song
      * @return - the uuid of the song
@@ -112,5 +120,13 @@ public class Song {
 		songObject.put("sheets", sheetsJSON);
 
 		return songObject;
+	}
+
+	/**
+	 * Gets a string representation of the song
+	 */
+	@Override
+	public String toString() {
+		return title + " by " + artist;
 	}
 }
