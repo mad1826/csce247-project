@@ -86,6 +86,10 @@ public class UserManager implements  SavableList<User> {
         return null;
     }
 
+    public User getUser(UUID id) {
+        return this.users.get(id);
+    }
+
     /**
      * Returns the json file path this list is stored at.
      * @return filePath

@@ -17,6 +17,8 @@ public class Course {
 	 */
 	private UUID id;
 
+	private String code;
+
 	/**
 	 * The course's title
 	 */
@@ -26,11 +28,13 @@ public class Course {
 	 * The course's owner
 	 */
 	private Teacher owner;
+	private UUID unlinkedOwner;
 
 	/**
 	 * The course's members
 	 */
 	private ArrayList<Student> members;
+	private ArrayList<UUID> unlinkedMembers;
 
 	/**
 	 * The course's lessons
@@ -52,6 +56,16 @@ public class Course {
 		this.owner = owner;
 		this.members = members;
 	}
+
+	//Constructor for data loader
+	public Course(UUID id, String code, String title, ArrayList<Lesson> lessons, UUID owner, ArrayList<UUID> members) {
+        this.id = id;
+        this.title = title;
+        this.lessons = lessons;
+        this.code = code;
+		this.unlinkedMembers = members;
+		this.unlinkedOwner = owner;
+    }
 
 	/**
 	 * Constructs a new Course instance and automatically generates an identifier
@@ -78,6 +92,14 @@ public class Course {
 	 */
 	public String getTitle() {
 		return title;
+	}
+
+	public ArrayList<UUID> getUnlinkedMembers() {
+		return this.unlinkedMembers;
+	}
+
+	public UUID getUnlinkedOwner() {
+		return this.unlinkedOwner;
 	}
 
 	/**

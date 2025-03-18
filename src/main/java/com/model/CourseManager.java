@@ -7,6 +7,8 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.datahandlers.DataLoader;
+
 /**
  * A manager for all courses
  * @author Michael Davis
@@ -107,19 +109,41 @@ public class CourseManager implements SavableList<Course> {
 	 * Transforms a JSON object into a Course instances
 	 */
 	@Override
-	public Course toObject(@SuppressWarnings("exports") JSONObject json) {
-		return new Course("", new ArrayList<>(), new Teacher("", "", "", "abcd1234$"), new ArrayList<>());
+	public Course toObject(@SuppressWarnings("exports") JSONObject object) {
+		UUID id = UUID.fromString((String) object.get("id"));
+		String code = (String) object.get("code");
+		String title = (String) object.get("title");
+		UUID owner = UUID.fromString((String) object.get("owner"));
+
+		ArrayList<UUID> members = new ArrayList<>(); //TODO: grab the members by UUID from json and index here
+
+		ArrayList<Lesson> lessons = new ArrayList<>(); //TODO: Construct these from json
+
+
+		return new Course(id,code,title,lessons,owner,members);
 	}
 
 	@Override
 	public OperationResult<Void> loadData() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'loadData'");
+		 OperationResult<ArrayList<Course>> or = DataLoader.getData(this);
+
+        if (or.success) {
+            for (Course c : or.result) {
+                this.courses.put(c.getId(),c);
+            }
+        }
+
+        return new OperationResult<>("Needs result message done");
 	}
 
 	@Override
 	public OperationResult<Void> linkData() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'linkData'");
+		for (Course c : this.courses.values()) {
+            for (UUID id : c.getUnlinkedMembers()) {
+               c.getMembers().add((Student) UserManager.getInstance().getUser(id)); //will throw error if non student user is in course
+            }
+        }
+
+        return new OperationResult<>(true);
 	}
 }
