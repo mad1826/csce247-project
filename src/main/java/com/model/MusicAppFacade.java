@@ -11,6 +11,10 @@ import java.util.UUID;
  */
 public class MusicAppFacade {
 	/**
+	 * The singleton facade instance
+	 */
+	private static MusicAppFacade instance;
+	/**
 	 * The currently authenticated user
 	 */
     private User currentUser;
@@ -26,11 +30,22 @@ public class MusicAppFacade {
     /**
      * Constructs a new MusicAppFacade instance
      */
-    public MusicAppFacade() {
+    private MusicAppFacade() {
         UserManager.getInstance().loadData();
 		// CourseManager.getInstance().loadData();
 		// SongManager.getInstance().loadData();
     }
+
+	/**
+	 * Gets the facade singleton instance.
+	 * @return the sole facade instance
+	 */
+	public static MusicAppFacade getInstance() {
+		if (instance == null)
+			instance = new MusicAppFacade();
+
+		return instance;
+	}
 
 	/**
 	 * Gets the current authenticated user
@@ -67,9 +82,7 @@ public class MusicAppFacade {
      * @return The newly authenticated user
      */
     public User login(String email, String password) {
-        User user = UserManager.getInstance().getUser(email, password);
-		this.currentUser = user;
-		return user;
+        return this.currentUser = UserManager.getInstance().getUser(email, password);
     }
 
     /**

@@ -8,7 +8,7 @@ public class MusicAppDriver {
 	/**
 	 * The facade that the driver will interact through
 	 */
-	public MusicAppFacade facade = new MusicAppFacade();
+	public MusicAppFacade facade = MusicAppFacade.getInstance();
 
 	/**
 	 * Create a new driver and run its designated scenarios.
