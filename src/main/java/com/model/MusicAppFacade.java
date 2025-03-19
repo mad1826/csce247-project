@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import com.model.managers.SongManager;
+import com.model.managers.UserManager;
+
 /**
  * facade for the music application
  * central access to app functionality

@@ -1,4 +1,4 @@
-package com.model;
+package com.model.managers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,13 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.Course;
+import com.model.InstrumentType;
+import com.model.Lesson;
+import com.model.OperationResult;
+import com.model.SavableList;
+import com.model.Student;
+import com.model.Teacher;
 import com.model.datahandlers.DataLoader;
 
 /**
@@ -148,7 +155,7 @@ public class CourseManager implements SavableList<Course> {
             }
         }
 
-        return new OperationResult<>("Needs result message done");
+        return new OperationResult<>(true);
 	}
 
 	@Override

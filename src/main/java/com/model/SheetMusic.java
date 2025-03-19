@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.Measure;
+
 /**
  * sheet with measures and playback settings
  * @author Ryan Smith

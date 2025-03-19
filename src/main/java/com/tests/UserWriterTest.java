@@ -1,7 +1,7 @@
 package com.tests;
 
-import com.model.UserManager;
 import com.model.datahandlers.DataWriter;
+import com.model.managers.UserManager;
 
 public class UserWriterTest {
 	public static void main(String[] args) {

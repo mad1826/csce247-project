@@ -6,7 +6,6 @@ import java.util.UUID;
 
 import com.model.Clef;
 import com.model.Course;
-import com.model.CourseManager;
 import com.model.Difficulty;
 import com.model.Instrument;
 import com.model.InstrumentType;
@@ -14,6 +13,7 @@ import com.model.SheetMusic;
 import com.model.Song;
 import com.model.Teacher;
 import com.model.datahandlers.DataWriter;
+import com.model.managers.CourseManager;
 
 public class CourseWriterTest {
 	public static void main(String[] args) {

@@ -9,7 +9,9 @@ import org.json.simple.parser.JSONParser;
 
 import com.model.OperationResult;
 import com.model.SavableList;
-import com.model.UserManager;
+import com.model.managers.CourseManager;
+import com.model.managers.SongManager;
+import com.model.managers.UserManager;
 
 /**
  * Handles loading data from a JSON file to any savable list
@@ -26,19 +28,20 @@ public class DataLoader {
             ArrayList<T> result = new ArrayList<>();
 
             FileReader reader = new FileReader(list.getFilePath()); //const reader
+
             JSONArray jsonData = (JSONArray) new JSONParser().parse(reader); //parse file into JSONArray
 
-            for (int i = 0; i < jsonData.size(); i++) { //iterate array
+            for (int i = 0; i < jsonData.size(); i++) { //iterate array\
                 JSONObject o = (JSONObject) jsonData.get(i); //get object in array
-                
+
                 T object = list.toObject(o); //call class specific behavior on how to construct object from json data
-                
+
                 result.add(object); //append result
             }
 
             return new OperationResult<>(result);
         } catch (Exception e) {
-            return new OperationResult<>("Unable to load data.",e);
+            return new OperationResult<>("Unable to load data from loader.",e);
         }
     }
     
@@ -54,6 +57,8 @@ public class DataLoader {
         // Index all savable lists we want to load
         ArrayList<SavableList<?>> handlers = new ArrayList<>();
         handlers.add(UserManager.getInstance());
+        handlers.add(CourseManager.getInstance());
+        handlers.add(SongManager.getInstance());
 
         // Load all data from files
         for (SavableList<?> list : handlers) {
