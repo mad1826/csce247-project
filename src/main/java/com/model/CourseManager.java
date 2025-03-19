@@ -163,7 +163,7 @@ public class CourseManager implements SavableList<Course> {
             }
 
 			for (Lesson l : c.getLessons()) {
-				l.setSong(SongManager.getInstance().getSong(l.getUnlinkedSong())); //will error until we have songmanager.loadData
+				l.setSong(SongManager.getInstance().getSong(l.getUnlinkedSong()).result); //will error until we have songmanager.loadData
 			}
         }
 
