@@ -43,13 +43,13 @@ public class SongManager implements  SavableList<Song> {
      * @param - the unique ID of the song
      * @return - the Song object if found, otherwise null
      */
-    public Song getSong(UUID id) {
+    public OperationResult<Song> getSong(UUID id) {
         for (Song song : songs.values()) {
             if (song.getID().equals(id)) {
-                return song;
+                return new OperationResult<>(song);
             }
         }
-        return null;
+        return new OperationResult<>("Song not found");
     }
 
 	/**
@@ -249,5 +249,10 @@ public class SongManager implements  SavableList<Song> {
     @Override
     public OperationResult<Void> linkData() {
         return new OperationResult<>(true); //Nothing to link
+    }
+
+    public static void main(String[] args) {
+        SongManager.getInstance().loadData();
+        System.out.println(SongManager.getInstance().songs);
     }
 }

@@ -227,6 +227,10 @@ public class MusicAppFacade {
         return SongManager.getInstance().findSongs(songQuery);
     }
 
+    public OperationResult<Song> getSong(UUID id) {
+        return SongManager.getInstance().getSong(id);
+    }
+
     /**
      * get sheets
      * @param song song
