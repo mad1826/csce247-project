@@ -20,7 +20,7 @@ public class CourseWriterTest {
 		CourseManager courseManager = CourseManager.getInstance();
 		Course course = courseManager.createCourse(UUID.randomUUID(), "Hi", new Teacher("Mary", "Sue", "abc@gmail.com", "$1982347Ddj"));
 		
-		Instrument instrument = new Instrument(InstrumentType.PIANO, 1, 1);
+		Instrument instrument = new Instrument(InstrumentType.PIANO);
 		SheetMusic sheet = new SheetMusic(instrument, Difficulty.BEGINNER, Clef.BASS, true, new ArrayList<>(), true);
 		HashMap<Instrument, SheetMusic> sheets = new HashMap<>();
 		sheets.put(instrument, sheet);

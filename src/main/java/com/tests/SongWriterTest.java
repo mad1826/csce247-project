@@ -27,7 +27,7 @@ public class SongWriterTest {
 		genres.add(Genre.ROCK);
 		genres.add(Genre.JAZZ);
 
-		Instrument piano = new Instrument(InstrumentType.PIANO, 0, 1);
+		Instrument piano = new Instrument(InstrumentType.PIANO);
 		Note note = new Note(Pitch.A, PitchModifier.NONE, NoteValue.SIXTEENTH, false, false, 2);
 		ArrayList<Note> notes = new ArrayList<>();
 		notes.add(note);
