@@ -54,15 +54,21 @@ public class CourseManager implements SavableList<Course> {
 
 	/**
 	 * Creates a new course
+	 * @param code - the course's unique code
 	 * @param title - the course's title
-	 * @param courseId - the course's unique identifier
 	 * @param owner - the course's owner
 	 * @return the newly created course
 	 */
-	public Course createCourse(UUID courseId, String title, Teacher owner) {
-		Course course = new Course(courseId, title, new ArrayList<>(), owner, new ArrayList<>());
-		courses.put(courseId, course);
-		return course;
+	public OperationResult<Course> createCourse(String code, String title, Teacher owner) {
+		for (Course course : courses.values()) {
+			if (course.getCode().equals(code)) {
+				return new OperationResult<>("A course with the specified code already exists.");
+			}
+		} 
+
+		Course course = new Course(code, title, new ArrayList<>(), owner, new ArrayList<>());
+		courses.put(course.getId(), course);
+		return new OperationResult<>(course);
 	}
 
 	/**

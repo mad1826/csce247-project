@@ -1,6 +1,5 @@
 package com.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -39,23 +38,23 @@ public class Student extends User {
     }
 
     /**
-     * Joins a course with the specified ID
+     * Joins a course with the specified code
      *
-     * @param id The unique identifier for the course
+     * @param code The unique code for the course
      * @return The joined Course object
      */
-    public Course joinCourse(UUID id) {
-        return new Course(id, "Placeholder Course", new ArrayList<Lesson>(), null, new ArrayList<Student>());
+    public Course joinCourse(String code) {
+        return null; // TODO iterate through courses to join the matching one
     }
 
     /**
-     * Leaves a course with the specified ID
+     * Leaves a course with the specified code
      *
-     * @param id The unique identifier of the course to leave
+     * @param code The unique code of the course to leave
      * @return true if the course was successfully left, false otherwise
      */
-    public boolean leaveCourse(UUID id) {
-        return true;
+    public boolean leaveCourse(String code) {
+        return true; // TODO iterate through courses to leave the matching one
     }
 
     /**

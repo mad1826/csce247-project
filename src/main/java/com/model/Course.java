@@ -17,6 +17,9 @@ public class Course {
 	 */
 	private UUID id;
 
+	/**
+	 * The course's unique code that students will enter to join
+	 */
 	private String code;
 
 	/**
@@ -44,13 +47,15 @@ public class Course {
 	/**
 	 * Constructs a new Course instance that already has an identifier
 	 * @param id - the course's unique identifier
+	 * @param code - the course's unique code
 	 * @param title - the course's title
 	 * @param lessons - the course's lessons
 	 * @param owner - the course's owner
 	 * @param members - the course's student members
 	 */
-	public Course(UUID id, String title, ArrayList<Lesson> lessons, Teacher owner, ArrayList<Student> members) {
+	public Course(UUID id, String code, String title, ArrayList<Lesson> lessons, Teacher owner, ArrayList<Student> members) {
 		this.id = id;
+		this.code = code;
 		this.title = title;
 		this.lessons = lessons;
 		this.owner = owner;
@@ -60,22 +65,23 @@ public class Course {
 	//Constructor for data loader
 	public Course(UUID id, String code, String title, ArrayList<Lesson> lessons, UUID owner, ArrayList<UUID> members) {
         this.id = id;
+        this.code = code;
         this.title = title;
         this.lessons = lessons;
-        this.code = code;
-		this.unlinkedMembers = members;
 		this.unlinkedOwner = owner;
+		this.unlinkedMembers = members;
     }
 
 	/**
 	 * Constructs a new Course instance and automatically generates an identifier
+	 * @param code - the course's unique code
 	 * @param title - the course's title
 	 * @param lessons - the course's lessons
 	 * @param owner - the course's owner
 	 * @param members - the course's student members
 	 */
-	public Course(String title, ArrayList<Lesson> lessons, Teacher owner, ArrayList<Student> members) {
-		this(UUID.randomUUID(), title, lessons, owner, members);
+	public Course(String code, String title, ArrayList<Lesson> lessons, Teacher owner, ArrayList<Student> members) {
+		this(UUID.randomUUID(), code, title, lessons, owner, members);
 	}
 
 	/**
@@ -84,6 +90,14 @@ public class Course {
 	 */
 	public UUID getId() {
 		return id;
+	}
+
+	/**
+	 * Gets the code's unique code that students may join through.
+	 * @return the course's code
+	 */
+	public String getCode() {
+		return code;
 	}
 
 	/**
@@ -175,7 +189,7 @@ public class Course {
 		JSONObject courseDetails = new JSONObject();
 
 		courseDetails.put("id", id.toString());
-		courseDetails.put("code", id.toString());
+		courseDetails.put("code", code.toString());
 		courseDetails.put("title", title);
 		courseDetails.put("owner", owner.getId().toString());
 

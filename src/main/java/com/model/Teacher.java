@@ -1,8 +1,6 @@
 package com.model;
 
-import java.util.HashMap;
 import java.util.UUID;
-import java.util.ArrayList;
 
 /**
  * Represents a teacher in the music app
@@ -36,13 +34,14 @@ public class Teacher extends User {
     }
 
     /**
-     * Creates a new course with the specified ID
+     * Creates a new course with the specified code
      *
-     * @param id The unique identifier for the course
-     * @return A new Course object
+	 * @param code - the code that students will enter to join the course
+	 * @param title - the course's title
+     * @return the result of attempting to create the course
      */
-    public Course createCourse(UUID id) {
-        return new Course(id, "Placeholder Course", new ArrayList<Lesson>(), this, new ArrayList<Student>());
+    public OperationResult<Course> createCourse(String code, String title) {
+		return CourseManager.getInstance().createCourse(code, title, this);
     }
 
     /**
