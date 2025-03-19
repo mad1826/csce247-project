@@ -189,7 +189,7 @@ public class Course {
 		JSONObject courseDetails = new JSONObject();
 
 		courseDetails.put("id", id.toString());
-		courseDetails.put("code", code.toString());
+		courseDetails.put("code", code);
 		courseDetails.put("title", title);
 		courseDetails.put("owner", owner.getId().toString());
 
