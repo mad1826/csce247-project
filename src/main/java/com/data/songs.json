@@ -9,11 +9,7 @@
         ],
         "sheets": {
             "GUITAR": {
-                "name": "Guitar",
-                "rangeMin": 40,
-                "rangeMax": 88,
                 "tuning": "Standard",
-                "isMuted": false,
 				"sheet": {
 					"difficulty": "INTERMEDIATE",
 					"clef": "TREBLE",
@@ -47,11 +43,7 @@
 				}
             },
             "PIANO": {
-                "name": "Piano",
-                "rangeMin": 21,
-                "rangeMax": 108,
                 "tuning": "Standard",
-                "isMuted": false,
 				"sheet": {
 					"difficulty": "INTERMEDIATE",
 					"clef": "TREBLE",
@@ -96,11 +88,7 @@
         ],
         "sheets": {
             "BASS": {
-                "name": "Bass",
-                "rangeMin": 30,
-                "rangeMax": 70,
                 "tuning": "Standard",
-                "isMuted": false,
 				"sheet": {
 					"difficulty": "INTERMEDIATE",
 					"clef": "TREBLE",
@@ -134,11 +122,7 @@
 				}
             },
             "DRUMS": {
-                "name": "Drums",
-                "rangeMin": 35,
-                "rangeMax": 90,
                 "tuning": "Standard",
-                "isMuted": true,
 				"sheet": {
 					"difficulty": "INTERMEDIATE",
 					"clef": "TREBLE",
