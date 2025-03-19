@@ -26,6 +26,10 @@ public class MusicAppFacade {
 	 * The currently selected music sheet
 	 */
     private SheetMusic currentSheet;
+	/**
+	 * The current query for filtering songs
+	 */
+	private final HashMap<SongFilter, String> songQuery = new HashMap<>();
 
     /**
      * Constructs a new MusicAppFacade instance
@@ -184,13 +188,43 @@ public class MusicAppFacade {
         return SongManager.getInstance().getSongs();
     }
 
+	/**
+	 * Set the artist of songs to search for
+	 * @param artist - the name of the artist
+	 */
+	public void setArtistQuery(String artist) {
+		songQuery.put(SongFilter.ARTIST, artist);
+	}
+
+	/**
+	 * Set the title of songs to search for
+	 * @param title - the song's title
+	 */
+	public void setTitleQuery(String title) {
+		songQuery.put(SongFilter.TITLE, title);
+	}
+
+	/**
+	 * Set the genre of songs to search for
+	 * @param genre - the song's genre
+	 */
+	public void setGenreQuery(String genre) {
+		songQuery.put(SongFilter.GENRE, genre);
+	}
+
+	/**
+	 * Clears the filters for which songs to search for
+	 */
+	public void clearQuery() {
+		songQuery.clear();
+	}
+
     /**
-     * find songs
-     * @param query query
+     * Search songs for those that match the query filters
      * @return All songs that match the query
      */
-    public HashMap<UUID, Song> findSongs(HashMap<SongFilter, String> query) {
-        return SongManager.getInstance().findSongs(query);
+    public HashMap<UUID, Song> searhSongs() {
+        return SongManager.getInstance().findSongs(songQuery);
     }
 
     /**

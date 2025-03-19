@@ -1,17 +1,17 @@
 [
     {
         "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
-        "title": "Echoes of Time",
-        "artist": "The Soundwaves",
+        "title": "Happy Birthday",
+        "artist": "Traditional",
         "genres": [
-            "ROCK",
-            "JAZZ"
+			"CLASSICAL",
+			"FOLK"
         ],
         "sheets": {
             "GUITAR": {
                 "tuning": "Standard",
 				"sheet": {
-					"difficulty": "INTERMEDIATE",
+					"difficulty": "BEGINNER",
 					"clef": "TREBLE",
 					"audioPlaybackEnabled": true,
 					"measures": [
@@ -21,12 +21,7 @@
 									"name": "My First Chord",
 									"notes": [
 										{
-											"pitch": "A",
-											"pitchModifier": "NONE",
-											"value": "SIXTEENTH",
-											"dot": false,
-											"line": false,
-											"octave": 2
+											
 										}
 									],
 									"tie": false
@@ -42,10 +37,10 @@
 					"private": true
 				}
             },
-            "PIANO": {
-                "tuning": "Standard",
+			"PIANO": {
+				"tuning": "Standard",
 				"sheet": {
-					"difficulty": "INTERMEDIATE",
+					"difficulty": "BEGINNER",
 					"clef": "TREBLE",
 					"audioPlaybackEnabled": true,
 					"measures": [
@@ -55,30 +50,113 @@
 									"name": "My First Chord",
 									"notes": [
 										{
-											"pitch": "A",
-											"pitchModifier": "NONE",
-											"value": "SIXTEENTH",
-											"dot": false,
-											"line": false,
-											"octave": 2
-										}
-									],
-									"tie": false
-								}
-							],
-							"tempo": 1,
-							"timeSignatureNum": 50,
-							"timeSignatureDenom": 1,
-							"repeatOpen": false,
-							"repeatClose": false
-						}
-					],
-					"private": true
+										"pitch": "C",
+												"pitchModifier": "NONE",
+												"value": "QUARTER",
+												"dot": false,
+												"octave": 4,
+												"jfugueString": "C4q"
+											}
+										],
+										"tie": false
+									},
+									{
+										"name": "C",
+										"notes": [
+											{
+												"pitch": "C",
+												"pitchModifier": "NONE",
+												"value": "QUARTER",
+												"dot": false,
+												"octave": 4,
+												"jfugueString": "C4q"
+											}
+										],
+										"tie": false
+									},
+									{
+										"name": "D",
+										"notes": [
+											{
+												"pitch": "D",
+												"pitchModifier": "NONE",
+												"value": "HALF",
+												"dot": false,
+												"octave": 4,
+												"jfugueString": "D4h"
+											}
+										],
+										"tie": false
+									}
+								],
+								"tempo": 80,
+								"timeSignatureNum": 4,
+								"timeSignatureDenom": 4,
+								"repeatOpen": false,
+								"repeatClose": false,
+								"jfugueString": "C4q C4q D4h"
+							},
+							{
+								"chords": [
+									{
+										"name": "C",
+										"notes": [
+											{
+												"pitch": "C",
+												"pitchModifier": "NONE",
+												"value": "QUARTER",
+												"dot": false,
+												"octave": 4,
+												"jfugueString": "C4q"
+											}
+										],
+										"tie": false
+									},
+									{
+										"name": "F",
+										"notes": [
+											{
+												"pitch": "F",
+												"pitchModifier": "NONE",
+												"value": "QUARTER",
+												"dot": false,
+												"octave": 4,
+												"jfugueString": "F4q"
+											}
+										],
+										"tie": false
+									},
+									{
+										"name": "E",
+										"notes": [
+											{
+												"pitch": "E",
+												"pitchModifier": "NONE",
+												"value": "HALF",
+												"dot": false,
+												"octave": 4,
+												"jfugueString": "E4h"
+											}
+										],
+										"tie": false
+									}
+								],
+								"tempo": 80,
+								"timeSignatureNum": 4,
+								"timeSignatureDenom": 4,
+								"repeatOpen": false,
+								"repeatClose": false,
+								"jfugueString": "C4q F4q E4h"
+							}
+						],
+						"private": true,
+						"jfuguePattern": "T80 I[Piano] C4q C4q D4h C4q F4q E4h"
+					}
 				}
-            }
-        }
-    },
-    {
+			}
+								   
+		},
+   {
         "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
         "title": "Midnight Groove",
         "artist": "Lunar Rhythms",
@@ -156,5 +234,5 @@
 				}
             }
         }
-    }
+    } 
 ]
