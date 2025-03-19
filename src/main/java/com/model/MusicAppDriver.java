@@ -93,7 +93,7 @@ public class MusicAppDriver {
 			System.out.println("\t" + song);
 		}
 
-		String titleFilter = "time";
+		String titleFilter = "birth";
 		System.out.println("Filtering songs by \"title: " + titleFilter + "\"");
 		facade.setTitleQuery(titleFilter);
 		for (Song song : facade.searhSongs().values()) {
