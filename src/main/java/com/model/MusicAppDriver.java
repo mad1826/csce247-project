@@ -35,6 +35,11 @@ public class MusicAppDriver {
 	public void logInAndOut() {
 		facade.login("jane.smith@example.com", "secureP@ss987");
 		User user = facade.getCurrentUser();
+		if (user == null) {
+			System.out.println("Login was unsuccessful.");
+			return;
+		}
+
 		System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
 
 		boolean changed = facade.logout();
@@ -86,6 +91,11 @@ public class MusicAppDriver {
 	public void searchSongs() {
 		facade.login("jane.smith@example.com", "secureP@ss987");
 		User user = facade.getCurrentUser();
+		if (user == null) {
+			System.out.println("Login was unsuccessful.");
+			return;
+		}
+		
 		System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
 
 		System.out.println("Listing all songs:");
