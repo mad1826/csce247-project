@@ -2,6 +2,8 @@ package com.model;
 
 import java.util.UUID;
 
+import com.model.managers.CourseManager;
+
 /**
  * Represents a teacher in the music app
  *  @author Ryan Smith
