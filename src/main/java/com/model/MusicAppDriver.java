@@ -1,7 +1,5 @@
 package com.model;
 
-import java.util.HashMap;
-
 /**
  * A terminal-based interface for interacting with the application.
  * @author Michael Davis
@@ -97,9 +95,8 @@ public class MusicAppDriver {
 
 		String titleFilter = "time";
 		System.out.println("Filtering songs by \"title: " + titleFilter + "\"");
-		HashMap<SongFilter, String> query = new HashMap<>();
-		query.put(SongFilter.TITLE, titleFilter);
-		for (Song song : facade.findSongs(query).values()) {
+		facade.setTitleQuery(titleFilter);
+		for (Song song : facade.searhSongs().values()) {
 			System.out.println("\t" + song);
 		}
 
