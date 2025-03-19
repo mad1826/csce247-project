@@ -1,4 +1,4 @@
-package com.model;
+package com.model.managers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,9 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.OperationResult;
+import com.model.SavableList;
+import com.model.User;
 import com.model.datahandlers.DataLoader;
 
 /**
@@ -171,7 +174,7 @@ public class UserManager implements  SavableList<User> {
             }
         }
 
-        return new OperationResult<>("Needs result message done");
+        return new OperationResult<>(true);
     }
 
     @Override

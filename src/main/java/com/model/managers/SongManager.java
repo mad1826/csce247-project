@@ -1,4 +1,4 @@
-package com.model;
+package com.model.managers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,22 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.Chord;
+import com.model.Clef;
+import com.model.Difficulty;
+import com.model.Genre;
+import com.model.Instrument;
+import com.model.InstrumentType;
+import com.model.Measure;
+import com.model.Note;
+import com.model.NoteValue;
+import com.model.OperationResult;
+import com.model.Pitch;
+import com.model.PitchModifier;
+import com.model.SavableList;
+import com.model.SheetMusic;
+import com.model.Song;
+import com.model.SongFilter;
 import com.model.datahandlers.DataLoader;
 
 /**
@@ -16,8 +32,8 @@ import com.model.datahandlers.DataLoader;
  */
 public class SongManager implements  SavableList<Song> {
     private static SongManager songManager; //singleton instance
-    private HashMap<UUID, Song> songs; //list of all songs
-    final static String filePath = "src/main/java/com/data/songs.json";
+    private final HashMap<UUID, Song> songs; //list of all songs
+    final static String FILE_PATH = "src/main/java/com/data/songs.json";
 
     /**
      * private constructor for SongManager
@@ -127,7 +143,7 @@ public class SongManager implements  SavableList<Song> {
      */
 	@Override
 	public String getFilePath() {
-		return filePath;
+		return FILE_PATH;
 	}
 
     /**
@@ -135,7 +151,7 @@ public class SongManager implements  SavableList<Song> {
      * this is a placeholder method
      * @return - JSON representation of the song
      */
-	@SuppressWarnings({ "exports", "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Override
     public JSONArray toJSON() {
         JSONArray songsJSON = new JSONArray();
@@ -166,7 +182,7 @@ public class SongManager implements  SavableList<Song> {
             NoteValue v = NoteValue.valueOf((String)noteObj.get("value"));
             Boolean dot = (Boolean) noteObj.get("dot");
             Boolean line = (Boolean) noteObj.get("line");
-            int oct = (int) noteObj.get("octave");
+            int oct = ((Long)noteObj.get("octave")).intValue();
 
             Note n = new Note(p, pm, v, dot, line, oct);
             notes.add(n);
@@ -176,11 +192,11 @@ public class SongManager implements  SavableList<Song> {
     }
 
     private Measure toMeasure(JSONObject measure) {
-        int tempo = (int)measure.get("tempo");
-        int tsn = (int)measure.get("timeSignatureNum");
-        int tsd = (int) measure.get("timeSignatureDenom");
+        int tempo = ((Long)measure.get("tempo")).intValue();
+        int tsn = ((Long)measure.get("timeSignatureNum")).intValue();
+        int tsd = ((Long)measure.get("timeSignatureDenom")).intValue();
         boolean repeatOpen = (Boolean) measure.get("repeatOpen");
-        boolean repeatClosed = (Boolean) measure.get("repeatClosed");
+        boolean repeatClosed = (Boolean) measure.get("repeatClose");
 
         ArrayList<Chord> chords = new ArrayList<>();
         JSONArray chordsJSON = (JSONArray)measure.get("chords");
@@ -192,10 +208,15 @@ public class SongManager implements  SavableList<Song> {
     }
 
     private SheetMusic toSheet(String instrument, JSONObject sheet) {
+        InstrumentType i = InstrumentType.valueOf(instrument);
+        Instrument ins = new Instrument(i);
+        ins.adjustTuning((String)sheet.get("tuning"));
+        
+        sheet = (JSONObject) sheet.get("sheet"); //because of oddly written json sheet data is stored in a nested table inside of itself
+
         Difficulty d = Difficulty.valueOf((String)sheet.get("difficulty"));
         Clef c = Clef.valueOf((String)sheet.get("clef"));
-        InstrumentType i = InstrumentType.valueOf(instrument);
-        Boolean isPrivate = (Boolean)sheet.get("isPrivate");
+        Boolean isPrivate = (Boolean)sheet.get("private");
 
         ArrayList<Measure> measures = new ArrayList<>();
         JSONArray measuresJSON = (JSONArray)sheet.get("measures");
@@ -207,7 +228,7 @@ public class SongManager implements  SavableList<Song> {
     }
 
 	@Override
-    public Song toObject(@SuppressWarnings("exports") JSONObject object) {
+    public Song toObject(JSONObject object) {
         UUID id = UUID.fromString((String) object.get("id"));
         String title = (String) object.get("title");
         String artist = (String) object.get("artist");
@@ -229,8 +250,10 @@ public class SongManager implements  SavableList<Song> {
 
             sheets.put(m.getInstrument(),m);
         }
-
-        return new Song(id,title,artist,genres,sheets);
+        
+        Song ret = new Song(id, title, artist, genres, sheets);
+        System.out.println(ret);
+        return ret;
     }
 
     @Override
@@ -251,7 +274,7 @@ public class SongManager implements  SavableList<Song> {
         return new OperationResult<>(true); //Nothing to link
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { //tester
         SongManager.getInstance().loadData();
         System.out.println(SongManager.getInstance().songs);
     }

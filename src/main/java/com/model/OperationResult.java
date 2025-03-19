@@ -54,4 +54,15 @@ public class OperationResult<T> {
         this.error = null;
         this.message = null;
     }
+
+    @Override
+    public String toString() {
+        return "Operation Result {"
+            + "\n\tsuccess=" + success
+            + ",\n\tresult=" + result
+            + ",\n\terror=" + (error != null ? error.getMessage() : "null")
+            + (error != null ? ",\n\ttrace="+error.fillInStackTrace().toString() : "")
+            + ",\n\tmessage='" + message + '\''
+            + "\n}";
+    }
 }
