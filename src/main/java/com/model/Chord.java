@@ -61,4 +61,9 @@ public class Chord {
 
 		return chordJSON;
 	}
+
+    @Override
+    public String toString() {
+        return this.name+" - "+this.notes;
+    }
 } 

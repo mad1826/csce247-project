@@ -92,4 +92,9 @@ public class Instrument {
 
 		return instrumentJSON;
 	}
+
+    @Override
+    public String toString() {
+        return this.type.getName();
+    }
 } 

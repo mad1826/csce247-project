@@ -96,4 +96,16 @@ public class Measure {
 
 		return measureJSON;
 	}
+
+    @Override
+    public String toString() {
+        return "Measure {" +
+           "\n\tchords=" + chords +
+           ",\n\ttempo=" + tempo +
+           ",\n\ttimeSignatureNum=" + timeSignatureNum +
+           ",\n\ttimeSignatureDenom=" + timeSignatureDenom +
+           ",\n\trepeatOpen=" + repeatOpen +
+           ",\n\trepeatClose=" + repeatClose +
+           "\n}";
+    }
 } 

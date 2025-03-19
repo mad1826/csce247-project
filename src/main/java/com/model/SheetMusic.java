@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.model.Measure;
-
 /**
  * sheet with measures and playback settings
  * @author Ryan Smith
@@ -99,4 +97,16 @@ public class SheetMusic {
 
 		return sheetObject;
 	}
+
+    @Override
+    public String toString() {
+        return "SheetMusic {" +
+           "\n\tinstrument=" + instrument +
+           ",\n\tdifficulty=" + difficulty +
+           ",\n\tclef=" + clef +
+           ",\n\taudioPlaybackEnabled=" + audioPlaybackEnabled +
+           ",\n\tmeasures=" + measures +
+           ",\n\tisPrivate=" + isPrivate +
+           "\n}";
+    }
 } 

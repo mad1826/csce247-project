@@ -99,4 +99,9 @@ public class Note {
 
 		return noteJSON;
 	}
+
+  @Override
+  public String toString() {
+    return this.pitch.name()+this.pitchModifier.abbreviatedName;
+  }
 } 

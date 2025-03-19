@@ -127,6 +127,12 @@ public class Song {
 	 */
 	@Override
 	public String toString() {
-		return title + " by " + artist;
+		return "Song {" +
+            "\n\tid=" + id +
+            ",\n\ttitle=" + title +
+            ",\n\tartist=" + artist +
+            ",\n\tgenres=" + genres +
+            ",\n\tsheets=" + sheets +
+            "\n}";
 	}
 }
