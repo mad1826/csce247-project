@@ -1,6 +1,7 @@
 package com.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.json.simple.JSONObject;
@@ -17,7 +18,7 @@ public class User {
     private String lastName;
     private String emailAddress;
     private String password;
-    private ArrayList<User> friends;
+    private HashMap<UUID, User> friends;
     private ArrayList<Course> courses;
     private double metronomeSpeedModifier = 1.0;
 
@@ -41,7 +42,7 @@ public class User {
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.password = password;
-        this.friends = new ArrayList<>();
+        this.friends = new HashMap<>();
         this.courses = new ArrayList<>();
         this.unlinkedFriends = unlinkedFriends;
         this.metronomeSpeedModifier = metronomeSpeedModifier;
@@ -66,7 +67,7 @@ public class User {
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.password = password;
-        this.friends = new ArrayList<>();
+        this.friends = new HashMap<>();
         this.courses = new ArrayList<>();
      }
 
@@ -190,11 +191,31 @@ public class User {
 
     /**
      * gets the list of the user's friends
-     * @return - ArrayList of friends
+     * @return - hash map of friends
      */
-    public ArrayList<User> getFriends() {
+    public HashMap<UUID, User> getFriends() {
         return friends;
     }
+
+	public OperationResult<Void> addFriend(User friend) {
+		for (UUID friendId : friends.keySet()) {
+			if (friendId.equals(friend.getId())) {
+				return new OperationResult<>("This user is already your friend.");
+			}
+		}
+		friends.put(friend.getId(), friend);
+		return new OperationResult<>(true);
+	}
+
+	public OperationResult<Void> removeFriend(User friend) {
+		for (UUID friendId : friends.keySet()) {
+			if (friendId.equals(friend.getId())) {
+				friends.remove(friendId);
+				return new OperationResult<>(true);
+			}
+		}
+		return new OperationResult<>("User was not already a friend.");
+	}
 
     /**
      * gets the list of the user's courses
