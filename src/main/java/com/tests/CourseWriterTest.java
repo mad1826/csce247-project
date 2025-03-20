@@ -12,7 +12,7 @@ import com.model.OperationResult;
 import com.model.SheetMusic;
 import com.model.Song;
 import com.model.Teacher;
-import com.model.DataHandlers.DataWriter;
+import com.model.datahandlers.DataWriter;
 import com.model.managers.CourseManager;
 
 public class CourseWriterTest {
