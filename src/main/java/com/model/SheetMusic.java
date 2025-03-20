@@ -10,11 +10,11 @@ import org.json.simple.JSONObject;
  * @author Ryan Smith
  */
 public class SheetMusic {
-    private Instrument instrument;
+    private final Instrument instrument;
     private Difficulty difficulty;
     private Clef clef;
     private boolean audioPlaybackEnabled;
-    private ArrayList<Measure> measures;
+    private final ArrayList<Measure> measures;
     private boolean isPrivate;
 
     /**
@@ -51,7 +51,7 @@ public class SheetMusic {
      * Toggles audio playback on/off
      */
     public void toggleAudioPlayback() {
-        
+        audioPlaybackEnabled = !audioPlaybackEnabled;
     }
 
     /**
@@ -67,14 +67,22 @@ public class SheetMusic {
      * @param measure the measure to remove
      */
     public void removeMeasure(Measure measure) {
-        
+        measures.remove(measure);
     }
+
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	public void setClef(Clef clef) {
+		this.clef = clef;
+	}
 
     /**
      * Toggles the private status
      */
     public void togglePrivate() {
-        
+        isPrivate = !isPrivate;
     }
 
 	/**
