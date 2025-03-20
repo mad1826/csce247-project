@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.jfugue.player.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.jfugue.player.Player;
 
 /**
  * represent a song in the music app system
@@ -48,7 +48,7 @@ public class Song {
      * @param - a HashMap of instruments and their corresponding sheet music
      */
     public Song(String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets) {
-        this(UUID.randomUUID(), title, artist, genres, sheets);
+        this(UUID.randomUUID(), title, artist, genres, sheets,"");
     }
 
 	/**
