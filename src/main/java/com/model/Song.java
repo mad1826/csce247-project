@@ -67,6 +67,24 @@ public class Song {
         return sheets;
     }
 
+	/**
+	 * Creates a new sheet for this song
+	 * @param instrument - the instrument that will play the sheet
+	 * @param difficulty - the sheet's difficulty
+	 * @param clef - the clef to play the sheet in
+	 * @param audioPlaybackEnabled - whether the sheet will play audio back
+	 * @param measures - the sheet's measures
+	 * @param isPrivate - whether the sheet is private
+	 * @return The result of attempting to create the sheet
+	 */
+	public OperationResult<SheetMusic> createSheet(Instrument instrument, Difficulty difficulty, 
+		Clef clef, boolean audioPlaybackEnabled, 
+		ArrayList<Measure> measures, boolean isPrivate) {
+		SheetMusic newSheet = new SheetMusic(instrument, difficulty, clef, audioPlaybackEnabled, measures, isPrivate);
+		sheets.put(instrument, newSheet);
+		return new OperationResult<>(newSheet);
+	}
+
     /**
      * gets the title of the song
      * @return - title of the song

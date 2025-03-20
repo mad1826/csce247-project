@@ -287,10 +287,10 @@ public class MusicAppFacade {
      * @param isPrivate is private
      * @return boolean
      */
-    public boolean createSheet(Song song, Instrument instrument, Difficulty difficulty, 
+    public OperationResult<SheetMusic> createSheet(Song song, Instrument instrument, Difficulty difficulty, 
                              Clef clef, boolean audioPlaybackEnabled, 
                              ArrayList<Measure> measures, boolean isPrivate) {
-        return true;
+        return song.createSheet(instrument, difficulty, clef, audioPlaybackEnabled, measures, isPrivate);
     }
 
     /**
@@ -342,10 +342,12 @@ public class MusicAppFacade {
     /**
      * remove friend
      * @param user user
-     * @return boolean
+     * @return The result of attemping to remove the friend
      */
-    public boolean removeFriend(User user) {
-        return true;
+    public OperationResult<Void> removeFriend(User user) {
+		if (currentUser == null) 
+			return new OperationResult<>("Must be logged in to add a friend.");
+		return currentUser.removeFriend(user);
     }
 
     /**
