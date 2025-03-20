@@ -185,6 +185,15 @@ public class Course {
 		return false;
 	}
 
+	/**
+	 * Removes a member from this course
+	 * @param member - the student leaving the course
+	 * @return whether the operation was successful
+	 */
+	public boolean removeMember(Student member) {
+		return this.members.remove(member);
+	}
+
 	@SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {
 		JSONObject courseDetails = new JSONObject();
