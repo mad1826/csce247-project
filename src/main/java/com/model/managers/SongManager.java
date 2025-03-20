@@ -184,7 +184,7 @@ public class SongManager implements  SavableList<Song> {
             Boolean line = (Boolean) noteObj.get("line");
             int oct = ((Long)noteObj.get("octave")).intValue();
 
-            Note n = new Note(p, pm, v, dot, line, oct);
+            Note n = new Note(p, pm, v, dot, line, oct,"");
             notes.add(n);
         }
 
@@ -204,7 +204,7 @@ public class SongManager implements  SavableList<Song> {
             chords.add(toChord((JSONObject)chord));
         }
 
-        return new Measure(chords, tempo, tsn, tsd, repeatOpen, repeatClosed);
+        return new Measure(chords, tempo, tsn, tsd, repeatOpen, repeatClosed,"");
     }
 
     private SheetMusic toSheet(String instrument, JSONObject sheet) {
@@ -251,7 +251,7 @@ public class SongManager implements  SavableList<Song> {
             sheets.put(m.getInstrument(),m);
         }
         
-        Song ret = new Song(id, title, artist, genres, sheets);
+        Song ret = new Song(id, title, artist, genres, sheets,"");
         System.out.println(ret);
         return ret;
     }
