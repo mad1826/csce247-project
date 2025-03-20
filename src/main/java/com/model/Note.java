@@ -120,4 +120,6 @@ public class Note {
 public String getJfugueString() {
     return jfugueString;
   }
+
+  
 } 

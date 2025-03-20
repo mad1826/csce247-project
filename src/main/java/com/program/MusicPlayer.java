@@ -14,7 +14,9 @@ public class MusicPlayer {
      * the main method that starts the program and plays the melody.
      */  
     public static void main(String[] args) {
+      
         Player player = new Player();
         player.play("C C G G A A G R F F E E D D C");
-      }
+        
+    }
 }
