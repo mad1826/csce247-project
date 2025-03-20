@@ -33,7 +33,7 @@ public class CourseWriterTest {
 		HashMap<Instrument, SheetMusic> sheets = new HashMap<>();
 		sheets.put(instrument, sheet);
 		Song song = new Song("Sandstorm", "Darude", new ArrayList<>(), sheets);
-		course.createLesson("My Lesson", song, instrument.getType());
+		course.createLesson("My Lesson", song, instrument.getType(),1);
 
 		DataWriter.setData(courseManager);
 	}

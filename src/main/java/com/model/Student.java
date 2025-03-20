@@ -8,6 +8,9 @@ import java.util.UUID;
  * @author Ryan Smith
  */
 public class Student extends User {
+    /**
+     * Maps lesson progress
+     */
     private HashMap<UUID, Integer> lessonProgress;
     
     /**
