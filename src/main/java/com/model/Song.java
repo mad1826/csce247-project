@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.jfugue.player.Player;
 
 /**
  * represent a song in the music app system
@@ -19,6 +20,7 @@ public class Song {
     private String artist;
     private ArrayList<Genre> genres;
     private HashMap<Instrument, SheetMusic> sheets;
+    private String jfuguePattern;
 
     /**
      * constructs a Song with a specified UUID
@@ -27,13 +29,15 @@ public class Song {
      * @param - the artist of the song
      * @param - the list of genres associated with the song
      * @param - a HashMap of instruments and their corresponding sheet music
+     * @param - a string for the pattern of the notes
      */
-    public Song(UUID id, String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets) {
+    public Song(UUID id, String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets, String jfuguePattern) {
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.genres = genres;
         this.sheets = sheets;
+        this.jfuguePattern = jfuguePattern;
     }
 
     /**
@@ -135,4 +139,16 @@ public class Song {
             ",\n\tsheets=" + sheets +
             "\n}";
 	}
+
+    /**
+     * plays the entire song using JFugue
+     */
+    public void play() {
+        Player player = new Player();
+        player.play(jfuguePattern);
+    }
+
+    public String getJfuguePattern() {
+        return jfuguePattern;
+    }
 }

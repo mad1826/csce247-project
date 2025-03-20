@@ -28,6 +28,7 @@ public class Measure {
      * @param timeSignatureDenom denominator of time signature
      * @param repeatOpen         whether measure opens a repeat section
      * @param repeatClose        whether measure closes a repeat section
+     * @param jfugueString       a String to play the measure
      */
     public Measure(ArrayList<Chord> chords, int tempo, int timeSignatureNum, 
                   int timeSignatureDenom, boolean repeatOpen, boolean repeatClose, String jfugueString) {
