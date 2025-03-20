@@ -2,6 +2,7 @@ package com.model;
 
 import java.util.ArrayList;
 
+import org.jfugue.player.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -16,6 +17,7 @@ public class Measure {
     private int timeSignatureDenom;
     private boolean repeatOpen;
     private boolean repeatClose;
+    private String jfugueString;
 
     /**
      * new measure with musical properties
@@ -28,13 +30,14 @@ public class Measure {
      * @param repeatClose        whether measure closes a repeat section
      */
     public Measure(ArrayList<Chord> chords, int tempo, int timeSignatureNum, 
-                  int timeSignatureDenom, boolean repeatOpen, boolean repeatClose) {
+                  int timeSignatureDenom, boolean repeatOpen, boolean repeatClose, String jfugueString) {
         this.chords = chords;
         this.tempo = tempo;
         this.timeSignatureNum = timeSignatureNum;
         this.timeSignatureDenom = timeSignatureDenom;
         this.repeatOpen = repeatOpen;
         this.repeatClose = repeatClose;
+        this.jfugueString = jfugueString;
     }
 
     /**
@@ -108,4 +111,16 @@ public class Measure {
            ",\n\trepeatClose=" + repeatClose +
            "\n}";
     }
-} 
+
+    /**
+     * plays the measure using JFugue
+     */
+    public void play() {
+        Player player = new Player();
+        player.play(jfugueString);
+    }
+
+    public String getJfugueString() {
+        return jfugueString;
+    }
+}
