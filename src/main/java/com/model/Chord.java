@@ -30,10 +30,12 @@ public class Chord {
 
     /**
      * Adds a note to the chord
-     * @param note note to add
+     * @param note the note to add
      */
     public void addNote(Note note) {
-        
+        if (note != null && !notes.contains(note)) {
+            notes.add(note);
+        }
     }
 
     /**
@@ -41,7 +43,9 @@ public class Chord {
      * @param note the note to remove
      */
     public void removeNote(Note note) {
-        
+        if (note != null) {
+            notes.remove(note);
+        }
     }
 
 	/**

@@ -48,7 +48,7 @@ public class Student extends User {
      * @param code The unique code for the course
      * @return The joined Course object
      */
-    public Course joinCourse(String code) {
+    public OperationResult<Course> joinCourse(String code) {
         return null; // TODO iterate through courses to join the matching one
     }
 
@@ -58,8 +58,8 @@ public class Student extends User {
      * @param code The unique code of the course to leave
      * @return true if the course was successfully left, false otherwise
      */
-    public boolean leaveCourse(String code) {
-        return true; // TODO iterate through courses to leave the matching one
+    public OperationResult<Void> leaveCourse(String code) {
+        return null; // TODO iterate through courses to leave the matching one
     }
 
     /**

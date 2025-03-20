@@ -7,12 +7,12 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.DataHandlers.DataLoader;
 import com.model.OperationResult;
 import com.model.SavableList;
 import com.model.Student;
 import com.model.Teacher;
 import com.model.User;
-import com.model.datahandlers.DataLoader;
 
 /**
  * manages user creation, deletion, and retrieval
@@ -204,7 +204,7 @@ public class UserManager implements  SavableList<User> {
     public OperationResult<Void> linkData() { //links references stored by UUID to other classes.  Must be called AFTER all other data is loaded
         for (User u : this.users.values()) {
             for (UUID id : u.getUnlinkedFriends()) {
-                u.getFriends().add(this.users.get(id));
+                u.getFriends().put(id, this.users.get(id));
             }
         }
 

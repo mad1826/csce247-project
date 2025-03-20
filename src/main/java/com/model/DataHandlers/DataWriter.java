@@ -1,4 +1,4 @@
-package com.model.datahandlers;
+package com.model.DataHandlers;
 
 import java.io.FileWriter;
 import java.io.IOException;

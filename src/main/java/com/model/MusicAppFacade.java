@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import com.model.DataHandlers.DataLoader;
 import com.model.managers.SongManager;
 import com.model.managers.UserManager;
 
@@ -38,10 +39,22 @@ public class MusicAppFacade {
      * Constructs a new MusicAppFacade instance
      */
     private MusicAppFacade() {
-        UserManager.getInstance().loadData();
-		// CourseManager.getInstance().loadData();
-		// SongManager.getInstance().loadData();
+        DataLoader.loadAllData();
     }
+
+	private Teacher getCurrentTeacher() {
+        if (currentUser == null || !(currentUser instanceof Teacher)) {
+			return null;
+		}
+		return (Teacher)currentUser;
+	}
+
+	private Student getCurrentStudent() {
+        if (currentUser == null || !(currentUser instanceof Student)) {
+			return null;
+		}
+		return (Student)currentUser;
+	}
 
 	/**
 	 * Gets the facade singleton instance.
@@ -114,7 +127,7 @@ public class MusicAppFacade {
      * @return OperationResult<User>
      */
     public OperationResult<User> resetPassword(String newPassword) {
-        return null;
+		return null;
     }
 
     /**
@@ -123,8 +136,11 @@ public class MusicAppFacade {
      * @param id id
      * @return OperationResult<Course>
      */
-    public OperationResult<Course> createCourse(String title, UUID id) {
-        return null;
+    public OperationResult<Course> createCourse(String code, String title) {
+        Teacher teacher = getCurrentTeacher();
+		if (teacher == null)
+			return new OperationResult<>("Must be logged in as a teacher to create a course.");
+		return teacher.createCourse(code, title);
     }
 
     /**
@@ -133,54 +149,71 @@ public class MusicAppFacade {
      * @return OperationResult<Void>
      */
     public OperationResult<Void> deleteCourse(UUID id) {
-        return null;
+        Teacher teacher = getCurrentTeacher();
+		if (teacher == null)
+			return new OperationResult<>("Must be logged in as a teacher to delete a course.");
+		
+		boolean success = teacher.deleteCourse(id);
+		if (success)
+			return new OperationResult<>(true);
+		else 
+			return new OperationResult<>("Unable to delete the course.");
     }
 
     /**
      * create lesson
-     * @param course course
-     * @param title title
-     * @param sheet sheet
-     * @return OperationResult<Void>
+     * @param course - the course to create the lesson for
+     * @param title - the lesson's title
+     * @param song - the song the lesson focuses on
+	 * @param instrumentType - the instrument the lesson is played with
+     * @return The result of creating the lesson
      */
-    public OperationResult<Void> createLesson(Course course, String title, SheetMusic sheet) {
-        return null;
+    public OperationResult<Lesson> createLesson(Course course, String title, Song song, InstrumentType instrumentType) {
+        Teacher teacher = getCurrentTeacher();
+		if (teacher == null)
+			return new OperationResult<>("Must be logged in as a teacher to create a lesson.");
+
+		return course.createLesson(title, currentSong, instrumentType);
     }
 
     /**
      * delete lesson
-     * @param lesson lesson
-     * @return OperationResult<Void>
+     * @param course - the course to delete the lesson from
+	 * @param lessonId - the id of the lesson to delete
+     * @return The result of attempting to delete the lesson
      */
-    public OperationResult<Void> deleteLesson(Lesson lesson) {
-        return null;
+    public OperationResult<Void> deleteLesson(Course course, UUID lessonId) {
+        Teacher teacher = getCurrentTeacher();
+		if (teacher == null)
+			return new OperationResult<>("Must be logged in as a teacher to delete a lesson.");
+
+		return new OperationResult<>(course.deleteLesson(lessonId));
     }
 
     /**
      * join course
-     * @param id id
-     * @return OperationResult<Course>
+     * @param code - the course code
+     * @return The result of attemping to join a course
      */
-    public OperationResult<Course> joinCourse(UUID id) {
-        return null;
+    public OperationResult<Course> joinCourse(String code) {
+        Student student = getCurrentStudent();
+		if (student == null)
+			return new OperationResult<>("Must be logged in as a student to join a course.");
+
+		return student.joinCourse(code);
     }
 
     /**
      * leave course
-     * @param id id
+     * @param code - the course 
      * @return OperationResult<Void>
      */
-    public OperationResult<Void> leaveCourse(UUID id) {
-        return null;
-    }
+    public OperationResult<Void> leaveCourse(String code) {
+        Student student = getCurrentStudent();
+		if (student == null)
+			return new OperationResult<>("Must be logged in as a student to leave a course.");
 
-    /**
-     * start lesson
-     * @param lesson lesson
-     * @return boolean
-     */
-    public boolean startLesson(Lesson lesson) {
-        return true;
+		return student.leaveCourse(code);
     }
 
     /**
@@ -240,7 +273,7 @@ public class MusicAppFacade {
      * @return HashMap<Instrument, SheetMusic>
      */
     public HashMap<Instrument, SheetMusic> getSheets(Song song) {
-        return new HashMap<>();
+        return song.getSheets();
     }
 
     /**
@@ -254,10 +287,10 @@ public class MusicAppFacade {
      * @param isPrivate is private
      * @return boolean
      */
-    public boolean createSheet(Song song, Instrument instrument, Difficulty difficulty, 
+    public OperationResult<SheetMusic> createSheet(Song song, Instrument instrument, Difficulty difficulty, 
                              Clef clef, boolean audioPlaybackEnabled, 
                              ArrayList<Measure> measures, boolean isPrivate) {
-        return true;
+        return song.createSheet(instrument, difficulty, clef, audioPlaybackEnabled, measures, isPrivate);
     }
 
     /**
@@ -287,28 +320,34 @@ public class MusicAppFacade {
 
     /**
      * get friends
-     * @return ArrayList<User>
+     * @return The result of getting the authenticated user's friends
      */
-    public ArrayList<User> getFriends() {
-        return new ArrayList<>();
+    public OperationResult<HashMap<UUID, User>> getFriends() {
+		if (currentUser == null) 
+			return new OperationResult<>("Must be logged in to get friends.");
+        return new OperationResult<>(currentUser.getFriends());
     }
 
     /**
      * add friend
      * @param user user
-     * @return boolean
+     * @return The result of attempting to add the friend
      */
-    public boolean addFriend(User user) {
-        return true;
+    public OperationResult<Void> addFriend(User user) {
+		if (currentUser == null) 
+			return new OperationResult<>("Must be logged in to add a friend.");
+		return currentUser.addFriend(user);
     }
 
     /**
      * remove friend
      * @param user user
-     * @return boolean
+     * @return The result of attemping to remove the friend
      */
-    public boolean removeFriend(User user) {
-        return true;
+    public OperationResult<Void> removeFriend(User user) {
+		if (currentUser == null) 
+			return new OperationResult<>("Must be logged in to add a friend.");
+		return currentUser.removeFriend(user);
     }
 
     /**

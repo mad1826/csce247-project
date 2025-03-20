@@ -55,8 +55,7 @@ public class Teacher extends User {
      * @return true if the course was successfully deleted, false otherwise
      */
     public boolean deleteCourse(UUID id) {
-        
-        return true;
+        return CourseManager.getInstance().deleteCourse(id);
     }
 
     @Override
