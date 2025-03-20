@@ -23,36 +23,20 @@ public class MusicAppDriver {
 	 * Runs one or more individual scenarios.
 	 */
 	public void run() {
-		logInAndOut();
-		searchSongs();
-		signUp();
-		signUpInvalid();
-	}
-
-	/**
-	 * Logs in with a user and then immediately logs out.
-	 */
-	public void logInAndOut() {
-		facade.login("jane.smith@example.com", "secureP@ss987");
-		User user = facade.getCurrentUser();
-		if (user == null) {
-			System.out.println("Login was unsuccessful.");
-			return;
-		}
-
-		System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
-
-		boolean changed = facade.logout();
-		if (changed)
-			System.out.println("You have successfully logged out.");
+		signUp(true);
+		// signUp(false);
+		login(true);
+		// login(false);
+		playSong(true);
+		// playSong(false);
 	}
 
 	/**
 	 * Sign up for a new account.
 	 */
-	public void signUp() {
+	public void signUp(boolean valid) {
 		System.out.println("Signing up for a new account...");
-		OperationResult<User> or = facade.signUp("Portia", "Plante", "pplante@email.sc.edu", "secu4eP@ssw0rd");
+		OperationResult<User> or = facade.signUp("Portia", "Plante", valid ? "pplante@email.sc.edu" : "jane.smith@example.com", "secu4eP@ssw0rd");
 		if (or.success) {
 			User user = facade.getCurrentUser();
 			System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
@@ -67,28 +51,28 @@ public class MusicAppDriver {
 	}
 
 	/**
-	 * Attempt to sign up for a new account with an email that an account is already regitered to.
+	 * Logs in to an existing account.
 	 */
-	public void signUpInvalid() {
-		System.out.println("Signing up for a new account...");
-		OperationResult<User> or = facade.signUp("Portia", "Plante","jane.smith@example.com", "secu4eP@ssw0rd");
-		if (or.success) {
-			User user = facade.getCurrentUser();
-			System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
+	public void login(boolean valid) {
+		System.out.println("Logging in with existing credentials...");
+		facade.login("jane.smith@example.com", valid ? "secureP@ss987" : "wrong-PW0rd");
+		User user = facade.getCurrentUser();
+		if (user == null) {
+			System.out.println("Unable to log in with these credentials.");
+			return;
+		}
 
-			boolean changed = facade.logout();
-			if (changed)
-				System.out.println("You have successfully logged out.");
-		}
-		else {
-			System.out.println("Your account could not be created for the following reason: " + or.message);
-		}
+		System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
+
+		boolean changed = facade.logout();
+		if (changed)
+			System.out.println("You have successfully logged out.");
 	}
 
 	/**
-	 * List all songs, then filter all songs by a query.
+	 * List all songs, then filter all songs by a query and plays the first song found.
 	 */
-	public void searchSongs() {
+	public void playSong(boolean valid) {
 		facade.login("jane.smith@example.com", "secureP@ss987");
 		User user = facade.getCurrentUser();
 		if (user == null) {
@@ -103,11 +87,22 @@ public class MusicAppDriver {
 			System.out.println("\t" + song);
 		}
 
-		String titleFilter = "birth";
+		Song foundSong = null;
+
+		String titleFilter = valid ? "birth" : "fake song";
 		System.out.println("Filtering songs by \"title: " + titleFilter + "\"");
 		facade.setTitleQuery(titleFilter);
 		for (Song song : facade.searhSongs().values()) {
+			if (foundSong == null)
+				foundSong = song;
 			System.out.println("\t" + song);
+		}
+
+		if (foundSong != null) {
+			System.out.println("Now playing: " + foundSong);
+		}
+		else {
+			System.out.println("No song was found in the search.");
 		}
 
 		boolean changed = facade.logout();
