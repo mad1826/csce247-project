@@ -168,12 +168,12 @@ public class MusicAppFacade {
 	 * @param instrumentType - the instrument the lesson is played with
      * @return The result of creating the lesson
      */
-    public OperationResult<Lesson> createLesson(Course course, String title, Song song, InstrumentType instrumentType) {
+    public OperationResult<Lesson> createLesson(Course course, String title, Song song, InstrumentType instrumentType, int numberOfTimes) {
         Teacher teacher = getCurrentTeacher();
 		if (teacher == null)
 			return new OperationResult<>("Must be logged in as a teacher to create a lesson.");
 
-		return course.createLesson(title, currentSong, instrumentType);
+		return course.createLesson(title, currentSong, instrumentType, numberOfTimes);
     }
 
     /**
