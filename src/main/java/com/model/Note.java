@@ -1,6 +1,7 @@
 package com.model;
 
 import org.json.simple.JSONObject;
+import org.jfugue.player.Player;
 
 /**
  * Represents a musical note with musical properties
@@ -13,6 +14,7 @@ public class Note {
     private boolean dot;
     private boolean line;
     private int octave;
+    private String jfugueString;
 
     /**
      * Creates a new musical note with all properties
@@ -24,13 +26,14 @@ public class Note {
      * @param line          whether the note has a line
      * @param octave        the note's octave number
      */
-    public Note(Pitch pitch, PitchModifier pitchModifier, NoteValue value, boolean dot, boolean line, int octave) {
+    public Note(Pitch pitch, PitchModifier pitchModifier, NoteValue value, boolean dot, boolean line, int octave, String jfugueString) {
         this.pitch = pitch;
         this.pitchModifier = pitchModifier;
         this.value = value;
         this.dot = dot;
         this.line = line;
         this.octave = octave > 0 ? octave : 1;
+        this.jfugueString = jfugueString;
     }
 
     /**
@@ -103,5 +106,17 @@ public class Note {
   @Override
   public String toString() {
     return this.pitch.name()+this.pitchModifier.abbreviatedName;
+  }
+
+  /*
+   * plays the note using jfugue
+   */
+  public void play() {
+    Player player = new Player();
+    player.play(jfugueString);
+  }
+
+public String getJfugueString() {
+    return jfugueString;
   }
 } 
