@@ -2,6 +2,7 @@ package com.model;
 
 import java.util.ArrayList;
 
+import org.jfugue.player.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -65,5 +66,19 @@ public class Chord {
     @Override
     public String toString() {
         return this.name+" - "+this.notes;
+    }
+
+    /**
+     * plays the chord using JFugue
+     */
+    public void play() {
+        Player player = new Player();
+        StringBuilder chordString = new StringBuilder();
+
+        for (Note note : notes) {
+            chordString.append(note.getJfugueString()).append(" ");
+        }
+
+        player.play(chordString.toString().trim());
     }
 } 
