@@ -7,13 +7,18 @@ import com.model.managers.CourseManager;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import org.json.simple.JSONObject;
+
 /**
  * Represents a student in the music app
  * @author Ryan Smith
  */
 public class Student extends User {
-    private HashMap<UUID, Integer> lessonProgress;
-    
+    /**
+     * Maps lesson to amount of times they have played the lesson.
+     */
+    private final HashMap<UUID, Integer> lessonProgress;
+
     /**
      * Creates a new Student with an existing UUID and user details
      *
@@ -23,9 +28,9 @@ public class Student extends User {
      * @param emailAddress  student's email address
      * @param password      student's password
      */
-    public Student(UUID id, String firstName, String lastName, String emailAddress, String password) {
+    public Student(UUID id, String firstName, String lastName, String emailAddress, String password, HashMap<UUID,Integer> lessonProgress) {
         super(id, firstName, lastName, emailAddress, password);
-        this.lessonProgress = new HashMap<>();
+        this.lessonProgress = lessonProgress;
     }
 
     /**
@@ -36,9 +41,9 @@ public class Student extends User {
      * @param emailAddress  student's email address
      * @param password      student's password
      */
-    public Student(String firstName, String lastName, String emailAddress, String password) {
+    public Student(String firstName, String lastName, String emailAddress, String password,HashMap<UUID, Integer> lessonProgress) {
         super(firstName, lastName, emailAddress, password);
-        this.lessonProgress = new HashMap<>();
+        this.lessonProgress = lessonProgress;
     }
 
     /**
@@ -110,6 +115,40 @@ public class Student extends User {
      * @return The progress value (0-100)
      */
     public int getLessonProgress(Lesson lesson) {
-        return 0;
+        return lessonProgress.get(lesson.getId());
+    }
+    
+    /**
+     * Assigns a lesson to this user
+     * 
+     * @param l lesson being assigned
+     */
+
+    public void assignLesson(Lesson l) {
+        this.lessonProgress.put(l.getId(),0);
+    }
+
+    @Override
+    @SuppressWarnings({ "unchecked", "exports" })
+	public JSONObject toJSON() {
+        JSONObject o = super.toJSON();
+
+        //TODO: write lesson progress to jsonobject o
+        o.put("type","Student");
+
+        return o;
+    }
+
+    /**
+     * Increments amount of times this lesson has been played by one
+     * 
+     * @param lesson lesson that is being progressed in
+     */
+    public void progressLesson(Lesson lesson) {
+        int maxProgress = lesson.getNumberOfTimes();
+        int thisProgress = this.lessonProgress.get(lesson.getId());
+        if (thisProgress<maxProgress) { //If lesson is complete, do not increment progress
+            thisProgress++;
+        }
     }
 } 

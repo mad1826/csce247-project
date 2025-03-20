@@ -14,7 +14,7 @@ import com.model.OperationResult;
 import com.model.SavableList;
 import com.model.Student;
 import com.model.Teacher;
-import com.model.DataHandlers.DataLoader;
+import com.model.datahandlers.DataLoader;
 
 /**
  * A manager for all courses
@@ -144,7 +144,13 @@ public class CourseManager implements SavableList<Course> {
 			UUID songID = UUID.fromString((String) lessonJSON.get("song"));
 			String instrument = (String) lessonJSON.get("instrument");
 
-			Lesson l = new Lesson(lessonID, lessonTitle, songID,InstrumentType.valueOf(instrument));
+			Object numTimesObj = lessonJSON.get("numberOfTimes");
+			if (numTimesObj==null) { //safe against nullptr;
+				numTimesObj = 1;
+			}
+			int numberOfTimes = ((Long)numTimesObj).intValue();
+
+			Lesson l = new Lesson(lessonID, lessonTitle, songID,InstrumentType.valueOf(instrument),numberOfTimes);
 			lessons.add(l);
 		}
 

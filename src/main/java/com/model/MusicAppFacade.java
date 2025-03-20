@@ -92,7 +92,7 @@ public class MusicAppFacade {
      * @return the result of creating a new user
      */
     public OperationResult<User> signUp(String firstName, String lastName, String email, String password) {
-        OperationResult<User> or = UserManager.getInstance().createUser(firstName, lastName, email, password);
+        OperationResult<User> or = UserManager.getInstance().createUser(firstName, lastName, email, password,false);
 		if (or.success)
 			this.currentUser = or.result;
 
@@ -168,12 +168,12 @@ public class MusicAppFacade {
 	 * @param instrumentType - the instrument the lesson is played with
      * @return The result of creating the lesson
      */
-    public OperationResult<Lesson> createLesson(Course course, String title, Song song, InstrumentType instrumentType) {
+    public OperationResult<Lesson> createLesson(Course course, String title, Song song, InstrumentType instrumentType, int numberOfTimes) {
         Teacher teacher = getCurrentTeacher();
 		if (teacher == null)
 			return new OperationResult<>("Must be logged in as a teacher to create a lesson.");
 
-		return course.createLesson(title, currentSong, instrumentType);
+		return course.createLesson(title, currentSong, instrumentType, numberOfTimes);
     }
 
     /**
@@ -287,10 +287,10 @@ public class MusicAppFacade {
      * @param isPrivate is private
      * @return boolean
      */
-    public boolean createSheet(Song song, Instrument instrument, Difficulty difficulty, 
+    public OperationResult<SheetMusic> createSheet(Song song, Instrument instrument, Difficulty difficulty, 
                              Clef clef, boolean audioPlaybackEnabled, 
                              ArrayList<Measure> measures, boolean isPrivate) {
-        return true;
+        return song.createSheet(instrument, difficulty, clef, audioPlaybackEnabled, measures, isPrivate);
     }
 
     /**
@@ -342,10 +342,12 @@ public class MusicAppFacade {
     /**
      * remove friend
      * @param user user
-     * @return boolean
+     * @return The result of attemping to remove the friend
      */
-    public boolean removeFriend(User user) {
-        return true;
+    public OperationResult<Void> removeFriend(User user) {
+		if (currentUser == null) 
+			return new OperationResult<>("Must be logged in to add a friend.");
+		return currentUser.removeFriend(user);
     }
 
     /**

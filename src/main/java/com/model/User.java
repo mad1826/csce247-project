@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
  * @author Makyia Irick
  * @author Matt Carey (Data stuff)
  */
-public class User {
+public abstract class User {
     private UUID id;
     private String firstName;
     private String lastName;
