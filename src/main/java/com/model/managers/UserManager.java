@@ -9,6 +9,8 @@ import org.json.simple.JSONObject;
 
 import com.model.OperationResult;
 import com.model.SavableList;
+import com.model.Student;
+import com.model.Teacher;
 import com.model.User;
 import com.model.datahandlers.DataLoader;
 
@@ -54,13 +56,17 @@ public class UserManager implements  SavableList<User> {
      * @param - the password of the user
      * @return - the result of attempting to create the user
      */
-    public OperationResult<User> createUser(String firstName, String lastName, String emailAddress, String password) {
+    public OperationResult<User> createUser(String firstName, String lastName, String emailAddress, String password, boolean isTeacher) {
         if (accountExists(emailAddress))
 			return new OperationResult<>("An account with this email already exists.");
 
-        User user = new User(firstName, lastName, emailAddress, password);
+        User user;
+        if (isTeacher)
+            user = new Teacher(firstName, lastName, emailAddress, password);
+        else
+            user = new Student(firstName, lastName, emailAddress, password, new HashMap<UUID,Integer>());
+        
         users.put(user.getId(), user);
-		// TODO save data
         
 		OperationResult<User> or = new OperationResult<>(user);
 		return or;
@@ -125,9 +131,11 @@ public class UserManager implements  SavableList<User> {
 	@Override
     public JSONArray toJSON() {
 		JSONArray jsonUsers = new JSONArray();
+
 		for (User user : users.values()) {
 			jsonUsers.add(user.toJSON());
 		}
+
 		return jsonUsers;
     }
 
@@ -145,6 +153,7 @@ public class UserManager implements  SavableList<User> {
         String em = (String) object.get("emailAddress");
         String pw = (String) object.get("password");
         double spd = ((Double) object.get("metronomeSpeedModifier"));
+        String type = (String) object.get("type");
 
         ArrayList<UUID> friends = new ArrayList<>();
         JSONArray friendsJSON = (JSONArray)object.get("friends");
@@ -152,7 +161,21 @@ public class UserManager implements  SavableList<User> {
             friends.add(UUID.fromString((String) friendID));
         }
 
-        User u = new User(id,fn,ln,em,pw,spd,friends);
+        User u = null;
+        if (type.equals("Student")) {
+            HashMap<UUID, Integer> lessonProgress = new HashMap<>(); //load lesson progress
+            JSONObject o = (JSONObject) object.get("lessonProgress");
+            for (Object key : o.keySet()) {
+                String index = (String) key;
+                int value = ((Long) o.get(index)).intValue();
+
+                lessonProgress.put(UUID.fromString(index), value);
+            }
+
+            u = new Student(id,fn,ln,em,pw,lessonProgress);
+        } else if (type.equals("Teacher")) {
+            u = new Teacher(id,fn,ln,em,pw);
+        }
 
         // userDetails.put("id", id.toString());
         // userDetails.put("firstName", firstName);

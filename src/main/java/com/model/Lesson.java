@@ -140,4 +140,12 @@ public class Lesson {
 		
 		return lessonObject;
 	}
+
+    public int getNumberOfTimes() {
+        return numberOfTimes;
+    }
+
+    public void setNumberOfTimes(int numberOfTimes) {
+        this.numberOfTimes = numberOfTimes;
+    }
 }

@@ -2,6 +2,8 @@ package com.model;
 
 import java.util.UUID;
 
+import org.json.simple.JSONObject;
+
 import com.model.managers.CourseManager;
 
 /**
@@ -55,5 +57,15 @@ public class Teacher extends User {
     public boolean deleteCourse(UUID id) {
         
         return true;
+    }
+
+    @Override
+    @SuppressWarnings({ "unchecked", "exports" })
+	public JSONObject toJSON() {
+        JSONObject o = super.toJSON();
+
+        o.put("type","Teacher");
+
+        return o;
     }
 } 

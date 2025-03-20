@@ -79,7 +79,7 @@ public class MusicAppFacade {
      * @return the result of creating a new user
      */
     public OperationResult<User> signUp(String firstName, String lastName, String email, String password) {
-        OperationResult<User> or = UserManager.getInstance().createUser(firstName, lastName, email, password);
+        OperationResult<User> or = UserManager.getInstance().createUser(firstName, lastName, email, password,false);
 		if (or.success)
 			this.currentUser = or.result;
 

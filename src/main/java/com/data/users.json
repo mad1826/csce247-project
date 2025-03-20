@@ -1,5 +1,6 @@
 [
     {
+        "type": "Teacher",
         "id": "550e8400-e29b-41d4-a716-446655440000",
         "firstName": "John",
         "lastName": "Doe",
@@ -9,6 +10,10 @@
         "metronomeSpeedModifier": 0.5
     },
     {
+        "type": "Student",
+        "lessonProgress": {
+            "24d85a1d-e68c-4961-a43c-f9d02a7483c0": 1
+        },
         "id": "c0a80101-7b2d-4f5a-91d1-4e5b5b5a5a5a",
         "firstName": "Jane",
         "lastName": "Smith",
