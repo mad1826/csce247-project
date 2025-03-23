@@ -29,35 +29,17 @@ public abstract class User {
     }
 
     /**
-     * Complete constructor used in data loading
-     * @param id
-     * @param firstname
-     * @param lastName
-     * @param emailAddress
-     * @param password
-     */
-    public User(UUID id, String firstName, String lastName, String emailAddress, String password, double metronomeSpeedModifier, ArrayList<UUID> unlinkedFriends) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailAddress = emailAddress;
-        this.password = password;
-        this.friends = new HashMap<>();
-        this.courses = new ArrayList<>();
-        this.unlinkedFriends = unlinkedFriends;
-        this.metronomeSpeedModifier = metronomeSpeedModifier;
-    }
-
-    /**
      * constructs a User with a specific UUID
      * @param - the unique ID of the user
      * @param - the user's first name
      * @param - the user's last name
      * @param - the user's email address
      * @param - the user's password (validated)
+	 * @param metronomeSpeedModifier - the user's modifier for metronome speed
+	 * @param unlinkedFriends - the teacher's friends to be linked to full User instances
      * @throws - IllegalArgumentException, if password is invalid
      */
-     public User(UUID id, String firstName, String lastName, String emailAddress, String password) {
+     public User(UUID id, String firstName, String lastName, String emailAddress, String password, double metronomeSpeedModifier, ArrayList<UUID> unlinkedFriends) {
            if(!isValidPassword(password)) {
             throw new IllegalArgumentException("Invalid password: Should be at least 7 characters, containing 1 number and 1 symbol.");
            }
@@ -67,6 +49,8 @@ public abstract class User {
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.password = password;
+		this.metronomeSpeedModifier = metronomeSpeedModifier;
+		this.unlinkedFriends = unlinkedFriends;
         this.friends = new HashMap<>();
         this.courses = new ArrayList<>();
      }
@@ -79,7 +63,7 @@ public abstract class User {
      * @param - the user's password (validated)
      */
     public User(String firstName, String lastName, String emailAddress, String password) {
-        this(UUID.randomUUID(), firstName, lastName, emailAddress, password);
+        this(UUID.randomUUID(), firstName, lastName, emailAddress, password, 1, new ArrayList<>());
     }
 
     /**

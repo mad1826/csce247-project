@@ -64,7 +64,7 @@ public class UserManager implements  SavableList<User> {
         if (isTeacher)
             user = new Teacher(firstName, lastName, emailAddress, password);
         else
-            user = new Student(firstName, lastName, emailAddress, password, new HashMap<UUID,Integer>());
+            user = new Student(firstName, lastName, emailAddress, password);
         
         users.put(user.getId(), user);
         
@@ -127,7 +127,7 @@ public class UserManager implements  SavableList<User> {
      * converts all users into a JSON array
      * @return - the users represented as a JSON array
      */
-	@SuppressWarnings({ "unchecked", "exports" })
+	@SuppressWarnings({ "unchecked" })
 	@Override
     public JSONArray toJSON() {
 		JSONArray jsonUsers = new JSONArray();
@@ -146,7 +146,7 @@ public class UserManager implements  SavableList<User> {
      */
 
     @Override
-    public User toObject(@SuppressWarnings("exports") JSONObject object) {
+    public User toObject(JSONObject object) {
         UUID id = UUID.fromString((String) object.get("id"));
         String fn = (String) object.get("firstName");
         String ln = (String) object.get("lastName");
@@ -172,9 +172,9 @@ public class UserManager implements  SavableList<User> {
                 lessonProgress.put(UUID.fromString(index), value);
             }
 
-            u = new Student(id,fn,ln,em,pw,lessonProgress);
+            u = new Student(id,fn,ln,em,pw,spd, friends, lessonProgress);
         } else if (type.equals("Teacher")) {
-            u = new Teacher(id,fn,ln,em,pw);
+            u = new Teacher(id,fn,ln,em,pw, spd, friends);
         }
 
         // userDetails.put("id", id.toString());

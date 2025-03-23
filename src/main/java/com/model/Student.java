@@ -3,11 +3,11 @@ package com.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-import com.model.managers.CourseManager;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import org.json.simple.JSONObject;
+import com.model.managers.CourseManager;
 
 /**
  * Represents a student in the music app
@@ -27,9 +27,12 @@ public class Student extends User {
      * @param lastName      student's last name
      * @param emailAddress  student's email address
      * @param password      student's password
+	 * @param metronomeSpeedModifier - the student's modifier for metronome speed
+	 * @param unlinkedFriends - the student's friends to be linked to full Student instances
+	 * @param lessonProgress - the student's progress per lesson, mapped by each lesson's id
      */
-    public Student(UUID id, String firstName, String lastName, String emailAddress, String password, HashMap<UUID,Integer> lessonProgress) {
-        super(id, firstName, lastName, emailAddress, password);
+    public Student(UUID id, String firstName, String lastName, String emailAddress, String password, double metronomeSpeedModifier, ArrayList<UUID> unlinkedFriends, HashMap<UUID,Integer> lessonProgress) {
+        super(id, firstName, lastName, emailAddress, password, metronomeSpeedModifier, unlinkedFriends);
         this.lessonProgress = lessonProgress;
     }
 
@@ -41,9 +44,9 @@ public class Student extends User {
      * @param emailAddress  student's email address
      * @param password      student's password
      */
-    public Student(String firstName, String lastName, String emailAddress, String password,HashMap<UUID, Integer> lessonProgress) {
+    public Student(String firstName, String lastName, String emailAddress, String password) {
         super(firstName, lastName, emailAddress, password);
-        this.lessonProgress = lessonProgress;
+        this.lessonProgress = new HashMap<>();
     }
 
     /**
