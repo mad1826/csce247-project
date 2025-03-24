@@ -122,12 +122,15 @@ public class MusicAppFacade {
     }
 
     /**
-     * reset password
-     * @param newPassword new password
-     * @return OperationResult<User>
+     * Reset the authenticated user's password
+     * @param newPassword the new password
+     * @return the result of attempting to reset the password
      */
-    public OperationResult<User> resetPassword(String newPassword) {
-		return null;
+    public OperationResult<Void> resetPassword(String newPassword) {
+		if (currentUser == null) 
+			return new OperationResult<>("Must be logged in to get friends.");
+
+		return new OperationResult<>(currentUser.resetPassword(newPassword));
     }
 
     /**
