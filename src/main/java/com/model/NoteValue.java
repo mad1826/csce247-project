@@ -6,7 +6,7 @@ package com.model;
  */
 public enum NoteValue {
 	SIXTEENTH,
-	EIGTH,
+	EIGHTH,
 	QUARTER,
 	HALF,
 	WHOLE

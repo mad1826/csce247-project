@@ -36,7 +36,7 @@ public class Course {
 	/**
 	 * The course's members
 	 */
-	private ArrayList<Student> members;
+	private ArrayList<Student> members = new ArrayList<>();
 	private ArrayList<UUID> unlinkedMembers;
 
 	/**

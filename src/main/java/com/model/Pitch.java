@@ -11,5 +11,6 @@ public enum Pitch {
 	D,
 	E,
 	F,
-	G
+	G,
+	R
 }

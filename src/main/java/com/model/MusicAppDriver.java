@@ -84,7 +84,7 @@ public class MusicAppDriver {
 
 		System.out.println("Listing all songs:");
 		for (Song song : facade.getSongs().values()) {
-			System.out.println("\t" + song);
+			System.out.println("\t" + song.getTitle() + " by " + song.getArtist());
 		}
 
 		Song foundSong = null;
@@ -95,11 +95,11 @@ public class MusicAppDriver {
 		for (Song song : facade.searhSongs().values()) {
 			if (foundSong == null)
 				foundSong = song;
-			System.out.println("\t" + song);
+			System.out.println("\t" + song.getTitle() + " by " + song.getArtist());
 		}
 
 		if (foundSong != null) {
-			System.out.println("Now playing: " + foundSong);
+			System.out.println("Now playing: " + foundSong.getTitle() + " by " + foundSong.getArtist());
 		}
 		else {
 			System.out.println("No song was found in the search.");

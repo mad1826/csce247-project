@@ -8,13 +8,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.model.Course;
+import com.model.DataHandlers.DataLoader;
 import com.model.InstrumentType;
 import com.model.Lesson;
 import com.model.OperationResult;
 import com.model.SavableList;
 import com.model.Student;
 import com.model.Teacher;
-import com.model.DataHandlers.DataLoader;
 
 /**
  * A manager for all courses
@@ -160,9 +160,9 @@ public class CourseManager implements SavableList<Course> {
 			if (numTimesObj==null) { //safe against nullptr;
 				numTimesObj = 1;
 			}
-			int numberOfTimes = ((Long)numTimesObj).intValue();
+			int numberOfTimes = (Integer)numTimesObj;
 
-			Lesson l = new Lesson(lessonID, lessonTitle, songID,InstrumentType.valueOf(instrument),numberOfTimes);
+			Lesson l = new Lesson(lessonID, lessonTitle, songID,InstrumentType.valueOf(instrument.toUpperCase()),numberOfTimes);
 			lessons.add(l);
 		}
 
