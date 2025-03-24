@@ -14,7 +14,7 @@ import com.model.OperationResult;
 import com.model.SavableList;
 import com.model.Student;
 import com.model.Teacher;
-import com.model.datahandlers.DataLoader;
+import com.model.DataHandlers.DataLoader;
 
 /**
  * A manager for all courses
@@ -92,7 +92,19 @@ public class CourseManager implements SavableList<Course> {
 	 * @return whether the deletion was successful
 	 */
 	public boolean deleteCourse(UUID courseId) {
-		return false;
+		Course course = courses.get(courseId);
+		if (course == null) {
+			return false;
+		}
+
+		// Remove course from all enrolled students
+		for (Student student : course.getMembers()) {
+			student.getCourses().remove(course);
+		}
+
+		// Remove course from the manager
+		courses.remove(courseId);
+		return true;
 	}
 
 	/**
@@ -144,7 +156,13 @@ public class CourseManager implements SavableList<Course> {
 			UUID songID = UUID.fromString((String) lessonJSON.get("song"));
 			String instrument = (String) lessonJSON.get("instrument");
 
-			Lesson l = new Lesson(lessonID, lessonTitle, songID,InstrumentType.valueOf(instrument));
+			Object numTimesObj = lessonJSON.get("numberOfTimes");
+			if (numTimesObj==null) { //safe against nullptr;
+				numTimesObj = 1;
+			}
+			int numberOfTimes = ((Long)numTimesObj).intValue();
+
+			Lesson l = new Lesson(lessonID, lessonTitle, songID,InstrumentType.valueOf(instrument),numberOfTimes);
 			lessons.add(l);
 		}
 

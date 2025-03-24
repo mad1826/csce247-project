@@ -164,9 +164,10 @@ public class Course {
 	 * @param instrumentType - the instrument this lesson will play a sheet using
 	 * @return whether the lesson was successfully created
 	 */
-	public boolean createLesson(String title, Song song, InstrumentType instrumentType) {
-		lessons.add(new Lesson(title, song, instrumentType));
-		return true;
+	public OperationResult<Lesson> createLesson(String title, Song song, InstrumentType instrumentType, int numberOfTimes) {
+		Lesson lesson = new Lesson(title, song, instrumentType, numberOfTimes);
+		lessons.add(lesson);
+		return new OperationResult<>(lesson);
 	}
 
 	/**
@@ -182,6 +183,15 @@ public class Course {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Removes a member from this course
+	 * @param member - the student leaving the course
+	 * @return whether the operation was successful
+	 */
+	public boolean removeMember(Student member) {
+		return this.members.remove(member);
 	}
 
 	@SuppressWarnings({ "unchecked", "exports" })

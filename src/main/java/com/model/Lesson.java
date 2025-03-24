@@ -8,7 +8,10 @@ import org.json.simple.JSONObject;
 /**
  * A lesson for playing a sheet
  * 
+ * A lesson will prompt the student to play the song a set amount of times.  The lesson is complete when they play the song this amount of times.
+ * 
  * @author Michael Davis
+ * @author Matt Carey
  */
 public class Lesson {
 	/**
@@ -26,6 +29,7 @@ public class Lesson {
 	 */
 	private Song song;
 	private UUID unlinkedSong;
+	private int numberOfTimes; //How many times the song needs to be played for the lesson to be complete
 
 	/**
 	 * The instrument this lesson will play a sheet from
@@ -38,19 +42,22 @@ public class Lesson {
 	 * @param title - the lesson's title
 	 * @param song - the song this lesson will play a sheet from
 	 * @param instrumentType - the instrument this lesson will play a sheet from
+	 * @param numberOfTimes - how many times the song should be played for the lesson to be complete.
 	 */
-	public Lesson(UUID id, String title, Song song, InstrumentType instrumentType) {
+	public Lesson(UUID id, String title, Song song, InstrumentType instrumentType, int numberOfTimes) {
 		this.id = id;
 		this.title = title;
 		this.song = song;
 		this.instrumentType = instrumentType;
+		this.numberOfTimes = numberOfTimes;
 	}
 
-	public Lesson(UUID id, String title, UUID song, InstrumentType instrumentType) {
+	public Lesson(UUID id, String title, UUID song, InstrumentType instrumentType, int numberOfTimes) {
         this.id = id;
         this.title = title;
         this.unlinkedSong = song;
         this.instrumentType = instrumentType;
+		this.numberOfTimes = numberOfTimes;
     }
 
 	/**
@@ -59,8 +66,8 @@ public class Lesson {
 	 * @param song - the song this lesson will play a sheet from
 	 * @param instrumentType - the instrument this lesson will play a sheet from
 	 */
-	public Lesson(String title, Song song, InstrumentType instrumentType) {
-		this(UUID.randomUUID(), title, song, instrumentType);
+	public Lesson(String title, Song song, InstrumentType instrumentType, int numberOfTimes) {
+		this(UUID.randomUUID(), title, song, instrumentType, numberOfTimes);
 	}
 
 	/**
@@ -129,7 +136,16 @@ public class Lesson {
 		lessonObject.put("title", title);
 		lessonObject.put("song", song.getId().toString());
 		lessonObject.put("instrument", instrumentType.getName());
-
+		lessonObject.put("numberOfTimes",numberOfTimes);
+		
 		return lessonObject;
 	}
+
+    public int getNumberOfTimes() {
+        return numberOfTimes;
+    }
+
+    public void setNumberOfTimes(int numberOfTimes) {
+        this.numberOfTimes = numberOfTimes;
+    }
 }

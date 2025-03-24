@@ -1,6 +1,9 @@
 package com.model;
 
+import java.util.ArrayList;
 import java.util.UUID;
+
+import org.json.simple.JSONObject;
 
 import com.model.managers.CourseManager;
 
@@ -18,9 +21,11 @@ public class Teacher extends User {
      * @param lastName      teacher's last name
      * @param emailAddress  teacher's email address
      * @param password      teacher's password
+	 * @param metronomeSpeedModifier - the teacher's modifier for metronome speed
+	 * @param unlinkedFriends - the teacher's friends to be linked to full Teacher instances
      */
-    public Teacher(UUID id, String firstName, String lastName, String emailAddress, String password) {
-        super(id, firstName, lastName, emailAddress, password);
+    public Teacher(UUID id, String firstName, String lastName, String emailAddress, String password, double metronomeSpeedModifier, ArrayList<UUID> unlinkedFriends) {
+        super(id, firstName, lastName, emailAddress, password, metronomeSpeedModifier, unlinkedFriends);
     }
 
     /**
@@ -53,7 +58,16 @@ public class Teacher extends User {
      * @return true if the course was successfully deleted, false otherwise
      */
     public boolean deleteCourse(UUID id) {
-        
-        return true;
+        return CourseManager.getInstance().deleteCourse(id);
+    }
+
+    @Override
+    @SuppressWarnings({ "unchecked", "exports" })
+	public JSONObject toJSON() {
+        JSONObject o = super.toJSON();
+
+        o.put("type","Teacher");
+
+        return o;
     }
 } 

@@ -18,6 +18,8 @@ public class Measure {
     private boolean repeatOpen;
     private boolean repeatClose;
     private String jfugueString;
+    private boolean metronomeEnabled = false;
+    private boolean audioPlaybackEnabled = false;
 
     /**
      * new measure with musical properties
@@ -42,10 +44,10 @@ public class Measure {
     }
 
     /**
-     * Toggles the metronome
+     * Toggles the metronome on/off
      */
     public void toggleMetronome() {
-        
+        this.metronomeEnabled = !this.metronomeEnabled;
     }
 
     /**
@@ -53,14 +55,16 @@ public class Measure {
      * @param speed the new speed to set
      */
     public void setMetronomeSpeed(double speed) {
-        
+        if (speed > 0) {
+            this.tempo = (int) speed;
+        }
     }
 
     /**
-     * Toggles audio playback 
+     * Toggles audio playback on/off
      */
     public void toggleAudioPlayback() {
-        
+        this.audioPlaybackEnabled = !this.audioPlaybackEnabled;
     }
 
     /**
@@ -68,7 +72,9 @@ public class Measure {
      * @param chord the chord to add
      */
     public void addChord(Chord chord) {
-        
+        if (chord != null && !chords.contains(chord)) {
+            chords.add(chord);
+        }
     }
 
     /**
@@ -76,7 +82,9 @@ public class Measure {
      * @param chord the chord to remove
      */
     public void removeChord(Chord chord) {
-        
+        if (chord != null) {
+            chords.remove(chord);
+        }
     }
 
 	/**

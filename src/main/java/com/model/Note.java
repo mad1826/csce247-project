@@ -1,7 +1,7 @@
 package com.model;
 
-import org.json.simple.JSONObject;
 import org.jfugue.player.Player;
+import org.json.simple.JSONObject;
 
 /**
  * Represents a musical note with musical properties

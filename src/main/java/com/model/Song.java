@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.jfugue.player.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.jfugue.player.Player;
 
 /**
  * represent a song in the music app system
@@ -48,7 +48,7 @@ public class Song {
      * @param - a HashMap of instruments and their corresponding sheet music
      */
     public Song(String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets) {
-        this(UUID.randomUUID(), title, artist, genres, sheets);
+        this(UUID.randomUUID(), title, artist, genres, sheets,"");
     }
 
 	/**
@@ -66,6 +66,24 @@ public class Song {
     public HashMap<Instrument, SheetMusic> getSheets() {
         return sheets;
     }
+
+	/**
+	 * Creates a new sheet for this song
+	 * @param instrument - the instrument that will play the sheet
+	 * @param difficulty - the sheet's difficulty
+	 * @param clef - the clef to play the sheet in
+	 * @param audioPlaybackEnabled - whether the sheet will play audio back
+	 * @param measures - the sheet's measures
+	 * @param isPrivate - whether the sheet is private
+	 * @return The result of attempting to create the sheet
+	 */
+	public OperationResult<SheetMusic> createSheet(Instrument instrument, Difficulty difficulty, 
+		Clef clef, boolean audioPlaybackEnabled, 
+		ArrayList<Measure> measures, boolean isPrivate) {
+		SheetMusic newSheet = new SheetMusic(instrument, difficulty, clef, audioPlaybackEnabled, measures, isPrivate);
+		sheets.put(instrument, newSheet);
+		return new OperationResult<>(newSheet);
+	}
 
     /**
      * gets the title of the song

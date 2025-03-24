@@ -16,7 +16,7 @@ import com.model.Pitch;
 import com.model.PitchModifier;
 import com.model.SheetMusic;
 import com.model.Song;
-import com.model.datahandlers.DataWriter;
+import com.model.DataHandlers.DataWriter;
 import com.model.managers.SongManager;
 
 public class SongWriterTest {
@@ -28,13 +28,13 @@ public class SongWriterTest {
 		genres.add(Genre.JAZZ);
 
 		Instrument piano = new Instrument(InstrumentType.PIANO);
-		Note note = new Note(Pitch.A, PitchModifier.NONE, NoteValue.SIXTEENTH, false, false, 2);
+		Note note = new Note(Pitch.A, PitchModifier.NONE, NoteValue.SIXTEENTH, false, false, 2,"");
 		ArrayList<Note> notes = new ArrayList<>();
 		notes.add(note);
 		Chord chord = new Chord("My First Chord", notes, false);
 		ArrayList<Chord> chords = new ArrayList<>();
 		chords.add(chord);
-		Measure measure = new Measure(chords, 1, 50, 1, false, false);
+		Measure measure = new Measure(chords, 1, 50, 1, false, false,"");
 
 		HashMap<Instrument, SheetMusic> sheets = new HashMap<>();
 		SheetMusic sheet = new SheetMusic(piano, Difficulty.BEGINNER, Clef.BASS, false, new ArrayList<>(), false);
