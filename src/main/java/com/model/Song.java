@@ -147,7 +147,7 @@ public class Song {
         Player player = new Player();
         player.play(jfuguePattern);
     }
-
+    
     public String getJfuguePattern() {
         return jfuguePattern;
     }

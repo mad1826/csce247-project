@@ -20,7 +20,14 @@
 								{
 									"name": "My First Chord",
 									"notes": [
-										
+  										{
+										"pitch": "A",
+										"pitchModifier": "NONE",
+										"value": "SIXTEENTH",
+										"dot": false,
+										"line": false,
+										"octave": 2
+										} 
 									],
 									"tie": false
 								}
@@ -162,14 +169,13 @@
 		},
    {
         "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "title": "Midnight Groove",
-        "artist": "Lunar Rhythms",
+        "title": "Seven Nation Army",
+        "artist": "The White Stripes",
         "genres": [
-            "FUNK",
-            "LOFI"
+            "ROCK"
         ],
         "sheets": {
-            "BASS": {
+            "PIANO": {
                 "tuning": "Standard",
 				"sheet": {
 					"difficulty": "INTERMEDIATE",
@@ -179,30 +185,148 @@
 						{
 							"chords": [
 								{
-									"name": "My First Chord",
+									"name": "My Second Chord",
+									"notes": [
+										{
+											"pitch": "E",
+											"pitchModifier": "NONE",
+											"value": "QUARTER",
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"jfugueString": "E3q"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "E",
+									"notes": [
+										{
+											"pitch": "E",
+											"pitchModifier": "NONE",
+											"value": "QUARTER",
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"jfugueString": "E3q"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "G",
+									"notes": [
+										{
+											"pitch": "G",
+											"pitchModifier": "NONE",
+											"value": "QUARTER",
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"jfugueString": "G3q"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "A",
 									"notes": [
 										{
 											"pitch": "A",
 											"pitchModifier": "NONE",
-											"value": "SIXTEENTH",
+											"value": "QUARTER",
 											"dot": false,
 											"line": false,
-											"octave": 2
+											"octave": 3,
+											"jfugueString": "A3q"
 										}
 									],
 									"tie": false
 								}
 							],
-							"tempo": 1,
-							"timeSignatureNum": 50,
-							"timeSignatureDenom": 1,
+							"tempo": 120,
+							"timeSignatureNum": 4,
+							"timeSignatureDenom": 4,
 							"repeatOpen": false,
-							"repeatClose": false
+							"repeatClose": false,
+							"jfugueString": "E3q E3q G3q A3q"
+						},
+						{
+							"chords": [
+								{
+									"name": "A",
+									"notes": [
+										{
+											"pitch": "A",
+											"pitchModifier": "NONE",
+											"value": "EIGHTH",
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"jfugueString": "A3i"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "G",
+									"notes": [
+										{
+											"pitch": "G",
+											"pitchModifier": "NONE",
+											"value": "EIGHTH",
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"jfugueString": "G3i"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "E",
+									"notes": [
+										{
+											"pitch": "E",
+											"pitchModifier": "NONE",
+											"value": "HALF",
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"jfugueString": "E3h"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "Rest",
+									"notes": [
+										{
+											"pitch": "R",
+											"pitchModifier": "NONE",
+											"value": "QUARTER",
+											"dot": false,
+											"line": false,
+											"octave": 0,
+											"jfugueString": "Rq"
+										}
+									],
+									"tie": false
+								}
+							],
+							"tempo": 120,
+							"timeSignatureNum": 4,
+							"timeSignatureDenom": 4,
+							"repeatOpen": false,
+							"repeatClose": false,
+							"jfugueString": "A3i G3i E3h Rq"
 						}
 					],
-					"private": true
+					"private": true,
+					"jfuguePattern": "T120 I[Piano] E3q E3q G3q A3q A3i G3i E3h Rq"
 				}
-            },
+			},
             "DRUMS": {
                 "tuning": "Standard",
 				"sheet": {
@@ -213,30 +337,78 @@
 						{
 							"chords": [
 								{
-									"name": "My First Chord",
+									"name": "Kick",
 									"notes": [
 										{
-											"pitch": "A",
+											"pitch": "B",
 											"pitchModifier": "NONE",
-											"value": "SIXTEENTH",
+											"value": "QUARTER",
 											"dot": false,
 											"line": false,
-											"octave": 2
+											"octave": 1,
+											"jfugueString": "B1q"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "Rest",
+									"notes": [
+										{
+											"pitch": "R",
+											"pitchModifier": "NONE",
+											"value": "QUARTER",
+											"dot": false,
+											"line": false,
+											"octave": 0,
+											"jfugueString": "Rq"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "Snare",
+									"notes": [
+										{
+											"pitch": "D",
+											"pitchModifier": "NONE",
+											"value": "QUARTER",
+											"dot": false,
+											"line": false,
+											"octave": 2,
+											"jfugueString": "D2q"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "Rest",
+									"notes": [
+										{
+											"pitch": "R",
+											"pitchModifier": "NONE",
+											"value": "QUARTER",
+											"dot": false,
+											"line": false,
+											"octave": 0,
+											"jfugueString": "Rq"
 										}
 									],
 									"tie": false
 								}
 							],
-							"tempo": 1,
-							"timeSignatureNum": 50,
-							"timeSignatureDenom": 1,
+							"tempo": 120,
+							"timeSignatureNum": 4,
+							"timeSignatureDenom": 4,
 							"repeatOpen": false,
-							"repeatClose": false
+							"repeatClose": false,
+							"jfugueString": "B1q Rq D2q Rq"
 						}
 					],
-					"private": true
+					"private": true,
+					"jfuguePattern": "T120 I[Drums] B1q Rq D2q Rq"
 				}
-            }
-        }
-    } 
+			}
+		}
+	}
 ]
