@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.managers.CourseManager;
+
 /**
  * A teacher's course that can contain lessons for members to progress through
  * 
@@ -132,7 +134,7 @@ public class Course {
 	 * @return whether the deletion was successful
 	 */
 	public boolean delete() {
-		return true;
+		return CourseManager.getInstance().deleteCourse(id);
 	}
 
 	public ArrayList<Student> getMembers() {
