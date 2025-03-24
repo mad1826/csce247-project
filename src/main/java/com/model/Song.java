@@ -169,4 +169,5 @@ public class Song {
     public String getJfuguePattern() {
         return jfuguePattern;
     }
+
 }

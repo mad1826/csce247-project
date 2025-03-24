@@ -60,6 +60,22 @@ public class UserManager implements  SavableList<User> {
         if (accountExists(emailAddress))
 			return new OperationResult<>("An account with this email already exists.");
 
+            /*
+             * validate input parameters
+             */
+            if (firstName == null || firstName.trim().isEmpty()) {
+                return new OperationResult<>("First name cannot be empty.");
+            }
+            if (lastName == null || lastName.trim().isEmpty()) {
+                return new OperationResult<>("Last name cannot be empty.");
+            }
+            if (emailAddress == null || !emailAddress.contains("@")) {
+                return new OperationResult<>("Invalid email address.");
+            }
+            if (password == null || password.length() < 6) {
+                return new OperationResult<>("Password must be at least 6 characters long.");
+            }
+
         User user;
         if (isTeacher)
             user = new Teacher(firstName, lastName, emailAddress, password);
@@ -78,8 +94,19 @@ public class UserManager implements  SavableList<User> {
      * @return - the result of attempting to delete the user
      */
     public OperationResult<Void> deleteUser(UUID userID) {
-        // TODO implement using users.get
-        return new OperationResult<>("Not implemented");
+         //check if user exists
+         User userToDelete = users.get(userID);
+        
+         if (userToDelete == null) {
+             return new OperationResult<>("User not found with the given ID.");
+         }
+ 
+         //remove user from the collection
+         users.remove(userID);
+         
+         //return successful operation
+         OperationResult<Void> or = new OperationResult<>(true);
+         return or;
     }
 
 	/**
