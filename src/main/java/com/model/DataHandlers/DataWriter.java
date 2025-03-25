@@ -1,5 +1,6 @@
 package com.model.datahandlers;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -7,6 +8,7 @@ import org.json.simple.JSONArray;
 
 import com.model.OperationResult;
 import com.model.SavableList;
+import com.model.SheetMusic;
 
 /**
  * Handles writing data to JSON files.
@@ -34,5 +36,23 @@ public class DataWriter {
 
 			return new OperationResult<>("FileWriter Exception");
 		}
+    }
+
+    /**
+     * Writes song to a new file
+     * 
+     * @param path Where to save the file
+     * @param song Song Object to write
+     * @author Matt Carey
+     * @author Ryan Smith
+     */
+    public static void ExportSheet(String path, SheetMusic s) {
+        File f = new File(path);
+
+        try (FileWriter writer = new FileWriter(f)) {
+
+        } catch (IOException e) {
+            
+        }
     }
 }
