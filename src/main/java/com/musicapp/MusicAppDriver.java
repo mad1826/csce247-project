@@ -1,4 +1,9 @@
-package com.model;
+package com.musicapp;
+
+import com.model.MusicAppFacade;
+import com.model.OperationResult;
+import com.model.Song;
+import com.model.User;
 
 /**
  * A terminal-based interface for interacting with the application.
@@ -89,7 +94,7 @@ public class MusicAppDriver {
 
 		Song foundSong = null;
 
-		String titleFilter = valid ? "birth" : "fake song";
+		String titleFilter = valid ? "ick" : "fake song";
 		System.out.println("Filtering songs by \"title: " + titleFilter + "\"");
 		facade.setTitleQuery(titleFilter);
 		for (Song song : facade.searhSongs().values()) {
