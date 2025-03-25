@@ -149,6 +149,7 @@ public class Course {
 	 */
 	public boolean addMember(Student member) {
 		this.members.add(member);
+		member.getCourses().add(this);
 		CourseManager.getInstance().save();
 		return true;
 	}

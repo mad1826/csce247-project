@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.model.managers.CourseManager;
@@ -61,11 +60,9 @@ public class Student extends User {
         Course courseToJoin = null;
         
         // Find course with matching code
-        JSONArray courses = courseManager.toJSON();
-        for (Object obj : courses) {
-            JSONObject courseJson = (JSONObject)obj;
-            if (courseJson.get("code").equals(code)) {
-                courseToJoin = courseManager.toObject(courseJson);
+        for (Course course : courseManager.getCourses().values()) {
+            if (course.getCode().equals(code)) {
+                courseToJoin = course;
                 break;
             }
         }
@@ -75,13 +72,10 @@ public class Student extends User {
         }
         
         // Check if already enrolled
-        for (Course enrolledCourse : getCourses()) {
-            if (enrolledCourse.getCode().equals(code)) {
-                return new OperationResult<>("Already enrolled in this course.");
-            }
-        }
+		if (getCourses().contains(courseToJoin)) {
+			return new OperationResult<>("Already enrolled in this course.");
+		}
 
-        getCourses().add(courseToJoin);
         courseToJoin.addMember(this);
 		UserManager.getInstance().save();
         return new OperationResult<>(courseToJoin);
