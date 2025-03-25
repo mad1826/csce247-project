@@ -52,7 +52,7 @@
 						{
 							"chords": [
 								{
-									"name": "My First Chord",
+									"name": "C",
 									"notes": [
 										{
 										"pitch": "C",
@@ -60,8 +60,7 @@
 												"value": "QUARTER",
 												"dot": false,
 												"line": false,
-												"octave": 4,
-												"jfugueString": "C4q"
+												"octave": 4
 											}
 										],
 										"tie": false
@@ -75,8 +74,7 @@
 												"value": "QUARTER",
 												"dot": false,
 												"line": false,
-												"octave": 4,
-												"jfugueString": "C4q"
+												"octave": 4
 											}
 										],
 										"tie": false
@@ -90,8 +88,7 @@
 												"value": "HALF",
 												"dot": false,
 												"line": false,
-												"octave": 4,
-												"jfugueString": "D4h"
+												"octave": 4
 											}
 										],
 										"tie": false
@@ -101,8 +98,7 @@
 								"timeSignatureNum": 4,
 								"timeSignatureDenom": 4,
 								"repeatOpen": false,
-								"repeatClose": false,
-								"jfugueString": "C4q C4q D4h"
+								"repeatClose": false
 							},
 							{
 								"chords": [
@@ -115,8 +111,7 @@
 												"value": "QUARTER",
 												"dot": false,
 												"line": false,
-												"octave": 4,
-												"jfugueString": "C4q"
+												"octave": 4
 											}
 										],
 										"tie": false
@@ -130,8 +125,7 @@
 												"value": "QUARTER",
 												"dot": false,
 												"line": false,
-												"octave": 4,
-												"jfugueString": "F4q"
+												"octave": 4
 											}
 										],
 										"tie": false
@@ -145,8 +139,7 @@
 												"value": "HALF",
 												"dot": false,
 												"line": false,
-												"octave": 4,
-												"jfugueString": "E4h"
+												"octave": 4
 											}
 										],
 										"tie": false
@@ -156,12 +149,10 @@
 								"timeSignatureNum": 4,
 								"timeSignatureDenom": 4,
 								"repeatOpen": false,
-								"repeatClose": false,
-								"jfugueString": "C4q F4q E4h"
+								"repeatClose": false
 							}
 						],
-						"private": true,
-						"jfuguePattern": "T80 I[Piano] C4q C4q D4h C4q F4q E4h"
+						"private": true
 					}
 				}
 			}
@@ -185,7 +176,7 @@
 						{
 							"chords": [
 								{
-									"name": "My Second Chord",
+									"name": "E",
 									"notes": [
 										{
 											"pitch": "E",
@@ -193,8 +184,7 @@
 											"value": "QUARTER",
 											"dot": false,
 											"line": false,
-											"octave": 3,
-											"jfugueString": "E3q"
+											"octave": 3
 										}
 									],
 									"tie": false
@@ -208,8 +198,7 @@
 											"value": "QUARTER",
 											"dot": false,
 											"line": false,
-											"octave": 3,
-											"jfugueString": "E3q"
+											"octave": 3
 										}
 									],
 									"tie": false
@@ -223,8 +212,7 @@
 											"value": "QUARTER",
 											"dot": false,
 											"line": false,
-											"octave": 3,
-											"jfugueString": "G3q"
+											"octave": 3
 										}
 									],
 									"tie": false
@@ -238,8 +226,7 @@
 											"value": "QUARTER",
 											"dot": false,
 											"line": false,
-											"octave": 3,
-											"jfugueString": "A3q"
+											"octave": 3
 										}
 									],
 									"tie": false
@@ -249,8 +236,7 @@
 							"timeSignatureNum": 4,
 							"timeSignatureDenom": 4,
 							"repeatOpen": false,
-							"repeatClose": false,
-							"jfugueString": "E3q E3q G3q A3q"
+							"repeatClose": false
 						},
 						{
 							"chords": [
@@ -263,8 +249,7 @@
 											"value": "EIGHTH",
 											"dot": false,
 											"line": false,
-											"octave": 3,
-											"jfugueString": "A3i"
+											"octave": 3
 										}
 									],
 									"tie": false
@@ -278,8 +263,7 @@
 											"value": "EIGHTH",
 											"dot": false,
 											"line": false,
-											"octave": 3,
-											"jfugueString": "G3i"
+											"octave": 3
 										}
 									],
 									"tie": false
@@ -293,8 +277,7 @@
 											"value": "HALF",
 											"dot": false,
 											"line": false,
-											"octave": 3,
-											"jfugueString": "E3h"
+											"octave": 3
 										}
 									],
 									"tie": false
@@ -308,8 +291,7 @@
 											"value": "QUARTER",
 											"dot": false,
 											"line": false,
-											"octave": 0,
-											"jfugueString": "Rq"
+											"octave": 0
 										}
 									],
 									"tie": false
@@ -319,12 +301,10 @@
 							"timeSignatureNum": 4,
 							"timeSignatureDenom": 4,
 							"repeatOpen": false,
-							"repeatClose": false,
-							"jfugueString": "A3i G3i E3h Rq"
+							"repeatClose": false
 						}
 					],
-					"private": true,
-					"jfuguePattern": "T120 I[Piano] E3q E3q G3q A3q A3i G3i E3h Rq"
+					"private": true
 				}
 			},
             "DRUMS": {
@@ -345,8 +325,7 @@
 											"value": "QUARTER",
 											"dot": false,
 											"line": false,
-											"octave": 1,
-											"jfugueString": "B1q"
+											"octave": 1
 										}
 									],
 									"tie": false
@@ -360,8 +339,7 @@
 											"value": "QUARTER",
 											"dot": false,
 											"line": false,
-											"octave": 0,
-											"jfugueString": "Rq"
+											"octave": 0
 										}
 									],
 									"tie": false
@@ -375,8 +353,7 @@
 											"value": "QUARTER",
 											"dot": false,
 											"line": false,
-											"octave": 2,
-											"jfugueString": "D2q"
+											"octave": 2
 										}
 									],
 									"tie": false
@@ -390,8 +367,7 @@
 											"value": "QUARTER",
 											"dot": false,
 											"line": false,
-											"octave": 0,
-											"jfugueString": "Rq"
+											"octave": 0
 										}
 									],
 									"tie": false
@@ -401,14 +377,222 @@
 							"timeSignatureNum": 4,
 							"timeSignatureDenom": 4,
 							"repeatOpen": false,
-							"repeatClose": false,
-							"jfugueString": "B1q Rq D2q Rq"
+							"repeatClose": false
 						}
 					],
-					"private": true,
-					"jfuguePattern": "T120 I[Drums] B1q Rq D2q Rq"
+					"private": true
 				}
 			}
 		}
-	}
-]
+	},
+	{
+		"id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+            "title": "Fell in Love with a Girl",
+            "artist": "The White Stripes",
+            "genres": ["ROCK"
+			],
+            "sheets": {
+                "GUITAR": {
+                    "tuning": "Standard",
+                    "sheet": {
+                        "difficulty": "INTERMEDIATE",
+                        "clef": "TREBLE",
+                        "audioPlaybackEnabled": true,
+                        "measures": [
+                            {
+                                "chords": [
+                                    {
+                                        "name": "G",
+                                        "notes": [
+                                            {
+                                                "pitch": "G",
+                                                "pitchModifier": "NONE",
+                                                "value": "EIGHTH",
+                                                "dot": false,
+                                                "line": false,
+                                                "octave": 4
+                                            }
+                                        ],
+                                        "tie": false
+                                    },
+                                    {
+                                        "name": "B",
+                                        "notes": [
+                                            {
+                                                "pitch": "B",
+                                                "pitchModifier": "NONE",
+                                                "value": "EIGHTH",
+                                                "dot": false,
+                                                "line": false,
+                                                "octave": 4
+                                            }
+                                        ],
+                                        "tie": false
+                                    }
+                                ],
+                                "tempo": 160,
+                                "timeSignatureNum": 4,
+                                "timeSignatureDenom": 4,
+                                "repeatOpen": false,
+                                "repeatClose": false
+                            }
+                        ],
+                        "private": true
+                    }
+                },
+                "DRUMS": {
+                    "tuning": "Standard",
+                    "sheet": {
+                        "difficulty": "EXPERT",
+                        "clef": "TREBLE",
+                        "audioPlaybackEnabled": true,
+                        "measures": [
+                            {
+                                "chords": [
+                                    {
+                                        "name": "Kick",
+                                        "notes": [
+                                            {
+                                                "pitch": "B",
+                                                "pitchModifier": "NONE",
+                                                "value": "SIXTEENTH",
+                                                "dot": false,
+                                                "line": false,
+                                                "octave": 1
+                                            }
+                                        ],
+                                        "tie": false
+                                    },
+                                    {
+                                        "name": "Snare",
+                                        "notes": [
+                                            {
+                                                "pitch": "D",
+                                                "pitchModifier": "NONE",
+                                                "value": "SIXTEENTH",
+                                                "dot": false,
+                                                "line": false,
+                                                "octave": 2
+                                            }
+                                        ],
+                                        "tie": false
+                                    }
+                                ],
+                                "tempo": 160,
+                                "timeSignatureNum": 4,
+                                "timeSignatureDenom": 4,
+                                "repeatOpen": false,
+                                "repeatClose": false
+                            }
+                        ],
+                        "private": true
+                    }
+                }
+            }
+        },
+        {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "title": "Icky Thump",
+            "artist": "The White Stripes",
+            "genres": ["ROCK"
+			],
+            "sheets": {
+                "GUITAR": {
+                    "tuning": "Standard",
+                    "sheet": {
+                        "difficulty": "ADVANCED",
+                        "clef": "TREBLE",
+                        "audioPlaybackEnabled": true,
+                        "measures": [
+                            {
+                                "chords": [
+                                    {
+                                        "name": "E",
+                                        "notes": [
+                                            {
+                                                "pitch": "E",
+                                                "pitchModifier": "NONE",
+                                                "value": "QUARTER",
+                                                "dot": false,
+                                                "line": false,
+                                                "octave": 4
+                                            }
+                                        ],
+                                        "tie": false
+                                    },
+                                    {
+                                        "name": "G",
+                                        "notes": [
+                                            {
+                                                "pitch": "G",
+                                                "pitchModifier": "NONE",
+                                                "value": "QUARTER",
+                                                "dot": false,
+                                                "line": false,
+                                                "octave": 4
+                                            }
+                                        ],
+                                        "tie": false
+                                    }
+                                ],
+                                "tempo": 140,
+                                "timeSignatureNum": 4,
+                                "timeSignatureDenom": 4,
+                                "repeatOpen": false,
+                                "repeatClose": false
+                            }
+                        ],
+                        "private": true
+                    }
+                },
+                "DRUMS": {
+                    "tuning": "Standard",
+                    "sheet": {
+                        "difficulty": "EXPERT",
+                        "clef": "TREBLE",
+                        "audioPlaybackEnabled": true,
+                        "measures": [
+                            {
+                                "chords": [
+                                    {
+                                        "name": "Kick",
+                                        "notes": [
+                                            {
+                                                "pitch": "B",
+                                                "pitchModifier": "NONE",
+                                                "value": "EIGHTH",
+                                                "dot": false,
+                                                "line": false,
+                                                "octave": 1
+                                            }
+                                        ],
+                                        "tie": false
+                                    },
+                                    {
+                                        "name": "Snare",
+                                        "notes": [
+                                            {
+                                                "pitch": "D",
+                                                "pitchModifier": "NONE",
+                                                "value": "EIGHTH",
+                                                "dot": false,
+                                                "line": false,
+                                                "octave": 2
+                                            }
+                                        ],
+                                        "tie": false
+                                    }
+                                ],
+                                "tempo": 140,
+                                "timeSignatureNum": 4,
+                                "timeSignatureDenom": 4,
+                                "repeatOpen": false,
+                                "repeatClose": false
+                            }
+                        ],
+                        "private": true
+                    }
+                }
+            }
+        }
+    ]
