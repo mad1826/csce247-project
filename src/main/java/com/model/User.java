@@ -125,14 +125,6 @@ public abstract class User {
     }
 
     /**
-     * simulate playing sheet music 
-     * @param - the sheet music to play
-     */
-    public void playSheet(SheetMusic sheet) {
-        System.out.println("Playing sheet music...");
-    }
-
-    /**
      * sets the metronome speed modifier if speed is greater than 0
      * @param - the speed to set
      * @return - true if speed was set, false otherwise
