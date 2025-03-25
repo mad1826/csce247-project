@@ -500,7 +500,7 @@
                 "GUITAR": {
                     "tuning": "Standard",
                     "sheet": {
-                        "difficulty": "ADVANCED",
+                        "difficulty": "EXPERT",
                         "clef": "TREBLE",
                         "audioPlaybackEnabled": true,
                         "measures": [

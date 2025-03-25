@@ -288,7 +288,10 @@ public class SongManager implements  SavableList<Song> {
 	}
 
     public static void main(String[] args) { //tester
-        SongManager.getInstance().loadData();
+        OperationResult<Void> or = SongManager.getInstance().loadData();
+
+        System.out.println(or);
+
         System.out.println(SongManager.getInstance().songs);
     }
 }

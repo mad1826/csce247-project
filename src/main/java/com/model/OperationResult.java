@@ -60,7 +60,7 @@ public class OperationResult<T> {
         return "Operation Result {"
             + "\n\tsuccess=" + success
             + ",\n\tresult=" + result
-            + ",\n\terror=" + (error != null ? error.getMessage() : "null")
+            + ",\n\terror=" + (error != null ? error.toString() : "null")
             + (error != null ? ",\n\ttrace="+error.fillInStackTrace().toString() : "")
             + ",\n\tmessage='" + message + '\''
             + "\n}";

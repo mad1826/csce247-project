@@ -41,6 +41,7 @@ public class DataLoader {
 
             return new OperationResult<>(result);
         } catch (Exception e) {
+            System.out.println(e.toString());
             return new OperationResult<>("Unable to load data from loader.",e);
         }
     }
