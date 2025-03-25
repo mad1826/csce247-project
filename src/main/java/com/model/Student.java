@@ -136,8 +136,12 @@ public class Student extends User {
 	public JSONObject toJSON() {
         JSONObject o = super.toJSON();
 
-        //TODO: write lesson progress to jsonobject o
+        JSONObject progress = new JSONObject();
+		for (UUID lessonId : lessonProgress.keySet()) {
+			progress.put(lessonId, lessonProgress.get(lessonId));
+		}
         o.put("type","Student");
+		o.put("lessonProgress", progress);
 
         return o;
     }
