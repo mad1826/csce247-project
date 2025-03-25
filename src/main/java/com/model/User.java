@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.model.managers.UserManager;
@@ -215,6 +216,11 @@ public abstract class User {
         userDetails.put("emailAddress", emailAddress);
         userDetails.put("password", password);
         userDetails.put("metronomeSpeedModifier", metronomeSpeedModifier);
+		JSONArray friendsJSON = new JSONArray();
+		for (UUID friendId : friends.keySet()) {
+			friendsJSON.add(friendId.toString());
+		}
+		userDetails.put("friends", friendsJSON);
         return userDetails;
     }
 
