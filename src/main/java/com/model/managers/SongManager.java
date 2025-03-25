@@ -9,6 +9,8 @@ import org.json.simple.JSONObject;
 
 import com.model.Chord;
 import com.model.Clef;
+import com.model.DataHandlers.DataLoader;
+import com.model.DataHandlers.DataWriter;
 import com.model.Difficulty;
 import com.model.Genre;
 import com.model.Instrument;
@@ -23,8 +25,6 @@ import com.model.SavableList;
 import com.model.SheetMusic;
 import com.model.Song;
 import com.model.SongFilter;
-import com.model.DataHandlers.DataLoader;
-import com.model.DataHandlers.DataWriter;
 
 /**
  * manages all songs within the music app system
