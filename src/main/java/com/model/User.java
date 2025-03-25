@@ -115,16 +115,6 @@ public abstract class User {
     }
 
     /**
-     * create a sheet music instance (placeholder method)
-     * @param - the sheet to create
-     * @return - always returns true (placeholder)
-     */
-    public boolean createSheet(SheetMusic sheet) {
-		UserManager.getInstance().save();
-        return true; 
-    }
-
-    /**
      * sets the metronome speed modifier if speed is greater than 0
      * @param - the speed to set
      * @return - true if speed was set, false otherwise
