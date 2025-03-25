@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.json.simple.JSONArray;
 
+import com.model.Measure;
 import com.model.OperationResult;
 import com.model.SavableList;
 import com.model.SheetMusic;
@@ -49,10 +50,16 @@ public class DataWriter {
     public static void ExportSheet(String path, SheetMusic s) {
         File f = new File(path);
 
-        try (FileWriter writer = new FileWriter(f)) {
+        String music = "";
+        
+        for (Measure m : s.getMeasures()) {
+            music = music+" "+m.getJfugueString();
+        }
 
+        try (FileWriter writer = new FileWriter(f)) {
+            writer.write(music);
         } catch (IOException e) {
-            
+            System.out.println(e.toString());
         }
     }
 }
