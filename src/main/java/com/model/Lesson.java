@@ -89,6 +89,10 @@ public class Lesson {
 		return id;
 	}
 
+	/**
+	 * Updates the song the lesson is based around.
+	 * @param s the new song
+	 */
 	public void setSong(Song s) {
 		this.song = s;
 		CourseManager.getInstance().save();
@@ -142,6 +146,14 @@ public class Lesson {
 		lessonObject.put("numberOfTimes",numberOfTimes);
 		
 		return lessonObject;
+	}
+
+	/**
+	 * Initially links the song to the lesson.
+	 * @param song the song to link
+	 */
+	public void linkSong(Song song) {
+		this.song = song;
 	}
 
     public int getNumberOfTimes() {
