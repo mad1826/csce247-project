@@ -7,13 +7,13 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.model.DataHandlers.DataLoader;
-import com.model.DataHandlers.DataWriter;
 import com.model.OperationResult;
 import com.model.SavableList;
 import com.model.Student;
 import com.model.Teacher;
 import com.model.User;
+import com.model.datahandlers.DataLoader;
+import com.model.datahandlers.DataWriter;
 
 /**
  * manages user creation, deletion, and retrieval

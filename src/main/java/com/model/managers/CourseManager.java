@@ -8,14 +8,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.model.Course;
-import com.model.DataHandlers.DataLoader;
-import com.model.DataHandlers.DataWriter;
 import com.model.InstrumentType;
 import com.model.Lesson;
 import com.model.OperationResult;
 import com.model.SavableList;
 import com.model.Student;
 import com.model.Teacher;
+import com.model.datahandlers.DataLoader;
+import com.model.datahandlers.DataWriter;
 
 /**
  * A manager for all courses
