@@ -34,7 +34,9 @@ public class Instrument {
      * @param note note to play
      */
     public void playNote(Note note) {
-        
+        if (!isMuted) {
+            note.play();
+        }
     }
 
     /**
@@ -42,7 +44,7 @@ public class Instrument {
      * @param note note to stop
      */
     public void stopNote(Note note) {
-        
+        //Doesn't Jfuge automatically stop notes when they finish playing?
     }
 
     /**
@@ -50,21 +52,21 @@ public class Instrument {
      * @param newTuning the new tuning to set
      */
     public void adjustTuning(String newTuning) {
-        
+        this.tuning = newTuning;
     }
 
     /**
      * Mutes instrument
      */
     public void mute() {
-        
+        this.isMuted = true;
     }
 
     /**
      * Unmutes instrument
      */
     public void unmute() {
-        
+        this.isMuted = false;
     }
 
     /**
@@ -72,7 +74,7 @@ public class Instrument {
      * @param volume the volume level 
      */
     public void setVolume(int volume) {
-        
+        //Does Jfuge set the volume?
     }
 
 	
