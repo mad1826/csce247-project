@@ -75,6 +75,10 @@ public class SheetMusic {
 		SongManager.getInstance().save();
     }
 
+    public ArrayList<Measure> getMeasures() {
+        return this.measures;
+    }
+
 	public void setDifficulty(Difficulty difficulty) {
 		this.difficulty = difficulty;
 		SongManager.getInstance().save();
