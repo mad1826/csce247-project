@@ -6,6 +6,8 @@ import org.jfugue.player.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.managers.SongManager;
+
 /**
  * chord composed of multiple notes
  * @author Ryan Smith
@@ -35,6 +37,7 @@ public class Chord {
     public void addNote(Note note) {
         if (note != null && !notes.contains(note)) {
             notes.add(note);
+			SongManager.getInstance().save();
         }
     }
 
@@ -45,6 +48,7 @@ public class Chord {
     public void removeNote(Note note) {
         if (note != null) {
             notes.remove(note);
+			SongManager.getInstance().save();
         }
     }
 

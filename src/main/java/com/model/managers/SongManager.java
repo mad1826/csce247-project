@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import com.model.Chord;
 import com.model.Clef;
 import com.model.DataHandlers.DataLoader;
+import com.model.DataHandlers.DataWriter;
 import com.model.Difficulty;
 import com.model.Genre;
 import com.model.Instrument;
@@ -119,6 +120,7 @@ public class SongManager implements  SavableList<Song> {
      */
     public boolean createSong(Song song) {
         songs.put(song.getID(), song);
+		save();
         return true;
     }
 
@@ -131,6 +133,7 @@ public class SongManager implements  SavableList<Song> {
         for (Song song : songs.values()) {
             if (song.getID().equals(songId)) {
                 songs.remove(song.getID());
+				save();
                 return new OperationResult<>(song);
             }
         }
@@ -275,6 +278,14 @@ public class SongManager implements  SavableList<Song> {
     public OperationResult<Void> linkData() {
         return new OperationResult<>(true); //Nothing to link
     }
+
+	/**
+	 * Save all songs to the data writer destination.
+	 */
+	@Override
+	public OperationResult<JSONArray> save() {
+		return DataWriter.setData(this);
+	}
 
     public static void main(String[] args) { //tester
         SongManager.getInstance().loadData();

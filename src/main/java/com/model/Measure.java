@@ -6,6 +6,8 @@ import org.jfugue.player.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.managers.SongManager;
+
 /**
  * musical measure containing chords
  * @author Ryan Smith
@@ -48,6 +50,7 @@ public class Measure {
      */
     public void toggleMetronome() {
         this.metronomeEnabled = !this.metronomeEnabled;
+		SongManager.getInstance().save();
     }
 
     /**
@@ -57,6 +60,7 @@ public class Measure {
     public void setMetronomeSpeed(double speed) {
         if (speed > 0) {
             this.tempo = (int) speed;
+			SongManager.getInstance().save();
         }
     }
 
@@ -65,6 +69,7 @@ public class Measure {
      */
     public void toggleAudioPlayback() {
         this.audioPlaybackEnabled = !this.audioPlaybackEnabled;
+		SongManager.getInstance().save();
     }
 
     /**
@@ -74,6 +79,7 @@ public class Measure {
     public void addChord(Chord chord) {
         if (chord != null && !chords.contains(chord)) {
             chords.add(chord);
+			SongManager.getInstance().save();
         }
     }
 
@@ -84,6 +90,7 @@ public class Measure {
     public void removeChord(Chord chord) {
         if (chord != null) {
             chords.remove(chord);
+			SongManager.getInstance().save();
         }
     }
 

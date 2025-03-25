@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import org.json.simple.JSONObject;
 
+import com.model.managers.UserManager;
+
 /**
  * represent a user in the music app system
  * stores user info, password, friends, and courses
@@ -106,6 +108,7 @@ public abstract class User {
     public boolean resetPassword(String newPassword) {
         if(isValidPassword(newPassword) && !this.password.equals(newPassword)) {
             this.password = newPassword;
+			UserManager.getInstance().save();
             return true;
         }
         return false;
@@ -117,6 +120,7 @@ public abstract class User {
      * @return - always returns true (placeholder)
      */
     public boolean createSheet(SheetMusic sheet) {
+		UserManager.getInstance().save();
         return true; 
     }
 
@@ -136,6 +140,7 @@ public abstract class User {
     public boolean setMetronomeSpeed(double speed) {
         if (speed > 0 ) {
             this.metronomeSpeedModifier = speed;
+			UserManager.getInstance().save();
             return true;
         }
         return false;
@@ -188,6 +193,7 @@ public abstract class User {
 			}
 		}
 		friends.put(friend.getId(), friend);
+		UserManager.getInstance().save();
 		return new OperationResult<>(true);
 	}
 
@@ -195,6 +201,7 @@ public abstract class User {
 		for (UUID friendId : friends.keySet()) {
 			if (friendId.equals(friend.getId())) {
 				friends.remove(friendId);
+				UserManager.getInstance().save();
 				return new OperationResult<>(true);
 			}
 		}

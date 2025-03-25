@@ -41,4 +41,10 @@ public interface SavableList<T> {
      * @return
      */
     OperationResult<Void> linkData();
+
+	/**
+	 * Write this list's data to the file path.
+	 */
+	@SuppressWarnings("exports")
+	OperationResult<JSONArray> save();
 }

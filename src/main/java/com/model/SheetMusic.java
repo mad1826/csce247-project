@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.managers.SongManager;
+
 /**
  * sheet with measures and playback settings
  * @author Ryan Smith
@@ -52,6 +54,7 @@ public class SheetMusic {
      */
     public void toggleAudioPlayback() {
         audioPlaybackEnabled = !audioPlaybackEnabled;
+		SongManager.getInstance().save();
     }
 
     /**
@@ -60,6 +63,7 @@ public class SheetMusic {
      */
     public void addMeasure(Measure measure) {
         measures.add(measure);
+		SongManager.getInstance().save();
     }
 
     /**
@@ -68,14 +72,17 @@ public class SheetMusic {
      */
     public void removeMeasure(Measure measure) {
         measures.remove(measure);
+		SongManager.getInstance().save();
     }
 
 	public void setDifficulty(Difficulty difficulty) {
 		this.difficulty = difficulty;
+		SongManager.getInstance().save();
 	}
 
 	public void setClef(Clef clef) {
 		this.clef = clef;
+		SongManager.getInstance().save();
 	}
 
     /**
@@ -83,6 +90,7 @@ public class SheetMusic {
      */
     public void togglePrivate() {
         isPrivate = !isPrivate;
+		SongManager.getInstance().save();
     }
 
 	/**

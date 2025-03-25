@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 
 import com.model.Course;
 import com.model.DataHandlers.DataLoader;
+import com.model.DataHandlers.DataWriter;
 import com.model.InstrumentType;
 import com.model.Lesson;
 import com.model.OperationResult;
@@ -75,15 +76,8 @@ public class CourseManager implements SavableList<Course> {
 
 		Course course = new Course(code, title, new ArrayList<>(), owner, new ArrayList<>());
 		courses.put(course.getId(), course);
+		save();
 		return new OperationResult<>(course);
-	}
-
-	/**
-	 * Saves all courses
-	 * @return whether the save was successful
-	 */
-	public boolean saveCourses() {
-		return false;
 	}
 
 	/**
@@ -104,6 +98,7 @@ public class CourseManager implements SavableList<Course> {
 
 		// Remove course from the manager
 		courses.remove(courseId);
+		save();
 		return true;
 	}
 
@@ -118,7 +113,7 @@ public class CourseManager implements SavableList<Course> {
 	/**
 	 * Transforms all Course instances into a JSON array
 	 */
-	@SuppressWarnings({ "exports", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	public JSONArray toJSON() {
 		JSONArray jsonCourses = new JSONArray();
@@ -134,7 +129,7 @@ public class CourseManager implements SavableList<Course> {
 	 * Transforms a JSON object into a Course instances
 	 */
 	@Override
-	public Course toObject(@SuppressWarnings("exports") JSONObject object) {
+	public Course toObject(JSONObject object) {
 		UUID id = UUID.fromString((String) object.get("id"));
 		String code = (String) object.get("code");
 		String title = (String) object.get("title");
@@ -199,5 +194,13 @@ public class CourseManager implements SavableList<Course> {
         }
 
         return new OperationResult<>(true);
+	}
+
+	/**
+	 * Save all courses to the data writer destination.
+	 */
+	@Override
+	public OperationResult<JSONArray> save() {
+		return DataWriter.setData(this);
 	}
 }

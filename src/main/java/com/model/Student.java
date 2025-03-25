@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.model.managers.CourseManager;
+import com.model.managers.UserManager;
 
 /**
  * Represents a student in the music app
@@ -82,6 +83,7 @@ public class Student extends User {
 
         getCourses().add(courseToJoin);
         courseToJoin.addMember(this);
+		UserManager.getInstance().save();
         return new OperationResult<>(courseToJoin);
     }
 
@@ -105,6 +107,7 @@ public class Student extends User {
         }
 
         getCourses().remove(courseToLeave);
+		UserManager.getInstance().save();
         if (!courseToLeave.removeMember(this)) {
             return new OperationResult<>("Failed to remove student from course.");
         }
@@ -129,6 +132,7 @@ public class Student extends User {
 
     public void assignLesson(Lesson l) {
         this.lessonProgress.put(l.getId(),0);
+		UserManager.getInstance().save();
     }
 
     @Override
@@ -156,6 +160,7 @@ public class Student extends User {
         int thisProgress = this.lessonProgress.get(lesson.getId());
         if (thisProgress<maxProgress) { //If lesson is complete, do not increment progress
             thisProgress++;
+			UserManager.getInstance().save();
         }
     }
 } 

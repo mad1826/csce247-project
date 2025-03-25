@@ -3,6 +3,8 @@ package com.model;
 import org.jfugue.player.Player;
 import org.json.simple.JSONObject;
 
+import com.model.managers.SongManager;
+
 /**
  * Represents a musical note with musical properties
  * @author Ryan Smith
@@ -44,6 +46,7 @@ public class Note {
      */
     public void setPitch(Pitch pitch) {
         this.pitch = pitch;
+		SongManager.getInstance().save();
     }
 
 	/**
@@ -52,6 +55,7 @@ public class Note {
 	 */
 	public void setPitchModifier(PitchModifier pitchModifier) {
 		this.pitchModifier = pitchModifier;
+		SongManager.getInstance().save();
 	}
 
     /**
@@ -61,6 +65,7 @@ public class Note {
      */
     public void setValue(NoteValue value) {
 		this.value = value;
+		SongManager.getInstance().save();
     }
 
     /**
@@ -68,6 +73,7 @@ public class Note {
      */
     public void toggleDot() {
 		dot = !dot;
+		SongManager.getInstance().save();
     }
 
 	/**
@@ -75,6 +81,7 @@ public class Note {
 	 */
 	public void toggleLine() {
 		line = !line;
+		SongManager.getInstance().save();
 	}
 
 	/**
@@ -82,8 +89,10 @@ public class Note {
 	 * @param octave - the new octave
 	 */
 	public void setOctave(int octave) {
-		if (octave > 0)
+		if (octave > 0) {
 			this.octave = octave;
+			SongManager.getInstance().save();
+		}
 	}
 
 	/**

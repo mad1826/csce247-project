@@ -126,6 +126,7 @@ public class Course {
 	public boolean setTitle(String title) {
 		if (this.title.equals(title)) return false;
 		this.title = title;
+		CourseManager.getInstance().save();
 		return true;
 	}
 
@@ -148,6 +149,7 @@ public class Course {
 	 */
 	public boolean addMember(Student member) {
 		this.members.add(member);
+		CourseManager.getInstance().save();
 		return true;
 	}
 
@@ -169,6 +171,7 @@ public class Course {
 	public OperationResult<Lesson> createLesson(String title, Song song, InstrumentType instrumentType, int numberOfTimes) {
 		Lesson lesson = new Lesson(title, song, instrumentType, numberOfTimes);
 		lessons.add(lesson);
+		CourseManager.getInstance().save();
 		return new OperationResult<>(lesson);
 	}
 
@@ -184,6 +187,7 @@ public class Course {
 				return true;
 			}
 		}
+		CourseManager.getInstance().save();
 		return false;
 	}
 
@@ -193,7 +197,9 @@ public class Course {
 	 * @return whether the operation was successful
 	 */
 	public boolean removeMember(Student member) {
-		return this.members.remove(member);
+		boolean ret = this.members.remove(member);
+		CourseManager.getInstance().save();
+		return ret;
 	}
 
 	@SuppressWarnings({ "unchecked", "exports" })

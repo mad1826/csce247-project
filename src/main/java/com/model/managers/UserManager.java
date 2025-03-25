@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.model.DataHandlers.DataLoader;
+import com.model.DataHandlers.DataWriter;
 import com.model.OperationResult;
 import com.model.SavableList;
 import com.model.Student;
@@ -85,6 +86,7 @@ public class UserManager implements  SavableList<User> {
         users.put(user.getId(), user);
         
 		OperationResult<User> or = new OperationResult<>(user);
+		save();
 		return or;
     }
 
@@ -94,19 +96,20 @@ public class UserManager implements  SavableList<User> {
      * @return - the result of attempting to delete the user
      */
     public OperationResult<Void> deleteUser(UUID userID) {
-         //check if user exists
-         User userToDelete = users.get(userID);
+        //check if user exists
+        User userToDelete = users.get(userID);
         
-         if (userToDelete == null) {
-             return new OperationResult<>("User not found with the given ID.");
-         }
+        if (userToDelete == null) {
+            return new OperationResult<>("User not found with the given ID.");
+        }
  
-         //remove user from the collection
-         users.remove(userID);
+        //remove user from the collection
+        users.remove(userID);
          
-         //return successful operation
-         OperationResult<Void> or = new OperationResult<>(true);
-         return or;
+        //return successful operation
+        OperationResult<Void> or = new OperationResult<>(true);
+		save();
+        return or;
     }
 
 	/**
@@ -204,13 +207,6 @@ public class UserManager implements  SavableList<User> {
             u = new Teacher(id,fn,ln,em,pw, spd, friends);
         }
 
-        // userDetails.put("id", id.toString());
-        // userDetails.put("firstName", firstName);
-        // userDetails.put("lastName", lastName);
-        // userDetails.put("emailAddress", emailAddress);
-        // userDetails.put("password", password);
-        // userDetails.put("metronomeSpeedModifier", metronomeSpeedModifier);
-
         return u;
     }
     
@@ -237,6 +233,14 @@ public class UserManager implements  SavableList<User> {
 
         return new OperationResult<>(true);
     }
+
+	/**
+	 * Save all users to the data writer destination.
+	 */
+	@Override
+	public OperationResult<JSONArray> save() {
+		return DataWriter.setData(this);
+	}
 
     public static void main(String[] args) { //tester.  verifies users are deserialized.  currently works.
         DataLoader.loadAllData();

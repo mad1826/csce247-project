@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.json.simple.JSONObject;
 
+import com.model.managers.CourseManager;
+
 /**
  * A lesson for playing a sheet
  * 
@@ -89,6 +91,7 @@ public class Lesson {
 
 	public void setSong(Song s) {
 		this.song = s;
+		CourseManager.getInstance().save();
 	}
 
 	public UUID getUnlinkedSong() {
