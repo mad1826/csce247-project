@@ -52,6 +52,14 @@ public class CourseManager implements SavableList<Course> {
 	}
 
 	/**
+	 * Get all loaded courses.
+	 * @return a hash map of courses, mapped by their ids
+	 */
+	public HashMap<UUID, Course> getCourses() {
+		return courses;
+	}
+
+	/**
 	 * Finds a course by its identifier
 	 * @param id - the course's unique identifier
 	 * @return - the found course, or null if not found
