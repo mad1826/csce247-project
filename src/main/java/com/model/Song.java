@@ -20,7 +20,6 @@ public class Song {
     private String artist;
     private ArrayList<Genre> genres;
     private HashMap<Instrument, SheetMusic> sheets;
-    private String jfuguePattern;
 
     /**
      * constructs a Song with a specified UUID
@@ -31,13 +30,12 @@ public class Song {
      * @param - a HashMap of instruments and their corresponding sheet music
      * @param - a string for the pattern of the notes
      */
-    public Song(UUID id, String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets, String jfuguePattern) {
+    public Song(UUID id, String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets) {
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.genres = genres;
         this.sheets = sheets;
-        this.jfuguePattern = jfuguePattern;
     }
 
     /**
@@ -117,6 +115,39 @@ public class Song {
         return id;
     }
 
+    /**
+     * converts song into a full JFugue pattern string
+     * @param - the instrument to generate the JFugue
+     * @return - the JFugue pattern for the entire song
+     */
+    public String toJfugue(Instrument instrument) {
+        //get sheet music for the specified instrument
+        SheetMusic sheetMusic = sheets.get(instrument);
+        if (sheetMusic == null) {
+            return ""; //return empty string if no sheet music for instrument
+        }
+
+        //get measures from sheet music
+        ArrayList<Measure> measures = sheetMusic.getMeasures();
+
+        StringBuilder songPattern = new StringBuilder();
+
+        for ( Measure measure : measures) {
+            songPattern.append(measure.toJfugue()).append(" ");
+        }
+
+        return songPattern.toString().trim();
+    }
+
+    /**
+     * plays the song for a specific instrument
+     * @param - the instrument to play
+     */
+    public void play(Instrument instrument) {
+        Player player = new Player();
+        player.play(toJfugue(instrument));
+    }
+
 	
 	/**
 	 * Transforms this instance into a JSON object
@@ -157,17 +188,5 @@ public class Song {
             ",\n\tsheets=" + sheets +
             "\n}";
 	}
-
-    /**
-     * plays the entire song using JFugue
-     */
-    public void play() {
-        Player player = new Player();
-        player.play(jfuguePattern);
-    }
-    
-    public String getJfuguePattern() {
-        return jfuguePattern;
-    }
 
 }

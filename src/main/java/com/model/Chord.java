@@ -30,6 +30,28 @@ public class Chord {
         this.tie = tie;
     }
 
+     /**
+     * converts the chord to a JFugue string representation
+     * @return - JFugue string for the entire chord
+     */
+    public String toJfugue() {
+        StringBuilder chordString = new StringBuilder();
+
+        // if there's only one note, return its JFugue representation
+        if (notes.size() == 1) {
+            return notes.get(0).toJfugue();
+        }
+
+        // for multiple notes, create a chord representation
+        chordString.append("(");
+        for (Note note : notes) {
+            chordString.append(note.toJfugue()).append(" ");
+        }
+        chordString.append(")");
+
+        return chordString.toString().trim();
+    }
+
     /**
      * Adds a note to the chord
      * @param note the note to add
@@ -50,6 +72,14 @@ public class Chord {
             notes.remove(note);
 			SongManager.getInstance().save();
         }
+    }
+
+     /**
+     * Plays the chord using JFugue
+     */
+    public void play() {
+        Player player = new Player();
+        player.play(toJfugue());
     }
 
 	/**
@@ -76,17 +106,4 @@ public class Chord {
         return this.name+" - "+this.notes;
     }
 
-    /**
-     * plays the chord using JFugue
-     */
-    public void play() {
-        Player player = new Player();
-        StringBuilder chordString = new StringBuilder();
-
-        for (Note note : notes) {
-            chordString.append(note.getJfugueString()).append(" ");
-        }
-
-        player.play(chordString.toString().trim());
-    }
 } 

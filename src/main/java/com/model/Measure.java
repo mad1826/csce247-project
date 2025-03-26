@@ -19,7 +19,6 @@ public class Measure {
     private int timeSignatureDenom;
     private boolean repeatOpen;
     private boolean repeatClose;
-    private String jfugueString;
     private boolean metronomeEnabled = false;
     private boolean audioPlaybackEnabled = false;
 
@@ -32,17 +31,15 @@ public class Measure {
      * @param timeSignatureDenom denominator of time signature
      * @param repeatOpen         whether measure opens a repeat section
      * @param repeatClose        whether measure closes a repeat section
-     * @param jfugueString       a String to play the measure
      */
     public Measure(ArrayList<Chord> chords, int tempo, int timeSignatureNum, 
-                  int timeSignatureDenom, boolean repeatOpen, boolean repeatClose, String jfugueString) {
+                  int timeSignatureDenom, boolean repeatOpen, boolean repeatClose) {
         this.chords = chords;
         this.tempo = tempo;
         this.timeSignatureNum = timeSignatureNum;
         this.timeSignatureDenom = timeSignatureDenom;
         this.repeatOpen = repeatOpen;
         this.repeatClose = repeatClose;
-        this.jfugueString = jfugueString;
     }
 
     /**
@@ -94,6 +91,42 @@ public class Measure {
         }
     }
 
+    /**
+     * converts the measure to a JFugue string representation
+     * @return - string for the entire measure
+     */
+    public String toJfugue() {
+        StringBuilder jfugueString = new StringBuilder();
+
+        //add tempo
+        jfugueString.append("T").append(tempo).append(" ");
+
+        //add repeat open if applicable
+        if (repeatClose) {
+            jfugueString.append("|: ");
+        }
+
+         // Add chords
+         for (Chord chord : chords) {
+            jfugueString.append(chord.toJfugue()).append(" ");
+        }
+
+        //add repeat close if applicable
+        if(repeatClose) {
+            jfugueString.append(" :|");
+        }
+
+        return jfugueString.toString().trim();
+    }
+
+    /**
+     * Plays the measure using JFugue
+     */
+    public void play() {
+        Player player = new Player();
+        player.play(toJfugue());
+    }
+
 	/**
 	 * Transforms this instance into a JSON object
 	 * @return a JSON object
@@ -128,15 +161,4 @@ public class Measure {
            "\n}";
     }
 
-    /**
-     * plays the measure using JFugue
-     */
-    public void play() {
-        Player player = new Player();
-        player.play(jfugueString);
-    }
-
-    public String getJfugueString() {
-        return jfugueString;
-    }
 }

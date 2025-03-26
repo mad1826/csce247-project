@@ -16,7 +16,6 @@ public class Note {
     private boolean dot;
     private boolean line;
     private int octave;
-    private String jfugueString;
 
     /**
      * Creates a new musical note with all properties
@@ -27,7 +26,6 @@ public class Note {
      * @param dot           whether the note is dotted
      * @param line          whether the note has a line
      * @param octave        the note's octave number
-     * @param jfugueString  a String to play the chord(s)
      */
     public Note(Pitch pitch, PitchModifier pitchModifier, NoteValue value, boolean dot, boolean line, int octave, String jfugueString) {
         this.pitch = pitch;
@@ -36,7 +34,6 @@ public class Note {
         this.dot = dot;
         this.line = line;
         this.octave = octave > 0 ? octave : 1;
-        this.jfugueString = jfugueString;
     }
 
     /**
@@ -119,16 +116,11 @@ public class Note {
   }
 
   /*
-   * plays the note using jfugue
+   * converts note into a JFugue string format 
+   * @return - the JFugue representation of the note 
    */
-  public void play() {
-    Player player = new Player();
-    player.play(jfugueString);
+  public String toJfugue() {
+    return pitch.name() + octave + value.toString().substring(0, 1).toLowerCase();
   }
 
-public String getJfugueString() {
-    return jfugueString;
-  }
-
-  
 } 
