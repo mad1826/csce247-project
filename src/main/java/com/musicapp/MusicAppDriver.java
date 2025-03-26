@@ -1,6 +1,7 @@
 package com.musicapp;
 
 import com.model.Course;
+import com.model.Instrument;
 import com.model.Lesson;
 import com.model.MusicAppFacade;
 import com.model.OperationResult;
@@ -102,7 +103,7 @@ public class MusicAppDriver {
 
 		Song foundSong = null;
 
-		String titleFilter = valid ? "ick" : "fake song";
+		String titleFilter = valid ? "seven" : "fake song";
 		System.out.println("Filtering songs by \"title: " + titleFilter + "\"");
 		facade.setTitleQuery(titleFilter);
 		for (Song song : facade.searhSongs().values()) {
@@ -112,7 +113,11 @@ public class MusicAppDriver {
 		}
 
 		if (foundSong != null) {
-			System.out.println("Now playing: " + foundSong.getTitle() + " by " + foundSong.getArtist());
+			for (Instrument instrument : foundSong.getSheets().keySet()) {
+				System.out.println("Now playing: " + foundSong.getTitle() + " on " + instrument.getType().getName() + "...");
+				foundSong.play(instrument);
+				break;
+			}
 		}
 		else {
 			System.out.println("No song was found in the search.");
