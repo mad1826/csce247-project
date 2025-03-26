@@ -9,11 +9,29 @@ import com.model.managers.SongManager;
  * @author Ryan Smith
  */
 public class Note {
+	/**
+	 * The note's pitch
+	 */
     private Pitch pitch;
+	/**
+	 * The note's pitch modifier
+	 */
     private PitchModifier pitchModifier;
+	/**
+	 * The note's value
+	 */
     private NoteValue value;
+	/**
+	 * Whether the note has a dot
+	 */
     private boolean dot;
+	/**
+	 * Whether the note has a line
+	 */
     private boolean line;
+	/**
+	 * The note's octave
+	 */
     private int octave;
 
     /**
@@ -109,12 +127,15 @@ public class Note {
 		return noteJSON;
 	}
 
+	/**
+	 * Gets a string representation of the note.
+	 */
   @Override
   public String toString() {
     return this.pitch.name()+this.pitchModifier.abbreviatedName;
   }
 
-  /*
+  /**
    * converts note into a JFugue string format 
    * @return - the JFugue representation of the note 
    */

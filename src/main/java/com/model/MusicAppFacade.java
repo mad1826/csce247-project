@@ -314,6 +314,11 @@ public class MusicAppFacade {
         return SongManager.getInstance().findSongs(songQuery);
     }
 
+	/**
+	 * Get a song by its id.
+	 * @param id the song's id
+	 * @return the result of attemping to find the song
+	 */
     public OperationResult<Song> getSong(UUID id) {
         return SongManager.getInstance().getSong(id);
     }
@@ -342,15 +347,6 @@ public class MusicAppFacade {
                              Clef clef, boolean audioPlaybackEnabled, 
                              ArrayList<Measure> measures, boolean isPrivate) {
         return song.createSheet(instrument, difficulty, clef, audioPlaybackEnabled, measures, isPrivate);
-    }
-
-    /**
-     * edit sheet
-     * @param sheet sheet
-     * @return boolean
-     */
-    public boolean editSheet(SheetMusic sheet) {
-        return true;
     }
 
     /**

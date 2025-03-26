@@ -11,9 +11,16 @@ public enum NoteValue {
 	HALF('H'),
 	WHOLE('W');
 
+	/**
+	 * The jfugue character representing the value
+	 */
 	public final char character;
 
-	NoteValue(char character) {
+	/**
+	 * Creates a NoteValue instance
+	 * @param character the jfugue character representation
+	 */
+	private NoteValue(char character) {
 		this.character = character;
 	}
 }

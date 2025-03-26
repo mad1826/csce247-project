@@ -13,8 +13,17 @@ import com.model.managers.SongManager;
  * @author Ryan Smith
  */
 public class Chord {
+	/**
+	 * The chord's name
+	 */
     private String name;
+	/**
+	 * The notes in the chord
+	 */
     private ArrayList<Note> notes;
+	/**
+	 * Whether the chord's notes are tied
+	 */
     private boolean tie;
 
     /**
@@ -101,6 +110,9 @@ public class Chord {
 		return chordJSON;
 	}
 
+	/**
+	 * Converts the note to a readable format
+	 */
     @Override
     public String toString() {
         return this.name+" - "+this.notes;

@@ -32,8 +32,17 @@ import com.model.SongFilter;
  * @author Makyia Irick
  */
 public class SongManager implements  SavableList<Song> {
-    private static SongManager songManager; //singleton instance
-    private final HashMap<UUID, Song> songs; //list of all songs
+	/**
+	 * The singleton manager instance
+	 */
+    private static SongManager songManager;
+	/**
+	 * All songs loaded in the manager
+	 */
+    private final HashMap<UUID, Song> songs;
+	/**
+	 * The file path to load/save from
+	 */
     final static String FILE_PATH = "src/main/java/com/data/songs.json";
 
     /**
@@ -44,7 +53,7 @@ public class SongManager implements  SavableList<Song> {
     }
 
     /**
-     * eeturns singleton instance of SongManager
+     * returns singleton instance of SongManager
      * if the instance does not exist, a new one is created
      * @return - the singleton instance of SongManager
      */
@@ -57,8 +66,8 @@ public class SongManager implements  SavableList<Song> {
 
     /**
      * retrieves a song by its unique ID
-     * @param - the unique ID of the song
-     * @return - the Song object if found, otherwise null
+     * @param id the unique ID of the song
+     * @return  the Song object if found, otherwise null
      */
     public OperationResult<Song> getSong(UUID id) {
         for (Song song : songs.values()) {
@@ -79,7 +88,7 @@ public class SongManager implements  SavableList<Song> {
 
     /**
      * finds songs based on search filters
-     * @param - a HashMap of search filters (e.g., title, artist, genre)
+     * @param query a HashMap of search filters (e.g., title, artist, genre)
      * @return All matching songs
      */
     public HashMap<UUID, Song> findSongs(HashMap<SongFilter, String> query) {
@@ -115,8 +124,8 @@ public class SongManager implements  SavableList<Song> {
 
     /**
      * adds a new song to the list
-     * @param - the song to add
-     * @return - true if the song was added successfully, false otherwise
+     * @param song the song to add
+     * @return true if the song was added successfully, false otherwise
      */
     public boolean createSong(Song song) {
         songs.put(song.getID(), song);
@@ -126,8 +135,8 @@ public class SongManager implements  SavableList<Song> {
 
     /**
      * deletes a song from the list by its ID
-     * @param - the unique ID of the song
-     * @return - operationResult with the song if found, or null if not found
+     * @param songId the unique ID of the song
+     * @return operationResult with the song if found, or null if not found
      */
     public OperationResult<Song> deleteSong(UUID songId) {
         for (Song song : songs.values()) {
@@ -142,7 +151,7 @@ public class SongManager implements  SavableList<Song> {
 
     /**
      * Returns the json file path this list is stored at.
-     * @return filePath
+     * @return the file path
      */
 	@Override
 	public String getFilePath() {
@@ -166,12 +175,12 @@ public class SongManager implements  SavableList<Song> {
 		return songsJSON;
     }
 
+	// Below methods ending at toObject have to do with JSON to java object conversions
 	/**
-	 * Below methods ending at toObject have to do with JSON to java object conversions
-	 * @param object JSONObject
-	 * @return java object
+	 * Converts a chord json into a Chord instance
+	 * @param chord the chord json object
+	 * @return the Chord instance
 	 */
-
     private Chord toChord(JSONObject chord) {
         String name = (String)chord.get("name");
         Boolean tie = (Boolean)chord.get("tie");
@@ -194,6 +203,11 @@ public class SongManager implements  SavableList<Song> {
         return new Chord(name, notes, tie);
     }
 
+	/**
+	 * Converts a measure json into an object
+	 * @param measure the measure json
+	 * @return a Measure instance
+	 */
     private Measure toMeasure(JSONObject measure) {
         int tempo = ((Long)measure.get("tempo")).intValue();
         int tsn = ((Long)measure.get("timeSignatureNum")).intValue();
@@ -210,6 +224,12 @@ public class SongManager implements  SavableList<Song> {
         return new Measure(chords, tempo, tsn, tsd, repeatOpen, repeatClosed);
     }
 
+	/**
+	 * Converts a sheet json into a SheetMusic instance
+	 * @param instrument the instrument the sheet is played for
+	 * @param sheet the sheet json
+	 * @return a SheetMusic instance
+	 */
     private SheetMusic toSheet(String instrument, JSONObject sheet) {
         InstrumentType i = InstrumentType.valueOf(instrument);
         Instrument ins = new Instrument(i);
@@ -230,6 +250,9 @@ public class SongManager implements  SavableList<Song> {
         return new SheetMusic(new Instrument(i),d,c,true,measures,isPrivate);
     }
 
+	/**
+	 * Converts a song json into a Song instance
+	 */
 	@Override
     public Song toObject(JSONObject object) {
         UUID id = UUID.fromString((String) object.get("id"));
@@ -258,6 +281,9 @@ public class SongManager implements  SavableList<Song> {
         return ret;
     }
 
+	/**
+	 * Loads all data from the file path
+	 */
     @Override
     public OperationResult<Void> loadData() {
         OperationResult<ArrayList<Song>> or = DataLoader.getData(this);
@@ -274,6 +300,9 @@ public class SongManager implements  SavableList<Song> {
 		}
     }
 
+	/**
+	 * Performs no linkage since no song attributes are dependent on other data.
+	 */
     @Override
     public OperationResult<Void> linkData() {
         return new OperationResult<>(true); //Nothing to link

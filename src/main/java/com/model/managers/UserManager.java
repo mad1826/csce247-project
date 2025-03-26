@@ -7,13 +7,13 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.DataHandlers.DataLoader;
+import com.model.DataHandlers.DataWriter;
 import com.model.OperationResult;
 import com.model.SavableList;
 import com.model.Student;
 import com.model.Teacher;
 import com.model.User;
-import com.model.DataHandlers.DataLoader;
-import com.model.DataHandlers.DataWriter;
 
 /**
  * manages user creation, deletion, and retrieval
@@ -21,15 +21,22 @@ import com.model.DataHandlers.DataWriter;
  * @author Makyia Irick
  */
 public class UserManager implements  SavableList<User> {
-    private static UserManager userManager; //singleton instance
-    private final HashMap<UUID,User> users; //list of users
-    final static String FILE_PATH = "src/main/java/com/data/users.json"; //file path for saving user data
+	/**
+	 * The singleton manager instance
+	 */
+    private static UserManager userManager;
+	/**
+	 * All users loaded by the manager
+	 */
+    private final HashMap<UUID,User> users;
+	/**
+	 * The file path for retrieving and saving data
+	 */
+    final static String FILE_PATH = "src/main/java/com/data/users.json";
 
     /**
      * private constructor to create the UserManager instance
      * only called internally by getInstance method
-     * @param - the list of users to manage
-     * @param - the file path for saving user data
      */
     private UserManager() {
         this.users = new HashMap<>();
@@ -38,8 +45,6 @@ public class UserManager implements  SavableList<User> {
     /**
      * returns the singleton instance of UserManager
      * if the instance doesn't exist, it creates one
-     * @param - the list of users to manage
-     * @param - the file path for saving user data
      * @return - the singleton instance of UserManager
      */
     public static UserManager getInstance() {
@@ -51,10 +56,11 @@ public class UserManager implements  SavableList<User> {
 
     /**
      * creates a new user and adds it to the list of users
-     * @param - the first name of the user
-     * @param - the last name of the user
-     * @param - the email address of the user
-     * @param - the password of the user
+     * @param firstName the first name of the user
+     * @param lastName the last name of the user
+     * @param emailAddress the email address of the user
+     * @param password the password of the user
+	 * @param isTeacher whether the user should be a teacher
      * @return - the result of attempting to create the user
      */
     public OperationResult<User> createUser(String firstName, String lastName, String emailAddress, String password, boolean isTeacher) {
@@ -92,8 +98,8 @@ public class UserManager implements  SavableList<User> {
 
     /**
      * deletes a user from the list by matching the user ID
-     * @param - the unique ID of the user to delete
-     * @return - the result of attempting to delete the user
+     * @param userID the unique ID of the user to delete
+     * @return the result of attempting to delete the user
      */
     public OperationResult<Void> deleteUser(UUID userID) {
         //check if user exists
@@ -127,8 +133,8 @@ public class UserManager implements  SavableList<User> {
 
     /**
      * retrieve a user by matching their email address and password
-     * @param - the email address of the user
-     * @param - the password of the user
+     * @param emailAddress the email address of the user
+     * @param password the password of the user
      * @return - the matching user object, or null if no user is found 
      */
     public User getUser(String emailAddress, String password) {
@@ -140,6 +146,11 @@ public class UserManager implements  SavableList<User> {
         return null;
     }
 
+	/**
+	 * Gets a user by their id.
+	 * @param id the user's id
+	 * @return the user, or null if not found
+	 */
     public User getUser(UUID id) {
         return this.users.get(id);
     }
@@ -171,10 +182,9 @@ public class UserManager implements  SavableList<User> {
 
     /**
      * converts a user JSON Object into a user
-     * @param - the JSON object containing user data
+     * @param object the JSON object containing user data
      * @return a User instance
      */
-
     @Override
     public User toObject(JSONObject object) {
         UUID id = UUID.fromString((String) object.get("id"));
@@ -210,6 +220,9 @@ public class UserManager implements  SavableList<User> {
         return u;
     }
     
+	/**
+	 * Loads all data from the file path.
+	 */
     @Override
     public OperationResult<Void> loadData() { //loads all data to user file
         OperationResult<ArrayList<User>> or = DataLoader.getData(this);
@@ -223,6 +236,9 @@ public class UserManager implements  SavableList<User> {
         return new OperationResult<>(true);
     }
 
+	/**
+	 * Links data with other managers once their data is retrieved.
+	 */
     @Override
     public OperationResult<Void> linkData() { //links references stored by UUID to other classes.  Must be called AFTER all other data is loaded
         for (User u : this.users.values()) {

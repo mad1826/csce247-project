@@ -20,8 +20,17 @@ import com.model.managers.UserManager;
  */
 
 public class DataLoader {
+	/**
+	 * Whether the data has been loaded
+	 */
     private static boolean isLoaded = false;
 
+	/**
+	 * Gets all data from a list
+	 * @param <T> the object the list contains
+	 * @param list the list of objects
+	 * @return the result of getting a list of every object
+	 */
     @SuppressWarnings("UseSpecificCatch")
     public static <T> OperationResult<ArrayList<T>> getData(SavableList<T> list) {
         try {
@@ -48,7 +57,7 @@ public class DataLoader {
     
     /**
      * To be called on initialization to load data from files into all classes.
-     * @return
+     * @return the result of loading all data
      */
     public static OperationResult<Void> loadAllData() {
         if (isLoaded) {

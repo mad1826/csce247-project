@@ -13,11 +13,29 @@ import com.model.managers.SongManager;
  * @author Ryan Smith
  */
 public class SheetMusic {
+	/**
+	 * The instrument associated with this sheet
+	 */
     private final Instrument instrument;
+	/**
+	 * The sheet's difficulty
+	 */
     private Difficulty difficulty;
+	/**
+	 * The clef to play the sheet in
+	 */
     private Clef clef;
+	/**
+	 * Whether the sheet should play back audio
+	 */
     private boolean audioPlaybackEnabled;
+	/**
+	 * The sheet's measures
+	 */
     private final ArrayList<Measure> measures;
+	/**
+	 * Whether the sheet is private
+	 */
     private boolean isPrivate;
 
     /**
@@ -76,15 +94,27 @@ public class SheetMusic {
 		SongManager.getInstance().save();
     }
 
+	/**
+	 * Gets all the sheet's measures.
+	 * @return an array list of measures
+	 */
     public ArrayList<Measure> getMeasures() {
         return this.measures;
     }
 
+	/**
+	 * Updates the sheet's difficulty.
+	 * @param difficulty the sheet's difficulty
+	 */
 	public void setDifficulty(Difficulty difficulty) {
 		this.difficulty = difficulty;
 		SongManager.getInstance().save();
 	}
 
+	/**
+	 * Updates the sheet's clef.
+	 * @param clef the new clef
+	 */
 	public void setClef(Clef clef) {
 		this.clef = clef;
 		SongManager.getInstance().save();

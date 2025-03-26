@@ -134,6 +134,9 @@ public class Student extends User {
 		UserManager.getInstance().save();
     }
 
+	/**
+	 * Gets a json representation of the student.
+	 */
     @Override
     @SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {
@@ -163,6 +166,10 @@ public class Student extends User {
         }
     }
 
+	/**
+	 * Prints feedback of all lessons across all the student's courses to a file.
+	 * @param filePath the file path to print feedback to
+	 */
 	public void printLessonFeedback(String filePath) {
 		File f = new File(filePath);
 		try (FileWriter writer = new FileWriter(f)) {		

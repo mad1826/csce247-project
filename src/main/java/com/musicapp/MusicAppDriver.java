@@ -175,9 +175,11 @@ public class MusicAppDriver {
 				System.out.println("Opened lesson " + lesson.getTitle() + ", playing on " + lesson.getSheet().getInstrument().getType().getName());
 				System.out.println("Current student progress: " + facade.getProgress(lesson).result);
 				System.out.println("Progressing the lesson...");
+				facade.playSheet(lesson.getSheet());
 				student.progressLesson(lesson);
 				System.out.println("Progressed lesson! New lesson progress: " + facade.getProgress(lesson).result);
 				System.out.println("Progressing again...");
+				facade.playSheet(lesson.getSheet());
 				student.progressLesson(lesson);
 				System.out.println("New lesson progress: " + facade.getProgress(lesson).result);
 			}
@@ -195,6 +197,7 @@ public class MusicAppDriver {
 			System.out.println("Changed lesson to " + lesson.getTitle());
 			System.out.println("Current lesson progress: " + facade.getProgress(lesson).result);
 			System.out.println("Progressing lesson...");
+			facade.playSheet(lesson.getSheet());
 			student.progressLesson(lesson);
 			System.out.println("New lesson progress: " + facade.getProgress(lesson).result);
 

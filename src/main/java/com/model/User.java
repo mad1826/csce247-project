@@ -16,28 +16,59 @@ import com.model.managers.UserManager;
  * @author Matt Carey (Data stuff)
  */
 public abstract class User {
+	/**
+	 * The user's id
+	 */
     private UUID id;
+	/**
+	 * The user's first name
+	 */
     private String firstName;
+	/**
+	 * The user's last name
+	 */
     private String lastName;
+	/**
+	 * The user's email address
+	 */
     private String emailAddress;
+	/**
+	 * The user's password
+	 */
     private String password;
+	/**
+	 * The user's friends
+	 */
     private HashMap<UUID, User> friends;
+	/**
+	 * Courses the user is a member or owner of
+	 */
     private ArrayList<Course> courses;
+	/**
+	 * The user's modifier for metronome speed
+	 */
     private double metronomeSpeedModifier = 1.0;
 
+	/**
+	 * Ids of friends who must be linked with User instances after initial data loading
+	 */
     private ArrayList<UUID> unlinkedFriends;
 
+	/**
+	 * Gets a list of ids of friends that should be linked.
+	 * @return an array list of ids
+	 */
     public ArrayList<UUID> getUnlinkedFriends() {
         return unlinkedFriends;
     }
 
     /**
      * constructs a User with a specific UUID
-     * @param - the unique ID of the user
-     * @param - the user's first name
-     * @param - the user's last name
-     * @param - the user's email address
-     * @param - the user's password (validated)
+     * @param id the unique ID of the user
+     * @param firstName the user's first name
+     * @param lastName the user's last name
+     * @param emailAddress the user's email address
+     * @param password the user's password (validated)
 	 * @param metronomeSpeedModifier - the user's modifier for metronome speed
 	 * @param unlinkedFriends - the teacher's friends to be linked to full User instances
      * @throws - IllegalArgumentException, if password is invalid
@@ -60,10 +91,10 @@ public abstract class User {
 
     /**
      * constructs a User without a UUID (generates one automatically)
-     * @param - the user's first name
-     * @param - the user's last name
-     * @param - the user's email address
-     * @param - the user's password (validated)
+     * @param firstName the user's first name
+     * @param lastName the user's last name
+     * @param emailAddress the user's email address
+     * @param password the user's password (validated)
      */
     public User(String firstName, String lastName, String emailAddress, String password) {
         this(UUID.randomUUID(), firstName, lastName, emailAddress, password, 1, new ArrayList<>());
@@ -71,7 +102,7 @@ public abstract class User {
 
     /**
      * validates if the password meets criteria
-     * @param - the password to validate
+     * @param password the password to validate
      * @return - true if password is valid, false otherwise
      */
     private boolean isValidPassword(String password){
@@ -94,7 +125,7 @@ public abstract class User {
 
     /**
      * check if provided password matches the user's password
-     * @param - the password to verify
+     * @param password the password to verify
      * @return - true if password is correct, false otherwise
      */
     public boolean isAuthorized(String password) {
@@ -103,7 +134,7 @@ public abstract class User {
 
     /**
      * resets the user's password if new password is valid and different
-     * @param - the new password to set
+     * @param newPassword the new password to set
      * @return - true if the password was successfully reset, false otherwise
      */
     public boolean resetPassword(String newPassword) {
@@ -117,7 +148,7 @@ public abstract class User {
 
     /**
      * sets the metronome speed modifier if speed is greater than 0
-     * @param - the speed to set
+     * @param speed the speed to set
      * @return - true if speed was set, false otherwise
      */
     public boolean setMetronomeSpeed(double speed) {
@@ -129,10 +160,10 @@ public abstract class User {
         return false;
     }
 
-        /**
-    * gets the user's unique ID
-    * @return - the user's ID
-    */
+    /**
+     * gets the user's unique ID
+     * @return - the user's ID
+     */
     public UUID getId() {
         return id;
     }
@@ -169,6 +200,11 @@ public abstract class User {
         return friends;
     }
 
+	/**
+	 * Adds a user as a friend.
+	 * @param friend the user to add as a friend
+	 * @return the result of attempting to add the user as a friend
+	 */
 	public OperationResult<Void> addFriend(User friend) {
 		for (UUID friendId : friends.keySet()) {
 			if (friendId.equals(friend.getId())) {
@@ -180,6 +216,11 @@ public abstract class User {
 		return new OperationResult<>(true);
 	}
 
+	/**
+	 * Removes a friend.
+	 * @param friend the user to remove as a friend
+	 * @return the result of attempting to unfriend
+	 */
 	public OperationResult<Void> removeFriend(User friend) {
 		for (UUID friendId : friends.keySet()) {
 			if (friendId.equals(friend.getId())) {
@@ -207,6 +248,10 @@ public abstract class User {
         return metronomeSpeedModifier;
     }
 
+	/**
+	 * Gets a json representation of the user.
+	 * @return
+	 */
     @SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {
         JSONObject userDetails = new JSONObject();
@@ -224,6 +269,9 @@ public abstract class User {
         return userDetails;
     }
 
+	/**
+	 * Gets a string representation of the user.
+	 */
     @Override
     public String toString() {
         return "User: "

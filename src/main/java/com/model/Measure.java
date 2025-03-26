@@ -13,13 +13,37 @@ import com.model.managers.SongManager;
  * @author Ryan Smith
  */
 public class Measure {
+	/**
+	 * The chords in the measure
+	 */
     private ArrayList<Chord> chords;
+	/**
+	 * The tempo of the measure
+	 */
     private int tempo;
+	/**
+	 * The numerator of the measure's starting time
+	 */
     private int timeSignatureNum;
+	/**
+	 * The denominator of the measure's starting time
+	 */
     private int timeSignatureDenom;
+	/**
+	 * Whether the measure opens a repeat section
+	 */
     private boolean repeatOpen;
+	/**
+	 * Whether the measure closes a repeat section
+	 */
     private boolean repeatClose;
+	/**
+	 * Whether the measure should have a metronome
+	 */
     private boolean metronomeEnabled = false;
+	/**
+	 * Whether the measure should play back audio
+	 */
     private boolean audioPlaybackEnabled = false;
 
     /**
@@ -149,6 +173,9 @@ public class Measure {
 		return measureJSON;
 	}
 
+	/**
+	 * Gets a string representation of the measure.
+	 */
     @Override
     public String toString() {
         return "Measure {" +

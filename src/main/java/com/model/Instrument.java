@@ -7,8 +7,17 @@ import org.json.simple.JSONObject;
  * @author Ryan Smith
  */
 public class Instrument {
+	/**
+	 * The instrument's type
+	 */
     private InstrumentType type;
+	/**
+	 * The instrument's tuning
+	 */
     private String tuning = "Standard";
+	/**
+	 * Whether the instrument is muted
+	 */
     private boolean isMuted = false;
 
     /**
@@ -68,6 +77,9 @@ public class Instrument {
 		return instrumentJSON;
 	}
 
+	/**
+	 * Gets a string representation of the instrument
+	 */
     @Override
     public String toString() {
         return this.type.getName();

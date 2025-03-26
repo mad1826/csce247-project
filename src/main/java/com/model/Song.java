@@ -14,20 +14,34 @@ import org.json.simple.JSONObject;
  */
 
 public class Song {
+	/**
+	 * The song's id
+	 */
     private UUID id;
+	/**
+	 * The song's title
+	 */
     private String title;
+	/**
+	 * The song's artist
+	 */
     private String artist;
+	/**
+	 * The song's genres
+	 */
     private ArrayList<Genre> genres;
+	/**
+	 * Sheets made for the song
+	 */
     private HashMap<Instrument, SheetMusic> sheets;
 
     /**
      * constructs a Song with a specified UUID
-     * @param - the unique ID of the song
-     * @param - the title of the song
-     * @param - the artist of the song
-     * @param - the list of genres associated with the song
-     * @param - a HashMap of instruments and their corresponding sheet music
-     * @param - a string for the pattern of the notes
+     * @param id the unique ID of the song
+     * @param title the title of the song
+     * @param artist the artist of the song
+     * @param genres the list of genres associated with the song
+     * @param sheets a HashMap of instruments and their corresponding sheet music
      */
     public Song(UUID id, String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets) {
         this.id = id;
@@ -39,10 +53,10 @@ public class Song {
 
     /**
      * constructs a Song without a UUID (automatically generates one)
-     * @param - the title of the song
-     * @param - the artist of the song
-     * @param - the list of genres associated with the song
-     * @param - a HashMap of instruments and their corresponding sheet music
+     * @param title the title of the song
+     * @param artist the artist of the song
+     * @param genres the list of genres associated with the song
+     * @param sheets a HashMap of instruments and their corresponding sheet music
      */
     public Song(String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets) {
         this(UUID.randomUUID(), title, artist, genres, sheets);
