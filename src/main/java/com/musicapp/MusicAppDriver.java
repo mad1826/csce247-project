@@ -1,8 +1,11 @@
 package com.musicapp;
 
+import com.model.Course;
+import com.model.Lesson;
 import com.model.MusicAppFacade;
 import com.model.OperationResult;
 import com.model.Song;
+import com.model.Student;
 import com.model.User;
 
 /**
@@ -34,10 +37,13 @@ public class MusicAppDriver {
 		// login(false);
 		playSong(true);
 		// playSong(false);
+		progressLesson(true);
+		// progressLesson(false);
 	}
 
 	/**
 	 * Sign up for a new account.
+	 * @param valid whether to show a successful use case
 	 */
 	public void signUp(boolean valid) {
 		System.out.println("Signing up for a new account...");
@@ -57,6 +63,7 @@ public class MusicAppDriver {
 
 	/**
 	 * Logs in to an existing account.
+	 * @param valid whether to show a successful use case
 	 */
 	public void login(boolean valid) {
 		System.out.println("Logging in with existing credentials...");
@@ -76,6 +83,7 @@ public class MusicAppDriver {
 
 	/**
 	 * List all songs, then filter all songs by a query and plays the first song found.
+	 * @param valid whether to show a successful use case
 	 */
 	public void playSong(boolean valid) {
 		facade.login("jane.smith@example.com", "secureP@ss987");
@@ -108,6 +116,64 @@ public class MusicAppDriver {
 		}
 		else {
 			System.out.println("No song was found in the search.");
+		}
+
+		boolean changed = facade.logout();
+		if (changed)
+			System.out.println("You have successfully logged out.");
+	}
+
+	/**
+	 * Progresses a student's lesson.
+	 * @param valid whether to show a successful use case
+	 */
+	public void progressLesson(boolean valid) {
+		if (valid) {
+			System.out.println("Logging in as a student...");
+			facade.login("jane.smith@example.com", "secureP@ss987");
+		}
+		else {
+			System.out.println("Logging in as a teacher...");
+			facade.login("john.doe@example.com", "p@ssw0rd123");
+		}
+
+		Student student = facade.getCurrentStudent();
+		if (student == null) {
+			System.out.println("Student login was unsuccessful.");
+			return;
+		}
+		
+		System.out.println("Welcome " + student.getFirstName() + " " + student.getLastName() + "!");
+
+		System.out.println("Listing all courses:");
+		for (Course course : facade.getCurrentStudent().getCourses()) {
+			System.out.println("\t" + course.getTitle());
+			facade.setCurrentCourse(course);
+		}
+
+		Course course = facade.getCurrentCourse();
+		if (course == null) {
+			System.out.println("No course was found to enter.");
+		}
+		else {
+			System.out.println("Listing lessons in course " + course.getTitle() + ":");
+			for (Lesson lesson : course.getLessons()) {
+				System.out.println("\t" + lesson.getTitle());
+				if (student.getLessonProgress(lesson) != 0)
+					facade.setCurrentLesson(lesson);
+			}
+
+			Lesson lesson = facade.getCurrentLesson();
+			if (lesson == null) {
+				System.out.println("No lesson was found to begin progressing.");
+			}
+			else {
+				System.out.println("Opened lesson " + lesson.getTitle() + ", playing on " + lesson.getSheet().getInstrument().getType().getName());
+				System.out.println("Current student progress: " + student.getLessonProgress(lesson));
+				System.out.println("Progressing the lesson...");
+				student.progressLesson(lesson);
+				System.out.println("Progressed lesson! New lesson progress: " + student.getLessonProgress(lesson));
+			}
 		}
 
 		boolean changed = facade.logout();

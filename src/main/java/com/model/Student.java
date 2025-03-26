@@ -115,7 +115,9 @@ public class Student extends User {
      * @return The progress value (0-100)
      */
     public int getLessonProgress(Lesson lesson) {
-        return lessonProgress.get(lesson.getId());
+        return lessonProgress.containsKey(lesson.getId())
+			? lessonProgress.get(lesson.getId())
+			: 0;
     }
     
     /**
@@ -151,9 +153,9 @@ public class Student extends User {
      */
     public void progressLesson(Lesson lesson) {
         int maxProgress = lesson.getNumberOfTimes();
-        int thisProgress = this.lessonProgress.get(lesson.getId());
-        if (thisProgress<maxProgress) { //If lesson is complete, do not increment progress
-            thisProgress++;
+        int thisProgress = getLessonProgress(lesson);
+        if (thisProgress < maxProgress) { //If lesson is complete, do not increment progress
+            lessonProgress.put(lesson.getId(), thisProgress + 1);
 			UserManager.getInstance().save();
         }
     }

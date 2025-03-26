@@ -34,6 +34,14 @@ public class MusicAppFacade {
 	 * The current query for filtering songs
 	 */
 	private final HashMap<SongFilter, String> songQuery = new HashMap<>();
+	/**
+	 * The currently selected course
+	 */
+	private Course currentCourse;
+	/**
+	 * The currently selected lesson
+	 */
+	private Lesson currentLesson;
 
     /**
      * Constructs a new MusicAppFacade instance
@@ -41,20 +49,6 @@ public class MusicAppFacade {
     private MusicAppFacade() {
         DataLoader.loadAllData();
     }
-
-	private Teacher getCurrentTeacher() {
-        if (currentUser == null || !(currentUser instanceof Teacher)) {
-			return null;
-		}
-		return (Teacher)currentUser;
-	}
-
-	private Student getCurrentStudent() {
-        if (currentUser == null || !(currentUser instanceof Student)) {
-			return null;
-		}
-		return (Student)currentUser;
-	}
 
 	/**
 	 * Gets the facade singleton instance.
@@ -76,12 +70,66 @@ public class MusicAppFacade {
 	}
 
 	/**
+	 * Gets the current authenticated teacher.
+	 * @return the teacher that has logged in
+	 */
+	public Teacher getCurrentTeacher() {
+        if (currentUser == null || !(currentUser instanceof Teacher)) {
+			return null;
+		}
+		return (Teacher)currentUser;
+	}
+
+	/**
+	 * Gets the current authenticated student.
+	 * @return the student that has logged in
+	 */
+	public Student getCurrentStudent() {
+        if (currentUser == null || !(currentUser instanceof Student)) {
+			return null;
+		}
+		return (Student)currentUser;
+	}
+
+	/**
 	 * Gets the currently selected song
 	 * @return The currently selected song
 	 */
 	public Song getCurrentSong() {
 		return currentSong;
 	}
+	
+	/**
+	 * Gets the currently selected course.
+	 * @return the currently selected course
+	 */
+	public Course getCurrentCourse() {
+		return currentCourse;
+	}
+
+	/**
+	 * Updates the selected course.
+	 * @param course the course to select
+	 */
+	public void setCurrentCourse(Course course) {
+		currentCourse = course;
+	}
+
+	/**
+	 * Gets the currently selected lesson.
+	 * @return the currently selected lesson
+	 */
+	public Lesson getCurrentLesson() {
+		return currentLesson;
+	}
+
+	/**
+	 * Updates the selected lesson.
+	 * @param lesson the lesson to select
+	 */
+	public void setCurrentLesson(Lesson lesson) {
+		currentLesson = lesson;
+	} 
 
     /**
      * sign up
