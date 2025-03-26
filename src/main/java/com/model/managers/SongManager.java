@@ -207,7 +207,7 @@ public class SongManager implements  SavableList<Song> {
             chords.add(toChord((JSONObject)chord));
         }
 
-        return new Measure(chords, tempo, tsn, tsd, repeatOpen, repeatClosed,"");
+        return new Measure(chords, tempo, tsn, tsd, repeatOpen, repeatClosed);
     }
 
     private SheetMusic toSheet(String instrument, JSONObject sheet) {
@@ -254,7 +254,7 @@ public class SongManager implements  SavableList<Song> {
             sheets.put(m.getInstrument(),m);
         }
         
-        Song ret = new Song(id, title, artist, genres, sheets,"");
+        Song ret = new Song(id, title, artist, genres, sheets);
         return ret;
     }
 

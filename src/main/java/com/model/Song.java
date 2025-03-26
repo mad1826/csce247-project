@@ -46,7 +46,7 @@ public class Song {
      * @param - a HashMap of instruments and their corresponding sheet music
      */
     public Song(String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets) {
-        this(UUID.randomUUID(), title, artist, genres, sheets,"");
+        this(UUID.randomUUID(), title, artist, genres, sheets);
     }
 
 	/**
@@ -145,7 +145,7 @@ public class Song {
      */
     public void play(Instrument instrument) {
         Player player = new Player();
-        player.play(toJfugue(instrument));
+		player.play(toJfugue(instrument));
     }
 
 	

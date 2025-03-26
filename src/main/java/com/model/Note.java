@@ -1,6 +1,5 @@
 package com.model;
 
-import org.jfugue.player.Player;
 import org.json.simple.JSONObject;
 
 import com.model.managers.SongManager;
@@ -120,7 +119,7 @@ public class Note {
    * @return - the JFugue representation of the note 
    */
   public String toJfugue() {
-    return pitch.name() + octave + value.toString().substring(0, 1).toLowerCase();
+    return pitch.name() + octave + value.character;
   }
 
 } 

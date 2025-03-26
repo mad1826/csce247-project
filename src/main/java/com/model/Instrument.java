@@ -30,24 +30,6 @@ public class Instrument {
 	}
 
     /**
-     * Plays a musical note
-     * @param note note to play
-     */
-    public void playNote(Note note) {
-        if (!isMuted) {
-            note.play();
-        }
-    }
-
-    /**
-     * Stops playing a note
-     * @param note note to stop
-     */
-    public void stopNote(Note note) {
-        //Doesn't Jfuge automatically stop notes when they finish playing?
-    }
-
-    /**
      * Adjusts the instrument's tuning
      * @param newTuning the new tuning to set
      */
@@ -68,15 +50,6 @@ public class Instrument {
     public void unmute() {
         this.isMuted = false;
     }
-
-    /**
-     * Sets the volume
-     * @param volume the volume level 
-     */
-    public void setVolume(int volume) {
-        //Does Jfuge set the volume?
-    }
-
 	
 	/**
 	 * Transforms this instance into a JSON object

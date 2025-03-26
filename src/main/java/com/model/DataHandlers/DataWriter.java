@@ -53,7 +53,7 @@ public class DataWriter {
         String music = "";
         
         for (Measure m : s.getMeasures()) {
-            music = music+" "+m.getJfugueString();
+            music = music+" "+m.toJfugue();
         }
 
         try (FileWriter writer = new FileWriter(f)) {
