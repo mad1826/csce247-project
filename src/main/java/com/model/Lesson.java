@@ -163,4 +163,8 @@ public class Lesson {
     public void setNumberOfTimes(int numberOfTimes) {
         this.numberOfTimes = numberOfTimes;
     }
+
+	public String toFeedback(int progress) {
+		return "Lesson: " + title + "\nSong: " + song.getTitle() + " by " + song.getArtist() + "\nInstrument Played: " + instrumentType.getName() + "\nTimes Completed: " + progress + "/" + numberOfTimes + "\nComplete? " + (progress >= numberOfTimes ? "Yes" : "No");
+	}
 }

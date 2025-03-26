@@ -57,7 +57,7 @@ public class DataWriter {
         }
 
         try (FileWriter writer = new FileWriter(f)) {
-            writer.write(music);
+            writer.write(music.trim());
         } catch (IOException e) {
             System.out.println(e.toString());
         }

@@ -365,11 +365,14 @@ public class MusicAppFacade {
 	 * Plays a sheet of a song by the instrument to play.
 	 * @param song the song to play
 	 * @param instrumentName the instrument to play the song with
+	 * @return the sheet found, or null if not found
 	 */
-	public void playSheet(Song song, String instrumentName) {
+	public SheetMusic playSheet(Song song, String instrumentName) {
 		SheetMusic sheet = song.getSheet(instrumentName);
 		if (sheet != null)
 			playSheet(sheet);
+		
+		return sheet;
 	}
 
     /**

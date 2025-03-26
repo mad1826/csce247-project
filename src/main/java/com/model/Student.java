@@ -1,5 +1,8 @@
 package com.model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -159,4 +162,18 @@ public class Student extends User {
 			UserManager.getInstance().save();
         }
     }
+
+	public void printLessonFeedback(String filePath) {
+		File f = new File(filePath);
+		try (FileWriter writer = new FileWriter(f)) {		
+			for (Course course : getCourses()) {
+				for (Lesson lesson : course.getLessons()) {
+					writer.write(lesson.toFeedback(getLessonProgress(lesson)) + "\n\n");
+				}
+			}
+		}
+		catch (IOException e) {
+			System.out.println(e.toString());
+		}
+	}
 } 

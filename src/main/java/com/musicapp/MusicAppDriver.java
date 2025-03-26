@@ -1,9 +1,11 @@
 package com.musicapp;
 
 import com.model.Course;
+import com.model.DataHandlers.DataWriter;
 import com.model.Lesson;
 import com.model.MusicAppFacade;
 import com.model.OperationResult;
+import com.model.SheetMusic;
 import com.model.Song;
 import com.model.Student;
 import com.model.User;
@@ -31,14 +33,11 @@ public class MusicAppDriver {
 	 * Runs one or more individual scenarios.
 	 */
 	public void run() {
+		signUp(false);
 		signUp(true);
-		// signUp(false);
 		login(true);
-		// login(false);
 		playSong(true);
-		// playSong(false);
 		progressLesson(true);
-		// progressLesson(false);
 	}
 
 	/**
@@ -47,7 +46,7 @@ public class MusicAppDriver {
 	 */
 	public void signUp(boolean valid) {
 		System.out.println("Signing up for a new account...");
-		OperationResult<User> or = facade.signUp("Portia", "Plante", valid ? "pplante@email.sc.edu" : "jane.smith@example.com", "secu4eP@ssw0rd");
+		OperationResult<User> or = facade.signUp("Fred", "Fredrickson", valid ? "ffred@gmail.com" : "ffredrickson@gmail.com", "secu4eP@ssw0rd");
 		if (or.success) {
 			User user = facade.getCurrentUser();
 			System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
@@ -67,7 +66,7 @@ public class MusicAppDriver {
 	 */
 	public void login(boolean valid) {
 		System.out.println("Logging in with existing credentials...");
-		facade.login("jane.smith@example.com", valid ? "secureP@ss987" : "wrong-PW0rd");
+		facade.login("ffredrickson@gmail.com", valid ? "secureP@ss987" : "wrong-PW0rd");
 		User user = facade.getCurrentUser();
 		if (user == null) {
 			System.out.println("Unable to log in with these credentials.");
@@ -86,7 +85,7 @@ public class MusicAppDriver {
 	 * @param valid whether to show a successful use case
 	 */
 	public void playSong(boolean valid) {
-		facade.login("jane.smith@example.com", "secureP@ss987");
+		facade.login("ffredrickson@gmail.com", "secureP@ss987");
 		User user = facade.getCurrentUser();
 		if (user == null) {
 			System.out.println("Login was unsuccessful.");
@@ -112,7 +111,11 @@ public class MusicAppDriver {
 		}
 
 		if (foundSong != null) {
-			facade.playSheet(foundSong, "Piano");
+			SheetMusic sheet = facade.playSheet(foundSong, "Piano");
+			System.out.println("Printing sheet to text file...");
+			
+        	String exportPath = "src/main/java/com/data/exported_sheet.txt";
+			DataWriter.ExportSheet(exportPath, sheet);
 		}
 		else {
 			System.out.println("No song was found in the search.");
@@ -130,7 +133,7 @@ public class MusicAppDriver {
 	public void progressLesson(boolean valid) {
 		if (valid) {
 			System.out.println("Logging in as a student...");
-			facade.login("jane.smith@example.com", "secureP@ss987");
+			facade.login("ffredrickson@gmail.com", "secureP@ss987");
 		}
 		else {
 			System.out.println("Logging in as a teacher...");
@@ -174,7 +177,30 @@ public class MusicAppDriver {
 				System.out.println("Progressing the lesson...");
 				student.progressLesson(lesson);
 				System.out.println("Progressed lesson! New lesson progress: " + facade.getProgress(lesson).result);
+				System.out.println("Progressing again...");
+				student.progressLesson(lesson);
+				System.out.println("New lesson progress: " + facade.getProgress(lesson).result);
 			}
+
+			for (Lesson newLesson : course.getLessons()) {
+				if (newLesson.getTitle().equals(lesson.getTitle())) {
+					continue;
+				}
+				OperationResult<Integer> progressResult = facade.getProgress(newLesson);
+				if (progressResult.success) {
+					facade.setCurrentLesson(newLesson);
+				}
+			}
+			lesson = facade.getCurrentLesson();
+			System.out.println("Changed lesson to " + lesson.getTitle());
+			System.out.println("Current lesson progress: " + facade.getProgress(lesson).result);
+			System.out.println("Progressing lesson...");
+			student.progressLesson(lesson);
+			System.out.println("New lesson progress: " + facade.getProgress(lesson).result);
+
+			String feedbackPath = "feedback.txt";
+			System.out.println("Printing lesson feedback to " + feedbackPath);
+			student.printLessonFeedback(feedbackPath);
 		}
 
 		boolean changed = facade.logout();
