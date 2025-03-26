@@ -413,10 +413,15 @@ public class MusicAppFacade {
     }
 
     /**
-     * get progress
-     * @return HashMap<UUID, Double>
+     * Get progress for the authenticated student's lesson
+	 * @param lesson the lesson to get the progress of
+     * @return times the student has progressed the lesson
      */
-    public HashMap<UUID, Double> getProgress() {
-        return new HashMap<>();
+    public OperationResult<Integer> getProgress(Lesson lesson) {
+        Student student = getCurrentStudent();
+		if (student == null)
+			return new OperationResult<>("Must be logged in as a student to join a course.");
+
+		return new OperationResult<>(student.getLessonProgress(lesson));
     }
 } 

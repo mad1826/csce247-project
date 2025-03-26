@@ -159,7 +159,8 @@ public class MusicAppDriver {
 			System.out.println("Listing lessons in course " + course.getTitle() + ":");
 			for (Lesson lesson : course.getLessons()) {
 				System.out.println("\t" + lesson.getTitle());
-				if (student.getLessonProgress(lesson) != 0)
+				OperationResult<Integer> progressResult = facade.getProgress(lesson);
+				if (progressResult.success && progressResult.result != 0)
 					facade.setCurrentLesson(lesson);
 			}
 
@@ -169,10 +170,10 @@ public class MusicAppDriver {
 			}
 			else {
 				System.out.println("Opened lesson " + lesson.getTitle() + ", playing on " + lesson.getSheet().getInstrument().getType().getName());
-				System.out.println("Current student progress: " + student.getLessonProgress(lesson));
+				System.out.println("Current student progress: " + facade.getProgress(lesson).result);
 				System.out.println("Progressing the lesson...");
 				student.progressLesson(lesson);
-				System.out.println("Progressed lesson! New lesson progress: " + student.getLessonProgress(lesson));
+				System.out.println("Progressed lesson! New lesson progress: " + facade.getProgress(lesson).result);
 			}
 		}
 
