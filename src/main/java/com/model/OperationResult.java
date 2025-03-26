@@ -7,14 +7,26 @@ package com.model;
  */
 
 public class OperationResult<T> {
+	/**
+	 * Whether the operation was successful
+	 */
     public final boolean success;
+	/**
+	 * The result of the operation
+	 */
     public final T result;
+	/**
+	 * The exception thrown by the operation
+	 */
     public final Exception error;
+	/**
+	 * The message associated with the result
+	 */
     public final String message;
 
     /**
      * Constructs a new successful operation result, with the return value of result.
-     * @param result
+     * @param result the result of the operation
      */
     public OperationResult(T result) {
         this.success = true;
@@ -46,7 +58,7 @@ public class OperationResult<T> {
 
     /**
      * Should only be used in OperationResult<Void> so that result is guaranteed for successful operations.
-     * @param result
+     * @param result the result of the operation
      */
     public OperationResult(boolean result) {
         this.success = result;
@@ -55,6 +67,9 @@ public class OperationResult<T> {
         this.message = null;
     }
 
+	/**
+	 * Gets a string representation of the operation result.
+	 */
     @Override
     public String toString() {
         return "Operation Result {"

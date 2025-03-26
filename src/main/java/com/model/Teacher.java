@@ -61,6 +61,9 @@ public class Teacher extends User {
         return CourseManager.getInstance().deleteCourse(id);
     }
 
+	/**
+	 * Gets a json representation of the teacher.
+	 */
     @Override
     @SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {

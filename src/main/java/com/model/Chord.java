@@ -13,8 +13,17 @@ import com.model.managers.SongManager;
  * @author Ryan Smith
  */
 public class Chord {
+	/**
+	 * The chord's name
+	 */
     private String name;
+	/**
+	 * The notes in the chord
+	 */
     private ArrayList<Note> notes;
+	/**
+	 * Whether the chord's notes are tied
+	 */
     private boolean tie;
 
     /**
@@ -28,6 +37,28 @@ public class Chord {
         this.name = name;
         this.notes = notes;
         this.tie = tie;
+    }
+
+     /**
+     * converts the chord to a JFugue string representation
+     * @return - JFugue string for the entire chord
+     */
+    public String toJfugue() {
+        StringBuilder chordString = new StringBuilder();
+
+        // if there's only one note, return its JFugue representation
+        if (notes.size() == 1) {
+            return notes.get(0).toJfugue();
+        }
+
+        // for multiple notes, create a chord representation
+        chordString.append("(");
+        for (Note note : notes) {
+            chordString.append(note.toJfugue()).append(" ");
+        }
+        chordString.append(")");
+
+        return chordString.toString().trim();
     }
 
     /**
@@ -52,6 +83,14 @@ public class Chord {
         }
     }
 
+     /**
+     * Plays the chord using JFugue
+     */
+    public void play() {
+        Player player = new Player();
+        player.play(toJfugue());
+    }
+
 	/**
 	 * Transforms this instance into a JSON object
 	 * @return a JSON object
@@ -71,22 +110,12 @@ public class Chord {
 		return chordJSON;
 	}
 
+	/**
+	 * Converts the note to a readable format
+	 */
     @Override
     public String toString() {
         return this.name+" - "+this.notes;
     }
 
-    /**
-     * plays the chord using JFugue
-     */
-    public void play() {
-        Player player = new Player();
-        StringBuilder chordString = new StringBuilder();
-
-        for (Note note : notes) {
-            chordString.append(note.getJfugueString()).append(" ");
-        }
-
-        player.play(chordString.toString().trim());
-    }
 } 

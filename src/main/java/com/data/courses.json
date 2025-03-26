@@ -9,10 +9,11 @@
 		],
 		"lessons": [
 			{
-				"id": "65a6318e-2702-433a-9237-3f5be6cf4c63",
+				"id": "564dcc08-e886-4ed1-95eb-6cd1e689e06e",
 				"title": "Reading Sheet Music",
 				"song": "2a78b4ec-da25-4edf-b1db-76e4069826ef",
-				"instrument": "Piano"
+				"instrument": "Guitar",
+				"numberOfTimes": 3
 			}
 		]
 	},
@@ -27,15 +28,17 @@
 		"lessons": [
 			{
 				"id": "24d85a1d-e68c-4961-a43c-f9d02a7483c0",
-				"title": "Maki`ng Masterpieces Pt. 1",
-				"song": "fc421d46-b9d0-4ab8-a795-60364bc67af2",
-				"instrument": "Piano"
+				"title": "Making Masterpieces Pt. 1",
+				"song": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+				"instrument": "Piano",
+				"numberOfTimes": 3
 			},
 			{
 				"id": "42011ee3-1ad6-465a-b14c-44cd72f6491e",
 				"title": "Making Masterpieces Pt. 2",
-				"song": "fc421d46-b9d0-4ab8-a795-60364bc67af2",
-				"instrument": "Piano"
+				"song": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+				"instrument": "Piano",
+				"numberOfTimes": 5
 			}
 		]
 	}

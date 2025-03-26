@@ -53,14 +53,11 @@ public class DataWriter {
         String music = "";
         
         for (Measure m : s.getMeasures()) {
-            String myStr = m.toString();
-            music = music+" "+myStr;
-
-            System.out.println("Adding: "+myStr);
+            music = music+" "+m.toJfugue();
         }
 
         try (FileWriter writer = new FileWriter(f)) {
-            writer.write(music);
+            writer.write(music.trim());
         } catch (IOException e) {
             System.out.println(e.toString());
         }

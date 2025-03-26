@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.jfugue.player.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -15,40 +14,52 @@ import org.json.simple.JSONObject;
  */
 
 public class Song {
+	/**
+	 * The song's id
+	 */
     private UUID id;
+	/**
+	 * The song's title
+	 */
     private String title;
+	/**
+	 * The song's artist
+	 */
     private String artist;
+	/**
+	 * The song's genres
+	 */
     private ArrayList<Genre> genres;
+	/**
+	 * Sheets made for the song
+	 */
     private HashMap<Instrument, SheetMusic> sheets;
-    private String jfuguePattern;
 
     /**
      * constructs a Song with a specified UUID
-     * @param - the unique ID of the song
-     * @param - the title of the song
-     * @param - the artist of the song
-     * @param - the list of genres associated with the song
-     * @param - a HashMap of instruments and their corresponding sheet music
-     * @param - a string for the pattern of the notes
+     * @param id the unique ID of the song
+     * @param title the title of the song
+     * @param artist the artist of the song
+     * @param genres the list of genres associated with the song
+     * @param sheets a HashMap of instruments and their corresponding sheet music
      */
-    public Song(UUID id, String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets, String jfuguePattern) {
+    public Song(UUID id, String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets) {
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.genres = genres;
         this.sheets = sheets;
-        this.jfuguePattern = jfuguePattern;
     }
 
     /**
      * constructs a Song without a UUID (automatically generates one)
-     * @param - the title of the song
-     * @param - the artist of the song
-     * @param - the list of genres associated with the song
-     * @param - a HashMap of instruments and their corresponding sheet music
+     * @param title the title of the song
+     * @param artist the artist of the song
+     * @param genres the list of genres associated with the song
+     * @param sheets a HashMap of instruments and their corresponding sheet music
      */
     public Song(String title, String artist, ArrayList<Genre> genres, HashMap<Instrument, SheetMusic> sheets) {
-        this(UUID.randomUUID(), title, artist, genres, sheets,"");
+        this(UUID.randomUUID(), title, artist, genres, sheets);
     }
 
 	/**
@@ -117,6 +128,19 @@ public class Song {
         return id;
     }
 
+	/**
+	 * Gets the sheet for a specified instrument.
+	 * @param instrumentName the instrument's name
+	 * @return the sheet matching the instrument, or null if not found
+	 */
+	public SheetMusic getSheet(String instrumentName) {
+		for (Instrument instrument : sheets.keySet()) {
+			if (instrument.getType().getName().equalsIgnoreCase(instrumentName)) {
+				return sheets.get(instrument);
+			}
+		}
+		return null;
+	}
 	
 	/**
 	 * Transforms this instance into a JSON object
@@ -157,17 +181,5 @@ public class Song {
             ",\n\tsheets=" + sheets +
             "\n}";
 	}
-
-    /**
-     * plays the entire song using JFugue
-     */
-    public void play() {
-        Player player = new Player();
-        player.play(jfuguePattern);
-    }
-    
-    public String getJfuguePattern() {
-        return jfuguePattern;
-    }
 
 }

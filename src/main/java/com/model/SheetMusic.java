@@ -2,6 +2,7 @@ package com.model;
 
 import java.util.ArrayList;
 
+import org.jfugue.player.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -12,11 +13,29 @@ import com.model.managers.SongManager;
  * @author Ryan Smith
  */
 public class SheetMusic {
+	/**
+	 * The instrument associated with this sheet
+	 */
     private final Instrument instrument;
+	/**
+	 * The sheet's difficulty
+	 */
     private Difficulty difficulty;
+	/**
+	 * The clef to play the sheet in
+	 */
     private Clef clef;
+	/**
+	 * Whether the sheet should play back audio
+	 */
     private boolean audioPlaybackEnabled;
+	/**
+	 * The sheet's measures
+	 */
     private final ArrayList<Measure> measures;
+	/**
+	 * Whether the sheet is private
+	 */
     private boolean isPrivate;
 
     /**
@@ -75,15 +94,27 @@ public class SheetMusic {
 		SongManager.getInstance().save();
     }
 
+	/**
+	 * Gets all the sheet's measures.
+	 * @return an array list of measures
+	 */
     public ArrayList<Measure> getMeasures() {
         return this.measures;
     }
 
+	/**
+	 * Updates the sheet's difficulty.
+	 * @param difficulty the sheet's difficulty
+	 */
 	public void setDifficulty(Difficulty difficulty) {
 		this.difficulty = difficulty;
 		SongManager.getInstance().save();
 	}
 
+	/**
+	 * Updates the sheet's clef.
+	 * @param clef the new clef
+	 */
 	public void setClef(Clef clef) {
 		this.clef = clef;
 		SongManager.getInstance().save();
@@ -96,6 +127,13 @@ public class SheetMusic {
         isPrivate = !isPrivate;
 		SongManager.getInstance().save();
     }
+
+	/**
+	 * Plays this sheet using jfugue.
+	 */
+	public void play() {
+		new Player().play(toJfugue());
+	}
 
 	/**
 	 * Transforms this instance into a JSON object
@@ -129,4 +167,18 @@ public class SheetMusic {
            ",\n\tisPrivate=" + isPrivate +
            "\n}";
     }
+
+	/**
+	 * Get a jfugue pattern representation of this sheet.
+	 * @return the jfugue pattern as a string
+	 */
+	public String toJfugue() {
+        StringBuilder songPattern = new StringBuilder();
+
+        for ( Measure measure : measures) {
+            songPattern.append(measure.toJfugue()).append(" ");
+        }
+
+        return songPattern.toString().trim();
+	}
 } 

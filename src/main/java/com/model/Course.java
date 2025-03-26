@@ -39,32 +39,25 @@ public class Course {
 	 * The course's members
 	 */
 	private ArrayList<Student> members = new ArrayList<>();
+	/**
+	 * The ids of course members before converted to instances
+	 */
 	private ArrayList<UUID> unlinkedMembers;
 
 	/**
 	 * The course's lessons
 	 */
 	private ArrayList<Lesson> lessons;
-
+	
 	/**
-	 * Constructs a new Course instance that already has an identifier
+	 * Constructs a new Course instance for data loading
 	 * @param id - the course's unique identifier
 	 * @param code - the course's unique code
 	 * @param title - the course's title
 	 * @param lessons - the course's lessons
-	 * @param owner - the course's owner
-	 * @param members - the course's student members
+	 * @param owner - the course's owner's id
+	 * @param members - the course's student members' ids
 	 */
-	public Course(UUID id, String code, String title, ArrayList<Lesson> lessons, Teacher owner, ArrayList<Student> members) {
-		this.id = id;
-		this.code = code;
-		this.title = title;
-		this.lessons = lessons;
-		this.owner = owner;
-		this.members = members;
-	}
-
-	//Constructor for data loader
 	public Course(UUID id, String code, String title, ArrayList<Lesson> lessons, UUID owner, ArrayList<UUID> members) {
         this.id = id;
         this.code = code;
@@ -83,7 +76,12 @@ public class Course {
 	 * @param members - the course's student members
 	 */
 	public Course(String code, String title, ArrayList<Lesson> lessons, Teacher owner, ArrayList<Student> members) {
-		this(UUID.randomUUID(), code, title, lessons, owner, members);
+        this.id = UUID.randomUUID();
+        this.code = code;
+        this.title = title;
+        this.lessons = lessons;
+		this.owner = owner;
+		this.members = members;
 	}
 
 	/**
@@ -110,10 +108,18 @@ public class Course {
 		return title;
 	}
 
+	/**
+	 * Gets the ids of the course's members before linking.
+	 * @return an array list of ids
+	 */
 	public ArrayList<UUID> getUnlinkedMembers() {
 		return this.unlinkedMembers;
 	}
 
+	/**
+	 * Gets the course's owner's id before linking.
+	 * @return an id
+	 */
 	public UUID getUnlinkedOwner() {
 		return this.unlinkedOwner;
 	}
@@ -138,6 +144,10 @@ public class Course {
 		return CourseManager.getInstance().deleteCourse(id);
 	}
 
+	/**
+	 * Gets the course's members.
+	 * @return an array list of students
+	 */
 	public ArrayList<Student> getMembers() {
 		return members;
 	}
@@ -167,6 +177,7 @@ public class Course {
 	 * @param title - the lesson's title
 	 * @param sheet - the song this lesson will play a sheet from
 	 * @param instrumentType - the instrument this lesson will play a sheet using
+	 * @param numberOfTimes how many times the lesson should be played
 	 * @return whether the lesson was successfully created
 	 */
 	public OperationResult<Lesson> createLesson(String title, Song song, InstrumentType instrumentType, int numberOfTimes) {
@@ -203,6 +214,10 @@ public class Course {
 		return ret;
 	}
 
+	/**
+	 * Gets a json object of the course.
+	 * @return a json object
+	 */
 	@SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {
 		JSONObject courseDetails = new JSONObject();

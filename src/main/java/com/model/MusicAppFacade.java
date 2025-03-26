@@ -34,6 +34,14 @@ public class MusicAppFacade {
 	 * The current query for filtering songs
 	 */
 	private final HashMap<SongFilter, String> songQuery = new HashMap<>();
+	/**
+	 * The currently selected course
+	 */
+	private Course currentCourse;
+	/**
+	 * The currently selected lesson
+	 */
+	private Lesson currentLesson;
 
     /**
      * Constructs a new MusicAppFacade instance
@@ -41,20 +49,6 @@ public class MusicAppFacade {
     private MusicAppFacade() {
         DataLoader.loadAllData();
     }
-
-	private Teacher getCurrentTeacher() {
-        if (currentUser == null || !(currentUser instanceof Teacher)) {
-			return null;
-		}
-		return (Teacher)currentUser;
-	}
-
-	private Student getCurrentStudent() {
-        if (currentUser == null || !(currentUser instanceof Student)) {
-			return null;
-		}
-		return (Student)currentUser;
-	}
 
 	/**
 	 * Gets the facade singleton instance.
@@ -76,12 +70,66 @@ public class MusicAppFacade {
 	}
 
 	/**
+	 * Gets the current authenticated teacher.
+	 * @return the teacher that has logged in
+	 */
+	public Teacher getCurrentTeacher() {
+        if (currentUser == null || !(currentUser instanceof Teacher)) {
+			return null;
+		}
+		return (Teacher)currentUser;
+	}
+
+	/**
+	 * Gets the current authenticated student.
+	 * @return the student that has logged in
+	 */
+	public Student getCurrentStudent() {
+        if (currentUser == null || !(currentUser instanceof Student)) {
+			return null;
+		}
+		return (Student)currentUser;
+	}
+
+	/**
 	 * Gets the currently selected song
 	 * @return The currently selected song
 	 */
 	public Song getCurrentSong() {
 		return currentSong;
 	}
+	
+	/**
+	 * Gets the currently selected course.
+	 * @return the currently selected course
+	 */
+	public Course getCurrentCourse() {
+		return currentCourse;
+	}
+
+	/**
+	 * Updates the selected course.
+	 * @param course the course to select
+	 */
+	public void setCurrentCourse(Course course) {
+		currentCourse = course;
+	}
+
+	/**
+	 * Gets the currently selected lesson.
+	 * @return the currently selected lesson
+	 */
+	public Lesson getCurrentLesson() {
+		return currentLesson;
+	}
+
+	/**
+	 * Updates the selected lesson.
+	 * @param lesson the lesson to select
+	 */
+	public void setCurrentLesson(Lesson lesson) {
+		currentLesson = lesson;
+	} 
 
     /**
      * sign up
@@ -266,6 +314,11 @@ public class MusicAppFacade {
         return SongManager.getInstance().findSongs(songQuery);
     }
 
+	/**
+	 * Get a song by its id.
+	 * @param id the song's id
+	 * @return the result of attemping to find the song
+	 */
     public OperationResult<Song> getSong(UUID id) {
         return SongManager.getInstance().getSong(id);
     }
@@ -297,21 +350,26 @@ public class MusicAppFacade {
     }
 
     /**
-     * edit sheet
-     * @param sheet sheet
-     * @return boolean
-     */
-    public boolean editSheet(SheetMusic sheet) {
-        return true;
-    }
-
-    /**
-     * play sheet
-     * @param sheet sheet
+     * Plays a sheet using jfugue.
+     * @param sheet the sheet to play
      */
     public void playSheet(SheetMusic sheet) {
-        
+		sheet.play();
     }
+
+	/**
+	 * Plays a sheet of a song by the instrument to play.
+	 * @param song the song to play
+	 * @param instrumentName the instrument to play the song with
+	 * @return the sheet found, or null if not found
+	 */
+	public SheetMusic playSheet(Song song, String instrumentName) {
+		SheetMusic sheet = song.getSheet(instrumentName);
+		if (sheet != null)
+			playSheet(sheet);
+		
+		return sheet;
+	}
 
     /**
      * get current sheet
@@ -354,10 +412,15 @@ public class MusicAppFacade {
     }
 
     /**
-     * get progress
-     * @return HashMap<UUID, Double>
+     * Get progress for the authenticated student's lesson
+	 * @param lesson the lesson to get the progress of
+     * @return times the student has progressed the lesson
      */
-    public HashMap<UUID, Double> getProgress() {
-        return new HashMap<>();
+    public OperationResult<Integer> getProgress(Lesson lesson) {
+        Student student = getCurrentStudent();
+		if (student == null)
+			return new OperationResult<>("Must be logged in as a student to join a course.");
+
+		return new OperationResult<>(student.getLessonProgress(lesson));
     }
 } 

@@ -1,5 +1,8 @@
 package com.model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -115,7 +118,9 @@ public class Student extends User {
      * @return The progress value (0-100)
      */
     public int getLessonProgress(Lesson lesson) {
-        return lessonProgress.get(lesson.getId());
+        return lessonProgress.containsKey(lesson.getId())
+			? lessonProgress.get(lesson.getId())
+			: 0;
     }
     
     /**
@@ -129,6 +134,9 @@ public class Student extends User {
 		UserManager.getInstance().save();
     }
 
+	/**
+	 * Gets a json representation of the student.
+	 */
     @Override
     @SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {
@@ -151,10 +159,28 @@ public class Student extends User {
      */
     public void progressLesson(Lesson lesson) {
         int maxProgress = lesson.getNumberOfTimes();
-        int thisProgress = this.lessonProgress.get(lesson.getId());
-        if (thisProgress<maxProgress) { //If lesson is complete, do not increment progress
-            thisProgress++;
+        int thisProgress = getLessonProgress(lesson);
+        if (thisProgress < maxProgress) { //If lesson is complete, do not increment progress
+            lessonProgress.put(lesson.getId(), thisProgress + 1);
 			UserManager.getInstance().save();
         }
     }
+
+	/**
+	 * Prints feedback of all lessons across all the student's courses to a file.
+	 * @param filePath the file path to print feedback to
+	 */
+	public void printLessonFeedback(String filePath) {
+		File f = new File(filePath);
+		try (FileWriter writer = new FileWriter(f)) {		
+			for (Course course : getCourses()) {
+				for (Lesson lesson : course.getLessons()) {
+					writer.write(lesson.toFeedback(getLessonProgress(lesson)) + "\n\n");
+				}
+			}
+		}
+		catch (IOException e) {
+			System.out.println(e.toString());
+		}
+	}
 } 

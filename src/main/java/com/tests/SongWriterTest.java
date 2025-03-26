@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.model.Chord;
 import com.model.Clef;
+import com.model.DataHandlers.DataWriter;
 import com.model.Difficulty;
 import com.model.Genre;
 import com.model.Instrument;
@@ -34,7 +35,7 @@ public class SongWriterTest {
 		Chord chord = new Chord("My First Chord", notes, false);
 		ArrayList<Chord> chords = new ArrayList<>();
 		chords.add(chord);
-		Measure measure = new Measure(chords, 1, 50, 1, false, false,"");
+		Measure measure = new Measure(chords, 1, 50, 1, false, false);
 
 		HashMap<Instrument, SheetMusic> sheets = new HashMap<>();
 		SheetMusic sheet = new SheetMusic(piano, Difficulty.BEGINNER, Clef.BASS, false, new ArrayList<>(), false);

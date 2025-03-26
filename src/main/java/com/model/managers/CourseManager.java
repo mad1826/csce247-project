@@ -163,7 +163,7 @@ public class CourseManager implements SavableList<Course> {
 			if (numTimesObj==null) { //safe against nullptr;
 				numTimesObj = 1;
 			}
-			int numberOfTimes = (Integer)numTimesObj;
+			int numberOfTimes = ((Long)numTimesObj).intValue();
 
 			Lesson l = new Lesson(lessonID, lessonTitle, songID,InstrumentType.valueOf(instrument.toUpperCase()),numberOfTimes);
 			lessons.add(l);
@@ -172,6 +172,9 @@ public class CourseManager implements SavableList<Course> {
 		return new Course(id,code,title,lessons,owner,members);
 	}
 
+	/**
+	 * Loads all data to the manager.
+	 */
 	@Override
 	public OperationResult<Void> loadData() {
 		 OperationResult<ArrayList<Course>> or = DataLoader.getData(this);
@@ -185,6 +188,9 @@ public class CourseManager implements SavableList<Course> {
         return new OperationResult<>(true);
 	}
 
+	/**
+	 * Updates this manager's data with data from other prerequisite managers.
+	 */
 	@Override
 	public OperationResult<Void> linkData() {
 		for (Course c : this.courses.values()) {

@@ -30,8 +30,14 @@ public class Lesson {
 	 * The song this lesson will play a sheet from
 	 */
 	private Song song;
+	/**
+	 * The id of the song before linking
+	 */
 	private UUID unlinkedSong;
-	private int numberOfTimes; //How many times the song needs to be played for the lesson to be complete
+	/**
+	 * How many times the song needs to be played for the lesson to be complete
+	 */
+	private int numberOfTimes;
 
 	/**
 	 * The instrument this lesson will play a sheet from
@@ -39,21 +45,13 @@ public class Lesson {
 	private InstrumentType instrumentType;
 
 	/**
-	 * Constructs a new Lesson instance that already has an identifier
+	 * Constructs a new Lesson instance before linking
 	 * @param id - the lesson's unique identifier
 	 * @param title - the lesson's title
-	 * @param song - the song this lesson will play a sheet from
+	 * @param song - the id of the song this lesson will play a sheet from
 	 * @param instrumentType - the instrument this lesson will play a sheet from
 	 * @param numberOfTimes - how many times the song should be played for the lesson to be complete.
 	 */
-	public Lesson(UUID id, String title, Song song, InstrumentType instrumentType, int numberOfTimes) {
-		this.id = id;
-		this.title = title;
-		this.song = song;
-		this.instrumentType = instrumentType;
-		this.numberOfTimes = numberOfTimes;
-	}
-
 	public Lesson(UUID id, String title, UUID song, InstrumentType instrumentType, int numberOfTimes) {
         this.id = id;
         this.title = title;
@@ -67,9 +65,14 @@ public class Lesson {
 	 * @param title - the lesson's title
 	 * @param song - the song this lesson will play a sheet from
 	 * @param instrumentType - the instrument this lesson will play a sheet from
+	 * @param numberOfTimes how many times the lesson must be completed
 	 */
 	public Lesson(String title, Song song, InstrumentType instrumentType, int numberOfTimes) {
-		this(UUID.randomUUID(), title, song, instrumentType, numberOfTimes);
+		this.id = UUID.randomUUID();
+		this.title = title;
+		this.song = song;
+		this.instrumentType = instrumentType;
+		this.numberOfTimes = numberOfTimes;
 	}
 
 	/**
@@ -98,6 +101,10 @@ public class Lesson {
 		CourseManager.getInstance().save();
 	}
 
+	/**
+	 * Gets the id of the unlinked song
+	 * @return an id
+	 */
 	public UUID getUnlinkedSong() {
 		return this.unlinkedSong;
 	}
@@ -135,6 +142,10 @@ public class Lesson {
 		return null;
 	}
 
+	/**
+	 * Gets a json representation of the lesson
+	 * @return a json object
+	 */
 	@SuppressWarnings({ "unchecked", "exports" })
 	public JSONObject toJSON() {
 		JSONObject lessonObject = new JSONObject();
@@ -156,11 +167,27 @@ public class Lesson {
 		this.song = song;
 	}
 
+	/**
+	 * Gets how many times the lesson must be completed.
+	 * @return the number of times to complete
+	 */
     public int getNumberOfTimes() {
         return numberOfTimes;
     }
 
+	/**
+	 * Updates how many times the lesson must be completed.
+	 */
     public void setNumberOfTimes(int numberOfTimes) {
         this.numberOfTimes = numberOfTimes;
     }
+
+	/**
+	 * Gets a string representation of the feedback for progressing a lesson.
+	 * @param progress how many times the lesson has been completed
+	 * @return a string
+	 */
+	public String toFeedback(int progress) {
+		return "Lesson: " + title + "\nSong: " + song.getTitle() + " by " + song.getArtist() + "\nInstrument Played: " + instrumentType.getName() + "\nTimes Completed: " + progress + "/" + numberOfTimes + "\nComplete? " + (progress >= numberOfTimes ? "Yes" : "No");
+	}
 }

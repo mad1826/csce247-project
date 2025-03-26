@@ -12,9 +12,21 @@ public enum InstrumentType {
     KEYBOARD("Keyboard", 0, 0, ""),
     DRUMS("Drums", 0, 0, "");
 
+	/**
+	 * The instrument's name
+	 */
     private final String name;
+	/**
+	 * The instrument's minimum range
+	 */
     private final int rangeMin;
+	/**
+	 * The instrument's maximum range
+	 */
     private final int rangeMax;
+	/**
+	 * The path to the instrument's sounds
+	 */
     private final String noteSoundsPath;
 
     /**

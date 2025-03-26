@@ -1,6 +1,5 @@
 package com.model;
 
-import org.jfugue.player.Player;
 import org.json.simple.JSONObject;
 
 import com.model.managers.SongManager;
@@ -10,13 +9,30 @@ import com.model.managers.SongManager;
  * @author Ryan Smith
  */
 public class Note {
+	/**
+	 * The note's pitch
+	 */
     private Pitch pitch;
+	/**
+	 * The note's pitch modifier
+	 */
     private PitchModifier pitchModifier;
+	/**
+	 * The note's value
+	 */
     private NoteValue value;
+	/**
+	 * Whether the note has a dot
+	 */
     private boolean dot;
+	/**
+	 * Whether the note has a line
+	 */
     private boolean line;
+	/**
+	 * The note's octave
+	 */
     private int octave;
-    private String jfugueString;
 
     /**
      * Creates a new musical note with all properties
@@ -27,7 +43,6 @@ public class Note {
      * @param dot           whether the note is dotted
      * @param line          whether the note has a line
      * @param octave        the note's octave number
-     * @param jfugueString  a String to play the chord(s)
      */
     public Note(Pitch pitch, PitchModifier pitchModifier, NoteValue value, boolean dot, boolean line, int octave, String jfugueString) {
         this.pitch = pitch;
@@ -36,7 +51,6 @@ public class Note {
         this.dot = dot;
         this.line = line;
         this.octave = octave > 0 ? octave : 1;
-        this.jfugueString = jfugueString;
     }
 
     /**
@@ -113,22 +127,20 @@ public class Note {
 		return noteJSON;
 	}
 
+	/**
+	 * Gets a string representation of the note.
+	 */
   @Override
   public String toString() {
     return this.pitch.name()+this.pitchModifier.abbreviatedName;
   }
 
-  /*
-   * plays the note using jfugue
+  /**
+   * converts note into a JFugue string format 
+   * @return - the JFugue representation of the note 
    */
-  public void play() {
-    Player player = new Player();
-    player.play(jfugueString);
+  public String toJfugue() {
+    return pitch.name() + octave + value.character;
   }
 
-public String getJfugueString() {
-    return jfugueString;
-  }
-
-  
 } 
