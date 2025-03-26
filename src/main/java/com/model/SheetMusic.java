@@ -2,6 +2,7 @@ package com.model;
 
 import java.util.ArrayList;
 
+import org.jfugue.player.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -98,6 +99,13 @@ public class SheetMusic {
     }
 
 	/**
+	 * Plays this sheet using jfugue.
+	 */
+	public void play() {
+		new Player().play(toJfugue());
+	}
+
+	/**
 	 * Transforms this instance into a JSON object
 	 * @return a JSON object
 	 */
@@ -129,4 +137,18 @@ public class SheetMusic {
            ",\n\tisPrivate=" + isPrivate +
            "\n}";
     }
+
+	/**
+	 * Get a jfugue pattern representation of this sheet.
+	 * @return the jfugue pattern as a string
+	 */
+	public String toJfugue() {
+        StringBuilder songPattern = new StringBuilder();
+
+        for ( Measure measure : measures) {
+            songPattern.append(measure.toJfugue()).append(" ");
+        }
+
+        return songPattern.toString().trim();
+	}
 } 

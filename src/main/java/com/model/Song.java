@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.jfugue.player.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -115,39 +114,19 @@ public class Song {
         return id;
     }
 
-    /**
-     * converts song into a full JFugue pattern string
-     * @param - the instrument to generate the JFugue
-     * @return - the JFugue pattern for the entire song
-     */
-    public String toJfugue(Instrument instrument) {
-        //get sheet music for the specified instrument
-        SheetMusic sheetMusic = sheets.get(instrument);
-        if (sheetMusic == null) {
-            return ""; //return empty string if no sheet music for instrument
-        }
-
-        //get measures from sheet music
-        ArrayList<Measure> measures = sheetMusic.getMeasures();
-
-        StringBuilder songPattern = new StringBuilder();
-
-        for ( Measure measure : measures) {
-            songPattern.append(measure.toJfugue()).append(" ");
-        }
-
-        return songPattern.toString().trim();
-    }
-
-    /**
-     * plays the song for a specific instrument
-     * @param - the instrument to play
-     */
-    public void play(Instrument instrument) {
-        Player player = new Player();
-		player.play(toJfugue(instrument));
-    }
-
+	/**
+	 * Gets the sheet for a specified instrument.
+	 * @param instrumentName the instrument's name
+	 * @return the sheet matching the instrument, or null if not found
+	 */
+	public SheetMusic getSheet(String instrumentName) {
+		for (Instrument instrument : sheets.keySet()) {
+			if (instrument.getType().getName().equalsIgnoreCase(instrumentName)) {
+				return sheets.get(instrument);
+			}
+		}
+		return null;
+	}
 	
 	/**
 	 * Transforms this instance into a JSON object

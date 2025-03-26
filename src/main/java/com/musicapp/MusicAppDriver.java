@@ -1,7 +1,6 @@
 package com.musicapp;
 
 import com.model.Course;
-import com.model.Instrument;
 import com.model.Lesson;
 import com.model.MusicAppFacade;
 import com.model.OperationResult;
@@ -113,11 +112,7 @@ public class MusicAppDriver {
 		}
 
 		if (foundSong != null) {
-			for (Instrument instrument : foundSong.getSheets().keySet()) {
-				System.out.println("Now playing: " + foundSong.getTitle() + " on " + instrument.getType().getName() + "...");
-				foundSong.play(instrument);
-				break;
-			}
+			facade.playSheet(foundSong, "Piano");
 		}
 		else {
 			System.out.println("No song was found in the search.");

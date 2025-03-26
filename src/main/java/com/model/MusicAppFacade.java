@@ -354,12 +354,23 @@ public class MusicAppFacade {
     }
 
     /**
-     * play sheet
-     * @param sheet sheet
+     * Plays a sheet using jfugue.
+     * @param sheet the sheet to play
      */
     public void playSheet(SheetMusic sheet) {
-        
+		sheet.play();
     }
+
+	/**
+	 * Plays a sheet of a song by the instrument to play.
+	 * @param song the song to play
+	 * @param instrumentName the instrument to play the song with
+	 */
+	public void playSheet(Song song, String instrumentName) {
+		SheetMusic sheet = song.getSheet(instrumentName);
+		if (sheet != null)
+			playSheet(sheet);
+	}
 
     /**
      * get current sheet
