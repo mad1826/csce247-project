@@ -1,7 +1,6 @@
 package com.musicapp;
 
 import com.model.Course;
-import com.model.DataHandlers.DataWriter;
 import com.model.Lesson;
 import com.model.MusicAppFacade;
 import com.model.OperationResult;
@@ -9,6 +8,7 @@ import com.model.SheetMusic;
 import com.model.Song;
 import com.model.Student;
 import com.model.User;
+import com.model.datahandlers.DataWriter;
 
 /**
  * A terminal-based interface for interacting with the application.

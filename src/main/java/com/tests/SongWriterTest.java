@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import com.model.Chord;
 import com.model.Clef;
-import com.model.DataHandlers.DataWriter;
 import com.model.Difficulty;
 import com.model.Genre;
 import com.model.Instrument;
