@@ -1,4 +1,4 @@
-package com.model.DataHandlers;
+package com.model.datahandlers;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -53,7 +53,10 @@ public class DataWriter {
         String music = "";
         
         for (Measure m : s.getMeasures()) {
-            music = music+" "+m.getJfugueString();
+            String myStr = m.toString();
+            music = music+" "+myStr;
+
+            System.out.println("Adding: "+myStr);
         }
 
         try (FileWriter writer = new FileWriter(f)) {

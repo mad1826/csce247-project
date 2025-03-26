@@ -2,8 +2,9 @@ package com.tests;
 
 import java.util.UUID;
 
-import com.model.DataHandlers.DataLoader;
-import com.model.DataHandlers.DataWriter;
+import com.model.InstrumentType;
+import com.model.datahandlers.DataLoader;
+import com.model.datahandlers.DataWriter;
 import com.model.managers.SongManager;
 
 public class SheetExporterTest {
@@ -25,10 +26,10 @@ public class SheetExporterTest {
 
         // Get the piano sheet from the song
         var sheets = songResult.result.getSheets();
-        var pianoSheet = sheets.values().iterator().next(); 
+        var pianoSheet = ; 
 
         // Test exporting the sheet
-        String exportPath = "src/main/java/com/data/exported_sheet.json";
+        String exportPath = "src/main/java/com/data/exported_sheet.txt";
         DataWriter.ExportSheet(exportPath, pianoSheet);
         System.out.println("Sheet exported to: " + exportPath);
     }

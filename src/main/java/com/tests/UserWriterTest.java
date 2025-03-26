@@ -1,6 +1,6 @@
 package com.tests;
 
-import com.model.DataHandlers.DataWriter;
+import com.model.datahandlers.DataWriter;
 import com.model.managers.UserManager;
 
 public class UserWriterTest {

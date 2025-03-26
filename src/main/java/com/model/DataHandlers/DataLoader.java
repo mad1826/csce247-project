@@ -1,4 +1,4 @@
-package com.model.DataHandlers;
+package com.model.datahandlers;
 
 import java.io.FileReader;
 import java.util.ArrayList;
