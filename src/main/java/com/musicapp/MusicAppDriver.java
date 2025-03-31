@@ -46,7 +46,7 @@ public class MusicAppDriver {
 	 */
 	public void signUp(boolean valid) {
 		System.out.println("Signing up for a new account...");
-		OperationResult<User> or = facade.signUp("Fred", "Fredrickson", valid ? "ffred@gmail.com" : "ffredrickson@gmail.com", "secu4eP@ssw0rd");
+		OperationResult<User> or = facade.signUp("Fred", "Fredrickson", valid ? "ffred@gmail.com" : "ffredrickson@gmail.com", "secu4eP@ssw0rd", false);
 		if (or.success) {
 			User user = facade.getCurrentUser();
 			System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
