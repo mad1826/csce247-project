@@ -162,8 +162,12 @@ public class Lesson {
 	/**
 	 * Initially links the song to the lesson.
 	 * @param song the song to link
+	 * @throws IllegalArgumentException Thrown when linking to a null song
 	 */
 	public void linkSong(Song song) {
+		if (song == null)
+			throw new IllegalArgumentException("Cannot link lesson with null song.");
+
 		this.song = song;
 	}
 

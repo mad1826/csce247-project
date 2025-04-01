@@ -214,6 +214,14 @@ public class Course {
 		return ret;
 	}
 
+	public boolean linkOwner(Teacher owner) {
+		if (unlinkedOwner != null && !owner.getId().equals(unlinkedOwner))
+			return false;
+
+		this.owner = owner;
+		return true;
+	}
+
 	/**
 	 * Gets a json object of the course.
 	 * @return a json object

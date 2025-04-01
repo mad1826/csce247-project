@@ -194,6 +194,8 @@ public class CourseManager implements SavableList<Course> {
 	@Override
 	public OperationResult<Void> linkData() {
 		for (Course c : this.courses.values()) {
+			Teacher t = (Teacher)UserManager.getInstance().getUser(c.getUnlinkedOwner());
+			c.linkOwner(t);
             for (UUID id : c.getUnlinkedMembers()) {
 				Student s = (Student) UserManager.getInstance().getUser(id); //will throw error if non student user is in course
 
