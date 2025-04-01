@@ -1,4 +1,4 @@
-package com.model.datahandlers;
+package com.model.DataHandlers;
 
 import java.io.File;
 import java.io.FileWriter;

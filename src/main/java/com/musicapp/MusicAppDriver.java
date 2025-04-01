@@ -8,7 +8,7 @@ import com.model.SheetMusic;
 import com.model.Song;
 import com.model.Student;
 import com.model.User;
-import com.model.datahandlers.DataWriter;
+import com.model.DataHandlers.DataWriter;
 
 /**
  * A terminal-based interface for interacting with the application.

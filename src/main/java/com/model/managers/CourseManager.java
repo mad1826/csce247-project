@@ -14,8 +14,8 @@ import com.model.OperationResult;
 import com.model.SavableList;
 import com.model.Student;
 import com.model.Teacher;
-import com.model.datahandlers.DataLoader;
-import com.model.datahandlers.DataWriter;
+import com.model.DataHandlers.DataLoader;
+import com.model.DataHandlers.DataWriter;
 
 /**
  * A manager for all courses

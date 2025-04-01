@@ -1,0 +1,8 @@
+ Measure {
+	chords=[E - [E], G - [G]],
+	tempo=140,
+	timeSignatureNum=4,
+	timeSignatureDenom=4,
+	repeatOpen=false,
+	repeatClose=false
+}
