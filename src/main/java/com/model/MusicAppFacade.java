@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import com.model.datahandlers.DataLoader;
+import com.model.managers.CourseManager;
 import com.model.managers.SongManager;
 import com.model.managers.UserManager;
 
@@ -240,6 +241,15 @@ public class MusicAppFacade {
 
 		return new OperationResult<>(course.deleteLesson(lessonId));
     }
+
+	/**
+	 * Gets a course by its id.
+	 * @param id the course's id
+	 * @return the Course instance with the id, or null if not found
+	 */
+	public Course getCourse(UUID id) {
+		return CourseManager.getInstance().getCourse(id);
+	}
 
     /**
      * join course
