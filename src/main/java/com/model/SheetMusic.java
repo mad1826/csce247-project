@@ -181,4 +181,20 @@ public class SheetMusic {
 
         return songPattern.toString().trim();
 	}
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public Clef getClef() {
+        return clef;
+    }
+
+    public boolean isAudioPlaybackEnabled() {
+        return audioPlaybackEnabled;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
 } 
