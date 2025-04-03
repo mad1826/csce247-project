@@ -2,7 +2,7 @@ package com.model;
 
 import org.junit.Test;
 
-import com.model.datahandlers.DataWriter;
+import com.model.DataHandlers.DataWriter;
 import com.model.managers.CourseManager;
 
 import static org.junit.Assert.assertFalse;

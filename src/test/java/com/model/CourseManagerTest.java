@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.model.datahandlers.DataLoader;
+import com.model.DataHandlers.DataLoader;
 import com.model.managers.CourseManager;
 
 /**
