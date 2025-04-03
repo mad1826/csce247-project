@@ -215,6 +215,19 @@ public class Course {
 	}
 
 	/**
+	 * Links the owner to the Teacher object once it has been loaded.
+	 * @param owner the teacher who owns the course
+	 * @return Whether the link was successful
+	 */
+	public boolean linkOwner(Teacher owner) {
+		if (unlinkedOwner != null && !owner.getId().equals(unlinkedOwner))
+			return false;
+
+		this.owner = owner;
+		return true;
+	}
+
+	/**
 	 * Gets a json object of the course.
 	 * @return a json object
 	 */

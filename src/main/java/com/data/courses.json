@@ -1,1 +1,43 @@
-[{"owner":"b7610144-42c0-4700-9138-0c7f615dec63","code":"MUS101","members":["d752ff10-874c-462f-bcb2-11741d9988bb"],"id":"54193d4c-dde3-422c-aea4-746beb82fbf0","title":"Introduction to Music","lessons":[]}]
+[
+	{
+		"code": "FA2024MUSC101",
+		"id": "dd957d62-de3a-4dc5-b3fd-530d300cb80d",
+		"lessons": [
+			{
+				"id": "564dcc08-e886-4ed1-95eb-6cd1e689e06e",
+				"instrument": "Guitar",
+				"numberOfTimes": 3,
+				"song": "564dcc08-e886-4ed1-95eb-6cd1e689e06e",
+				"title": "Reading Sheet Music"
+			}
+		],
+		"members": [],
+		"owner": "550e8400-e29b-41d4-a716-446655440000",
+		"title": "Fall 2024 MUSC 101"
+	},
+	{
+		"code": "S25MUSC499",
+		"id": "712a41c0-2cd2-45d0-ade5-727d5261c0c5",
+		"lessons": [
+			{
+				"id": "24d85a1d-e68c-4961-a43c-f9d02a7483c0",
+				"instrument": "Piano",
+				"numberOfTimes": 3,
+				"song": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+				"title": "Making Masterpieces Pt. 1"
+			},
+			{
+				"id": "42011ee3-1ad6-465a-b14c-44cd72f6491e",
+				"instrument": "Piano",
+				"numberOfTimes": 5,
+				"song": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+				"title": "Making Masterpieces Pt. 2"
+			}
+		],
+		"members": [
+			"c0a80101-7b2d-4f5a-91d1-4e5b5b5a5a5a"
+		],
+		"owner": "550e8400-e29b-41d4-a716-446655440000",
+		"title": "Spring 2025 MUSC 499"
+	}
+]

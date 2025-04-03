@@ -15,8 +15,8 @@ import com.model.SavableList;
 import com.model.Student;
 import com.model.Teacher;
 import com.model.User;
-import com.model.DataHandlers.DataLoader;
-import com.model.DataHandlers.DataWriter;
+import com.model.datahandlers.DataLoader;
+import com.model.datahandlers.DataWriter;
 
 /**
  * A manager for all courses
@@ -195,6 +195,13 @@ public class CourseManager implements SavableList<Course> {
 	@Override
 	public OperationResult<Void> linkData() {
 		for (Course c : this.courses.values()) {
+			User owner = (Teacher)UserManager.getInstance().getUser(c.getUnlinkedOwner());
+
+			if (owner == null || !(owner instanceof Teacher)) {
+				return new OperationResult<>("Failed to link course owner: User with ID " + c.getUnlinkedOwner() + " is not a Teacher.");
+			}
+			c.linkOwner((Teacher)owner);
+
             for (UUID id : c.getUnlinkedMembers()) {
                 User user = UserManager.getInstance().getUser(id);
                 if (user == null) {

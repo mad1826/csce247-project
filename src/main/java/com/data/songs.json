@@ -1,1 +1,599 @@
-[]
+[
+	{
+		"artist": "Traditional",
+		"genres": [
+			"CLASSICAL",
+			"FOLK"
+		],
+		"id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+		"sheets": {
+			"GUITAR": {
+				"sheet": {
+					"audioPlaybackEnabled": true,
+					"clef": "TREBLE",
+					"difficulty": "BEGINNER",
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "My First Chord",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 2,
+											"pitch": "A",
+											"pitchModifier": "NONE",
+											"value": "SIXTEENTH"
+										}
+									],
+									"tie": false
+								}
+							],
+							"repeatClose": false,
+							"repeatOpen": false,
+							"tempo": 1,
+							"timeSignatureDenom": 1,
+							"timeSignatureNum": 50
+						}
+					],
+					"private": true
+				},
+				"tuning": "Standard"
+			},
+			"PIANO": {
+				"sheet": {
+					"audioPlaybackEnabled": true,
+					"clef": "TREBLE",
+					"difficulty": "BEGINNER",
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "C",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 4,
+											"pitch": "C",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "C",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 4,
+											"pitch": "C",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "D",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 4,
+											"pitch": "D",
+											"pitchModifier": "NONE",
+											"value": "HALF"
+										}
+									],
+									"tie": false
+								}
+							],
+							"repeatClose": false,
+							"repeatOpen": false,
+							"tempo": 80,
+							"timeSignatureDenom": 4,
+							"timeSignatureNum": 4
+						},
+						{
+							"chords": [
+								{
+									"name": "C",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 4,
+											"pitch": "C",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "F",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 4,
+											"pitch": "F",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "E",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 4,
+											"pitch": "E",
+											"pitchModifier": "NONE",
+											"value": "HALF"
+										}
+									],
+									"tie": false
+								}
+							],
+							"repeatClose": false,
+							"repeatOpen": false,
+							"tempo": 80,
+							"timeSignatureDenom": 4,
+							"timeSignatureNum": 4
+						}
+					],
+					"private": true
+				},
+				"tuning": "Standard"
+			}
+		},
+		"title": "Happy Birthday"
+	},
+	{
+		"artist": "The White Stripes",
+		"genres": [
+			"ROCK"
+		],
+		"id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+		"sheets": {
+			"DRUMS": {
+				"sheet": {
+					"audioPlaybackEnabled": true,
+					"clef": "TREBLE",
+					"difficulty": "INTERMEDIATE",
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "Kick",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 1,
+											"pitch": "B",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "Rest",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 0,
+											"pitch": "R",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "Snare",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 2,
+											"pitch": "D",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "Rest",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 0,
+											"pitch": "R",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								}
+							],
+							"repeatClose": false,
+							"repeatOpen": false,
+							"tempo": 120,
+							"timeSignatureDenom": 4,
+							"timeSignatureNum": 4
+						}
+					],
+					"private": true
+				},
+				"tuning": "Standard"
+			},
+			"PIANO": {
+				"sheet": {
+					"audioPlaybackEnabled": true,
+					"clef": "TREBLE",
+					"difficulty": "INTERMEDIATE",
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "E",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"pitch": "E",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "E",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"pitch": "E",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "G",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"pitch": "G",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "A",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"pitch": "A",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								}
+							],
+							"repeatClose": false,
+							"repeatOpen": false,
+							"tempo": 120,
+							"timeSignatureDenom": 4,
+							"timeSignatureNum": 4
+						},
+						{
+							"chords": [
+								{
+									"name": "A",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"pitch": "A",
+											"pitchModifier": "NONE",
+											"value": "EIGHTH"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "G",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"pitch": "G",
+											"pitchModifier": "NONE",
+											"value": "EIGHTH"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "E",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 3,
+											"pitch": "E",
+											"pitchModifier": "NONE",
+											"value": "HALF"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "Rest",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 0,
+											"pitch": "R",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								}
+							],
+							"repeatClose": false,
+							"repeatOpen": false,
+							"tempo": 120,
+							"timeSignatureDenom": 4,
+							"timeSignatureNum": 4
+						}
+					],
+					"private": true
+				},
+				"tuning": "Standard"
+			}
+		},
+		"title": "Seven Nation Army"
+	},
+	{
+		"artist": "The White Stripes",
+		"genres": [
+			"ROCK"
+		],
+		"id": "564dcc08-e886-4ed1-95eb-6cd1e689e06e",
+		"sheets": {
+			"DRUMS": {
+				"sheet": {
+					"audioPlaybackEnabled": true,
+					"clef": "TREBLE",
+					"difficulty": "EXPERT",
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "Kick",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 1,
+											"pitch": "B",
+											"pitchModifier": "NONE",
+											"value": "SIXTEENTH"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "Snare",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 2,
+											"pitch": "D",
+											"pitchModifier": "NONE",
+											"value": "SIXTEENTH"
+										}
+									],
+									"tie": false
+								}
+							],
+							"repeatClose": false,
+							"repeatOpen": false,
+							"tempo": 160,
+							"timeSignatureDenom": 4,
+							"timeSignatureNum": 4
+						}
+					],
+					"private": true
+				},
+				"tuning": "Standard"
+			},
+			"GUITAR": {
+				"sheet": {
+					"audioPlaybackEnabled": true,
+					"clef": "TREBLE",
+					"difficulty": "INTERMEDIATE",
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "G",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 4,
+											"pitch": "G",
+											"pitchModifier": "NONE",
+											"value": "EIGHTH"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "B",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 4,
+											"pitch": "B",
+											"pitchModifier": "NONE",
+											"value": "EIGHTH"
+										}
+									],
+									"tie": false
+								}
+							],
+							"repeatClose": false,
+							"repeatOpen": false,
+							"tempo": 160,
+							"timeSignatureDenom": 4,
+							"timeSignatureNum": 4
+						}
+					],
+					"private": true
+				},
+				"tuning": "Standard"
+			}
+		},
+		"title": "Fell in Love with a Girl"
+	},
+	{
+		"artist": "The White Stripes",
+		"genres": [
+			"ROCK"
+		],
+		"id": "7c49692b-5c9b-4d01-ae5e-55bdbf66eb94",
+		"sheets": {
+			"DRUMS": {
+				"sheet": {
+					"audioPlaybackEnabled": true,
+					"clef": "TREBLE",
+					"difficulty": "EXPERT",
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "Kick",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 1,
+											"pitch": "B",
+											"pitchModifier": "NONE",
+											"value": "EIGHTH"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "Snare",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 2,
+											"pitch": "D",
+											"pitchModifier": "NONE",
+											"value": "EIGHTH"
+										}
+									],
+									"tie": false
+								}
+							],
+							"repeatClose": false,
+							"repeatOpen": false,
+							"tempo": 140,
+							"timeSignatureDenom": 4,
+							"timeSignatureNum": 4
+						}
+					],
+					"private": true
+				},
+				"tuning": "Standard"
+			},
+			"GUITAR": {
+				"sheet": {
+					"audioPlaybackEnabled": true,
+					"clef": "TREBLE",
+					"difficulty": "EXPERT",
+					"measures": [
+						{
+							"chords": [
+								{
+									"name": "E",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 4,
+											"pitch": "E",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								},
+								{
+									"name": "G",
+									"notes": [
+										{
+											"dot": false,
+											"line": false,
+											"octave": 4,
+											"pitch": "G",
+											"pitchModifier": "NONE",
+											"value": "QUARTER"
+										}
+									],
+									"tie": false
+								}
+							],
+							"repeatClose": false,
+							"repeatOpen": false,
+							"tempo": 140,
+							"timeSignatureDenom": 4,
+							"timeSignatureNum": 4
+						}
+					],
+					"private": true
+				},
+				"tuning": "Standard"
+			}
+		},
+		"title": "Icky Thump"
+	}
+]
