@@ -14,8 +14,9 @@ import com.model.OperationResult;
 import com.model.SavableList;
 import com.model.Student;
 import com.model.Teacher;
-import com.model.datahandlers.DataLoader;
-import com.model.datahandlers.DataWriter;
+import com.model.User;
+import com.model.DataHandlers.DataLoader;
+import com.model.DataHandlers.DataWriter;
 
 /**
  * A manager for all courses
@@ -194,14 +195,19 @@ public class CourseManager implements SavableList<Course> {
 	@Override
 	public OperationResult<Void> linkData() {
 		for (Course c : this.courses.values()) {
-			Teacher t = (Teacher)UserManager.getInstance().getUser(c.getUnlinkedOwner());
-			c.linkOwner(t);
             for (UUID id : c.getUnlinkedMembers()) {
-				Student s = (Student) UserManager.getInstance().getUser(id); //will throw error if non student user is in course
-
-				s.getCourses().add(c); //Add course to user, ideally would be done in user.linkData but the loop is already here so it was easier.
-
-            	c.getMembers().add(s); //Add user to course
+                User user = UserManager.getInstance().getUser(id);
+                if (user == null) {
+                    return new OperationResult<>("Failed to link course member: User with ID " + id + " not found.");
+                }
+                
+                if (!(user instanceof Student)) {
+                    return new OperationResult<>("Failed to link course member: User with ID " + id + " is not a Student.");
+                }
+                
+                Student s = (Student) user;
+                s.getCourses().add(c); //Add course to user
+                c.getMembers().add(s); //Add user to course
             }
 
 			for (Lesson l : c.getLessons()) {
