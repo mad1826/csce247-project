@@ -1,4 +1,4 @@
-package com.tests;
+package com.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -17,6 +17,11 @@ import com.model.Pitch;
 import com.model.NoteValue;
 
 public class ChordTest {
+
+    @Test
+    public void testTeseting() {
+        assertTrue(true);
+    }
 
     @Test
     public void testToJfugueSingleNote() {
