@@ -7,7 +7,7 @@ import java.util.UUID;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.model.managers.CourseManager;
-import com.model.DataHandlers.DataLoader;
+import com.model.datahandlers.DataLoader;
 
 public class StudentTest {
     private Student student;
