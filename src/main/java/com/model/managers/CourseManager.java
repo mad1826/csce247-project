@@ -86,6 +86,8 @@ public class CourseManager implements SavableList<Course> {
 		Course course = new Course(code, title, new ArrayList<>(), owner, new ArrayList<>());
 		courses.put(course.getId(), course);
 		save();
+		owner.getCourses().add(course);
+		UserManager.getInstance().save();
 		return new OperationResult<>(course);
 	}
 

@@ -224,6 +224,7 @@ public class Course {
 			return false;
 
 		this.owner = owner;
+		this.owner.getCourses().add(this);
 		return true;
 	}
 
