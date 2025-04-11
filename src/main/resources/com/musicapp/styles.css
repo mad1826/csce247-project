@@ -1,3 +1,79 @@
-.label {
-	-fx-text-fill: #549df9;
+.root {
+	-fx-background-image: url("background-header.png");
+	background-image: url("background-header.png");
+	-fx-background-size: 100%;
+	background-size: 100%;
+	-fx-background-repeat: no-repeat;
+	background-repeat: no-repeat;
+	-fx-font-size: 1.5em;
+	font-size: 1.5em;
+}
+
+.main-label {
+	-fx-font-size: 2em;
+	font-size: 2.5em;
+	-fx-font-weight: bolder;
+	font-weight: bolder;
+	-fx-wrap-text: true;
+	-fx-text-alignment: center;
+}
+
+.text-input {
+	-fx-max-width: 432;
+	max-width: 432px;
+	-fx-background-color: #F3F9FF;
+	background-color: #F3F9FF;
+	-fx-padding: 10;
+	padding: 10px;
+}
+
+.login-button {
+	-fx-pref-width: 432;
+	-fx-pref-height: 48;
+	-fx-background-color: white;
+	background-color: white;
+	-fx-background-radius: 24;
+	-fx-text-fill: deepskyblue;
+	-fx-border-color: deepskyblue;
+	border-color: deepskyblue;
+	-fx-border-radius: 24;
+	border-radius: 24px;
+	-fx-border-width: 1;
+	border-width: 1px;
+}
+
+.login-button:hover {
+	-fx-background-color: deepskyblue;
+	background-color: deepskyblue;
+	-fx-text-fill: white;
+}
+
+.google-button {
+	-fx-text-fill: black;
+	-fx-background-color: #F3F9FF;
+	background-color: #F3F9FF;
+	-fx-border-color: black;
+	border-color: black;
+}
+
+.google-button:hover {
+	-fx-text-fill: white;
+	-fx-background-color: gray;
+	background-color: gray;
+}
+
+#output {
+	-fx-text-fill: red;
+}
+
+.swap-login {
+	-fx-text-fill: gray;
+	-fx-background-color: none;
+	background-color: none;
+}
+
+.swap-login:hover {
+	-fx-text-fill: black;
+	-fx-background-color: lightgray;
+	background-color: lightgray;
 }

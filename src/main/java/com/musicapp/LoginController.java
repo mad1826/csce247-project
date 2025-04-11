@@ -1,17 +1,27 @@
 package com.musicapp;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import com.model.MusicAppFacade;
 import com.model.User;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
-public class PrimaryController {
+public class LoginController implements Initializable {
+
+	@FXML
+	private VBox vboxMain;
+
+    @FXML
+    private Label labelLogin;
 
     @FXML
     private Button btnlogin;
@@ -20,7 +30,7 @@ public class PrimaryController {
     private Label output;
 
     @FXML
-    private Button primaryButton;
+    private Button toSignUp;
 
     @FXML
     private TextField textPassword;
@@ -29,20 +39,25 @@ public class PrimaryController {
     private TextField textUsername;
 
     @FXML
-    void login(ActionEvent event) {
+    public void initialize(URL url, ResourceBundle rb)  {
+		labelLogin.setText("Log in\nto continue your journey"); // Line break not supported directly in fxml
+	}
+
+    @FXML
+    void login(ActionEvent event) throws IOException {
 		MusicAppFacade facade = MusicAppFacade.getInstance();
 		facade.login(textUsername.getText(), textPassword.getText());
 		User user = facade.getCurrentUser();
 		if (user == null) {
-			output.setText("User not found");
+			output.setText("No account found with that username and password.");
 		}
 		else {
-			output.setText("Signed in as " + user.getFirstName() + " " + user.getLastName());
+			App.setRoot("home");
 		}
     }
 
     @FXML
-    void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
+    void switchToSignUp() throws IOException {
+        App.setRoot("signup");
     }
 }
