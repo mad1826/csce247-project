@@ -45,8 +45,29 @@ public class LoginController implements Initializable {
 
     @FXML
     void login(ActionEvent event) throws IOException {
+		loginWithCredentials(textUsername.getText(), textPassword.getText());
+    }
+
+	@FXML
+	void continueWithGoogle(ActionEvent event) throws IOException {
+		// Simulate getting credentials from device's locally saved Google account
+		loginWithCredentials("jane.smith@example.com", "secureP@ss987");
+	}
+
+    @FXML
+    void switchToSignUp() throws IOException {
+        App.setRoot("signup");
+    }
+
+	/**
+	 * Logs in with the specified email and password.
+	 * @param email the user's email
+	 * @param password the user's password
+	 * @throws IOException thrown if the root file is invalid
+	 */
+	private void loginWithCredentials(String email, String password) throws IOException {
 		MusicAppFacade facade = MusicAppFacade.getInstance();
-		facade.login(textUsername.getText(), textPassword.getText());
+		facade.login(email, password);
 		User user = facade.getCurrentUser();
 		if (user == null) {
 			output.setText("No account found with that username and password.");
@@ -54,10 +75,5 @@ public class LoginController implements Initializable {
 		else {
 			App.setRoot("home");
 		}
-    }
-
-    @FXML
-    void switchToSignUp() throws IOException {
-        App.setRoot("signup");
-    }
+	}
 }

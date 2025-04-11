@@ -9,6 +9,42 @@
 	font-size: 1.25em;
 }
 
+#vboxMain {
+	-fx-pref-height: 800;
+	-fx-pref-width: 450;
+	-fx-aligment: top;
+	-fx-spacing: 50;
+}
+
+#mainLabelContainer {
+	-fx-pref-height: 145;
+	-fx-alignment: bottom-center;
+}
+
+#content {
+	-fx-pref-height: 465;
+	-fx-spacing: 20;
+	-fx-alignment: top-center;
+}
+
+#footer {
+	-fx-pref-height: 90;
+	-fx-alignment: center;
+}
+
+.label {
+	-fx-text-alignment: center;
+}
+
+.text-input {
+	-fx-max-width: 432;
+	max-width: 432px;
+	-fx-background-color: #dfefff;
+	background-color: #dfefff;
+	-fx-padding: 10;
+	padding: 10px;
+}
+
 .main-label {
 	-fx-font-size: 2em;
 	font-size: 2.5em;
@@ -16,15 +52,6 @@
 	font-weight: bolder;
 	-fx-wrap-text: true;
 	-fx-text-alignment: center;
-}
-
-.text-input {
-	-fx-max-width: 432;
-	max-width: 432px;
-	-fx-background-color: #F3F9FF;
-	background-color: #F3F9FF;
-	-fx-padding: 10;
-	padding: 10px;
 }
 
 .login-button {
@@ -76,4 +103,61 @@
 	-fx-text-fill: black;
 	-fx-background-color: lightgray;
 	background-color: lightgray;
+}
+
+.nav-tab {
+	-fx-pref-height: 90;
+	-fx-pref-width: 90;
+	-fx-alignment: center;
+}
+
+.nav-tab:hover {
+	-fx-background-color: lightgray;
+	background-color: lightgray;
+}
+
+.current-tab .label {
+	-fx-text-fill: deepskyblue;
+}
+
+#labelHomeLessons {
+	-fx-font-weight: bolder;
+	font-weight: bolder;
+	-fx-min-width: 400;
+	min-width: 400px;
+	-fx-text-alignment: center;
+}
+
+#listLessons {
+	-fx-max-width: 400;
+	max-width: 400px;
+	-fx-spacing: 10;
+}
+
+.home-lesson {
+	-fx-pref-height: 75;
+	-fx-spacing: 15;
+	-fx-padding: 5;
+	padding: 5px;
+}
+
+.home-lesson:hover {
+	-fx-background-color: lightgray;
+	background-color: lightgray;
+	-fx-background-radius: 10;
+}
+
+.home-lesson .label {
+	-fx-font-weight: bolder;
+	font-weight: bolder;
+	-fx-font-size: 1.4em;
+	font-size: 1.4em;
+}
+
+.lesson-progress {
+	-fx-progress-color: deepskyblue;
+	-fx-min-width: 75;
+	min-width: 75px;
+	-fx-min-height: 75;
+	min-height: 75px;
 }
