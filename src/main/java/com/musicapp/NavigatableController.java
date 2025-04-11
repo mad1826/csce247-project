@@ -37,20 +37,11 @@ public abstract class NavigatableController implements Initializable {
 
 	@FXML
 	public void initialize(URL url, ResourceBundle rb) {
-		tabHome.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				try {
-					setTab("home");
-				}
-				catch (IOException e) {
-					return;
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		addOnClickEvent(tabHome, "home");
+		addOnClickEvent(tabCourses, "courses");
+		addOnClickEvent(tabSongs, "songs");
+		addOnClickEvent(tabProfile, "profile");
+		addOnClickEvent(tabFriends, "friends");
 	}
 
 	/**
@@ -77,5 +68,27 @@ public abstract class NavigatableController implements Initializable {
 	private void setTab(String tab) throws IOException {
 		setCurrentTab(tab);
 		App.setRoot(tab);
+	}
+
+	/**
+	 * Add an event listener that switches to a tab once the corresponding node is clicked.
+	 * @param node the node to listen for the onMouseClicked event
+	 * @param tab the tab to set the app to
+	 */
+	private void addOnClickEvent(Node node, String tab) {
+		node.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				try {
+					setTab(tab);
+				}
+				catch (IOException e) {
+					return;
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
