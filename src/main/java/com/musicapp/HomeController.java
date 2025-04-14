@@ -44,7 +44,7 @@ public class HomeController extends NavigatableController {
 	 */
 	private void loadLessons() {
 		for (Course course : user.getCourses()) {
-			for (Lesson lesson : course.getLessons()) {
+			for (Lesson lesson : course.getLessons().values()) {
 				listLessons.getChildren().add(getLessonHBox(lesson));
 			}
 		}

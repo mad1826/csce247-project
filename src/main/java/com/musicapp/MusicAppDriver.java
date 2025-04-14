@@ -160,7 +160,7 @@ public class MusicAppDriver {
 		}
 		else {
 			System.out.println("Listing lessons in course " + course.getTitle() + ":");
-			for (Lesson lesson : course.getLessons()) {
+			for (Lesson lesson : course.getLessons().values()) {
 				System.out.println("\t" + lesson.getTitle());
 				OperationResult<Integer> progressResult = facade.getProgress(lesson);
 				if (progressResult.success && progressResult.result != 0)
@@ -184,7 +184,7 @@ public class MusicAppDriver {
 				System.out.println("New lesson progress: " + facade.getProgress(lesson).result);
 			}
 
-			for (Lesson newLesson : course.getLessons()) {
+			for (Lesson newLesson : course.getLessons().values()) {
 				if (newLesson.getTitle().equals(lesson.getTitle())) {
 					continue;
 				}

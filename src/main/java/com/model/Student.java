@@ -174,7 +174,7 @@ public class Student extends User {
 		File f = new File(filePath);
 		try (FileWriter writer = new FileWriter(f)) {		
 			for (Course course : getCourses()) {
-				for (Lesson lesson : course.getLessons()) {
+				for (Lesson lesson : course.getLessons().values()) {
 					writer.write(lesson.toFeedback(getLessonProgress(lesson)) + "\n\n");
 				}
 			}

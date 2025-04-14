@@ -99,7 +99,7 @@ public class LessonTest {
 
 		Course course = facade.getCourse(UUID.fromString("712a41c0-2cd2-45d0-ade5-727d5261c0c5"));
 		Lesson lesson = null;
-		for (Lesson courseLesson : course.getLessons()) {
+		for (Lesson courseLesson : course.getLessons().values()) {
 			if (courseLesson.hasId(UUID.fromString("24d85a1d-e68c-4961-a43c-f9d02a7483c0")))
 				lesson = courseLesson;
 		}

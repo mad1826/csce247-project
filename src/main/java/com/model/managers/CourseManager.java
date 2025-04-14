@@ -90,7 +90,7 @@ public class CourseManager implements SavableList<Course> {
 		if (owner == null)
 			return new OperationResult<>("The course owner cannot be null.");
 
-		Course course = new Course(code, title, new ArrayList<>(), owner, new ArrayList<>());
+		Course course = new Course(code, title, owner);
 		courses.put(course.getId(), course);
 		save();
 		owner.getCourses().add(course);
@@ -160,7 +160,7 @@ public class CourseManager implements SavableList<Course> {
 			members.add(UUID.fromString((String) memberID));
 		}
 
-		ArrayList<Lesson> lessons = new ArrayList<>();
+		HashMap<UUID, Lesson> lessons = new HashMap<>();
 		JSONArray lessonsJSON = (JSONArray) object.get("lessons");
 		for (Object lessonObject : lessonsJSON) {
 			JSONObject lessonJSON = (JSONObject) lessonObject;
@@ -177,7 +177,7 @@ public class CourseManager implements SavableList<Course> {
 			int numberOfTimes = ((Long)numTimesObj).intValue();
 
 			Lesson l = new Lesson(lessonID, lessonTitle, songID,InstrumentType.valueOf(instrument.toUpperCase()),numberOfTimes);
-			lessons.add(l);
+			lessons.put(lessonID, l);
 		}
 
 		return new Course(id,code,title,lessons,owner,members);
@@ -227,7 +227,7 @@ public class CourseManager implements SavableList<Course> {
                 c.getMembers().add(s); //Add user to course
             }
 
-			for (Lesson l : c.getLessons()) {
+			for (Lesson l : c.getLessons().values()) {
 				l.linkSong(SongManager.getInstance().getSong(l.getUnlinkedSong()).result); //will error until we have songmanager.loadData
 			}
         }

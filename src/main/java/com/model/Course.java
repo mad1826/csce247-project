@@ -1,6 +1,7 @@
 package com.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.json.simple.JSONArray;
@@ -47,7 +48,7 @@ public class Course {
 	/**
 	 * The course's lessons
 	 */
-	private ArrayList<Lesson> lessons;
+	private HashMap<UUID, Lesson> lessons = new HashMap<>();
 	
 	/**
 	 * Constructs a new Course instance for data loading
@@ -58,7 +59,7 @@ public class Course {
 	 * @param owner - the course's owner's id
 	 * @param members - the course's student members' ids
 	 */
-	public Course(UUID id, String code, String title, ArrayList<Lesson> lessons, UUID owner, ArrayList<UUID> members) {
+	public Course(UUID id, String code, String title, HashMap<UUID, Lesson> lessons, UUID owner, ArrayList<UUID> members) {
         this.id = id;
         this.code = code;
         this.title = title;
@@ -75,13 +76,11 @@ public class Course {
 	 * @param owner - the course's owner
 	 * @param members - the course's student members
 	 */
-	public Course(String code, String title, ArrayList<Lesson> lessons, Teacher owner, ArrayList<Student> members) {
+	public Course(String code, String title, Teacher owner) {
         this.id = UUID.randomUUID();
         this.code = code;
         this.title = title;
-        this.lessons = lessons;
 		this.owner = owner;
-		this.members = members;
 	}
 
 	/**
@@ -177,9 +176,9 @@ public class Course {
 
 	/**
 	 * Gets the course's lessons
-	 * @return an array list of the course's lessons
+	 * @return a hash map of the course's lessons
 	 */
-	public ArrayList<Lesson> getLessons() {
+	public HashMap<UUID, Lesson> getLessons() {
 		return lessons;
 	}
 
@@ -196,7 +195,7 @@ public class Course {
 			return new OperationResult<>("Lesson number of times must be a positive integer.");
 
 		Lesson lesson = new Lesson(title, song, instrumentType, numberOfTimes);
-		lessons.add(lesson);
+		lessons.put(lesson.getId(), lesson);
 		CourseManager.getInstance().save();
 		return new OperationResult<>(lesson);
 	}
@@ -207,14 +206,12 @@ public class Course {
 	 * @return whether the lesson was successfully deleted
 	 */
 	public boolean deleteLesson(UUID lessonId) {
-		for (Lesson lesson : lessons) {
-			if (lesson.hasId(lessonId)) {
-				lessons.remove(lesson);
-				CourseManager.getInstance().save();
-				return true;
-			}
-		}
-		return false;
+		Lesson found = lessons.remove(lessonId);
+		if (found == null)
+			return false;
+
+		CourseManager.getInstance().save();
+		return true;
 	}
 
 	/**
@@ -262,7 +259,7 @@ public class Course {
 		courseDetails.put("members", membersArray);
 
 		JSONArray lessonsArray = new JSONArray();
-		for (Lesson lesson : lessons) {
+		for (Lesson lesson : lessons.values()) {
 			lessonsArray.add(lesson.toJSON());
 		}
 		courseDetails.put("lessons", lessonsArray);
