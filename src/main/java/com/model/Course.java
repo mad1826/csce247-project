@@ -207,10 +207,10 @@ public class Course {
 		for (Lesson lesson : lessons) {
 			if (lesson.hasId(lessonId)) {
 				lessons.remove(lesson);
+				CourseManager.getInstance().save();
 				return true;
 			}
 		}
-		CourseManager.getInstance().save();
 		return false;
 	}
 
