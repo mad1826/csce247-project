@@ -118,9 +118,11 @@ public class Student extends User {
      * @return The progress value (0-100)
      */
     public int getLessonProgress(Lesson lesson) {
-        return lessonProgress.containsKey(lesson.getId())
-			? lessonProgress.get(lesson.getId())
-			: 0;
+		UUID id = lesson.getId();
+		if (!lessonProgress.containsKey(id))
+			return 0;
+
+        return lessonProgress.get(id);
     }
     
     /**

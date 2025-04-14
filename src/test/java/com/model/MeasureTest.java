@@ -10,13 +10,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.Test;
 
-import com.model.Chord;
-import com.model.Note;
-import com.model.Measure;
-import com.model.Pitch;
-import com.model.PitchModifier;
-import com.model.NoteValue;
-
 public class MeasureTest {
 
     @Test

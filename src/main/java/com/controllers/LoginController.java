@@ -40,6 +40,7 @@ public class LoginController implements Initializable {
     private TextField textUsername;
 
     @FXML
+	@Override
     public void initialize(URL url, ResourceBundle rb)  {
 		labelLogin.setText("Log in\nto continue your journey"); // Line break not supported directly in fxml
 	}

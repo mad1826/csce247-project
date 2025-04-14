@@ -6,9 +6,6 @@ import org.junit.Test;
 import java.util.UUID;
 import java.util.ArrayList;
 import org.json.simple.JSONObject;
-import com.model.Teacher;
-import com.model.Course;
-import com.model.OperationResult;
 import com.model.managers.CourseManager;
 
 public class TeacherTest {

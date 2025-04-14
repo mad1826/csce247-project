@@ -18,12 +18,12 @@ public class Course {
 	/**
 	 * The course's unique identifier
 	 */
-	private UUID id;
+	private final UUID id;
 
 	/**
 	 * The course's unique code that students will enter to join
 	 */
-	private String code;
+	private final String code;
 
 	/**
 	 * The course's title
@@ -39,7 +39,7 @@ public class Course {
 	/**
 	 * The course's members
 	 */
-	private ArrayList<Student> members = new ArrayList<>();
+	private final ArrayList<Student> members = new ArrayList<>();
 	/**
 	 * The ids of course members before converted to instances
 	 */

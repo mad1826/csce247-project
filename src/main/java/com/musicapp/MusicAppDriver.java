@@ -185,7 +185,7 @@ public class MusicAppDriver {
 			}
 
 			for (Lesson newLesson : course.getLessons().values()) {
-				if (newLesson.getTitle().equals(lesson.getTitle())) {
+				if (lesson == null || newLesson.getTitle().equals(lesson.getTitle())) {
 					continue;
 				}
 				OperationResult<Integer> progressResult = facade.getProgress(newLesson);

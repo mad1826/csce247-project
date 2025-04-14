@@ -38,6 +38,7 @@ public abstract class NavigatableController implements Initializable {
 	private VBox tabFriends;
 
 	@FXML
+	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		addOnClickEvent(tabHome, "home");
 		addOnClickEvent(tabCourses, "courses");
@@ -85,7 +86,7 @@ public abstract class NavigatableController implements Initializable {
 					setTab(tab);
 				}
 				catch (IOException e) {
-					return;
+					e.printStackTrace();
 				}
 				catch (Exception e) {
 					e.printStackTrace();

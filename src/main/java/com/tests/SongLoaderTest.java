@@ -9,7 +9,7 @@ import com.model.datahandlers.DataLoader;
 
 public class SongLoaderTest {
     public static void main(String[] args) {
-        OperationResult<Void> or = DataLoader.loadAllData();
+        DataLoader.loadAllData();
 
         UUID testID = UUID.fromString("f47ac10b-58cc-4372-a567-0e02b2c3d479");
 

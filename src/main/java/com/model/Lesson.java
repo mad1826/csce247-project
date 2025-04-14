@@ -19,7 +19,7 @@ public class Lesson {
 	/**
 	 * The lesson's unique identifier
 	 */
-	private UUID id;
+	private final UUID id;
 
 	/**
 	 * The lesson's title
@@ -42,7 +42,7 @@ public class Lesson {
 	/**
 	 * The instrument this lesson will play a sheet from
 	 */
-	private InstrumentType instrumentType;
+	private final InstrumentType instrumentType;
 
 	/**
 	 * Constructs a new Lesson instance before linking

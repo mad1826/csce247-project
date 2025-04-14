@@ -29,6 +29,7 @@ public class HomeController extends NavigatableController {
 	private User user;
 
     @FXML
+	@Override
     public void initialize(URL url, ResourceBundle rb)  {
 		super.initialize(url, rb);
 		setCurrentTab("home");

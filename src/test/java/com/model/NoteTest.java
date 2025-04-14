@@ -7,11 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.json.simple.JSONObject;
 import org.junit.Test;
 
-import com.model.Note;
-import com.model.NoteValue;
-import com.model.Pitch;
-import com.model.PitchModifier;
-
 public class NoteTest {
 
     @Test
