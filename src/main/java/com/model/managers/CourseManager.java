@@ -81,7 +81,14 @@ public class CourseManager implements SavableList<Course> {
 			if (course.getCode().equals(code)) {
 				return new OperationResult<>("A course with the specified code already exists.");
 			}
-		} 
+		}
+
+		if (code == null || code.length() == 0)
+			return new OperationResult<>("The course code cannot be null nor empty.");
+		if (title == null || title.length() == 0)
+			return new OperationResult<>("The course title cannot be null nor empty.");
+		if (owner == null)
+			return new OperationResult<>("The course owner cannot be null.");
 
 		Course course = new Course(code, title, new ArrayList<>(), owner, new ArrayList<>());
 		courses.put(course.getId(), course);
