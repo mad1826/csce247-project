@@ -248,7 +248,14 @@ public class MusicAppFacade {
  	 * @return the Course instance with the id, or null if not found
  	 */
  	public Course getCourse(UUID id) {
- 		return CourseManager.getInstance().getCourse(id);
+		if (currentUser == null)
+			return null;
+
+ 		for (Course course : currentUser.getCourses()) {
+			if (course.getId().equals(id))
+				return course;
+		}
+		return null;
  	}
 
     /**
