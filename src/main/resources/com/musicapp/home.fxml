@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="vboxMain" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.musicapp.HomeController">
+<VBox fx:id="vboxMain" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.musicapp.HomeController">
 	<children>
 		<VBox fx:id="mainLabelContainer" alignment="CENTER">
 			<children>
