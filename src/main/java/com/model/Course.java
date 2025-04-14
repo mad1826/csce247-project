@@ -192,6 +192,9 @@ public class Course {
 	 * @return whether the lesson was successfully created
 	 */
 	public OperationResult<Lesson> createLesson(String title, Song song, InstrumentType instrumentType, int numberOfTimes) {
+		if (numberOfTimes < 1)
+			return new OperationResult<>("Lesson number of times must be a positive integer.");
+
 		Lesson lesson = new Lesson(title, song, instrumentType, numberOfTimes);
 		lessons.add(lesson);
 		CourseManager.getInstance().save();
