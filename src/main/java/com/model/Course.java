@@ -158,7 +158,10 @@ public class Course {
 	 * @return whether the operation was successful
 	 */
 	public boolean addMember(Student member) {
-		this.members.add(member);
+		if (member == null || members.contains(member))
+			return false;
+
+		members.add(member);
 		member.getCourses().add(this);
 		CourseManager.getInstance().save();
 		return true;
