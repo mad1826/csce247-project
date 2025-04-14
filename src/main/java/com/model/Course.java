@@ -145,6 +145,14 @@ public class Course {
 	}
 
 	/**
+	 * Gets the course's owner.
+	 * @return the teacher who created the course
+	 */
+	public Teacher getOwner() {
+		return owner;
+	}
+
+	/**
 	 * Gets the course's members.
 	 * @return an array list of students
 	 */

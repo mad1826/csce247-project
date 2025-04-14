@@ -109,6 +109,7 @@ public class CourseManager implements SavableList<Course> {
 			return false;
 		}
 
+		course.getOwner().getCourses().remove(course);
 		// Remove course from all enrolled students
 		for (Student student : course.getMembers()) {
 			student.getCourses().remove(course);
