@@ -1,4 +1,4 @@
-package com.musicapp;
+package com.controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.model.MusicAppFacade;
 import com.model.User;
+import com.musicapp.App;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

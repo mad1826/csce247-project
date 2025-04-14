@@ -9,7 +9,7 @@
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="vboxMain" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.musicapp.LoginController">
+<VBox fx:id="vboxMain" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LoginController">
 	<children>
 		<VBox fx:id="mainLabelContainer" alignment="CENTER">
 			<children>

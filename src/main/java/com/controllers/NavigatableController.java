@@ -1,8 +1,10 @@
-package com.musicapp;
+package com.controllers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.musicapp.App;
 
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
