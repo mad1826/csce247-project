@@ -77,8 +77,8 @@
 
 .google-button {
 	-fx-text-fill: black;
-	-fx-background-color: #F3F9FF;
-	background-color: #F3F9FF;
+	-fx-background-color: #f3f9ff;
+	background-color: #f3f9ff;
 	-fx-border-color: black;
 	border-color: black;
 }
@@ -103,6 +103,10 @@
 	-fx-text-fill: black;
 	-fx-background-color: lightgray;
 	background-color: lightgray;
+}
+
+#signUpButtons {
+	-fx-spacing: 100;
 }
 
 .nav-tab {
