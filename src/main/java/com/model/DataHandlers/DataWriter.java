@@ -25,6 +25,9 @@ public class DataWriter {
      * @return An operation result saying if the operation was successful.
      */
     public static <T> OperationResult<JSONArray> setData(SavableList<T> list) {
+        if (list==null)
+            return new OperationResult<>("List cannot be null");
+
         try (FileWriter file = new FileWriter(list.getFilePath())) {
 			JSONArray jsonArray = list.toJSON();
 			file.write(jsonArray.toJSONString());
