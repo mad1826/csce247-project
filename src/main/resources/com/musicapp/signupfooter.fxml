@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="footer" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SignUpController">
+	<children>	
+		<Button fx:id="swapAuthMethod" styleClass="swap-login" onAction="#switchToLogin" text="Already have an account?" />
+	</children>
+	<stylesheets>
+		<URL value="@styles.css" />
+	</stylesheets>
+</HBox>

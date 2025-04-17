@@ -55,10 +55,10 @@ public class CourseController extends NavigatableController {
 	 */
 	private VBox getLessonVBox(Course course) {
 		VBox courseContent = new VBox();
-        courseContent.setStyle("-fx-alignment: left");
+        courseContent.getStyleClass().add("home-course");
 
 		Label courseName = new Label();
-        courseName.getStyleClass().add("home-course");
+        courseName.getStyleClass().add("home-coursetitle");
 		courseName.setText(course.getTitle());
 
         Label courseDesc = new Label();
@@ -68,6 +68,11 @@ public class CourseController extends NavigatableController {
 
 		courseContent.getChildren().add(courseName);
         courseContent.getChildren().add(courseDesc);
+
+		courseContent.setOnMouseClicked(e -> {
+            System.out.println("Select "+course.toString());
+        });
+
 		return courseContent;
 	}
 }

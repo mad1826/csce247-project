@@ -11,9 +11,11 @@ import com.musicapp.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class LoginController implements Initializable {
@@ -21,8 +23,14 @@ public class LoginController implements Initializable {
 	@FXML
 	private VBox vboxMain;
 
+	@FXML
+	private VBox content;
+
+	@FXML
+	private HBox footer;
+
     @FXML
-    private Label labelLogin;
+    private Label labelMain;
 
     @FXML
     private Button btnlogin;
@@ -31,7 +39,7 @@ public class LoginController implements Initializable {
     private Label output;
 
     @FXML
-    private Button toSignUp;
+    private Button swapAuthMethod;
 
     @FXML
     private TextField textPassword;
@@ -42,7 +50,7 @@ public class LoginController implements Initializable {
     @FXML
 	@Override
     public void initialize(URL url, ResourceBundle rb)  {
-		labelLogin.setText("Log in\nto continue your journey"); // Line break not supported directly in fxml
+		labelMain.setText("Log in\nto continue your journey"); // Line break not supported directly in fxml
 	}
 
     @FXML
@@ -58,7 +66,11 @@ public class LoginController implements Initializable {
 
     @FXML
     void switchToSignUp() throws IOException {
-        App.setRoot("signup");
+		labelMain.setText("Sign up\nto start your journey");
+        Parent signUp = App.loadFXML("signup");
+		content.getChildren().setAll(signUp);
+		Parent signUpFooter = App.loadFXML("signupfooter");
+		footer.getChildren().setAll(signUpFooter);
     }
 
 	/**

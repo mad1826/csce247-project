@@ -7,13 +7,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox fx:id="vboxMain" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LoginController">
 	<children>
 		<VBox fx:id="mainLabelContainer" alignment="CENTER">
 			<children>
-				<Label fx:id="labelLogin" styleClass="main-label" />
+				<Label fx:id="labelMain" styleClass="main-label" />
 			</children>
 		</VBox>
 		<VBox fx:id="content" alignment="CENTER">
@@ -26,11 +27,11 @@
 				<Label fx:id="output" />
 			</children>
 		</VBox>
-		<VBox fx:id="footer">
+		<HBox fx:id="footer">
 			<children>
-				<Button fx:id="toSignUp" styleClass="swap-login" onAction="#switchToSignUp" text="Don't have an account?" />
+				<Button fx:id="swapAuthMethod" styleClass="swap-login" onAction="#switchToSignUp" text="Don't have an account?" />
 			</children>
-		</VBox>
+		</HBox>
 	</children>
 	<stylesheets>
 		<URL value="@styles.css" />
