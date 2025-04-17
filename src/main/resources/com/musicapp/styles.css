@@ -154,6 +154,33 @@
 	font-size: 1.4em;
 }
 
+#listCourses {
+	-fx-max-width: 400;
+	max-width: 400px;
+	-fx-spacing: 10;
+}
+
+.home-course:hover {
+	-fx-background-color: lightgray;
+	background-color: lightgray;
+	-fx-background-radius: 10;
+}
+
+.home-course {
+	-fx-font-weight: bolder;
+	font-weight: bolder;
+	-fx-font-size: 1.4em;
+	font-size: 1.4em;
+}
+.home-coursedesc {
+	-fx-font-weight: normal;
+	font-weight: normal;
+	-fx-font-size: 1em;
+	font-size: 1em;
+	-fx-white-space: normal;
+	white-space: normal;
+}
+
 .lesson-progress {
 	-fx-progress-color: deepskyblue;
 	-fx-min-width: 75;
