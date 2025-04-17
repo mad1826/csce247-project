@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import javafx.scene.Node;
+
 /**
  * JavaFX App
  */
@@ -26,10 +28,16 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
-    public static Parent loadFXML(String fxml) throws IOException {
+    @SuppressWarnings("exports")
+	public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
+
+	@SuppressWarnings("exports")
+	public static Node getNodeById(String fxId) {
+		return scene.lookup("#" + fxId);
+	}
 
     public static void main(String[] args) {
         launch();

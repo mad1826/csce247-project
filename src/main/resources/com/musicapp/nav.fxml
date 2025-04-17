@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="footer" HBox.hgrow="ALWAYS" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.NavigatableController">
+	<children>
+		<VBox fx:id="tabHome" styleClass="nav-tab" VBox.vgrow="ALWAYS">
+			<children>
+				<Label text="Home" />
+			</children>
+		</VBox>
+		<VBox fx:id="tabCourses" styleClass="nav-tab" VBox.vgrow="ALWAYS">
+			<children>
+				<Label text="Courses" />
+			</children>
+		</VBox>
+		<VBox fx:id="tabSongs" styleClass="nav-tab" VBox.vgrow="ALWAYS">
+			<children>
+				<Label text="Songs" />
+			</children>
+		</VBox>
+		<VBox fx:id="tabProfile" styleClass="nav-tab" VBox.vgrow="ALWAYS">
+			<children>
+				<Label text="Profile" />
+			</children>
+		</VBox>
+		<VBox fx:id="tabFriends" styleClass="nav-tab" VBox.vgrow="ALWAYS">
+			<children>
+				<Label text="Friends" />
+			</children>
+		</VBox>
+	</children>
+	<stylesheets>
+		<URL value="@styles.css" />
+	</stylesheets>
+</HBox>

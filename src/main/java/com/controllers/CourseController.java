@@ -1,17 +1,17 @@
 package com.controllers;
 
 import java.net.URL;
-import java.time.Duration;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 import com.model.Course;
 import com.model.MusicAppFacade;
 import com.model.OperationResult;
 import com.model.User;
+import com.musicapp.App;
 
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,9 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class CourseController extends NavigatableController {
-    @FXML
-    private Label welcome;
+public class CourseController implements Initializable {
     
 	@FXML
 	private Button joinCourse;
@@ -85,11 +83,9 @@ public class CourseController extends NavigatableController {
     @FXML
 	@Override
     public void initialize(URL url, ResourceBundle rb)  {
-		super.initialize(url, rb);
-		setCurrentTab("courses");
 		facade = MusicAppFacade.getInstance();
 		user = facade.getCurrentUser();
-        welcome.setText("My Courses");
+        ((Label)App.getNodeById("labelMain")).setText("My Courses");
 
 		joinCourse.setOnAction(e -> promptJoinCourse());
 

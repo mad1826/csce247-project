@@ -8,18 +8,17 @@ import com.model.Lesson;
 import com.model.MusicAppFacade;
 import com.model.Student;
 import com.model.User;
+import com.musicapp.App;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class HomeController extends NavigatableController {
-
-    @FXML
-    private Label welcome;
+public class HomeController implements Initializable {
 
 	@FXML
 	private VBox listLessons;
@@ -30,13 +29,12 @@ public class HomeController extends NavigatableController {
 
     @FXML
 	@Override
-    public void initialize(URL url, ResourceBundle rb)  {
-		super.initialize(url, rb);
-		setCurrentTab("home");
+    public void initialize(URL url, ResourceBundle rb) {
 		facade = MusicAppFacade.getInstance();
 		user = facade.getCurrentUser();
 
-		welcome.setText("Welcome back, " + user.getFirstName() + "!");
+		Label labelMain = (Label)App.getNodeById("labelMain");
+		labelMain.setText("Welcome back, " + user.getFirstName() + "!");
 		loadLessons();
     }
 
