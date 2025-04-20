@@ -10,22 +10,26 @@ import com.model.Student;
 import com.model.User;
 import com.musicapp.App;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
 
 public class HomeController implements Initializable {
 
 	@FXML
-	private VBox listLessons;
+	private ListView<Lesson> listLessons;
 
 	private MusicAppFacade facade;
 
 	private User user;
+
+	private final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
 
     @FXML
 	@Override
@@ -44,34 +48,40 @@ public class HomeController implements Initializable {
 	private void loadLessons() {
 		for (Course course : user.getCourses()) {
 			for (Lesson lesson : course.getLessons().values()) {
-				listLessons.getChildren().add(getLessonHBox(lesson));
+				lessons.add(lesson);
 			}
 		}
-	}
+		listLessons.setCellFactory((ListView<Lesson> list) -> {
+			ListCell<Lesson> cell = new ListCell<Lesson>() {
+				@Override
+				public void updateItem(Lesson lesson, boolean empty) {
+					super.updateItem(lesson, empty);
+					
+					if (lesson == null)
+						return;
+					
+					getStyleClass().add("home-lesson");
+					
+					setText(lesson.getTitle());
+					
+					Student student = facade.getCurrentStudent();
+					if (student != null) {
+						ProgressIndicator pi = new ProgressIndicator(1.0 * student.getLessonProgress(lesson) / lesson.getNumberOfTimes());
+						pi.getStyleClass().add("lesson-progress");
+						setGraphic(pi);
+					}
+				}
+			};
+			
+			return cell;
+		});
 
-	/**
-	 * Converts a Lesson object into a container that lists its children horizontally, including the progress for student accounts.
-	 * @param lesson a Lesson object
-	 * @return a container that lists its children horizontally
-	 */
-	private HBox getLessonHBox(Lesson lesson) {
-		HBox hbox = new HBox();
-		hbox.getStyleClass().add("home-lesson");
-		Student student = facade.getCurrentStudent();
+		listLessons.setItems(lessons);
 
-		if (student != null) {
-			ProgressIndicator pi = new ProgressIndicator(1.0 * student.getLessonProgress(lesson) / lesson.getNumberOfTimes());
-			pi.getStyleClass().add("lesson-progress");
-			hbox.getChildren().add(pi);
-		}
-
-		VBox labelContainer = new VBox();
-		Label lessonLabel = new Label();
-		lessonLabel.setText(lesson.getTitle());
-		labelContainer.setAlignment(Pos.CENTER_LEFT);
-		labelContainer.getChildren().add(lessonLabel);
-
-		hbox.getChildren().add(labelContainer);
-		return hbox;
+		listLessons.setOnMouseClicked((MouseEvent event) -> {
+			Lesson lesson = listLessons.getSelectionModel().getSelectedItem();
+			System.out.println("Selected lesson " + lesson.getTitle());
+			facade.setCurrentLesson(lesson);
+		});
 	}
 }

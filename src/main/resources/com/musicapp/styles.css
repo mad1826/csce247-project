@@ -5,6 +5,8 @@
 	background-size: 100%;
 	-fx-background-repeat: no-repeat;
 	background-repeat: no-repeat;
+	-fx-background-color: white;
+	background-color: white;
 	-fx-font-size: 1.25em;
 	font-size: 1.25em;
 }
@@ -136,6 +138,9 @@
 	-fx-max-width: 400;
 	max-width: 400px;
 	-fx-spacing: 10;
+	-fx-background-insets: 0;
+	-fx-padding: 0;
+	padding: 0px;
 }
 
 .home-lesson {
@@ -151,13 +156,6 @@
 	-fx-background-radius: 10;
 }
 
-.home-lesson .label {
-	-fx-font-weight: bolder;
-	font-weight: bolder;
-	-fx-font-size: 1.4em;
-	font-size: 1.4em;
-}
-
 #listCourses {
 	-fx-max-width: 400;
 	max-width: 400px;
@@ -165,7 +163,7 @@
 }
 
 .home-course {
-	background-color: lightgray;	
+	background-color: lightgray;
 }
 
 .home-course:hover {
