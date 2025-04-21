@@ -51,24 +51,28 @@ public class HomeController implements Initializable {
 				lessons.add(lesson);
 			}
 		}
+
 		listLessons.setCellFactory((ListView<Lesson> list) -> {
 			ListCell<Lesson> cell = new ListCell<Lesson>() {
 				@Override
-				public void updateItem(Lesson lesson, boolean empty) {
+				protected void updateItem(Lesson lesson, boolean empty) {
 					super.updateItem(lesson, empty);
 					
-					if (lesson == null)
-						return;
-					
-					getStyleClass().add("home-lesson");
-					
-					setText(lesson.getTitle());
-					
-					Student student = facade.getCurrentStudent();
-					if (student != null) {
-						ProgressIndicator pi = new ProgressIndicator(1.0 * student.getLessonProgress(lesson) / lesson.getNumberOfTimes());
-						pi.getStyleClass().add("lesson-progress");
-						setGraphic(pi);
+					if (empty || lesson == null) {
+						setText(null);
+						setGraphic(null);
+					}
+					else {
+						getStyleClass().add("home-lesson");
+
+						setText(lesson.getTitle());
+						
+						Student student = facade.getCurrentStudent();
+						if (student != null) {
+							ProgressIndicator pi = new ProgressIndicator(1.0 * student.getLessonProgress(lesson) / lesson.getNumberOfTimes());
+							pi.getStyleClass().add("lesson-progress");
+							setGraphic(pi);
+						}
 					}
 				}
 			};
@@ -80,8 +84,10 @@ public class HomeController implements Initializable {
 
 		listLessons.setOnMouseClicked((MouseEvent event) -> {
 			Lesson lesson = listLessons.getSelectionModel().getSelectedItem();
-			System.out.println("Selected lesson " + lesson.getTitle());
-			facade.setCurrentLesson(lesson);
+			if (lesson != null) {
+				System.out.println("Selected lesson " + lesson.getTitle());
+				facade.setCurrentLesson(lesson);
+			}
 		});
 	}
 }
