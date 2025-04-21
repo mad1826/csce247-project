@@ -2,6 +2,8 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -9,26 +11,51 @@
 	<children>
 		<VBox fx:id="tabHome" styleClass="nav-tab" VBox.vgrow="ALWAYS">
 			<children>
+				<ImageView pickOnBounds="true" preserveRatio="true" fitWidth="20">
+					<image>
+						<Image url="@images/home.png" />
+					</image>
+				</ImageView>
 				<Label text="Home" />
 			</children>
 		</VBox>
 		<VBox fx:id="tabCourses" styleClass="nav-tab" VBox.vgrow="ALWAYS">
 			<children>
+				<ImageView pickOnBounds="true" preserveRatio="true" fitWidth="20">
+					<image>
+						<Image url="@images/courses.png" />
+					</image>
+				</ImageView>
 				<Label text="Courses" />
 			</children>
 		</VBox>
 		<VBox fx:id="tabSongs" styleClass="nav-tab" VBox.vgrow="ALWAYS">
 			<children>
+				<ImageView pickOnBounds="true" preserveRatio="true" fitWidth="20">
+					<image>
+						<Image url="@images/songs.png" />
+					</image>
+				</ImageView>
 				<Label text="Songs" />
 			</children>
 		</VBox>
 		<VBox fx:id="tabProfile" styleClass="nav-tab" VBox.vgrow="ALWAYS">
 			<children>
+				<ImageView pickOnBounds="true" preserveRatio="true" fitWidth="20">
+					<image>
+						<Image url="@images/profile.png" />
+					</image>
+				</ImageView>
 				<Label text="Profile" />
 			</children>
 		</VBox>
 		<VBox fx:id="tabFriends" styleClass="nav-tab" VBox.vgrow="ALWAYS">
 			<children>
+				<ImageView pickOnBounds="true" preserveRatio="true" fitWidth="20">
+					<image>
+						<Image url="@images/friends.png" />
+					</image>
+				</ImageView>
 				<Label text="Friends" />
 			</children>
 		</VBox>

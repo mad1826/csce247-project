@@ -12,9 +12,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  * A base controller class for any pages with a usable nav bar, i.e., all pages after authentication.
@@ -59,11 +64,15 @@ public class NavigatableController implements Initializable {
 		currentTab = tab;
 		ObservableList<Node> navTabs = footer.getChildren();
 		for (Node navTab : navTabs) {
+			ImageView imageView = (ImageView)((VBox)navTab).getChildren().get(0);
+
 			if (navTab.getId().toLowerCase().contains(tab)) {
 				navTab.getStyleClass().add("current-tab");
+				updateCurrentTabImage(imageView, true);
 			}
 			else {
 				navTab.getStyleClass().remove("current-tab");
+				updateCurrentTabImage(imageView, false);
 			}
 		}
 	}
@@ -88,8 +97,7 @@ public class NavigatableController implements Initializable {
 			vboxMain.getChildren().add(newTab);
 		}
 		catch (Exception e) {
-			System.err.println("Error loading file for tab \"" + tab + "\":");
-			e.printStackTrace();
+			System.err.println("Error loading file for tab \"" + tab + "\"");
 		}
 		finally {
 			vboxMain.getChildren().add(footer);
@@ -113,5 +121,21 @@ public class NavigatableController implements Initializable {
 				}
 			}
 		});
+	}
+
+	private void updateCurrentTabImage(ImageView imageView, boolean selected) {
+		if (selected) { // Make image blue
+			Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.DEEPSKYBLUE));
+			ColorAdjust bright = new ColorAdjust(0, 1, 1, 1);
+			lighting.setContentInput(bright);
+			lighting.setSurfaceScale(0.0);
+
+			imageView.setEffect(lighting);
+		}
+		else { // Make image black
+			ColorAdjust adjust = new ColorAdjust();
+			adjust.setSaturation(-1);
+			imageView.setEffect(adjust);
+		}
 	}
 }
