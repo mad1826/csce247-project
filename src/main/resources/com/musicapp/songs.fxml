@@ -9,31 +9,35 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.geometry.Insets?>
 
-<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SongDetailsController">
+<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SongDetailsController" spacing="20">
     <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
+        <Insets top="30" right="40" bottom="30" left="40"/>
     </padding>
 
-    <TextField fx:id="searchField" promptText="Search songs..." />
+    <Label text="Songs" style="-fx-font-size: 32px; -fx-font-weight: bold;">
+        <VBox.margin>
+            <Insets bottom="30"/>
+        </VBox.margin>
+    </Label>
 
-    <HBox spacing="20" VBox.vgrow="ALWAYS">
-        <VBox HBox.hgrow="ALWAYS" spacing="10">
-            <Label text="Recently Played" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
-                <VBox fx:id="recentlyPlayedContainer" spacing="10"/>
-            </ScrollPane>
-        </VBox>
+    <TextField fx:id="searchField" promptText="Search by song title, artist, genre, instrument, or difficulty" style="-fx-font-size: 14px; -fx-padding: 12;">
+        <VBox.margin>
+            <Insets bottom="30"/>
+        </VBox.margin>
+    </TextField>
+    
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;" minHeight="400">
+        <padding>
+            <Insets right="10"/>
+        </padding>
+        <VBox fx:id="songsContainer" spacing="15"/>
+    </ScrollPane>
 
-        <VBox HBox.hgrow="ALWAYS" spacing="10">
-            <Label text="Popular Songs" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
-                <VBox fx:id="popularSongsContainer" spacing="10"/>
-            </ScrollPane>
-        </VBox>
-    </HBox>
-
-    <HBox spacing="10" alignment="CENTER">
-        <Button fx:id="createSongButton" text="Create New Song"/>
-        <Button fx:id="editSongButton" text="Edit Song"/>
+    <HBox spacing="20" alignment="CENTER">
+        <VBox.margin>
+            <Insets top="30"/>
+        </VBox.margin>
+        <Button fx:id="createSongButton" text="Create Song" style="-fx-padding: 12 24; -fx-font-size: 14px;"/>
+        <Button fx:id="editSongButton" text="Edit Song" style="-fx-padding: 12 24; -fx-font-size: 14px;"/>
     </HBox>
 </VBox> 

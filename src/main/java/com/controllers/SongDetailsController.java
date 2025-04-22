@@ -12,21 +12,16 @@ import com.musicapp.App;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class SongDetailsController extends NavigatableController {
     @FXML
     private TextField searchField;
     
     @FXML
-    private VBox recentlyPlayedContainer;
-    
-    @FXML
-    private VBox popularSongsContainer;
+    private VBox songsContainer;
     
     @FXML
     private Button createSongButton;
@@ -35,6 +30,7 @@ public class SongDetailsController extends NavigatableController {
     private Button editSongButton;
 
     private SongManager songManager;
+    private ArrayList<Song> allSongs;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,89 +39,68 @@ public class SongDetailsController extends NavigatableController {
         if (!result.success) {
             System.err.println("Failed to load songs: " + result.message);
         }
+        
         setupSearchField();
-        loadRecentlyPlayed();
-        loadPopularSongs();
+        loadAllSongs();
         setupButtons();
     }
 
     private void setupSearchField() {
-        searchField.setPromptText("Song title, artist, genre, instrument, difficulty");
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            // Filter songs based on search text
-            filterSongs(newValue);
+            if (newValue == null || newValue.trim().isEmpty()) {
+                displaySongs(allSongs);
+            } else {
+                ArrayList<Song> filteredSongs = songManager.searchSongs(newValue);
+                displaySongs(filteredSongs);
+            }
         });
     }
 
-    private void loadRecentlyPlayed() {
-        // Clear existing content
-        recentlyPlayedContainer.getChildren().clear();
-        
-        // Get recently played songs from SongManager
-        ArrayList<Song> recentSongs = songManager.getRecentlyPlayed();
-        if (recentSongs.isEmpty()) {
-            recentlyPlayedContainer.getChildren().add(new Text("No recently played songs"));
-        } else {
-            for (Song song : recentSongs) {
-                recentlyPlayedContainer.getChildren().add(createSongCard(song));
-            }
-        }
+    private void loadAllSongs() {
+        allSongs = new ArrayList<>(songManager.getSongs().values());
+        displaySongs(allSongs);
     }
 
-    private void loadPopularSongs() {
-        // Clear existing content
-        popularSongsContainer.getChildren().clear();
-        
-        // Get popular songs from SongManager
-        ArrayList<Song> popularSongs = songManager.getPopularSongs();
-        if (popularSongs.isEmpty()) {
-            popularSongsContainer.getChildren().add(new Text("No songs available"));
+    private void displaySongs(ArrayList<Song> songs) {
+        songsContainer.getChildren().clear();
+        if (songs.isEmpty()) {
+            Label noSongs = new Label("No songs found");
+            noSongs.setStyle("-fx-font-size: 16px; -fx-text-fill: #666666;");
+            songsContainer.getChildren().add(noSongs);
         } else {
-            for (Song song : popularSongs) {
-                popularSongsContainer.getChildren().add(createSongCard(song));
+            for (Song song : songs) {
+                songsContainer.getChildren().add(createSongCard(song));
             }
         }
     }
 
     private VBox createSongCard(Song song) {
-        VBox card = new VBox(5); // 5 is spacing between elements
+        VBox card = new VBox(10);
+        card.setStyle("-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);");
+        card.setMinHeight(100);
+        card.setPrefWidth(600);
         
-        // Create song card elements
-        ImageView albumArt = new ImageView();
-        try {
-            albumArt.setImage(new javafx.scene.image.Image(getClass().getResourceAsStream(song.getAlbumArtUrl())));
-        } catch (Exception e) {
-            // Fallback if image loading fails
-            System.err.println("Failed to load album art: " + e.getMessage());
-        }
-        albumArt.setFitWidth(60);
-        albumArt.setFitHeight(60);
+        Label title = new Label(song.getTitle());
+        title.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
+        title.setWrapText(true);
         
-        Text title = new Text(song.getTitle());
-        Text artist = new Text(song.getArtist());
-        Text details = new Text(song.getNumberOfSheets() + " Sheets: " + String.join(", ", song.getInstruments()));
+        Label artist = new Label(song.getArtist());
+        artist.setStyle("-fx-text-fill: #666666; -fx-font-size: 16px;");
+        artist.setWrapText(true);
         
-        // Add elements to card
-        card.getChildren().addAll(albumArt, title, artist, details);
+        String instrumentList = String.join(", ", song.getInstruments());
+        Label details = new Label(song.getNumberOfSheets() + " Sheets: " + instrumentList);
+        details.setStyle("-fx-text-fill: #666666; -fx-font-size: 16px;");
+        details.setWrapText(true);
         
-        // Add click handler
+        card.getChildren().addAll(title, artist, details);
+        
+        card.setOnMouseEntered(e -> card.setStyle("-fx-background-color: #f8f9fa; -fx-padding: 25; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 0);"));
+        card.setOnMouseExited(e -> card.setStyle("-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);"));
+        
         card.setOnMouseClicked(event -> openSongDetails(song));
         
         return card;
-    }
-
-    private void filterSongs(String searchText) {
-        if (searchText == null || searchText.trim().isEmpty()) {
-            loadRecentlyPlayed();
-            loadPopularSongs();
-            return;
-        }
-
-        // Filter songs based on search criteria
-        popularSongsContainer.getChildren().clear();
-        for (Song song : songManager.searchSongs(searchText)) {
-            popularSongsContainer.getChildren().add(createSongCard(song));
-        }
     }
 
     private void setupButtons() {
@@ -148,7 +123,6 @@ public class SongDetailsController extends NavigatableController {
 
     private void openSongDetails(Song song) {
         try {
-            // Store selected song in manager for access in details view
             songManager.setSelectedSong(song);
             App.setRoot("song-view");
         } catch (IOException e) {
