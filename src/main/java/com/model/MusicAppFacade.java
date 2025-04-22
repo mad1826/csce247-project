@@ -410,10 +410,13 @@ public class MusicAppFacade {
      * @param user user
      * @return The result of attempting to add the friend
      */
-    public OperationResult<Void> addFriend(User user) {
-		if (currentUser == null) 
-			return new OperationResult<>("Must be logged in to add a friend.");
-		return currentUser.addFriend(user);
+    public OperationResult<Void> addFriend(String user) {
+
+		// if (currentUser == null) 
+		// 	return new OperationResult<>("Must be logged in to add a friend.");
+		// return currentUser.addFriend(user);
+
+		return new OperationResult<>("Unimplemented", new UnsupportedOperationException());
     }
 
     /**
