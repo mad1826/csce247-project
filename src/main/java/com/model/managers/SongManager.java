@@ -323,4 +323,68 @@ public class SongManager implements  SavableList<Song> {
 
         System.out.println(SongManager.getInstance().songs);
     }
+
+    /**
+     * Gets the list of recently played songs
+     * @return ArrayList of recently played songs
+     */
+    public ArrayList<Song> getRecentlyPlayed() {
+        ArrayList<Song> recentSongs = new ArrayList<>();
+        // For now, return the first 5 songs as recently played
+        int count = 0;
+        for (Song song : songs.values()) {
+            if (count >= 5) break;
+            recentSongs.add(song);
+            count++;
+        }
+        return recentSongs;
+    }
+
+    /**
+     * Gets the list of popular songs
+     * @return ArrayList of popular songs
+     */
+    public ArrayList<Song> getPopularSongs() {
+        ArrayList<Song> popularSongs = new ArrayList<>();
+        // For now, return all songs as popular
+        popularSongs.addAll(songs.values());
+        return popularSongs;
+    }
+
+    /**
+     * Search songs based on a text query
+     * @param searchText text to search for in title, artist, genre, etc.
+     * @return ArrayList of matching songs
+     */
+    public ArrayList<Song> searchSongs(String searchText) {
+        ArrayList<Song> matchingSongs = new ArrayList<>();
+        String query = searchText.toLowerCase();
+        
+        for (Song song : songs.values()) {
+            if (song.getTitle().toLowerCase().contains(query) ||
+                song.getArtist().toLowerCase().contains(query) ||
+                song.getGenres().toString().toLowerCase().contains(query)) {
+                matchingSongs.add(song);
+            }
+        }
+        return matchingSongs;
+    }
+
+    private Song selectedSong;
+
+    /**
+     * Sets the currently selected song
+     * @param song the song to set as selected
+     */
+    public void setSelectedSong(Song song) {
+        this.selectedSong = song;
+    }
+
+    /**
+     * Gets the currently selected song
+     * @return the selected song
+     */
+    public Song getSelectedSong() {
+        return selectedSong;
+    }
 }

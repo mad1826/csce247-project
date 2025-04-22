@@ -97,7 +97,8 @@ public class NavigatableController implements Initializable {
 			vboxMain.getChildren().add(newTab);
 		}
 		catch (Exception e) {
-			System.err.println("Error loading file for tab \"" + tab + "\"");
+			System.err.println("Error loading file for tab \"" + tab + "\": " + e);
+			e.printStackTrace();
 		}
 		finally {
 			vboxMain.getChildren().add(footer);

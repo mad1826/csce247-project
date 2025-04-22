@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.Insets?>
+
+<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SongDetailsController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <TextField fx:id="searchField" promptText="Search songs..." />
+
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <VBox HBox.hgrow="ALWAYS" spacing="10">
+            <Label text="Recently Played" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                <VBox fx:id="recentlyPlayedContainer" spacing="10"/>
+            </ScrollPane>
+        </VBox>
+
+        <VBox HBox.hgrow="ALWAYS" spacing="10">
+            <Label text="Popular Songs" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                <VBox fx:id="popularSongsContainer" spacing="10"/>
+            </ScrollPane>
+        </VBox>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="createSongButton" text="Create New Song"/>
+        <Button fx:id="editSongButton" text="Edit Song"/>
+    </HBox>
+</VBox> 

@@ -3,6 +3,7 @@ package com.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -181,5 +182,32 @@ public class Song {
             ",\n\tsheets=" + sheets +
             "\n}";
 	}
+
+    /**
+     * Gets the number of sheet music pieces for this song
+     * @return the number of sheets
+     */
+    public int getNumberOfSheets() {
+        return sheets.size();
+    }
+
+    /**
+     * Gets the list of available instruments for this song
+     * @return ArrayList of instrument names
+     */
+    public ArrayList<String> getInstruments() {
+        return sheets.keySet().stream()
+                .map(Instrument::toString)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Gets the URL for the song's album art
+     * @return the album art URL, or a default image URL if none is set
+     */
+    public String getAlbumArtUrl() {
+        // TODO: Implement album art storage
+        return "/images/default-album-art.png";
+    }
 
 }
