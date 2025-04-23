@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.HomeController">
-	<Label fx:id="labelHomeLessons" text="My Upcoming Lessons" />
+	<Label fx:id="labelHomeLessons" text="Lessons" />
 	<ListView fx:id="listLessons" />
 	<stylesheets>
 		<URL value="@styles.css" />
