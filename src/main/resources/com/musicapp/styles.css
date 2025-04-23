@@ -156,6 +156,16 @@
 	-fx-background-radius: 10;
 }
 
+.home-lesson .progress-indicator {
+	-fx-padding: 0 0 -16 0; /* Remove space allocated for percentage */
+	padding: 0 0 -16px 0;
+}
+
+.home-lesson .progress-indicator .percentage {
+	-fx-fill: null; /* Hide percentage */
+	fill: none;
+}
+
 #listCourses {
 	-fx-max-width: 400;
 	max-width: 400px;
