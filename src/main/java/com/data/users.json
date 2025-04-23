@@ -1,1 +1,29 @@
-[{"firstName":"Jane","lastName":"Smith","emailAddress":"jane.smith@example.com","password":"secureP@ss987","metronomeSpeedModifier":1.0,"id":"c0a80101-7b2d-4f5a-91d1-4e5b5b5a5a5a","type":"Student","friends":["550e8400-e29b-41d4-a716-446655440000"],"lessonProgress":{"24d85a1d-e68c-4961-a43c-f9d02a7483c0":1}},{"firstName":"John","lastName":"Doe","emailAddress":"john.doe@example.com","password":"p@ssw0rd123","metronomeSpeedModifier":0.5,"id":"550e8400-e29b-41d4-a716-446655440000","type":"Teacher","friends":["c0a80101-7b2d-4f5a-91d1-4e5b5b5a5a5a"]},{"firstName":"Fred","lastName":"Fredrickson","emailAddress":"ffred@gmail.com","password":"secu4eP@ssw0rd","metronomeSpeedModifier":1.0,"id":"0fe796b0-7f67-4b70-af24-c942a4d44708","type":"Student","friends":[],"lessonProgress":{}},{"firstName":"Fred","lastName":"Fredrickson","emailAddress":"ffredrickson@gmail.com","password":"secu4eP@ssw0rd","metronomeSpeedModifier":1.0,"id":"71303dc5-7349-45e1-a05a-d709352ffffa","type":"Student","friends":[],"lessonProgress":{}}]
+[
+	{
+		"emailAddress": "john.doe@example.com",
+		"firstName": "John",
+		"friends": [
+			"c0a80101-7b2d-4f5a-91d1-4e5b5b5a5a5a"
+		],
+		"id": "550e8400-e29b-41d4-a716-446655440000",
+		"lastName": "Doe",
+		"metronomeSpeedModifier": 0.5,
+		"password": "p@ssw0rd123",
+		"type": "Teacher"
+	},
+	{
+		"emailAddress": "jane.smith@example.com",
+		"firstName": "Jane",
+		"friends": [
+			"550e8400-e29b-41d4-a716-446655440000"
+		],
+		"id": "c0a80101-7b2d-4f5a-91d1-4e5b5b5a5a5a",
+		"lastName": "Smith",
+		"lessonProgress": {
+			"24d85a1d-e68c-4961-a43c-f9d02a7483c0": 1
+		},
+		"metronomeSpeedModifier": 1.0,
+		"password": "secureP@ss987",
+		"type": "Student"
+	}
+]
