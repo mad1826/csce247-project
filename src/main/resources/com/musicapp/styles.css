@@ -15,16 +15,16 @@
 	-fx-pref-height: 800;
 	-fx-pref-width: 450;
 	-fx-aligment: top;
-	-fx-spacing: 50;
+	-fx-spacing: 20;
 }
 
 #mainLabelContainer {
-	-fx-pref-height: 145;
+	-fx-pref-height: 120;
 	-fx-alignment: bottom-center;
 }
 
 #content {
-	-fx-pref-height: 465;
+	-fx-pref-height: 550;
 	-fx-spacing: 20;
 	-fx-alignment: top-center;
 }
