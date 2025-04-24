@@ -37,8 +37,7 @@ public class HomeController implements Initializable {
 		facade = MusicAppFacade.getInstance();
 		user = facade.getCurrentUser();
 
-		Label labelMain = (Label)App.getNodeById("labelMain");
-		labelMain.setText("Welcome back, " + user.getFirstName() + "!");
+		App.setMainLabel("Welcome back, " + user.getFirstName() + "!");
 		loadLessons();
     }
 

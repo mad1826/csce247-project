@@ -1,14 +1,14 @@
 package com.musicapp;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * JavaFX App
@@ -37,6 +37,14 @@ public class App extends Application {
 	@SuppressWarnings("exports")
 	public static Node getNodeById(String fxId) {
 		return scene.lookup("#" + fxId);
+	}
+
+	/**
+	 * Updates the text of the app's main label.
+	 * @param text the new label text
+	 */
+	public static void setMainLabel(String text) {
+		((Label)getNodeById("labelMain")).setText(text);
 	}
 
     public static void main(String[] args) {

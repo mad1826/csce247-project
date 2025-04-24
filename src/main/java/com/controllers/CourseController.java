@@ -85,7 +85,7 @@ public class CourseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)  {
 		facade = MusicAppFacade.getInstance();
 		user = facade.getCurrentUser();
-        ((Label)App.getNodeById("labelMain")).setText("My Courses");
+        App.setMainLabel("My Courses");
 
 		joinCourse.setOnAction(e -> promptJoinCourse());
 

@@ -5,8 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.model.Song;
 import com.model.OperationResult;
+import com.model.Song;
 import com.model.managers.SongManager;
 import com.musicapp.App;
 
@@ -34,6 +34,7 @@ public class SongDetailsController extends NavigatableController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+		App.setMainLabel("Songs");
         songManager = SongManager.getInstance();
         OperationResult<Void> result = songManager.loadData();
         if (!result.success) {

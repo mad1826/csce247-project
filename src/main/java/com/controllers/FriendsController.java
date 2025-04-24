@@ -3,11 +3,9 @@ package com.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.model.Course;
 import com.model.MusicAppFacade;
 import com.model.OperationResult;
 import com.model.User;
-import com.model.managers.UserManager;
 import com.musicapp.App;
 
 import javafx.animation.PauseTransition;
@@ -86,7 +84,7 @@ public class FriendsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)  {
 		facade = MusicAppFacade.getInstance();
 		user = facade.getCurrentUser();
-        ((Label)App.getNodeById("labelMain")).setText("My Friends");
+		App.setMainLabel("My Friends");
 
 		addFriend.setOnAction(e -> promptAddFriend());
 

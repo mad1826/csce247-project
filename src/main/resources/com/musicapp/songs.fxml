@@ -14,12 +14,6 @@
         <Insets top="30" right="40" bottom="30" left="40"/>
     </padding>
 
-    <Label text="Songs" style="-fx-font-size: 32px; -fx-font-weight: bold;">
-        <VBox.margin>
-            <Insets bottom="30"/>
-        </VBox.margin>
-    </Label>
-
     <TextField fx:id="searchField" promptText="Search by song title, artist, genre, instrument, or difficulty" style="-fx-font-size: 14px; -fx-padding: 12;">
         <VBox.margin>
             <Insets bottom="30"/>
