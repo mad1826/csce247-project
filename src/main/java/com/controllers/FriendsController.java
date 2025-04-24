@@ -109,15 +109,15 @@ public class FriendsController implements Initializable {
 		friendsList.setCellFactory((ListView<User> list) -> {
 			ListCell<User> cell = new ListCell<User>() {
 				@Override
-				protected void updateItem(User lesson, boolean empty) {
-					super.updateItem(lesson, empty);
+				protected void updateItem(User friend, boolean empty) {
+					super.updateItem(friend, empty);
 					
-					if (empty || lesson == null) {
+					if (empty || friend == null) {
 						setText(null);
 						setGraphic(null);
 					}
 					else {
-						setText(user.getFirstName() + " " + user.getLastName());
+						setText(friend.getFirstName() + " " + friend.getLastName());
 						ImageView imageView = new ImageView(App.class.getResource("images/default-avatar.png").toString());
 						imageView.setFitHeight(100);
 						imageView.setFitWidth(100);
@@ -130,33 +130,5 @@ public class FriendsController implements Initializable {
 		});
 
 		friendsList.setItems(observableList);
-	}
-
-	/**
-	 * Converts a Lesson object into a container that lists its children horizontally, including the progress for student accounts.
-	 * @param lesson a Lesson object
-	 * @return a container that lists its children horizontally
-	 */
-	private VBox makeFriendContainer(User friend) {
-		VBox courseContent = new VBox();
-        courseContent.getStyleClass().add("home-course");
-
-		Label courseName = new Label();
-        courseName.getStyleClass().add("home-coursetitle");
-		courseName.setText(friend.getFirstName()+" "+friend.getLastName());
-
-        // Label courseDesc = new Label();
-        // courseDesc.getStyleClass().add("home-coursedesc");
-        // courseDesc.setWrapText(true);
-        // courseDesc.setText("A very long and potentially multiline description here which is ever so unfurtunatley unable to be implemented as we did not include this in course object.");
-
-		courseContent.getChildren().add(courseName);
-        // courseContent.getChildren().add(courseDesc);
-
-		// courseContent.setOnMouseClicked(e -> {
-        //     System.out.println("Select "+course.toString());
-        // });
-
-		return courseContent;
 	}
 }
