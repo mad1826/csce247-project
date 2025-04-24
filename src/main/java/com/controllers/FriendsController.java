@@ -9,12 +9,17 @@ import com.model.User;
 import com.musicapp.App;
 
 import javafx.animation.PauseTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -26,7 +31,9 @@ public class FriendsController implements Initializable {
 	private Button addFriend;
 
     @FXML
-	private VBox friendsList;
+	private ListView<User> friendsList;
+
+	private final ObservableList<User> observableList = FXCollections.observableArrayList();
 
 	private MusicAppFacade facade;
 
@@ -95,10 +102,34 @@ public class FriendsController implements Initializable {
 	 * Loads all lessons for the user's courses.
 	 */
 	private void loadFriends() {
-		friendsList.getChildren().clear();
 		for (User u : user.getFriends().values()) {
-			friendsList.getChildren().add(makeFriendContainer(u));
+			observableList.add(u);
 		}
+
+		friendsList.setCellFactory((ListView<User> list) -> {
+			ListCell<User> cell = new ListCell<User>() {
+				@Override
+				protected void updateItem(User lesson, boolean empty) {
+					super.updateItem(lesson, empty);
+					
+					if (empty || lesson == null) {
+						setText(null);
+						setGraphic(null);
+					}
+					else {
+						setText(user.getFirstName() + " " + user.getLastName());
+						ImageView imageView = new ImageView(App.class.getResource("images/default-avatar.png").toString());
+						imageView.setFitHeight(100);
+						imageView.setFitWidth(100);
+						setGraphic(imageView);
+					}
+				}
+			};
+			
+			return cell;
+		});
+
+		friendsList.setItems(observableList);
 	}
 
 	/**

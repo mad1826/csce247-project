@@ -202,3 +202,7 @@
 	-fx-fill: null; /* Hide percentage */
 	fill: none;
 }
+
+#friendsList .list-cell {
+	-fx-content-display: top;
+}
