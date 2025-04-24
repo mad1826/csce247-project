@@ -10,15 +10,7 @@
 <?import javafx.geometry.Insets?>
 
 <VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SongDetailsController" spacing="20">
-    <padding>
-        <Insets top="30" right="40" bottom="30" left="40"/>
-    </padding>
-
-    <TextField fx:id="searchField" promptText="Search by song title, artist, genre, instrument, or difficulty" style="-fx-font-size: 14px; -fx-padding: 12;">
-        <VBox.margin>
-            <Insets bottom="30"/>
-        </VBox.margin>
-    </TextField>
+    <TextField fx:id="searchField" promptText="Search by song title, artist, genre, instrument, or difficulty" style="-fx-font-size: 14px; -fx-padding: 12;" />
     
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;" minHeight="400">
         <padding>
@@ -28,9 +20,6 @@
     </ScrollPane>
 
     <HBox spacing="20" alignment="CENTER">
-        <VBox.margin>
-            <Insets top="30"/>
-        </VBox.margin>
         <Button fx:id="createSongButton" text="Create Song" style="-fx-padding: 12 24; -fx-font-size: 14px;"/>
         <Button fx:id="editSongButton" text="Edit Song" style="-fx-padding: 12 24; -fx-font-size: 14px;"/>
     </HBox>
