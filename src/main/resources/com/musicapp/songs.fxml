@@ -20,7 +20,7 @@
     </ScrollPane>
 
     <HBox spacing="20" alignment="CENTER">
-        <Button fx:id="createSongButton" text="Create Song"  onAction="#handleCreateSong" style="-fx-padding: 12 24; -fx-font-size: 14px;"/>
-        <Button fx:id="editSongButton" text="Edit Song"  onAction="#handleEditSong" style="-fx-padding: 12 24; -fx-font-size: 14px;"/>
+        <Button fx:id="createSongButton" text="Create Song" style="-fx-padding: 12 24; -fx-font-size: 14px;"/>
+        <Button fx:id="editSongButton" text="Edit Song" style="-fx-padding: 12 24; -fx-font-size: 14px;"/>
     </HBox>
 </VBox> 
