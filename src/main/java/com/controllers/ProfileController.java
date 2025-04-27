@@ -54,7 +54,7 @@ public class ProfileController implements Initializable {
         sliderMetronomeSpeed.setValue(1.0);
 
         // Load profile image from resources
-        Image profile = new Image(getClass().getResourceAsStream("/com/musicapp/profile-picture.png"));
+        Image profile = new Image(getClass().getResourceAsStream("/com/musicapp/images/profile-picture.png"));
         profileImage.setImage(profile);
     }
 

@@ -12,7 +12,7 @@
     <children>
         <ImageView fx:id="profileImage" fitHeight="150" fitWidth="150" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@profile-picture.png" />
+            <Image url="@images/profile-picture.png" />
          </image></ImageView>
 
         <Label fx:id="usernameLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Settings" />
