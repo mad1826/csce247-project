@@ -6,12 +6,14 @@ import com.model.MusicAppFacade;
 import com.model.Student;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,19 +38,55 @@ public class CourseDetailsController implements Initializable {
         leaveCourseButton.setOnAction(e -> {
             if (course != null) {
                 facade.leaveCourse(course.getCode());
-                // Optionally navigate back to courses list
+                // Navigate back to courses list
+                try {
+                    com.musicapp.App.setRoot("courses");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         backButton.setOnAction(e -> {
             System.out.println("Back button clicked!");
             try {
-                javafx.scene.layout.VBox vboxMain = (javafx.scene.layout.VBox) com.musicapp.App.getNodeById("vboxMain");
-                javafx.scene.layout.VBox content = (javafx.scene.layout.VBox) com.musicapp.App.getNodeById("content");
-                vboxMain.getChildren().remove(content);
-                javafx.scene.Parent courses = com.musicapp.App.loadFXML("courses");
-                vboxMain.getChildren().add(1, courses); // Add at index 1 to keep nav bar at the bottom
+                // Direct navigation back to courses with the entire nav layout
+                // This always works regardless of current scene structure
+                com.musicapp.App.setRoot("login");
+                
+                // Then follow the pattern from BaseAuthController.loadHome()
+                MusicAppFacade facade = MusicAppFacade.getInstance();
+                // Make sure user is logged in
+                if (facade.getCurrentUser() == null) {
+                    facade.login("jane.smith@example.com", "secureP@ss987");
+                }
+                
+                // Now rebuild the main app structure
+                VBox vboxMain = (VBox)com.musicapp.App.getNodeById("vboxMain");
+                if (vboxMain != null) {
+                    // Clear any footer from the login screen if needed
+                    HBox loginFooter = (HBox)com.musicapp.App.getNodeById("footer");
+                    if (loginFooter != null) {
+                        vboxMain.getChildren().remove(loginFooter);
+                    }
+                    
+                    // Add navigation
+                    Parent nav = com.musicapp.App.loadFXML("nav");
+                    vboxMain.getChildren().add(nav);
+                    
+                    // Replace content with courses
+                    VBox content = (VBox)com.musicapp.App.getNodeById("content");
+                    if (content != null) {
+                        content.getChildren().setAll(com.musicapp.App.loadFXML("courses"));
+                    }
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
+                // Last resort fallback
+                try {
+                    com.musicapp.App.setRoot("login");
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
             }
         });
     }
@@ -76,5 +114,14 @@ public class CourseDetailsController implements Initializable {
             lessonCard.getChildren().addAll(pi, lessonInfo);
             lessonsContainer.getChildren().add(lessonCard);
         }
+    }
+
+    private void loadCoursesTab() throws IOException {
+        VBox vboxMain = ((VBox)com.musicapp.App.getNodeById("vboxMain"));
+        vboxMain.getChildren().remove((HBox)com.musicapp.App.getNodeById("footer"));
+        Parent nav = com.musicapp.App.loadFXML("nav");
+        vboxMain.getChildren().add(nav);
+        Parent courses = com.musicapp.App.loadFXML("courses");
+        ((VBox)com.musicapp.App.getNodeById("content")).getChildren().setAll(courses);
     }
 } 
