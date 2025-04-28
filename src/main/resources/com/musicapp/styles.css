@@ -203,6 +203,11 @@
 	fill: none;
 }
 
+#sliderMetronomeSpeed {
+	-fx-max-width: 200;
+	max-width: 200px;
+}
+
 #friendsList .list-cell {
 	-fx-content-display: top;
 }
