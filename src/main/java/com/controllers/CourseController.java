@@ -9,22 +9,23 @@ import com.model.OperationResult;
 import com.model.User;
 import com.musicapp.App;
 
-import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class CourseController implements Initializable {
     
 	@FXML
+	private TextField courseCode;
+    
+	@FXML
 	private Button joinCourse;
+
+	@FXML
+	private Label joinCourseOutput;
 
     @FXML
 	private VBox listCourses;
@@ -36,61 +37,12 @@ public class CourseController implements Initializable {
 
 	private User user;
 
-	private void promptJoinCourse() {
-		Stage popup = new Stage();
-		popup.initModality(Modality.APPLICATION_MODAL); // blocks input to other windows
-		popup.setTitle("Join a Course");
-
-		VBox mainContainer = new VBox();
-		HBox lowerOptions = new HBox();
-
-		TextField input = new TextField();
-		input.setPromptText("Course ID");
-
-		Label feedback = new Label("");
-
-		Button closeButton = new Button("Cancel");
-		closeButton.setOnAction(e -> {
-			System.out.println("CLOSE?");
-			popup.close();
-		});
-
-		Button joinButton = new Button("Join");
-		joinButton.setOnAction(e -> {
-			String text = input.getText();
-			OperationResult<Course> or = facade.joinCourse(text);
-			System.out.println(or);
-			if (or.success) {
-				popup.close();
-
-				loadCourses(); //redisplay courses
-			} else { //display issue
-				feedback.setText(or.message);
-
-				PauseTransition delay = new PauseTransition(javafx.util.Duration.seconds(3));
-				delay.setOnFinished(event -> feedback.setText(""));
-				delay.play();
-			}
-		});
-
-		lowerOptions.getChildren().addAll(closeButton,joinButton);
-
-		mainContainer.getChildren().addAll(input,lowerOptions,feedback);
-
-		Scene popupScene = new Scene(mainContainer, 200, 100);
-
-		popup.setScene(popupScene);
-		popup.showAndWait(); // blocks until popup is closed
-	}
-
     @FXML
 	@Override
     public void initialize(URL url, ResourceBundle rb)  {
 		facade = MusicAppFacade.getInstance();
 		user = facade.getCurrentUser();
         labelMain.setText("My Courses");
-
-		joinCourse.setOnAction(e -> promptJoinCourse());
 
 		loadCourses();
     }
@@ -102,6 +54,19 @@ public class CourseController implements Initializable {
 		listCourses.getChildren().clear();
 		for (Course course : user.getCourses()) {
 			listCourses.getChildren().add(getLessonVBox(course));
+		}
+	}
+
+	@FXML
+	private void joinCourse() {
+		String code = courseCode.getText();
+		OperationResult<Course> result = facade.joinCourse(code);
+		if (result.success) {
+			joinCourseOutput.setText("");
+			loadCourses();
+		}
+		else {
+			joinCourseOutput.setText(result.message);
 		}
 	}
 

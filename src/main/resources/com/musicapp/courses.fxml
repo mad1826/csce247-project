@@ -3,12 +3,21 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CourseController">
 	<children>
         <Label fx:id="labelMain" text="My Courses" />
-        <Button fx:id="joinCourse" text="Join Course" />
+		<HBox fx:id="joinCourseContainer">
+			<children>
+				<TextField fx:id="courseCode" promptText="Course code" />
+				<Button fx:id="joinCourse" text="Join Course" onAction="#joinCourse" />
+			</children>
+		</HBox>
+		<Label fx:id="joinCourseOutput" />
+
 		<VBox fx:id="listCourses" />
 	</children>
 	<stylesheets>
