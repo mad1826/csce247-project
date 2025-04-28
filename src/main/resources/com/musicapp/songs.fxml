@@ -9,7 +9,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.geometry.Insets?>
 
-<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SongDetailsController" spacing="20">
+<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SongListController" spacing="20">
     <TextField fx:id="searchField" promptText="Search by song title, artist, genre, instrument, or difficulty" style="-fx-font-size: 14px; -fx-padding: 12;" />
     
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;" minHeight="400">

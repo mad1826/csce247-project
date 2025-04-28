@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.HomeController">
+	<Label fx:id="songName"/>
+	<ListView fx:id="songDetails" />
+	<stylesheets>
+		<URL value="@styles.css" />
+	</stylesheets>
+</VBox>

@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class SongDetailsController extends NavigatableController {
+public class SongListController extends NavigatableController {
     @FXML
     private TextField searchField;
     
