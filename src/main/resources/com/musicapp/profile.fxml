@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="content" alignment="CENTER" spacing="20" style="-fx-padding: 40; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ProfileController">
+<VBox fx:id="content" alignment="CENTER" spacing="20" style="-fx-padding: 40; -fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ProfileController">
     <children>
         <ImageView fx:id="profileImage" fitHeight="150" fitWidth="150" pickOnBounds="true" preserveRatio="true">
          <image>
