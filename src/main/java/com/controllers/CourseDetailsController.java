@@ -50,7 +50,6 @@ public class CourseDetailsController implements Initializable {
             System.out.println("Back button clicked!");
             try {
                 // Direct navigation back to courses with the entire nav layout
-                // This always works regardless of current scene structure
                 com.musicapp.App.setRoot("login");
                 
                 // Then follow the pattern from BaseAuthController.loadHome()
@@ -60,7 +59,7 @@ public class CourseDetailsController implements Initializable {
                     facade.login("jane.smith@example.com", "secureP@ss987");
                 }
                 
-                // Now rebuild the main app structure
+                // rebuild the main app structure
                 VBox vboxMain = (VBox)com.musicapp.App.getNodeById("vboxMain");
                 if (vboxMain != null) {
                     // Clear any footer from the login screen if needed
@@ -81,7 +80,7 @@ public class CourseDetailsController implements Initializable {
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                // Last resort fallback
+                
                 try {
                     com.musicapp.App.setRoot("login");
                 } catch (Exception e2) {
@@ -107,7 +106,7 @@ public class CourseDetailsController implements Initializable {
             VBox lessonInfo = new VBox(2);
             Label lessonTitle = new Label(lesson.getTitle());
             lessonTitle.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-            Label dueDate = new Label("Due 1/2/3"); // Placeholder, replace with real due date if available
+            Label dueDate = new Label("Due 1/2/3"); 
             dueDate.setStyle("-fx-font-size: 12px; -fx-text-fill: #888;");
             lessonInfo.getChildren().addAll(lessonTitle, dueDate);
 
