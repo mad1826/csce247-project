@@ -162,6 +162,15 @@
 	-fx-spacing: 10;
 }
 
+#joinCourseContainer {
+	-fx-alignment: center;
+	-fx-spacing: 10;
+}
+
+#joinCourseOutput {
+	-fx-text-fill: red;
+}
+
 .home-course {
 	background-color: lightgray;
 }
@@ -201,6 +210,11 @@
 .lesson-progress .percentage {
 	-fx-fill: null; /* Hide percentage */
 	fill: none;
+}
+
+#sliderMetronomeSpeed {
+	-fx-max-width: 200;
+	max-width: 200px;
 }
 
 #friendsList .list-cell {

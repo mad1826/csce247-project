@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.Insets?>
+<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CourseDetailsController" style="-fx-background-color: white;" prefWidth="375" prefHeight="812">
+    <children>
+        <VBox alignment="TOP_CENTER" spacing="0" prefWidth="375" prefHeight="812">
+            <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-padding: 16 0 0 16;">
+                <Button fx:id="backButton" text="← Back" style="-fx-background-color: transparent; -fx-font-size: 16px; -fx-text-fill: #3A5BA0; -fx-font-weight: bold;" />
+            </HBox>
+            <StackPane prefHeight="120" prefWidth="375">
+                <Rectangle width="375" height="120" arcWidth="60" arcHeight="60" fill="linear-gradient(to bottom, #e3f0ff, #ffffff)" />
+            </StackPane>
+            <Label text="Piano 101" fx:id="courseTitleLabel" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-padding: 0 0 16 0;" />
+            <VBox spacing="8" alignment="CENTER">
+                <Label text="Course Lessons" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                <VBox fx:id="lessonsContainer" spacing="16" alignment="CENTER_LEFT" style="-fx-padding: 0 0 0 0;" />
+            </VBox>
+            <Button text="Leave Course" fx:id="leaveCourseButton" style="-fx-background-color: #B94A3A; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8; -fx-padding: 10 0 10 0;" maxWidth="200" />
+        </VBox>
+    </children>
+</StackPane> 

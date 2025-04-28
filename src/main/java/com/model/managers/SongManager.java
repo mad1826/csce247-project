@@ -356,35 +356,17 @@ public class SongManager implements  SavableList<Song> {
      * @param searchText text to search for in title, artist, genre, etc.
      * @return ArrayList of matching songs
      */
-    public ArrayList<Song> searchSongs(String searchText) {
-        ArrayList<Song> matchingSongs = new ArrayList<>();
+    public HashMap<UUID, Song> searchSongs(String searchText) {
+        HashMap<UUID, Song> matchingSongs = new HashMap<>();
         String query = searchText.toLowerCase();
         
         for (Song song : songs.values()) {
             if (song.getTitle().toLowerCase().contains(query) ||
                 song.getArtist().toLowerCase().contains(query) ||
                 song.getGenres().toString().toLowerCase().contains(query)) {
-                matchingSongs.add(song);
+                matchingSongs.put(song.getID(), song);
             }
         }
         return matchingSongs;
-    }
-
-    private Song selectedSong;
-
-    /**
-     * Sets the currently selected song
-     * @param song the song to set as selected
-     */
-    public void setSelectedSong(Song song) {
-        this.selectedSong = song;
-    }
-
-    /**
-     * Gets the currently selected song
-     * @return the selected song
-     */
-    public Song getSelectedSong() {
-        return selectedSong;
     }
 }

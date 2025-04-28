@@ -2,21 +2,23 @@ package com.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
-import com.model.OperationResult;
+import com.model.MusicAppFacade;
 import com.model.Song;
-import com.model.managers.SongManager;
 import com.musicapp.App;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class SongDetailsController extends NavigatableController {
+public class SongListController extends NavigatableController {
     @FXML
     private TextField searchField;
     
@@ -29,17 +31,13 @@ public class SongDetailsController extends NavigatableController {
     @FXML
     private Button editSongButton;
 
-    private SongManager songManager;
-    private ArrayList<Song> allSongs;
+    private MusicAppFacade facade;
+    private HashMap<UUID, Song> allSongs;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+		facade = MusicAppFacade.getInstance();
 		App.setMainLabel("Songs");
-        songManager = SongManager.getInstance();
-        OperationResult<Void> result = songManager.loadData();
-        if (!result.success) {
-            System.err.println("Failed to load songs: " + result.message);
-        }
         
         setupSearchField();
         loadAllSongs();
@@ -50,25 +48,24 @@ public class SongDetailsController extends NavigatableController {
             if (newValue == null || newValue.trim().isEmpty()) {
                 displaySongs(allSongs);
             } else {
-                ArrayList<Song> filteredSongs = songManager.searchSongs(newValue);
+                HashMap<UUID, Song> filteredSongs = facade.searchSongs(newValue);
                 displaySongs(filteredSongs);
             }
         });
     }
 
     private void loadAllSongs() {
-        allSongs = new ArrayList<>(songManager.getSongs().values());
-        displaySongs(allSongs);
+        displaySongs(facade.getSongs());
     }
 
-    private void displaySongs(ArrayList<Song> songs) {
+    private void displaySongs(HashMap<UUID, Song> songs) {
         songsContainer.getChildren().clear();
         if (songs.isEmpty()) {
             Label noSongs = new Label("No songs found");
             noSongs.setStyle("-fx-font-size: 16px; -fx-text-fill: #666666;");
             songsContainer.getChildren().add(noSongs);
         } else {
-            for (Song song : songs) {
+            for (Song song : songs.values()) {
                 songsContainer.getChildren().add(createSongCard(song));
             }
         }
@@ -105,8 +102,18 @@ public class SongDetailsController extends NavigatableController {
 
     private void openSongDetails(Song song) {
         try {
-            songManager.setSelectedSong(song);
-            App.setRoot("song-view");
+            facade.setCurrentSong(song);
+
+            VBox vboxMain = (VBox) App.getNodeById("vboxMain");
+            VBox content = (VBox) App.getNodeById("content");
+            HBox footer = (HBox) App.getNodeById("footer");
+            
+            vboxMain.getChildren().removeAll(content, footer);
+            
+            Parent newContent = App.loadFXML("songdetails");
+            vboxMain.getChildren().add(newContent);
+            vboxMain.getChildren().add(footer);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
