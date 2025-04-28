@@ -43,7 +43,6 @@ public class SongDetailsController extends NavigatableController {
         
         setupSearchField();
         loadAllSongs();
-        setupButtons();
     }
 
     private void setupSearchField() {
@@ -104,24 +103,6 @@ public class SongDetailsController extends NavigatableController {
         return card;
     }
 
-    private void setupButtons() {
-        createSongButton.setOnAction(event -> {
-            try {
-                App.setRoot("create-song");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        editSongButton.setOnAction(event -> {
-            try {
-                App.setRoot("edit-song");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
     private void openSongDetails(Song song) {
         try {
             songManager.setSelectedSong(song);
@@ -130,4 +111,23 @@ public class SongDetailsController extends NavigatableController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void handleCreateSong() {
+        try {
+            App.setRoot("createeditsongs");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleEditSong() {
+        try {
+            App.setRoot("createeditsongs");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 } 

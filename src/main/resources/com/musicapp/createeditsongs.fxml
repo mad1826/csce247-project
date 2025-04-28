@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="content" alignment="CENTER" spacing="20" style="-fx-padding: 40; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CreateEditSongController">
+    <children>
+
+        <Label fx:id="pageTitleLabel" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Create Song" />
+
+        <TextField fx:id="songTitleField" promptText="Song Title" />
+        <TextField fx:id="songArtistField" promptText="Artist Name" />
+
+        <Label text="Select Note Value:" />
+        <ComboBox fx:id="noteValueDropdown" prefWidth="200" promptText="Select Note Value" />
+
+        <Label text="Select Pitch:" />
+        <ComboBox fx:id="pitchDropdown" prefWidth="200" promptText="Select Pitch" />
+
+        <Label text="Difficulty:" />
+        <HBox alignment="CENTER" spacing="10">
+            <children>
+                <ImageView fx:id="star1" fitHeight="40" fitWidth="40" preserveRatio="true">
+                    <image>
+                        <Image url="@images/star_gray.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="star2" fitHeight="40" fitWidth="40" preserveRatio="true">
+                    <image>
+                        <Image url="@images/star_gray.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="star3" fitHeight="40" fitWidth="40" preserveRatio="true">
+                    <image>
+                        <Image url="@images/star_gray.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </HBox>
+
+        <Button fx:id="saveButton" onAction="#handleSave" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;" text="Save" />
+
+    </children>
+
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+</VBox>
