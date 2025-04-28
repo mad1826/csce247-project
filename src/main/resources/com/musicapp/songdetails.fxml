@@ -10,21 +10,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SongDetailsController" spacing="20" padding="20">
-    <Text text="Song Details" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
-
+<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SongDetailsController" spacing="20">
     <HBox spacing="10" alignment="CENTER">
         <ImageView fitHeight="80" fitWidth="80" />
         <VBox alignment="CENTER_LEFT" spacing="5">
-            <Label text="Luther" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
-            <Label text="Kendrick Lamar & SZA" style="-fx-font-size: 14px;" />
-            <Label text="4 Sheets" style="-fx-font-size: 14px;" />
+            <Label fx:id="songNameLabel" text="SongName" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+            <Label fx:id="artistLabel" text="Artist" style="-fx-font-size: 14px;" />
+            <Label fx:id="sheetsLabel" text="[n] Sheets" style="-fx-font-size: 14px;" />
         </VBox>
     </HBox>
 
     <HBox spacing="10" alignment="CENTER">
         <Button text="▶" prefWidth="40" />
-        <Label text="00:00 / 00:00" />
+        <Label text="00:00 / timeLength" />
         <Slider prefWidth="150" />
         <Button text="🔊" prefWidth="40" />
     </HBox>

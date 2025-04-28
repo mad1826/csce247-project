@@ -11,9 +11,11 @@ import com.model.Song;
 import com.musicapp.App;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class SongListController extends NavigatableController {
@@ -120,7 +122,17 @@ public class SongListController extends NavigatableController {
     private void openSongDetails(Song song) {
         try {
             facade.setCurrentSong(song);
-            App.setRoot("song-view");
+
+            VBox vboxMain = (VBox) App.getNodeById("vboxMain");
+            VBox content = (VBox) App.getNodeById("content");
+            HBox footer = (HBox) App.getNodeById("footer");
+            
+            vboxMain.getChildren().removeAll(content, footer);
+            
+            Parent newContent = App.loadFXML("songdetails");
+            vboxMain.getChildren().add(newContent);
+            vboxMain.getChildren().add(footer);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
