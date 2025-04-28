@@ -4,18 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
-
-<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SongDetailsController">
-	<?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" alignment="TOP_CENTER" spacing="20" padding="20">
-    
+<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SongDetailsController" spacing="20" padding="20">
     <Text text="Song Details" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
 
     <HBox spacing="10" alignment="CENTER">
