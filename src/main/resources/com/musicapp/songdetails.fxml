@@ -5,9 +5,56 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.HomeController">
-	<Label fx:id="songName"/>
-	<ListView fx:id="songDetails" />
+<VBox fx:id="content" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.SongDetailsController">
+	<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="TOP_CENTER" spacing="20" padding="20">
+    
+    <Text text="Song Details" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+
+    <HBox spacing="10" alignment="CENTER">
+        <ImageView fitHeight="80" fitWidth="80" />
+        <VBox alignment="CENTER_LEFT" spacing="5">
+            <Label text="Luther" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+            <Label text="Kendrick Lamar & SZA" style="-fx-font-size: 14px;" />
+            <Label text="4 Sheets" style="-fx-font-size: 14px;" />
+        </VBox>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="▶" prefWidth="40" />
+        <Label text="00:00 / 00:00" />
+        <Slider prefWidth="150" />
+        <Button text="🔊" prefWidth="40" />
+    </HBox>
+
+    <Text text="Open Sheet Music" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+
+    <VBox alignment="CENTER" spacing="15">
+        <StackPane>
+            <Button text="Piano" style="-fx-font-size: 18px; -fx-padding: 10 20;" />
+            <Label text="Easy" style="-fx-text-fill: green;" StackPane.alignment="TOP_RIGHT" />
+        </StackPane>
+        <StackPane>
+            <Button text="Guitar" style="-fx-font-size: 18px; -fx-padding: 10 20;" />
+            <Label text="Intermediate" style="-fx-text-fill: orange;" StackPane.alignment="TOP_RIGHT" />
+        </StackPane>
+        <StackPane>
+            <Button text="Vocals" style="-fx-font-size: 18px; -fx-padding: 10 20;" />
+            <Label text="Intermediate" style="-fx-text-fill: orange;" StackPane.alignment="TOP_RIGHT" />
+        </StackPane>
+        <StackPane>
+            <Button text="Bass" style="-fx-font-size: 18px; -fx-padding: 10 20;" />
+            <Label text="Hard" style="-fx-text-fill: red;" StackPane.alignment="TOP_RIGHT" />
+        </StackPane>
+    </VBox>
+
 	<stylesheets>
 		<URL value="@styles.css" />
 	</stylesheets>
