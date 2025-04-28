@@ -2,12 +2,12 @@ package com.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
-import com.model.OperationResult;
+import com.model.MusicAppFacade;
 import com.model.Song;
-import com.model.managers.SongManager;
 import com.musicapp.App;
 
 import javafx.fxml.FXML;
@@ -29,17 +29,13 @@ public class SongDetailsController extends NavigatableController {
     @FXML
     private Button editSongButton;
 
-    private SongManager songManager;
-    private ArrayList<Song> allSongs;
+    private MusicAppFacade facade;
+    private HashMap<UUID, Song> allSongs;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+		facade = MusicAppFacade.getInstance();
 		App.setMainLabel("Songs");
-        songManager = SongManager.getInstance();
-        OperationResult<Void> result = songManager.loadData();
-        if (!result.success) {
-            System.err.println("Failed to load songs: " + result.message);
-        }
         
         setupSearchField();
         loadAllSongs();
@@ -51,25 +47,24 @@ public class SongDetailsController extends NavigatableController {
             if (newValue == null || newValue.trim().isEmpty()) {
                 displaySongs(allSongs);
             } else {
-                ArrayList<Song> filteredSongs = songManager.searchSongs(newValue);
+                HashMap<UUID, Song> filteredSongs = facade.searchSongs(newValue);
                 displaySongs(filteredSongs);
             }
         });
     }
 
     private void loadAllSongs() {
-        allSongs = new ArrayList<>(songManager.getSongs().values());
-        displaySongs(allSongs);
+        displaySongs(facade.getSongs());
     }
 
-    private void displaySongs(ArrayList<Song> songs) {
+    private void displaySongs(HashMap<UUID, Song> songs) {
         songsContainer.getChildren().clear();
         if (songs.isEmpty()) {
             Label noSongs = new Label("No songs found");
             noSongs.setStyle("-fx-font-size: 16px; -fx-text-fill: #666666;");
             songsContainer.getChildren().add(noSongs);
         } else {
-            for (Song song : songs) {
+            for (Song song : songs.values()) {
                 songsContainer.getChildren().add(createSongCard(song));
             }
         }
@@ -124,7 +119,7 @@ public class SongDetailsController extends NavigatableController {
 
     private void openSongDetails(Song song) {
         try {
-            songManager.setSelectedSong(song);
+            facade.setCurrentSong(song);
             App.setRoot("song-view");
         } catch (IOException e) {
             e.printStackTrace();

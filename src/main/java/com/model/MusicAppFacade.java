@@ -98,6 +98,14 @@ public class MusicAppFacade {
 	public Song getCurrentSong() {
 		return currentSong;
 	}
+
+	/**
+	 * Updates the currently selected song
+	 * @param song the song to select
+	 */
+	public void setCurrentSong(Song song) {
+		currentSong = song;
+	}
 	
 	/**
 	 * Gets the currently selected course.
@@ -329,6 +337,10 @@ public class MusicAppFacade {
     public HashMap<UUID, Song> searhSongs() {
         return SongManager.getInstance().findSongs(songQuery);
     }
+
+	public HashMap<UUID, Song> searchSongs(String query) {
+		return SongManager.getInstance().searchSongs(query);
+	}
 
 	/**
 	 * Get a song by its id.
