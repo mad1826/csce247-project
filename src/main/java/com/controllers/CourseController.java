@@ -29,6 +29,9 @@ public class CourseController implements Initializable {
     @FXML
 	private VBox listCourses;
 
+    @FXML
+    private Label labelMain;
+
 	private MusicAppFacade facade;
 
 	private User user;
@@ -85,7 +88,7 @@ public class CourseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)  {
 		facade = MusicAppFacade.getInstance();
 		user = facade.getCurrentUser();
-        App.setMainLabel("My Courses");
+        labelMain.setText("My Courses");
 
 		joinCourse.setOnAction(e -> promptJoinCourse());
 
@@ -124,7 +127,17 @@ public class CourseController implements Initializable {
         courseContent.getChildren().add(courseDesc);
 
 		courseContent.setOnMouseClicked(e -> {
-            System.out.println("Select "+course.toString());
+            System.out.println("Select " + course.toString());
+            facade.setCurrentCourse(course);
+            System.out.println("Attempting to navigate to course_details.fxml");
+            try {
+                App.setRoot("course_details");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                // Optionally show error to user
+                Label errorLabel = new Label("Error: " + ex.getMessage());
+                courseContent.getChildren().add(errorLabel);
+            }
         });
 
 		return courseContent;
